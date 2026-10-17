@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Layout and type follow the Altruva + RiseUp references; colours are the CMF brand palette
+   sampled from the Foundation's page designs and logo (../drive_assets). */
+@theme {
+  --color-cream: #fcf8f3; /* page background */
+  --color-sand: #f5ecdd; /* tiles, header, heroes */
+  --color-parchment: #efe2cc; /* light accent tiles */
+  --color-bronze: #a2601a; /* primary actions and labels (design buttons ≈ #a8641a, darkened for AA text contrast) */
+  --color-bronze-dark: #844d12;
+  --color-gold: #d4a82a; /* logo gold — accents on navy, highlights */
+  --color-tan: #c9a77c; /* soft accent text on navy, decorative frames */
+  --color-tan-light: #dcc3a1;
+  --color-navy: #0e2132; /* footer and dark sections */
+  --color-navy-soft: #1f3a52;
+  --color-ink: #14202c; /* headings */
+  --color-body: #34302b;
+  --color-muted: #6b6359;
+  --color-line: #e3d6c2;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-display: var(--font-bebas), "Bebas Neue", Impact, sans-serif;
+  --font-sans: var(--font-public), "Public Sans", system-ui, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+@utility wrap {
+  @apply mx-auto w-full max-w-[1140px] px-5 sm:px-8 xl:px-0;
+}
+
+@utility display {
+  @apply font-display leading-[0.92] tracking-[-0.01em] text-ink uppercase;
+}
+
+@utility display-xl {
+  @apply display text-[clamp(3.5rem,8.4vw,6rem)];
+}
+
+@utility display-lg {
+  @apply display text-[clamp(2.75rem,6vw,4.5rem)];
+}
+
+@utility display-md {
+  @apply display text-[clamp(2rem,4vw,3rem)];
+}
+
+@utility display-sm {
+  @apply display text-[1.75rem] leading-none;
+}
+
+@utility lede {
+  @apply text-[1.05rem] leading-relaxed text-body;
+}
+
+@utility tile {
+  @apply rounded-2xl bg-sand;
+}
+
+@utility field {
+  @apply w-full rounded-xl border border-line bg-cream px-4 py-3.5 text-[0.95rem] text-ink placeholder:text-muted focus:border-bronze focus:ring-2 focus:ring-bronze/20 focus:outline-none;
+}
+
+@utility highlight {
+  @apply box-decoration-clone bg-gold px-2 text-ink;
 }

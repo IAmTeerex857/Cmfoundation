@@ -1,0 +1,109 @@
+# CMF Foundation project status
+
+Reviewed October 14, 2026 from the local source, assets, project notes, and available Git history. This is an implementation inventory, not confirmation of a live deployment or a complete transcript of earlier conversations.
+
+## Project structure and history
+
+- `site/`: CMF website built with Next.js, React, TypeScript, and Tailwind CSS.
+- `../drive_assets/`: seven supplied page design images, the CMF logo, seven photographic assets, and five newly supplied official book covers. All preserved.
+- `public/images/`: website photographs, generated interim illustrations and covers, and image provenance notes.
+- Git's `main` branch has only the initial Create Next App commit. The CMF implementation is still uncommitted. It was preserved during cleanup.
+- No CMF Git remote is currently configured. The previous `origin` incorrectly pointed to the unrelated PremiumCare repository and was removed.
+
+## Website implementation already present
+
+| Area | Implemented locally |
+| --- | --- |
+| Shared design | Responsive layouts; CMF brand palette (bronze, navy, cream, logo gold) on the RiseUp/Altruva layouts; display and body typography; logo; desktop and mobile navigation; navy footer; reusable buttons, cards, photo layouts, statistics, FAQ accordions, and quote slider. |
+| Home | Foundation introduction, four mission pillars, founder story, featured literature, impact statements, suggested gifts, FAQs, upcoming events, and support calls to action. |
+| About | Foundation background, establishment in 2012, founder connection, vision, mission, values, and four pillars. |
+| Founder | Biography, life timeline, defining chapters, four-photo gallery, quotations, and links to the literature collection. |
+| Literature | Founder's Library, current series, Cheta section, forthcoming titles, and a searchable library with collection/topic filters and date/title sorting. |
+| Book catalogue | Eleven entries: three founder titles, three current titles, and five forthcoming titles. A title becomes readable in the online reader as soon as `books/<slug>.pdf` is added; until then its card offers a printed-copy request. No downloads are offered. |
+| Our Work | Literature, education, community development, legacy preservation, initiatives, working principles, four milestones, events, and partnership/volunteer links. |
+| Events | Three configured event entries, date formatting, upcoming-event filtering, book artwork, and contact-based expressions of interest. Dates and registration details need confirmation. |
+| Support | Giving card linking to Bachs payment links (NGN, USD, monthly; each optional), suggested gifts, partnership and volunteering options, and giving FAQs. |
+| Reader | `/read/<slug>`: full-screen PDF.js reader with range loading, zoom, page jump, keyboard navigation, light/sepia/night page colours, full screen and resume. No download or print control. |
+| Contact | Confirmed email/phone, Abuja head-office address and map, enquiry form, separate contact points, FAQs, and prefilled book/event enquiries. The footer also links to the supplied office map. |
+| Newsletter | Footer sign-up via `/api/newsletter`: adds the subscriber to a Resend segment when `RESEND_SEGMENT_ID` is set, otherwise emails the Foundation inbox. |
+| Supporting pages | Privacy, terms, donation policy, donation thank-you page, and custom not-found page. Policy text remains draft. |
+| Discoverability | Page metadata, Open Graph image, site icon, sitemap, and robots rules. |
+| Accessibility provisions | Skip link, labelled form controls, navigation controls, image alternatives, and reduced-motion styling are present; a full accessibility audit has not been performed. |
+
+## Integration code and remaining setup
+
+- **Donations:** Bachs payment links set by environment variable (see `.env.example`). The site holds no payment keys and runs no payment code; gift records and receipts live in the Bachs dashboard. With no links set, Support shows a coming-soon state.
+- **Books:** PDFs live in `books/` (outside `public/`) and are streamed to the reader by `/api/books/[slug]` in byte ranges; direct visits redirect to the reader. See `books/README.md`.
+- **Contact email:** Resend delivery, validation, and a honeypot are implemented. Production requires a valid API key, destination inbox, and verified sender. The development fallback can return success without delivering email.
+- **Newsletter:** Resend contacts/segment when `RESEND_SEGMENT_ID` is set; otherwise the sign-up is emailed to the Foundation inbox.
+- **Configuration:** `.env.example` documents the expected settings. No local `.env` or `.env.local` was found during this review. Hosted service settings and deployment were not inspected.
+
+## Assets already prepared
+
+- Original Drive reference assets are retained in `../drive_assets/`.
+- Founder portraits, a community photo, and the water-project photograph are used throughout the site.
+- Thirteen generated editorial illustrations cover former stock-image placements.
+- Five supplied official covers now display complete artwork without generated typography or cropping. Six titles still use generated interim backgrounds with live HTML titles/authors. See `public/images/SUPPLIED_ASSETS.md` for provenance.
+- A public NILA portrait of Cheta is present; Foundation permission and an original replacement are still pending.
+- The original stock folder and credit notes remain, although the current source no longer references its photographs.
+- Generated milestone scenes are illustrative, not evidence of actual CMF events; replace them with verified photographs.
+
+## Needed for the next website update
+
+1. Review any further instructions or assets supplied by the Foundation. The original Drive link has now been received and its five additional covers installed.
+2. The six remaining official book covers and downloadable PDFs; the remaining founder bibliography and missing publication details.
+3. Verified event, ministry, award, education, community, and book-distribution photos; additional founder and Cheta portraits.
+4. Confirm the departmental email addresses and office hours, and provide real social-profile URLs. The name, general email and phone are confirmed. Current social links point to platform homepages.
+5. Office location is now complete: CMF Head Office, Otunba Kayode Close, Asokoro, Abuja FCT, with the supplied Google Maps pin. The unrelated Columbia location remains removed.
+6. Approved event dates, registration details, FAQ answers, biographical claims, quotations, and policy copy.
+7. Resend configuration and a test message; book PDFs (see `books/README.md`); a test donation through the naira payment link.
+8. Confirmed CMF repository, hosting, and domain configuration.
+
+See `update needed.md` for the existing book-by-book and image-placement checklist.
+
+## Cleanup completed October 14, 2026
+
+- Removed the unrelated `../Premium-Care/` Git worktree, including its separate public care website, staff portal, Supabase code, branding, dependencies, and build output.
+- Removed the unrelated local `update-columbia-address` branch and the PremiumCare `origin` remote/tracking reference.
+- Before removal, verified a complete Git recovery bundle at `/private/tmp/cmf-cleanup-20261014/premium-care-recovery.bundle`. This is temporary recovery storage, not a permanent archive.
+- The removed worktree had no uncommitted source changes. Its ignored files were dependency and build directories.
+- No remote repository, hosted website, database, or deployment was changed. No Git history rewrite or object pruning was performed.
+- Added a workspace-level `AGENTS.md` identifying CMF and requiring clarification when an unrelated project is requested here.
+- Removed the unrelated Columbia address from shared contact data, the contact page, and the footer after user confirmation. Adjusted the contact cards to two columns and added the missing office details to the content checklist.
+- All other existing CMF source and Drive assets were preserved.
+
+## Verification after cleanup
+
+- ESLint, TypeScript checking (`tsc --noEmit --incremental false`), and `git diff --check` passed.
+- Compared SHA-256 hashes for 126 original CMF files: none were deleted; only the three address-related source files and the existing content checklist changed.
+- Source and readable asset scans found no PremiumCare branding or removed-address references.
+- Git lists only the CMF `main` worktree and branch, with no remotes.
+- No production build, browser visual review, external integration test, or deployment was performed in this cleanup.
+
+## Supplied assets and contact update — October 14, 2026
+
+- Retrieved five additional covers from the shared Drive folder and preserved exact originals in `../drive_assets/` and `public/images/covers/official/`.
+- Updated Exploring the Godhead, The Wages of Sin, A Criminal in Heaven, All Is Vanity, and Much Ado About Rapture throughout the site.
+- Corrected A Criminal in Heaven and its subtitle to match the supplied cover; retained the existing internal slug so book-request and event references still resolve. Added other supplied cover subtitles to searchable catalogue metadata.
+- Confirmed the Foundation name, general email and phone; added the Abuja head office to shared contact data, contact cards, map and footer.
+- The embedded map uses the place identifier resolved from the supplied short link, while directions links retain the supplied URL.
+- Updated the asset checklist: five covers received, six still needed; no book PDFs were present in the shared folder.
+- Validation passed: ESLint, TypeScript, asset existence and exact-copy checks, and a production build with `npm run build -- --webpack`. Default Turbopack hit an environment port-binding restriction; the project build script was not changed.
+- Browser verification passed at desktop and mobile widths: all five official cover images loaded without extra text overlays, library search and the retained book-request link worked, the Abuja address/map/footer links were present, and no horizontal overflow or page runtime errors were observed. Visually confirmed the embedded map shows CMF Head Office.
+- These updates are local; no hosted deployment was performed.
+
+## Read-online, rebrand and integrations update — October 16, 2026
+
+- **Brand colours restored.** The site had taken the green/lime palette of the RiseUp/Altruva references. It now uses the CMF palette sampled from the Drive page designs and logo: bronze `#a2601a` (design buttons ≈ `#a8641a`, darkened slightly for AA text contrast), navy `#0e2132`, cream/sand backgrounds, logo gold `#d4a82a`. The footer is navy with the gold mark, as in the designs. Layouts and typography from the references are unchanged.
+- **Book storage and online reader.** Added `books/` for PDFs, `/api/books/[slug]` (range streaming; direct navigation and cross-site requests redirect to the reader; unknown slugs 404), and `/read/[slug]`, statically generated for each book with a PDF. Library, home and forthcoming cards switch to "Read online — free" automatically. Download wording was replaced throughout.
+- **Donations simplified to Bachs payment links.** Removed the API checkout route, webhook route, Bachs API client and custom donation form (no API key, webhook secret or product ID needed any more). Added `src/lib/payment-links.ts` and the giving card. Invalid or non-HTTPS links are ignored.
+- **Resend.** Shared `src/lib/email.ts`; the contact route uses it; new `/api/newsletter` with honeypot and segment support.
+- **Structure.** Public pages moved into the `src/app/(site)/` route group so the reader can be full screen; the root not-found page carries its own header and footer. Removed unused create-next-app SVGs. Added `pdfjs-dist` 6.3.289 (pinned).
+- **Verification.** ESLint, `tsc --noEmit`, `git diff --check` and `next build` (Turbopack) pass. In headless Chrome against the production build: the reader rendered a generated 40-page and a 2,000-page/7 MB test PDF (range requests only, jump to page 1500, zoom with position kept, arrow keys, night mode, resume after reload, only five page bitmaps held at once) at desktop and mobile widths with no console errors; every page returned 200 with no horizontal overflow and all images loaded; API checks covered redirects, 206/416 ranges, cross-site refusal and path-traversal 404s. Payment links and email endpoints were tested only with placeholder/unset configuration. The test PDFs were removed. No real Bachs or Resend transaction has been made, and nothing was deployed or pushed.
+- **Backup.** Before these changes the site source (excluding `node_modules` and `.next`) was archived to the session scratchpad as `cmf-site-backup-20261016.tgz`. That location is temporary.
+
+## Payment link and repository — October 17, 2026
+
+- The Foundation's Bachs naira payment link (`https://checkout.bachs.io/pay/pl_af3bb8de098d`) is built in as the default NGN giving option. The checkout asks the donor for an amount in NGN, minimum ₦100. Its page is currently titled "Pay Meal". It should show the Foundation's name, and its post-payment redirect has not been verified.
+- The CMF repository is `https://github.com/IAmTeerex857/Cmfoundation.git` (remote `origin`). It was empty before the first push.
+- Remaining before launch: book PDFs and the Resend connection.
