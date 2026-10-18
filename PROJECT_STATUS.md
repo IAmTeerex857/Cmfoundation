@@ -57,7 +57,7 @@ Reviewed October 14, 2026 from the local source, assets, project notes, and avai
 5. Office location is now complete: CMF Head Office, Otunba Kayode Close, Asokoro, Abuja FCT, with the supplied Google Maps pin. The unrelated Columbia location remains removed.
 6. Approved event dates, registration details, FAQ answers, biographical claims, quotations, and policy copy.
 7. Resend configuration and a test message; book PDFs (see `books/README.md`); a test donation through the naira payment link.
-8. Confirmed CMF repository, hosting, and domain configuration.
+8. Done October 18, 2026: the repository is on GitHub, hosting is on Vercel (deploys from `main`) and cm.foundation is live. Remaining for production: Resend variables in Vercel, then book PDFs.
 
 See `update needed.md` for the existing book-by-book and image-placement checklist.
 

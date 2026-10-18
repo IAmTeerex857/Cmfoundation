@@ -115,5 +115,5 @@ No API keys are needed. In the Bachs dashboard, create payment links where the d
 - [ ] **Quote attribution.** "Service is the rental we pay for the space we occupy" is usually credited to Shirley Chisholm. Please confirm it should be attributed to Dr Mbadinuju.
 
 ### Launch
-- [ ] **Hosting.** Vercel is recommended.
-- [ ] **Domain access** for cm.foundation, to point it at the site
+- [x] **Hosting.** On Vercel, deploying automatically from `main` of https://github.com/IAmTeerex857/Cmfoundation.
+- [x] **Domain.** cm.foundation and www.cm.foundation are live on Vercel over HTTPS.
