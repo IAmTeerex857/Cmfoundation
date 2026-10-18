@@ -14,7 +14,7 @@ import "server-only";
 /** The Foundation's naira donation link, used unless BACHS_PAYMENT_LINK_NGN overrides it. */
 const NGN_LINK = "https://checkout.bachs.io/pay/pl_af3bb8de098d";
 
-export type GivingOption = { id: "NGN" | "USD" | "monthly"; label: string; detail: string; href: string };
+export type GivingOption = { id: "NGN" | "USD" | "monthly"; label: string; href: string };
 
 function httpsUrl(value: string | undefined) {
   if (!value) return undefined;
@@ -28,11 +28,16 @@ function httpsUrl(value: string | undefined) {
 
 export function givingOptions(): GivingOption[] {
   const options: (GivingOption | null)[] = [
-    withHref({ id: "NGN", label: "Give in Naira (₦)", detail: "Card, bank transfer and other local methods" }, process.env.BACHS_PAYMENT_LINK_NGN || NGN_LINK),
-    withHref({ id: "USD", label: "Give in US Dollars ($)", detail: "For international cards" }, process.env.BACHS_PAYMENT_LINK_USD),
-    withHref({ id: "monthly", label: "Give monthly", detail: "A regular gift that sustains the work" }, process.env.BACHS_PAYMENT_LINK_MONTHLY),
+    withHref({ id: "NGN", label: "Give" }, process.env.BACHS_PAYMENT_LINK_NGN || NGN_LINK),
+    withHref({ id: "USD", label: "Give in US Dollars ($)" }, process.env.BACHS_PAYMENT_LINK_USD),
+    withHref({ id: "monthly", label: "Give monthly" }, process.env.BACHS_PAYMENT_LINK_MONTHLY),
   ];
   return options.filter((o): o is GivingOption => o !== null);
+}
+
+/** Where "Donate" and "Give" buttons lead: straight to the main checkout, or the Support page if none is set. */
+export function giveHref() {
+  return givingOptions()[0]?.href ?? "/support#give";
 }
 
 function withHref(option: Omit<GivingOption, "href">, raw: string | undefined): GivingOption | null {

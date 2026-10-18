@@ -24,6 +24,7 @@ import { availableBooks, books, forthcomingBooks, getBook } from "@/lib/books";
 import { faqs } from "@/lib/faqs";
 import { quotes } from "@/lib/founder";
 import { readableSlugs } from "@/lib/manuscripts";
+import { giveHref } from "@/lib/payment-links";
 import { pillars, upcomingEvents } from "@/lib/work";
 
 export const revalidate = 86400;
@@ -33,6 +34,7 @@ const library = ["false-men-and-true-christians", "exploring-the-godhead", "the-
 export default function Home() {
   const events = upcomingEvents().slice(0, 2);
   const readable = readableSlugs();
+  const give = giveHref();
 
   return (
     <>
@@ -52,7 +54,7 @@ export default function Home() {
               knowledge and service.
             </p>
             <div data-reveal data-reveal-delay="580" className="mt-9 flex flex-wrap gap-4">
-              <Button href="/support">Donate Now</Button>
+              <Button href={give}>Donate Now</Button>
               <Button href="/literature" variant="outline">
                 Explore Our Books
               </Button>
@@ -306,7 +308,7 @@ export default function Home() {
         </section>
       )}
 
-      <ImageCta word="Give" title="A better tomorrow is possible" cta="Support the Mission" href="/support" image="/images/generated/family-support.jpg" position="50% 42%" />
+      <ImageCta word="Give" title="A better tomorrow is possible" cta="Give Now" href={give} image="/images/generated/family-support.jpg" position="50% 42%" />
     </>
   );
 }

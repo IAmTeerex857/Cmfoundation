@@ -5,7 +5,7 @@ import { Icon, type IconName } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
 import { Button, Faq, ImageCta, SectionHead, SlideIcon, Statement } from "@/components/ui";
 import { faqs } from "@/lib/faqs";
-import { givingOptions } from "@/lib/payment-links";
+import { giveHref, givingOptions } from "@/lib/payment-links";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -14,8 +14,9 @@ export const metadata: Metadata = {
     "Invest in a better tomorrow. Your support keeps life-changing books in people's hands, strengthens communities and invests in future generations.",
 };
 
-const ways: { title: string; body: string; icon: IconName; cta: string; href: string }[] = [
-  { title: "Give a Donation", body: "Support our work with a one-time or monthly gift.", icon: "heart", cta: "Give now", href: "#give" },
+// A way without an href goes straight to the checkout.
+const ways: { title: string; body: string; icon: IconName; cta: string; href?: string }[] = [
+  { title: "Give a Donation", body: "Support our work with a one-time or monthly gift.", icon: "heart", cta: "Give now" },
   { title: "Sponsor Books", body: "Help print and distribute our books to schools, churches and communities.", icon: "books", cta: "Sponsor a print run", href: "/contact?enquiry=sponsor" },
   { title: "Partner With Us", body: "Partner as an individual, organisation or corporate supporter.", icon: "handshake", cta: "Become a partner", href: "/contact?enquiry=partnership" },
   { title: "Volunteer", body: "Contribute your time, skills and expertise to our initiatives.", icon: "people", cta: "Get involved", href: "/contact?enquiry=volunteer" },
@@ -76,7 +77,7 @@ export default function SupportPage() {
             {ways.map((w) => (
               <a
                 key={w.title}
-                href={w.href}
+                href={w.href ?? giveHref()}
                 data-reveal
                 className="group tile flex flex-col p-6 transition-[transform,background-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_24px_50px_-28px_rgba(14,33,50,0.45)]"
               >
@@ -131,7 +132,7 @@ export default function SupportPage() {
         </div>
       </section>
 
-      <ImageCta word="Give" title="A better tomorrow is possible" cta="Give Now" href="#give" image="/images/generated/family-reading.jpg" position="50% 48%" />
+      <ImageCta word="Give" title="A better tomorrow is possible" cta="Give Now" href={giveHref()} image="/images/generated/family-reading.jpg" position="50% 48%" />
     </>
   );
 }

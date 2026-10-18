@@ -84,12 +84,9 @@ export function GiveCard({ options, email }: { options: GivingOption[]; email: s
           <a
             href={primary.href}
             rel="noopener"
-            className="mt-6 flex w-full items-center justify-between gap-3 rounded-full bg-navy py-2 pr-2 pl-6 text-white transition-colors duration-300 hover:bg-navy-soft"
+            className="mt-6 flex w-full items-center justify-between gap-3 rounded-full bg-navy py-2 pr-2 pl-6 font-medium text-white transition-colors duration-300 hover:bg-navy-soft"
           >
-            <span className="text-left">
-              <span className="block font-medium">{primary.label}</span>
-              <span className="block text-xs text-white/70">{primary.detail}</span>
-            </span>
+            {primary.label}
             <span className="flex size-10 items-center justify-center rounded-full bg-gold text-ink">
               <Icon name="arrowUpRight" className="size-4" strokeWidth={2} />
             </span>
@@ -109,19 +106,15 @@ export function GiveCard({ options, email }: { options: GivingOption[]; email: s
               ))}
             </div>
           )}
-          <p className="mt-4 text-center text-xs text-muted">
-            {focus.id === "general" ? (
-              "Secure checkout. Card or bank transfer."
-            ) : (
-              <>
-                After giving,{" "}
-                <a href={mail} className="font-medium text-bronze underline-offset-2 hover:underline">
-                  tell us it&rsquo;s for {focus.tab.toLowerCase()}
-                </a>{" "}
-                and we&rsquo;ll direct it there.
-              </>
-            )}
-          </p>
+          {focus.id !== "general" && (
+            <p className="mt-4 text-center text-xs text-muted">
+              After giving,{" "}
+              <a href={mail} className="font-medium text-bronze underline-offset-2 hover:underline">
+                tell us it&rsquo;s for {focus.tab.toLowerCase()}
+              </a>{" "}
+              and we&rsquo;ll direct it there.
+            </p>
+          )}
         </>
       ) : (
         <p className="mt-6 rounded-2xl bg-sand p-5 text-sm text-muted">

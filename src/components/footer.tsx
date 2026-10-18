@@ -34,7 +34,7 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-navy text-white">
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute right-[-2rem] bottom-[-4.5rem] font-display text-[clamp(10rem,28vw,22rem)] leading-none font-bold tracking-[-0.06em] text-white/[0.035] select-none"
+        className="pointer-events-none absolute inset-x-0 bottom-[-4.5rem] text-center font-display text-[clamp(10rem,28vw,22rem)] leading-none font-bold tracking-[-0.06em] text-white/[0.035] select-none"
       >
         CMF
       </span>

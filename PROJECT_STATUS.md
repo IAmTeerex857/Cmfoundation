@@ -126,3 +126,5 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 - **Suggested gifts:** removed from the home and Support pages. The checkout takes any amount.
 - **Buttons:** the hover sheen, glow, press-scale and springy arrow chips were removed site-wide. Buttons now change colour and slide their arrow.
 - **Dependencies:** `border-beam`, `liquid-gooey` and `metal-fx` were uninstalled.
+- **Donate buttons go to checkout:** the header and mobile-menu "Donate Now", the home hero's "Donate Now", the "Give Now" image banners on Home and Support, and the "Give a Donation" card all link straight to the checkout (`giveHref()` in `src/lib/payment-links.ts`, which honours `BACHS_PAYMENT_LINK_NGN`). "Support the Mission" links still go to the Support page.
+- **Giving card button:** now reads just "Give", with no payment-method line or checkout note underneath. The footer's large "CMF" mark is centred.
