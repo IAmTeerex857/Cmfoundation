@@ -17,7 +17,7 @@ export function BookCard({ book, readable = false }: { book: Book; readable?: bo
       <div className="relative flex justify-center overflow-hidden rounded-xl bg-cream px-8 py-7">
         <BookCover book={book} className="book-tilt w-full max-w-44" />
         {readable && (
-          <span className="sheen absolute top-3 left-3 rounded-full bg-bronze px-2.5 py-1 text-[0.7rem] font-medium tracking-wide text-white uppercase">Read free</span>
+          <span className="absolute top-3 left-3 rounded-full bg-bronze px-2.5 py-1 text-[0.7rem] font-medium tracking-wide text-white uppercase">Read free</span>
         )}
       </div>
       <div className="flex flex-1 flex-col px-1 pt-4 pb-1">

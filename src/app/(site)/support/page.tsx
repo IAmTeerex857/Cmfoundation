@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { GiftTiers } from "@/components/gift-tiers";
 import { GiveCard } from "@/components/give-card";
 import { Icon, type IconName } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
@@ -88,22 +87,12 @@ export default function SupportPage() {
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{w.body}</p>
                 <span className="mt-6 flex items-center justify-between text-sm font-medium text-ink">
                   {w.cta}
-                  <span className="flex size-8 items-center justify-center rounded-full bg-bronze text-white transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110">
+                  <span className="flex size-8 items-center justify-center rounded-full bg-bronze text-white">
                     <SlideIcon name="arrow" className="size-4" />
                   </span>
                 </span>
               </a>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-cream py-24">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-line to-transparent" />
-        <div className="wrap">
-          <SectionHead center title="Suggested gifts" aside="A guide to what your gift can do. You choose the exact amount at checkout." />
-          <div className="mt-16 lg:mt-20">
-            <GiftTiers href={options[0]?.href ?? "#give"} />
           </div>
         </div>
       </section>

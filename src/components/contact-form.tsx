@@ -87,7 +87,7 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
       <button
         type="submit"
         disabled={status === "sending"}
-        className="sheen group inline-flex items-center gap-2.5 rounded-full bg-bronze px-7 py-3.5 font-medium text-white transition-[background-color,transform] duration-300 hover:bg-bronze-dark active:scale-[0.97] disabled:opacity-80"
+        className="group inline-flex items-center gap-2.5 rounded-full bg-bronze px-7 py-3.5 font-medium text-white transition-colors duration-300 hover:bg-bronze-dark disabled:opacity-80"
       >
         {status === "sending" ? (
           <>

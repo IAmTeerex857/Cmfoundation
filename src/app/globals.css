@@ -242,25 +242,6 @@ body {
   }
 }
 
-/* Primary button sheen: a soft light sweeps across on hover. */
-.sheen {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-}
-.sheen::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.28) 50%, transparent 70%);
-  transform: translateX(-120%);
-  transition: transform 0.8s var(--ease-out-expo);
-}
-.sheen:hover::before {
-  transform: translateX(120%);
-}
-
 /* Loaders from generative-loaders use system and monospace fonts; keep the site's two typefaces. */
 .tl-loader {
   --tl-font: var(--font-sans);
@@ -268,16 +249,6 @@ body {
 .tl-decode,
 .tl-terminal {
   font-family: var(--font-display);
-}
-
-/* The giving card's metal button: metal-fx paints its own inner fill (charcoal in its dark tuning);
-   use brand navy instead, under the liquid-gold ring. */
-.give-metal .metal-fx-inner {
-  background: var(--color-navy) !important;
-  transition: background-color 0.3s;
-}
-.give-metal:hover .metal-fx-inner {
-  background: var(--color-navy-soft) !important;
 }
 
 /* Book covers tilt toward the reader on hover. */

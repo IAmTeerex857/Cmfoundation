@@ -15,14 +15,14 @@ Reviewed October 14, 2026 from the local source, assets, project notes, and avai
 | Area | Implemented locally |
 | --- | --- |
 | Shared design | Responsive layouts; CMF brand palette (bronze, navy, cream, logo gold) on the RiseUp/Altruva layouts; display and body typography; logo; desktop and mobile navigation; navy footer; reusable buttons, cards, photo layouts, statistics, FAQ accordions, and quote slider. |
-| Home | Foundation introduction, four mission pillars, founder story, featured literature, impact statements, suggested gifts, FAQs, upcoming events, and support calls to action. |
+| Home | Foundation introduction, four mission pillars, founder story, featured literature, impact statements, FAQs, upcoming events, and support calls to action. |
 | About | Foundation background, establishment in 2012, founder connection, vision, mission, values, and four pillars. |
 | Founder | Biography, life timeline, defining chapters, four-photo gallery, quotations, and links to the literature collection. |
 | Literature | Founder's Library, current series, Cheta section, forthcoming titles, and a searchable library with collection/topic filters and date/title sorting. |
 | Book catalogue | Eleven entries: three founder titles, three current titles, and five forthcoming titles. A title becomes readable in the online reader as soon as `books/<slug>.pdf` is added; until then its card offers a printed-copy request. No downloads are offered. |
 | Our Work | Literature, education, community development, legacy preservation, initiatives, working principles, four milestones, events, and partnership/volunteer links. |
 | Events | Three configured event entries, date formatting, upcoming-event filtering, book artwork, and contact-based expressions of interest. Dates and registration details need confirmation. |
-| Support | Giving card linking to Bachs payment links (NGN, USD, monthly; each optional), suggested gifts, partnership and volunteering options, and giving FAQs. |
+| Support | Giving card linking to Bachs payment links (NGN, USD, monthly; each optional), partnership and volunteering options, and giving FAQs. |
 | Reader | `/read/<slug>`: full-screen PDF.js reader with range loading, zoom, page jump, keyboard navigation, light/sepia/night page colours, full screen and resume. No download or print control. |
 | Contact | Confirmed email/phone, Abuja head-office address and map, enquiry form, separate contact points, FAQs, and prefilled book/event enquiries. The footer also links to the supplied office map. |
 | Newsletter | Footer sign-up via `/api/newsletter`: adds the subscriber to a Resend segment when `RESEND_SEGMENT_ID` is set, otherwise emails the Foundation inbox. |
@@ -104,7 +104,7 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 
 ## Payment link and repository — October 17, 2026
 
-- The Foundation's Bachs naira payment link (`https://checkout.bachs.io/pay/pl_af3bb8de098d`) is built in as the default NGN giving option. The checkout asks the donor for an amount in NGN, minimum ₦100. Its page is currently titled "Pay Meal". It should show the Foundation's name, and its post-payment redirect has not been verified.
+- The Foundation's Bachs naira payment link (`https://checkout.bachs.io/pay/pl_af3bb8de098d`) is built in as the default NGN giving option. The checkout lets the donor enter any amount in NGN. Its page is currently titled "Pay Meal". It should show the Foundation's name, and its post-payment redirect has not been verified.
 - The CMF repository is `https://github.com/IAmTeerex857/Cmfoundation.git` (remote `origin`). It was empty before the first push.
 - Remaining before launch: book PDFs and the Resend connection.
 
@@ -119,3 +119,10 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 - **Copy:** every em dash was rewritten, and no visible text names Bachs (the FAQ and donation policy say "our payment partner").
 - **New dependencies (exact pins):** `motion@13.5.1`, `lenis@1.3.26`, `border-beam@1.4.1`, `liquid-gooey@0.2.2`, `metal-fx@2.0.11` and `generative-loaders@0.1.1`. motion and generative-loaders share one `framer-motion@13.5.1`.
 - **Verified:** ESLint, `tsc`, `git diff --check` and the production build pass. Every page has no console or hydration errors in both dev and production. Rendered text was checked for em dashes and "Bachs". Scroll-throughs at 1366px and 390px left no content hidden and caused no horizontal overflow. The reader still opens and renders, with the new loader. Metal is mounted after hydration because it decides between WebGL and its fallback only in the browser. Not committed or pushed.
+
+## Simpler giving — October 18, 2026
+
+- **Giving card:** now plain. A title, the four choices with a sliding tab, a short description of the chosen cause, and one navy button to the checkout. The "Secure" pill, the gold beam, the metal button and the liquid tab were removed.
+- **Suggested gifts:** removed from the home and Support pages. The checkout takes any amount.
+- **Buttons:** the hover sheen, glow, press-scale and springy arrow chips were removed site-wide. Buttons now change colour and slide their arrow.
+- **Dependencies:** `border-beam`, `liquid-gooey` and `metal-fx` were uninstalled.

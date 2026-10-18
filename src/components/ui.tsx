@@ -19,9 +19,9 @@ type ButtonProps = {
 } & Omit<ComponentProps<typeof Link>, "href" | "className" | "children">;
 
 const variants = {
-  primary: "sheen bg-bronze text-white hover:bg-bronze-dark hover:shadow-[0_12px_30px_-12px_rgba(162,96,26,0.65)]",
+  primary: "bg-bronze text-white hover:bg-bronze-dark",
   outline: "border border-ink/80 text-ink hover:bg-ink hover:text-white",
-  dark: "sheen bg-ink text-white hover:bg-navy",
+  dark: "bg-ink text-white hover:bg-navy",
   light: "border border-white/70 text-white hover:bg-white hover:text-ink",
   ghost: "text-ink hover:text-bronze px-0!",
 };
@@ -44,7 +44,7 @@ export function Button({ href, children, variant = "primary", icon = "arrowUpRig
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-[0.95rem] font-medium transition-[background-color,color,box-shadow,transform] duration-300 active:scale-[0.97] ${variants[variant]} ${className}`}
+      className={`group inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-[0.95rem] font-medium transition-colors duration-300 ${variants[variant]} ${className}`}
       {...rest}
     >
       {children}
@@ -57,7 +57,7 @@ export function CircleArrow({ className = "", tone = "primary" }: { className?: 
   return (
     <span
       aria-hidden="true"
-      className={`flex shrink-0 items-center justify-center rounded-full text-white transition-[transform,background-color] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 ${
+      className={`flex shrink-0 items-center justify-center rounded-full text-white transition-colors duration-300 ${
         tone === "primary" ? "bg-bronze group-hover:bg-bronze-dark" : "bg-ink group-hover:bg-bronze"
       } ${className || "size-9"}`}
     >

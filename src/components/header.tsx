@@ -68,10 +68,10 @@ export function Header() {
         <div className="flex items-center gap-2">
           <Link
             href="/support"
-            className="sheen group hidden items-center gap-2 rounded-full bg-bronze py-3 pr-3 pl-5 text-[0.92rem] font-medium whitespace-nowrap text-white transition-[background-color,transform] hover:bg-bronze-dark active:scale-[0.97] sm:inline-flex"
+            className="group hidden items-center gap-2 rounded-full bg-bronze py-3 pr-3 pl-5 text-[0.92rem] font-medium whitespace-nowrap text-white transition-colors hover:bg-bronze-dark sm:inline-flex"
           >
             Donate Now
-            <span className="flex size-7 items-center justify-center rounded-full bg-white/15 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45">
+            <span className="flex size-7 items-center justify-center rounded-full bg-white/15">
               <Icon name="arrowUpRight" className="size-3.5" strokeWidth={2.2} />
             </span>
           </Link>
@@ -125,7 +125,7 @@ export function Header() {
               ))}
             </ul>
             <motion.div className="wrap pb-10" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.45 }}>
-              <Link href="/support" onClick={() => setOpen(false)} className="sheen block rounded-full bg-bronze px-5 py-4 text-center font-medium text-white">
+              <Link href="/support" onClick={() => setOpen(false)} className="block rounded-full bg-bronze px-5 py-4 text-center font-medium text-white">
                 Donate Now
               </Link>
             </motion.div>

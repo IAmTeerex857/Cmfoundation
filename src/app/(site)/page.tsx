@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { BookCover } from "@/components/book-cover";
 import { EventCard } from "@/components/event-card";
-import { GiftTiers } from "@/components/gift-tiers";
 import { SplitWords } from "@/components/motion/split-words";
 import { QuoteSlider } from "@/components/quote-slider";
 import {
@@ -25,7 +24,6 @@ import { availableBooks, books, forthcomingBooks, getBook } from "@/lib/books";
 import { faqs } from "@/lib/faqs";
 import { quotes } from "@/lib/founder";
 import { readableSlugs } from "@/lib/manuscripts";
-import { givingOptions } from "@/lib/payment-links";
 import { pillars, upcomingEvents } from "@/lib/work";
 
 export const revalidate = 86400;
@@ -35,7 +33,6 @@ const library = ["false-men-and-true-christians", "exploring-the-godhead", "the-
 export default function Home() {
   const events = upcomingEvents().slice(0, 2);
   const readable = readableSlugs();
-  const giveHref = givingOptions()[0]?.href ?? "/support#give";
 
   return (
     <>
@@ -259,16 +256,6 @@ export default function Home() {
               { value: "2012", title: "Foundation Established", body: "Created during his lifetime to continue his intellectual, Christian and community work." },
             ]}
           />
-        </div>
-      </section>
-
-      {/* Suggested gifts (RiseUp donation cards) */}
-      <section className="py-24">
-        <div className="wrap">
-          <SectionHead center title="Every little helps a lot" aside="Choose a gift, or give any amount you like. Every contribution, in big or small measure, makes a difference." />
-          <div className="mt-16 lg:mt-20">
-            <GiftTiers href={giveHref} />
-          </div>
         </div>
       </section>
 

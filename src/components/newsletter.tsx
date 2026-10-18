@@ -56,7 +56,7 @@ export function Newsletter() {
           type="submit"
           disabled={state === "sending"}
           aria-label="Subscribe"
-          className="absolute top-1/2 right-1.5 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-bronze text-white transition-[background-color,scale] duration-300 hover:scale-110 hover:bg-bronze-dark active:scale-95 disabled:opacity-80"
+          className="absolute top-1/2 right-1.5 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-bronze text-white transition-colors duration-300 hover:bg-bronze-dark disabled:opacity-80"
         >
           {state === "sending" ? <InlineLoader variant="orbit" size={16} label="Subscribing" /> : <Icon name="arrow" className="size-4" strokeWidth={2} />}
         </button>
