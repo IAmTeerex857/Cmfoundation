@@ -1,5 +1,6 @@
 "use client";
 
+import { InlineLoader, TextLoader } from "generative-loaders";
 import Link from "next/link";
 import type { PDFDocumentProxy, RenderTask } from "pdfjs-dist/legacy/build/pdf.mjs";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -245,7 +246,7 @@ export function BookReader({ book }: { book: Book }) {
           <span className="hidden text-sm md:inline">Library</span>
         </Link>
         <div className="min-w-0 flex-1">
-          <h1 className="truncate font-display text-xl leading-none tracking-wide uppercase sm:text-2xl">{book.title}</h1>
+          <h1 className="truncate font-display text-base leading-tight font-semibold tracking-[-0.02em] sm:text-lg">{book.title}</h1>
           <p className="truncate text-xs text-tan">{book.author}</p>
         </div>
 
@@ -301,7 +302,7 @@ export function BookReader({ book }: { book: Book }) {
       )}
 
       <div ref={scrollRef} className={`relative flex-1 overflow-auto overscroll-contain ${t.stage}`} onContextMenu={(e) => e.preventDefault()}>
-        {status === "loading" && <Notice title="Opening the book…" spinner />}
+        {status === "loading" && <Notice title={book.title} spinner />}
         {status === "error" && (
           <Notice title="This book couldn't be opened." body="Please check your connection and try again. If the problem continues, let us know.">
             <button type="button" onClick={() => window.location.reload()} className="rounded-xl bg-bronze px-5 py-3 text-white hover:bg-bronze-dark">
@@ -434,9 +435,18 @@ function PageSlot({
 function Notice({ title, body, spinner, children }: { title: string; body?: string; spinner?: boolean; children?: React.ReactNode }) {
   return (
     <div className="absolute inset-0 flex items-center justify-center p-6">
-      <div className="max-w-md rounded-2xl bg-cream p-8 text-center shadow-lg" role={spinner ? "status" : "alert"}>
-        {spinner && <span className="mx-auto mb-5 block size-9 animate-spin rounded-full border-3 border-bronze/25 border-t-bronze motion-reduce:animate-none" aria-hidden="true" />}
-        <p className="display-sm text-2xl">{title}</p>
+      <div className="max-w-md rounded-3xl bg-cream p-8 text-center shadow-lg" role={spinner ? undefined : "alert"}>
+        {spinner ? (
+          <>
+            <InlineLoader variant="fold" size={34} color="var(--color-bronze)" className="mx-auto mb-5 block" />
+            <p className="eyebrow">Opening</p>
+            <p className="display-sm mt-2 text-2xl">
+              <TextLoader text={title} variant="decode" color="var(--color-ink)" aria-label={`Opening ${title}`} />
+            </p>
+          </>
+        ) : (
+          <p className="display-sm text-2xl">{title}</p>
+        )}
         {body && <p className="mt-3 text-sm leading-relaxed text-muted">{body}</p>}
         {children && <div className="mt-6 flex flex-wrap justify-center gap-3">{children}</div>}
       </div>

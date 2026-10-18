@@ -1,8 +1,11 @@
 "use client";
 
+import { InlineLoader } from "generative-loaders";
+import { motion } from "motion/react";
 import { useState } from "react";
 import { type EnquiryType, enquiryTypes } from "@/lib/enquiries";
 import { Icon } from "./icons";
+import { SlideIcon } from "./ui";
 
 export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEnquiry?: EnquiryType; initialMessage?: string }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -30,11 +33,18 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
 
   if (status === "sent") {
     return (
-      <div className="tile p-8 text-center">
-        <Icon name="check" className="mx-auto size-10 text-bronze" strokeWidth={2} />
-        <h3 className="display-sm mt-4">Thank you — your message has been sent.</h3>
+      <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="tile p-8 text-center">
+        <motion.span
+          initial={{ scale: 0, rotate: -45 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 420, damping: 14, delay: 0.15 }}
+          className="mx-auto flex size-16 items-center justify-center rounded-full bg-bronze text-white"
+        >
+          <Icon name="check" className="size-8" strokeWidth={2} />
+        </motion.span>
+        <h3 className="display-sm mt-4">Thank you. Your message has been sent.</h3>
         <p className="mt-2 text-muted">We aim to respond within 1–2 business days.</p>
-      </div>
+      </motion.div>
     );
   }
 
@@ -77,10 +87,17 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex items-center gap-2.5 rounded-xl bg-bronze px-7 py-3.5 font-medium text-white hover:bg-bronze-dark disabled:opacity-60"
+        className="sheen group inline-flex items-center gap-2.5 rounded-full bg-bronze px-7 py-3.5 font-medium text-white transition-[background-color,transform] duration-300 hover:bg-bronze-dark active:scale-[0.97] disabled:opacity-80"
       >
-        {status === "sending" ? "Sending…" : "Send message"}
-        <Icon name="arrowUpRight" className="size-4" strokeWidth={2} />
+        {status === "sending" ? (
+          <>
+            <InlineLoader variant="orbit" size={18} label="Sending your message" /> Sending
+          </>
+        ) : (
+          <>
+            Send message <SlideIcon name="arrowUpRight" />
+          </>
+        )}
       </button>
     </form>
   );

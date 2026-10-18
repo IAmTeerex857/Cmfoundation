@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { EventCard } from "@/components/event-card";
 import { Icon } from "@/components/icons";
+import { SplitWords } from "@/components/motion/split-words";
 import { Button, IconList, ImageCard, ImageCta, Marquee, NumberedCards, PageHero, SectionHead, Statement } from "@/components/ui";
 import { approach, initiatives, milestones, pillars, upcomingEvents } from "@/lib/work";
 
@@ -41,7 +42,7 @@ export default function OurWorkPage() {
         }
       >
         <p>
-          The Chinwoke Mbadinuju Foundation translates ideas into action through literature, education, community development and legacy preservation —
+          The Chinwoke Mbadinuju Foundation translates ideas into action through literature, education, community development and legacy preservation,
           advancing a more informed, compassionate and opportunity-rich society.
         </p>
       </PageHero>
@@ -62,7 +63,7 @@ export default function OurWorkPage() {
 
       <section id="initiatives" className="scroll-mt-24 pb-24">
         <div className="wrap">
-          <SectionHead title={<>Real people. Real progress.</>} aside="The initiatives through which the Foundation's pillars become practical help." />
+          <SectionHead title="Real people. Real progress." aside="The initiatives through which the Foundation's pillars become practical help." />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {initiatives.map((i) =>
               initiativeImages[i.title] ? (
@@ -70,7 +71,7 @@ export default function OurWorkPage() {
               ) : (
                 <ImageCard key={i.title} href="/support#give" title={i.title}>
                   <div className="flex h-full flex-col justify-between bg-navy p-6 text-white">
-                    <Icon name={i.icon} className="size-12 text-gold" strokeWidth={1.3} />
+                    <Icon name={i.icon} className="size-12 text-gold transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-6" strokeWidth={1.3} />
                     <p className="text-sm leading-relaxed text-white/85">{i.body}</p>
                   </div>
                 </ImageCard>
@@ -83,8 +84,12 @@ export default function OurWorkPage() {
       <section id="approach" className="scroll-mt-24 bg-bronze py-24">
         <div className="wrap">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <h2 className="display-lg max-w-xl text-white">Principled. Practical. People-centred.</h2>
-            <p className="max-w-sm text-white/90">How we work, wherever the Foundation is involved.</p>
+            <h2 data-reveal="words" className="display-lg max-w-xl text-white">
+              <SplitWords>Principled. Practical. People-centred.</SplitWords>
+            </h2>
+            <p data-reveal data-reveal-delay="250" className="max-w-sm text-white/90">
+              How we work, wherever the Foundation is involved.
+            </p>
           </div>
           <div className="mt-12">
             <NumberedCards items={approach.map((a) => ({ title: a.title, body: a.body }))} />
@@ -97,17 +102,21 @@ export default function OurWorkPage() {
           <SectionHead title="Moments that mark the journey" aside="Impact and milestones from the Foundation's work." />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {milestones.map((m, i) => (
-              <article key={m.title} className="tile flex flex-col p-3">
+              <article
+                key={m.title}
+                data-reveal
+                className="tile group flex flex-col p-3 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-28px_rgba(14,33,50,0.5)]"
+              >
                 <div className={`relative aspect-[4/3] overflow-hidden rounded-xl ${["bg-parchment", "bg-tan", "bg-navy-soft", "bg-navy"][i % 4]}`}>
                   {m.image ? (
-                    <Image src={m.image} alt="" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
+                    <Image src={m.image} alt="" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.07]" />
                   ) : (
                     <Icon name="leaf" className={`absolute top-5 left-5 size-10 ${i === 0 ? "text-navy-soft" : "text-white/80"}`} strokeWidth={1.3} />
                   )}
                 </div>
                 <div className="px-1 pt-4 pb-1">
                   <p className="text-xs text-bronze">{"//"}{m.category}</p>
-                  <h3 className="display-sm mt-1 text-2xl">{m.title}</h3>
+                  <h3 className="display-sm mt-1 text-xl">{m.title}</h3>
                 </div>
               </article>
             ))}
@@ -118,7 +127,7 @@ export default function OurWorkPage() {
       {events.length > 0 && (
         <section id="events" className="scroll-mt-24 pb-8">
           <div className="wrap">
-            <SectionHead title="Where the mission comes together" aside="Literature, education, remembrance and community service — turning the work into opportunities for participation." />
+            <SectionHead title="Where the mission comes together" aside="Literature, education, remembrance and community service, turning the work into opportunities for participation." />
             <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {events.map((e, i) => (
                 <EventCard key={e.title} event={e} index={i} />

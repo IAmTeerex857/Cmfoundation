@@ -4,8 +4,8 @@ import { manuscriptPath, READER_HEADER } from "@/lib/manuscripts";
 
 // Streams a book's PDF to the on-site reader, in byte ranges so long books open quickly.
 //
-// Reading is free; downloading is not offered. Requests without the reader's header — someone
-// opening or sharing this URL directly — are sent to the reader page instead of receiving the file.
+// Reading is free; downloading is not offered. Requests without the reader's header (someone
+// opening or sharing this URL directly) are sent to the reader page instead of receiving the file.
 // No web reader can make copying impossible, but there is no download button, no public file URL
 // and no browser PDF viewer with a save option.
 

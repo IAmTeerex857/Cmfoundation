@@ -1,14 +1,16 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
+@import "generative-loaders/styles.css";
 
-/* Layout and type follow the Altruva + RiseUp references; colours are the CMF brand palette
-   sampled from the Foundation's page designs and logo (../drive_assets). */
+/* Layout follows the Altruva + RiseUp references; colours are the CMF brand palette sampled from
+   the Foundation's page designs and logo (../drive_assets). Type: Geist for headings, Inter for text. */
 @theme {
   --color-cream: #fcf8f3; /* page background */
   --color-sand: #f5ecdd; /* tiles, header, heroes */
   --color-parchment: #efe2cc; /* light accent tiles */
   --color-bronze: #a2601a; /* primary actions and labels (design buttons ≈ #a8641a, darkened for AA text contrast) */
   --color-bronze-dark: #844d12;
-  --color-gold: #d4a82a; /* logo gold — accents on navy, highlights */
+  --color-gold: #d4a82a; /* logo gold: accents on navy, highlights */
   --color-tan: #c9a77c; /* soft accent text on navy, decorative frames */
   --color-tan-light: #dcc3a1;
   --color-navy: #0e2132; /* footer and dark sections */
@@ -18,26 +20,39 @@
   --color-muted: #6b6359;
   --color-line: #e3d6c2;
 
-  --font-display: var(--font-bebas), "Bebas Neue", Impact, sans-serif;
-  --font-sans: var(--font-public), "Public Sans", system-ui, sans-serif;
+  --font-display: var(--font-geist), "Geist", system-ui, sans-serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-page-in: page-in 0.7s var(--ease-out-expo) both;
 
   @keyframes marquee {
     to {
       transform: translateX(-50%);
     }
   }
-}
-
-html {
-  scroll-behavior: smooth;
+  @keyframes float {
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes page-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
 }
 
 body {
   background: var(--color-cream);
   color: var(--color-body);
   font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
 }
 
 ::selection {
@@ -50,23 +65,27 @@ body {
 }
 
 @utility display {
-  @apply font-display leading-[0.92] tracking-[-0.01em] text-ink uppercase;
+  @apply font-display font-semibold tracking-[-0.035em] text-balance text-ink;
 }
 
 @utility display-xl {
-  @apply display text-[clamp(3.5rem,8.4vw,6rem)];
+  @apply display text-[clamp(2.6rem,6.2vw,4.75rem)] leading-[1.02];
 }
 
 @utility display-lg {
-  @apply display text-[clamp(2.75rem,6vw,4.5rem)];
+  @apply display text-[clamp(2.1rem,4.4vw,3.4rem)] leading-[1.05];
 }
 
 @utility display-md {
-  @apply display text-[clamp(2rem,4vw,3rem)];
+  @apply display text-[clamp(1.6rem,2.8vw,2.15rem)] leading-[1.1];
 }
 
 @utility display-sm {
-  @apply display text-[1.75rem] leading-none;
+  @apply display text-[1.35rem] leading-[1.15] tracking-[-0.025em];
+}
+
+@utility eyebrow {
+  @apply text-xs font-medium tracking-[0.16em] text-bronze uppercase;
 }
 
 @utility lede {
@@ -78,9 +97,211 @@ body {
 }
 
 @utility field {
-  @apply w-full rounded-xl border border-line bg-cream px-4 py-3.5 text-[0.95rem] text-ink placeholder:text-muted focus:border-bronze focus:ring-2 focus:ring-bronze/20 focus:outline-none;
+  @apply w-full rounded-xl border border-line bg-cream px-4 py-3.5 text-[0.95rem] text-ink transition-[border-color,box-shadow] duration-300 placeholder:text-muted focus:border-bronze focus:ring-4 focus:ring-bronze/15 focus:outline-none;
 }
 
 @utility highlight {
-  @apply box-decoration-clone bg-gold px-2 text-ink;
+  @apply box-decoration-clone px-2 text-ink;
+  background: linear-gradient(var(--color-gold), var(--color-gold)) no-repeat 0 0 / 100% 100%;
+}
+
+/* ---------- Motion ----------------------------------------------------------------------------
+   Scroll reveals are progressive enhancement. An inline script in the root layout adds
+   .js-reveal to <html>; ScrollEffects (components/motion/scroll-effects.tsx) adds .is-in as each
+   [data-reveal] element enters the viewport, then removes the attribute so hover effects take
+   over. Without JavaScript, or with reduced motion, everything is simply visible. */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: auto; /* Lenis handles smoothing */
+  }
+
+  [data-reveal] {
+    transition:
+      opacity 0.9s var(--ease-out-expo),
+      transform 1s var(--ease-out-expo),
+      filter 0.9s var(--ease-out-expo),
+      clip-path 1.2s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .js-reveal [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  .js-reveal [data-reveal="fade"]:not(.is-in) {
+    transform: none;
+  }
+  .js-reveal [data-reveal="scale"]:not(.is-in) {
+    transform: scale(0.94);
+  }
+  .js-reveal [data-reveal="left"]:not(.is-in) {
+    transform: translateX(-40px);
+  }
+  .js-reveal [data-reveal="right"]:not(.is-in) {
+    transform: translateX(40px);
+  }
+  .js-reveal [data-reveal="blur"]:not(.is-in) {
+    filter: blur(12px);
+    transform: translateY(14px);
+  }
+  /* Images open up from a smaller window and settle from a slight zoom. */
+  .js-reveal [data-reveal="clip"]:not(.is-in) {
+    opacity: 1;
+    transform: scale(1.04);
+    clip-path: inset(14% 10% 14% 10% round 1.25rem);
+  }
+
+  /* Headings split into words (components/motion/split-words.tsx) rise word by word. */
+  [data-reveal="words"] .word > span {
+    display: inline-block;
+    transition: transform 1s var(--ease-out-expo);
+    transition-delay: calc(var(--reveal-delay, 0ms) + var(--w) * 55ms);
+  }
+  .js-reveal [data-reveal="words"]:not(.is-in) {
+    opacity: 1;
+    transform: none;
+  }
+  .js-reveal [data-reveal="words"]:not(.is-in) .word > span {
+    transform: translateY(105%);
+  }
+
+  /* The gold highlight sweeps in from the left once its statement is in view. */
+  [data-reveal] .highlight {
+    transition: background-size 1.1s var(--ease-out-expo) calc(var(--reveal-delay, 0ms) + 350ms);
+  }
+  .js-reveal [data-reveal]:not(.is-in) .highlight {
+    background-size: 0% 100%;
+  }
+
+  /* Ruled lists draw their rule from left to right. */
+  [data-reveal] .rule-draw::after {
+    transition: transform 1.2s var(--ease-out-expo) calc(var(--reveal-delay, 0ms) + 200ms);
+  }
+  .js-reveal [data-reveal]:not(.is-in) .rule-draw::after,
+  .js-reveal [data-reveal].rule-draw:not(.is-in)::after {
+    transform: scaleX(0);
+  }
+
+  /* Safety net: if the reveal script never starts, show everything after a moment. */
+  .js-reveal:not(.reveal-ready) [data-reveal] {
+    animation: reveal-fallback 0s 2.5s forwards;
+  }
+  .js-reveal:not(.reveal-ready) [data-reveal] .word > span,
+  .js-reveal:not(.reveal-ready) [data-reveal] .highlight {
+    animation: reveal-fallback 0s 2.5s forwards;
+  }
+}
+
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    clip-path: none;
+    background-size: 100% 100%;
+  }
+}
+
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* Room for descenders inside the clipping box. */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.rule-draw {
+  position: relative;
+}
+.rule-draw::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+  transform-origin: left;
+}
+
+/* Smooth FAQ open and close where the browser supports animating to auto height. */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+  details.faq::details-content {
+    height: 0;
+    overflow: clip;
+    transition:
+      height 0.5s var(--ease-out-expo),
+      content-visibility 0.5s allow-discrete;
+  }
+  details.faq[open]::details-content {
+    height: auto;
+  }
+}
+
+/* Primary button sheen: a soft light sweeps across on hover. */
+.sheen {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.28) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.sheen:hover::before {
+  transform: translateX(120%);
+}
+
+/* Loaders from generative-loaders use system and monospace fonts; keep the site's two typefaces. */
+.tl-loader {
+  --tl-font: var(--font-sans);
+}
+.tl-decode,
+.tl-terminal {
+  font-family: var(--font-display);
+}
+
+/* The giving card's metal button: metal-fx paints its own inner fill (charcoal in its dark tuning);
+   use brand navy instead, under the liquid-gold ring. */
+.give-metal .metal-fx-inner {
+  background: var(--color-navy) !important;
+  transition: background-color 0.3s;
+}
+.give-metal:hover .metal-fx-inner {
+  background: var(--color-navy-soft) !important;
+}
+
+/* Book covers tilt toward the reader on hover. */
+.book-tilt {
+  transition:
+    transform 0.6s var(--ease-out-expo),
+    box-shadow 0.6s var(--ease-out-expo);
+  transform-origin: left center;
+}
+.group:hover .book-tilt {
+  transform: perspective(900px) rotateY(-14deg) translateX(6px) scale(1.03);
+  box-shadow: 18px 18px 30px -14px rgb(14 33 50 / 0.45);
+}
+
+.page-in {
+  animation: var(--animate-page-in);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

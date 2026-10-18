@@ -1,5 +1,7 @@
 "use client";
 
+import { InlineLoader } from "generative-loaders";
+import { motion } from "motion/react";
 import { useState } from "react";
 import { Icon } from "./icons";
 
@@ -27,7 +29,15 @@ export function Newsletter() {
     }
   }
 
-  if (state === "done") return <p className="text-gold">Thank you — you&rsquo;re on the list.</p>;
+  if (state === "done")
+    return (
+      <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 text-gold">
+        <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 500, damping: 15, delay: 0.1 }}>
+          <Icon name="check" className="size-5" strokeWidth={2.2} />
+        </motion.span>
+        Thank you. You&rsquo;re on the list.
+      </motion.p>
+    );
 
   return (
     <form onSubmit={submit} className="max-w-sm">
@@ -46,9 +56,9 @@ export function Newsletter() {
           type="submit"
           disabled={state === "sending"}
           aria-label="Subscribe"
-          className="absolute top-1/2 right-1.5 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-bronze text-white hover:bg-bronze-dark disabled:opacity-60"
+          className="absolute top-1/2 right-1.5 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-bronze text-white transition-[background-color,scale] duration-300 hover:scale-110 hover:bg-bronze-dark active:scale-95 disabled:opacity-80"
         >
-          <Icon name="arrow" className="size-4" strokeWidth={2} />
+          {state === "sending" ? <InlineLoader variant="orbit" size={16} label="Subscribing" /> : <Icon name="arrow" className="size-4" strokeWidth={2} />}
         </button>
       </label>
       {/* Honeypot: hidden from people, often filled by bots. */}

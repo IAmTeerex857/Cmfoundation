@@ -7,8 +7,8 @@ export default function NotFound() {
     <SiteShell>
       <section className="bg-sand py-28">
         <div className="wrap max-w-2xl text-center">
-          <p className="font-display text-[10rem] leading-none text-bronze">404</p>
-          <h1 className="display-lg mt-2">This page could not be found.</h1>
+          <p data-reveal="scale" className="font-display text-[clamp(7rem,20vw,11rem)] leading-none font-bold tracking-[-0.06em] text-bronze">404</p>
+          <h1 data-reveal className="display-lg mt-2">This page could not be found.</h1>
           <p className="lede mt-5 text-lg">The page may have moved. Try the home page or explore the free library.</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button href="/">Back to Home</Button>

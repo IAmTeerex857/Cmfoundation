@@ -1,6 +1,6 @@
 import "server-only";
 
-// Resend (https://resend.com) — the only email provider the site uses.
+// Resend (https://resend.com): the only email provider the site uses.
 //   RESEND_API_KEY      API key with "sending" access (and "full access" if RESEND_SEGMENT_ID is used)
 //   CONTACT_TO          inbox(es) that receive website messages, comma-separated
 //   CONTACT_FROM        sender on a domain verified in Resend, e.g. "CMF Website <website@cm.foundation>"

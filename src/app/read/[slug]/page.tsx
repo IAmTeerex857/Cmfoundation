@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/read/[slug]">): P
   if (!book) return {};
   return {
     title: `Read ${book.title}`,
-    description: `Read ${book.title}${book.subtitle ? `: ${book.subtitle}` : ""} by ${book.author} free online — part of the CMF Literature Series.`,
+    description: `Read ${book.title}${book.subtitle ? `: ${book.subtitle}` : ""} by ${book.author} free online. Part of the CMF Literature Series.`,
   };
 }
 

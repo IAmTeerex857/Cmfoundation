@@ -49,7 +49,7 @@ export default function AboutPage() {
         <div className="wrap">
           <Split title="Our Story" image={<NestedFrame src="/images/founder-portrait.jpg" alt="Dr Chinwoke Clement Mbadinuju" position="top" />}>
             <p>
-              Dr Chinwoke Clement Mbadinuju — scholar, lawyer, journalist, evangelist, author, Governor of Anambra State and Odera 1 of Uli — founded CMF to
+              Dr Chinwoke Clement Mbadinuju, scholar, lawyer, journalist, evangelist, author, Governor of Anambra State and Odera 1 of Uli, founded CMF to
               carry his convictions beyond his own lifetime: that knowledge, influence and opportunity must be used to serve God and humanity.
             </p>
             <p>

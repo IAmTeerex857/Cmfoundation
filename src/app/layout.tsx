@@ -1,18 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Public_Sans } from "next/font/google";
+import { Geist, Inter } from "next/font/google";
+import Script from "next/script";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const bebas = Bebas_Neue({
-  variable: "--font-bebas",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
-  weight: "400",
 });
 
-const publicSans = Public_Sans({
-  variable: "--font-public",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
+
+// Runs before first paint so content that will animate in on scroll starts hidden (see globals.css).
+const revealScript = `document.documentElement.classList.add("js-reveal")`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -36,8 +39,13 @@ export const viewport: Viewport = {
 // e-reader (app/read) can use the whole screen.
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-GB" className={`${bebas.variable} ${publicSans.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+    <html lang="en-GB" className={`${geist.variable} ${inter.variable} h-full antialiased`} suppressHydrationWarning>
+      <body className="flex min-h-full flex-col">
+        <Script id="reveal-init" strategy="beforeInteractive">
+          {revealScript}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }

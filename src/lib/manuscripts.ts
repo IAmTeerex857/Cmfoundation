@@ -3,7 +3,7 @@ import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { books, getBook } from "./books";
 
-// Book PDFs live in <project root>/books/<slug>.pdf — deliberately outside /public, so there is no
+// Book PDFs live in <project root>/books/<slug>.pdf, deliberately outside /public, so there is no
 // public URL to download them from. They are streamed only to the on-site reader by
 // app/api/books/[slug]/route.ts. A book becomes readable as soon as its PDF is added and the site
 // is redeployed. See books/README.md.

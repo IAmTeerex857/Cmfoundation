@@ -1,9 +1,11 @@
 "use client";
 
+import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useState } from "react";
 import { availableBooks, type Collection, topics } from "@/lib/books";
 import { BookCard } from "./book-card";
 import { Icon } from "./icons";
+import { SlideIcon } from "./ui";
 
 const tabs: { id: "all" | Exclude<Collection, "forthcoming">; label: string }[] = [
   { id: "all", label: "All" },
@@ -46,12 +48,15 @@ export function Library({ readable }: { readable: string[] }) {
                 setTab(t.id);
                 setLimit(PAGE);
               }}
-              className="rounded-lg px-5 py-2.5 text-sm whitespace-nowrap text-ink aria-selected:bg-ink aria-selected:text-white"
+              className="relative rounded-lg px-5 py-2.5 text-sm whitespace-nowrap text-ink transition-colors duration-300 hover:text-bronze aria-selected:text-white aria-selected:hover:text-white"
             >
-              {t.label}
+              {tab === t.id && (
+                <motion.span layoutId="library-tab" className="absolute inset-0 rounded-lg bg-ink" transition={{ type: "spring", stiffness: 420, damping: 34 }} />
+              )}
+              <span className="relative">{t.label}</span>
             </button>
           ))}
-          <a href="#forthcoming" className="rounded-lg px-5 py-2.5 text-sm whitespace-nowrap text-ink hover:text-bronze">
+          <a href="#forthcoming" className="rounded-lg px-5 py-2.5 text-sm whitespace-nowrap text-ink transition-colors hover:text-bronze">
             Forthcoming
           </a>
         </div>
@@ -78,7 +83,7 @@ export function Library({ readable }: { readable: string[] }) {
             <button
               aria-pressed={topic === t}
               onClick={() => setTopic(topic === t ? null : t)}
-              className="rounded-full border border-ink/25 px-4 py-1.5 text-sm text-ink hover:border-bronze aria-pressed:border-bronze aria-pressed:bg-bronze aria-pressed:text-white"
+              className="rounded-full border border-ink/20 px-4 py-1.5 text-sm text-ink transition-[background-color,border-color,color,transform] duration-300 hover:-translate-y-0.5 hover:border-bronze active:scale-95 aria-pressed:border-bronze aria-pressed:bg-bronze aria-pressed:text-white"
             >
               {t}
             </button>
@@ -87,22 +92,35 @@ export function Library({ readable }: { readable: string[] }) {
       </ul>
 
       {results.length === 0 ? (
-        <p className="mt-12 text-center text-muted">No books match your search. Try another topic or clear the filters.</p>
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-12 text-center text-muted">
+          No books match your search. Try another topic or clear the filters.
+        </motion.p>
       ) : (
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {results.slice(0, limit).map((b) => (
-            <BookCard key={b.slug} book={b} readable={readable.includes(b.slug)} />
-          ))}
-        </div>
+        <motion.div layout className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout" initial={false}>
+            {results.slice(0, limit).map((b) => (
+              <motion.div
+                key={b.slug}
+                layout
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.94 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <BookCard book={b} readable={readable.includes(b.slug)} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       )}
 
       {results.length > limit && (
         <div className="mt-10 text-center">
           <button
             onClick={() => setLimit(limit + PAGE)}
-            className="inline-flex items-center gap-2 rounded-xl border border-ink px-6 py-3.5 text-ink hover:bg-ink hover:text-white"
+            className="group inline-flex items-center gap-2 rounded-full border border-ink px-6 py-3.5 text-ink transition-colors hover:bg-ink hover:text-white active:scale-[0.97]"
           >
-            Load more books <Icon name="arrowDown" className="size-4" strokeWidth={2} />
+            Load more books <SlideIcon name="arrowDown" />
           </button>
         </div>
       )}

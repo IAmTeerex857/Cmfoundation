@@ -16,21 +16,21 @@ export async function POST(req: Request) {
   const message = String(body.message ?? "").trim().slice(0, 5000);
   const enquiry = isEnquiryType(body.enquiry) ? body.enquiry : null;
 
-  if (body.company) return Response.json({ ok: true }); // honeypot tripped — pretend success
+  if (body.company) return Response.json({ ok: true }); // honeypot tripped: pretend success
   if (!name || !email || !message || !enquiry) return bad("Please complete all required fields.");
   if (!EMAIL_PATTERN.test(email)) return bad("Please enter a valid email address.");
 
   const label = enquiryTypes.find((t) => t.id === enquiry)!.label;
   try {
     await sendToFoundation({
-      subject: `[CMF website] ${label} — ${name}`,
+      subject: `[CMF website] ${label}: ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nEnquiry: ${label}\n\n${message}`,
       replyTo: email,
     });
   } catch (err) {
     if (err instanceof EmailNotConfigured) {
       if (process.env.NODE_ENV !== "production") {
-        console.info("[contact] email not configured — message accepted in development only:", { enquiry, name, email });
+        console.info("[contact] email not configured; message accepted in development only:", { enquiry, name, email });
         return Response.json({ ok: true });
       }
       console.error("[contact]", err.message);

@@ -88,13 +88,13 @@ function Motif({ motif, ink }: { motif: CoverMotif; ink: string }) {
   }
 }
 
-export function BookCover({ book, className = "" }: { book: Book; className?: string }) {
+export function BookCover({ book, className = "", style }: { book: Book; className?: string; style?: React.CSSProperties }) {
   // Supplied covers already contain their typography. Preserve the full artwork.
   if (book.cover.type === "official") {
     return (
       <div
         className={`relative overflow-hidden rounded-[3px] shadow-[0_10px_24px_-10px_rgba(10,34,56,0.45)] ring-1 ring-black/5 ${className}`}
-        style={{ aspectRatio: `${book.cover.width} / ${book.cover.height}` }}
+        style={{ aspectRatio: `${book.cover.width} / ${book.cover.height}`, ...style }}
       >
         <Image
           src={book.cover.image}
@@ -116,7 +116,7 @@ export function BookCover({ book, className = "" }: { book: Book; className?: st
   return (
     <div
       className={`relative aspect-[2/3] overflow-hidden [container-type:inline-size] rounded-[3px] shadow-[0_10px_24px_-10px_rgba(10,34,56,0.45)] ring-1 ring-black/5 ${className}`}
-      style={{ background: `linear-gradient(170deg, ${from}, ${to})` }}
+      style={{ background: `linear-gradient(170deg, ${from}, ${to})`, ...style }}
       role="img"
       aria-label={`Cover of ${book.title} by ${book.author}`}
     >
@@ -124,8 +124,8 @@ export function BookCover({ book, className = "" }: { book: Book; className?: st
       {image && <div className="absolute inset-0" style={{ background: readability }} />}
       <div className="absolute inset-y-0 left-0 w-[4%] bg-black/20 shadow-[2px_0_5px_rgba(0,0,0,.16)]" />
       <div className="relative flex h-full flex-col px-[9cqi] pt-[10cqi] pb-[8cqi] text-center" style={{ color: ink }}>
-        <p className="font-serif text-[11cqi] leading-[1.02] font-semibold uppercase [text-wrap:balance] [text-shadow:0_1px_3px_rgba(0,0,0,.12)]">{book.title}</p>
-        {book.subtitle && <p className="mt-1 font-serif text-[6.5cqi] italic opacity-80">{book.subtitle}</p>}
+        <p className="font-display text-[11cqi] leading-[1.02] font-semibold tracking-[-0.02em] uppercase [text-wrap:balance] [text-shadow:0_1px_3px_rgba(0,0,0,.12)]">{book.title}</p>
+        {book.subtitle && <p className="mt-1 font-display text-[6.5cqi] italic opacity-80">{book.subtitle}</p>}
         {!image && (
           <svg viewBox="0 0 120 120" className="mx-auto mt-auto w-full" aria-hidden="true">
             <Motif motif={motif} ink={ink} />
