@@ -6,12 +6,14 @@ import { SplitWords } from "@/components/motion/split-words";
 import { Button, GreenBand, IconList, Marquee, NestedFrame, ReadMore, SectionHead, Split, Statement } from "@/components/ui";
 import { forthcomingBooks, getBook } from "@/lib/books";
 import { readableSlugs } from "@/lib/manuscripts";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "The Literature Series",
   description:
     "Books freely given. Knowledge freely shared. Read the CMF Literature Series free online: the writings of Dr Chinwoke Clement Mbadinuju and the books continuing his work.",
-};
+  path: "/literature",
+});
 
 const heroBooks = ["false-men-and-true-christians", "much-ado-about-rapture", "all-is-vanity"].map((s) => getBook(s)!);
 

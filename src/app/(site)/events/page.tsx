@@ -4,14 +4,16 @@ import { SplitWords } from "@/components/motion/split-words";
 import { Button, Faq, SectionHead } from "@/components/ui";
 import { faqs } from "@/lib/faqs";
 import { upcomingEvents } from "@/lib/work";
+import { pageMetadata } from "@/lib/metadata";
 
 // Re-render daily so past events drop off.
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Events",
   description: "Book presentations, launches and gatherings from the Chinwoke Mbadinuju Foundation.",
-};
+  path: "/events",
+});
 
 export default function EventsPage() {
   const upcoming = upcomingEvents();

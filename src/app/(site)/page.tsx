@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { BookCover } from "@/components/book-cover";
@@ -22,12 +23,33 @@ import {
 } from "@/components/ui";
 import { availableBooks, books, forthcomingBooks, getBook } from "@/lib/books";
 import { faqs } from "@/lib/faqs";
-import { quotes } from "@/lib/founder";
+import { founder, quotes } from "@/lib/founder";
 import { readableSlugs } from "@/lib/manuscripts";
 import { giveHref } from "@/lib/payment-links";
 import { pillars, upcomingEvents } from "@/lib/work";
+import { pageMetadata } from "@/lib/metadata";
+import { site } from "@/lib/site";
 
 export const revalidate = 86400;
+
+export const metadata: Metadata = pageMetadata({ description: site.description, path: "/" });
+
+// Structured data for search engines (schema.org), describing the Foundation.
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  name: site.name,
+  alternateName: site.shortName,
+  url: site.url,
+  logo: `${site.url}/images/logo-full.png`,
+  image: `${site.url}/og-image.jpg`,
+  description: site.description,
+  foundingDate: String(site.founded),
+  founder: { "@type": "Person", name: founder.name },
+  email: site.contact.email,
+  telephone: site.contact.phone,
+  address: { "@type": "PostalAddress", streetAddress: "Otunba Kayode Close, Asokoro", addressLocality: "Abuja", addressRegion: "FCT", addressCountry: "NG" },
+};
 
 const library = ["false-men-and-true-christians", "exploring-the-godhead", "the-criminal-in-heaven"].map((s) => getBook(s)!);
 
@@ -38,6 +60,7 @@ export default function Home() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization).replace(/</g, "\\u003c") }} />
       {/* Hero (Altruva) */}
       <section className="relative overflow-hidden bg-sand">
         <div aria-hidden="true" className="pointer-events-none absolute -top-32 right-[-10%] size-[40rem] rounded-full bg-gold/15 blur-3xl" />

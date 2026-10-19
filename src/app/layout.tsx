@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Inter } from "next/font/google";
 import Script from "next/script";
+import { defaultTitle, shareImage } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -20,15 +21,30 @@ const revealScript = `document.documentElement.classList.add("js-reveal")`;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | ${site.tagline}`,
+    default: defaultTitle,
     template: `%s | ${site.name}`,
   },
   description: site.description,
-  openGraph: {
-    siteName: site.name,
-    type: "website",
-    images: ["/images/students-reading.jpg"],
-  },
+  applicationName: site.name,
+  keywords: [
+    "Chinwoke Mbadinuju Foundation",
+    "CMF",
+    "Dr Chinwoke Clement Mbadinuju",
+    "CMF Literature Series",
+    "Christian books",
+    "free Christian literature",
+    "education",
+    "community development",
+    "Nigeria",
+    "Anambra",
+    "charity",
+  ],
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  formatDetection: { telephone: false, email: false, address: false },
+  openGraph: { type: "website", siteName: site.name, locale: "en_GB", title: defaultTitle, description: site.description, images: [shareImage] },
+  twitter: { card: "summary_large_image", title: defaultTitle, description: site.description, images: [shareImage] },
 };
 
 export const viewport: Viewport = {

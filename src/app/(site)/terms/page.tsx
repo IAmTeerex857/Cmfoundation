@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { PolicyPage } from "@/components/policy-page";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = { title: "Terms of Use" };
+export const metadata: Metadata = pageMetadata({
+  title: "Terms of Use",
+  description: "The terms for using the Chinwoke Mbadinuju Foundation website and reading the CMF Literature Series online.",
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

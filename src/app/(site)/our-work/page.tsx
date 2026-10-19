@@ -5,15 +5,17 @@ import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
 import { Button, IconList, ImageCard, ImageCta, Marquee, NumberedCards, PageHero, SectionHead, Statement } from "@/components/ui";
 import { approach, initiatives, milestones, pillars, upcomingEvents } from "@/lib/work";
+import { pageMetadata } from "@/lib/metadata";
 
 // Re-render daily so past events drop off.
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Our Work",
   description:
     "From ideas to lasting impact: the Chinwoke Mbadinuju Foundation translates ideas into action through literature, education, community development and legacy preservation.",
-};
+  path: "/our-work",
+});
 
 const initiativeImages: Record<string, string> = {
   "Education Support": "/images/generated/education-support.jpg",

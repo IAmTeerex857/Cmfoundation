@@ -3,12 +3,14 @@ import { QuoteSlider } from "@/components/quote-slider";
 import { Button, GreenBand, IconList, Marquee, NestedFrame, NumberedCards, PageHero, ReadMore, SectionHead, Split, Statement } from "@/components/ui";
 import { quotes } from "@/lib/founder";
 import { pillars, values } from "@/lib/work";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About CMF",
   description:
     "The Chinwoke Mbadinuju Foundation is an independent charitable and intellectual foundation advancing Christian literature, education, community development and service to humanity.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

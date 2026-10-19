@@ -3,9 +3,10 @@ import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
 import { Button } from "@/components/ui";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = {
-  title: "Thank You",
+  ...pageMetadata({ title: "Thank You", description: "Thank you for your gift to the Chinwoke Mbadinuju Foundation.", path: "/support/thank-you" }),
   robots: { index: false },
 };
 

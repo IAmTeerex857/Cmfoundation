@@ -7,12 +7,14 @@ import { Button, Faq, ImageCta, SectionHead, SlideIcon, Statement } from "@/comp
 import { faqs } from "@/lib/faqs";
 import { giveHref, givingOptions } from "@/lib/payment-links";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Support the Mission",
   description:
     "Invest in a better tomorrow. Your support keeps life-changing books in people's hands, strengthens communities and invests in future generations.",
-};
+  path: "/support",
+});
 
 // A way without an href goes straight to the checkout.
 const ways: { title: string; body: string; icon: IconName; cta: string; href?: string }[] = [

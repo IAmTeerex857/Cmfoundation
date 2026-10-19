@@ -157,3 +157,10 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
   - All DNS records resolve: Cloudflare MX, SPF, both DKIM keys, Resend's `send` and `rsend`, and DMARC with `p=quarantine`.
   - An external email to hello@cm.foundation was accepted by Cloudflare's mail servers.
   - The live contact form and newsletter sign-up both sent through Resend.
+
+## Social sharing and search metadata — October 19, 2026
+
+- **Share card:** `public/og-image.jpg` (1200 × 630). It shows the logo, the headline "Knowledge changes lives. A better tomorrow is possible." and the students-reading photo on navy. Every page uses it for Open Graph and as a large Twitter/X card.
+- **Per-page metadata:** each page sets its title, description, canonical URL, `og:url` and Twitter tags through `pageMetadata()` in `src/lib/metadata.ts`. Privacy, Terms, Donation Policy and Thank You gained descriptions.
+- **Root layout:** keywords, author, publisher and format detection.
+- **Icons and structured data:** `src/app/apple-icon.png` is the gold mark on navy. The home page carries schema.org `NGO` JSON-LD with name, logo, founder, contact details and Abuja address. Social profile links are not included because the footer's social URLs are still placeholders.

@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { PolicyPage } from "@/components/policy-page";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = { title: "Privacy Policy" };
+export const metadata: Metadata = pageMetadata({
+  title: "Privacy Policy",
+  description: "How the Chinwoke Mbadinuju Foundation uses the information you share through this website, including messages and donations.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

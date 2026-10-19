@@ -4,11 +4,13 @@ import { SplitWords } from "@/components/motion/split-words";
 import { QuoteSlider } from "@/components/quote-slider";
 import { Button, NestedFrame, NumberedCards, ReadMore, SectionHead, Split, StatTiles, Statement } from "@/components/ui";
 import { chapters, founder, gallery, quotes, timeline } from "@/lib/founder";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "The Founder",
   description: `${founder.name}, ${founder.title} (${founder.born} – ${founder.died}). ${founder.summary}`,
-};
+  path: "/founder",
+});
 
 export default function FounderPage() {
   const founderQuotes = quotes.filter((q) => q.role === "Founder");

@@ -8,11 +8,13 @@ import { getBook } from "@/lib/books";
 import { isEnquiryType } from "@/lib/enquiries";
 import { faqs } from "@/lib/faqs";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
   description: "Get in touch with the Chinwoke Mbadinuju Foundation for questions, partnerships, media, events or to support our work.",
-};
+  path: "/contact",
+});
 
 export default async function ContactPage({ searchParams }: PageProps<"/contact">) {
   const { enquiry, book, event } = await searchParams;
