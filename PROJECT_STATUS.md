@@ -133,9 +133,13 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 
 - `src/lib/email.ts` now sends through Cloudflare Email Service's REST API (`/accounts/{id}/email/sending/send`). Resend and the newsletter segment option were removed; newsletter sign-ups are emailed to `CONTACT_TO`.
 - Receiving: Cloudflare Email Routing will forward hello@cm.foundation to cmf.helloo@gmail.com.
+- Done October 19, 2026:
+  - cm.foundation's DNS moved from Namecheap to Cloudflare. The zone is active, and the Vercel A and `www` CNAME records are DNS only.
+  - Email Routing forwards hello@ and every other @cm.foundation address to cmf.helloo@gmail.com (verified).
+  - A test email from website@cm.foundation reached that inbox.
+  - `CLOUDFLARE_ACCOUNT_ID`, `CONTACT_TO` (cmf.helloo@gmail.com) and `CONTACT_FROM` are set in Vercel production.
+- The account is on Cloudflare's free plan, so Email Sending for the domain could not be enabled (API error 2036). The site can still send to verified destination addresses, which is all it needs.
 - Remaining:
-  - Add cm.foundation to Cloudflare (a Cloudflare account is signed in through the `cf` CLI).
-  - Move the nameservers at Namecheap.
-  - Enable Email Routing and Email Sending.
-  - Set `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_EMAIL_TOKEN` in Vercel.
-  - Send a test message.
+  - Create an API token with the "Email Sending: Edit" permission.
+  - Set it as `CLOUDFLARE_EMAIL_TOKEN` in Vercel production and redeploy.
+  - Test the contact form.

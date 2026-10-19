@@ -5,7 +5,8 @@ import "server-only";
 // Foundation's inbox; the website sends through the Email Sending REST API.
 //   CLOUDFLARE_ACCOUNT_ID    the Cloudflare account that has cm.foundation onboarded for sending
 //   CLOUDFLARE_EMAIL_TOKEN   API token with the "Email Sending: Edit" permission
-//   CONTACT_TO               inbox(es) that receive website messages, comma-separated
+//   CONTACT_TO               inbox(es) that receive website messages, comma-separated; each must be a
+//                            verified Email Routing destination (all the free plan can send to)
 //   CONTACT_FROM             sender on the onboarded domain, e.g. "CMF Website <website@cm.foundation>"
 
 export const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

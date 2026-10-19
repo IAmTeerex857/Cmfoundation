@@ -31,7 +31,7 @@ All variables are documented in [`.env.example`](.env.example). After you change
 
 **Bachs.** The naira link (`https://checkout.bachs.io/pay/pl_af3bb8de098d`) is built into `src/lib/payment-links.ts`. To add US-dollar or monthly giving, create those links in the Bachs dashboard so the donor chooses the amount, with the post-payment redirect set to `https://cm.foundation/support/thank-you`. Then set `BACHS_PAYMENT_LINK_USD` or `BACHS_PAYMENT_LINK_MONTHLY`.
 
-**Email.** cm.foundation's DNS is on Cloudflare. Email Routing forwards mail sent to hello@cm.foundation to the Foundation's Gmail. Email Sending is enabled for the domain, and the website sends through it with an API token that has the "Email Sending: Edit" permission. Contact messages and newsletter sign-ups both arrive in `CONTACT_TO`.
+**Email.** cm.foundation's DNS is on Cloudflare. Email Routing forwards mail sent to hello@cm.foundation to the Foundation's Gmail. Email Sending is enabled for the domain, and the website sends through it with an API token that has the "Email Sending: Edit" permission. Contact messages and newsletter sign-ups both arrive in `CONTACT_TO`. That must be a verified destination address (cmf.helloo@gmail.com), because on Cloudflare's free plan the site can only send to verified addresses. Sending to anyone else needs the Workers Paid plan.
 
 ## How it fits together
 

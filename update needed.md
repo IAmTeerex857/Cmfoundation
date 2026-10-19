@@ -105,7 +105,7 @@ No API keys are needed. In the Bachs dashboard, create payment links where the d
 - [ ] Real **social media links**: Facebook, X, Instagram, YouTube, LinkedIn. The icons currently point to each platform's home page.
 - [ ] Confirm the remaining **email addresses**: partnerships@, media@ and events@cm.foundation
 - [ ] Confirm **office hours** (currently Mon–Fri, 9am–5pm WAT)
-- [ ] **Email (Cloudflare)** for the contact form and newsletter: cm.foundation's nameservers moved from Namecheap to Cloudflare, Email Routing to cmf.helloo@gmail.com, Email Sending enabled, and `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_EMAIL_TOKEN` set in Vercel
+- [ ] **Email (Cloudflare):** DNS on Cloudflare, Email Routing to cmf.helloo@gmail.com, and the Vercel settings are done. Still needed: an API token with the "Email Sending: Edit" permission, set as `CLOUDFLARE_EMAIL_TOKEN` in Vercel
 
 ### Content to review and approve
 - [ ] **FAQ answers.** The designs only listed the questions, so we drafted the answers.
