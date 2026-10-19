@@ -41,7 +41,7 @@ Reviewed October 14, 2026 from the local source, assets, project notes, and avai
 ## Assets already prepared
 
 - Original Drive reference assets are retained in `../drive_assets/`.
-- Founder portraits are used throughout the site. The home hero rotates two supplied photos (`students-reading.jpg` and `clean-water-handwashing.jpg`), which replaced the earlier community and water-project photographs everywhere on October 19, 2026. The original water-project photo is still in `drive_assets/`.
+- Founder portraits are used throughout the site. The home hero shows two supplied photos (`students-reading.jpg` and `clean-water-handwashing.jpg`), which replaced the earlier community and water-project photographs everywhere on October 19, 2026. The original water-project photo is still in `drive_assets/`.
 - Thirteen generated editorial illustrations cover former stock-image placements.
 - Five supplied official covers now display complete artwork without generated typography or cropping. Six titles still use generated interim backgrounds with live HTML titles/authors. See `public/images/SUPPLIED_ASSETS.md` for provenance.
 - A public NILA portrait of Cheta is present; Foundation permission and an original replacement are still pending.

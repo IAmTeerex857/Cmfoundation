@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { BookCover } from "@/components/book-cover";
 import { EventCard } from "@/components/event-card";
-import { HeroRotator, type HeroSlide } from "@/components/hero-rotator";
 import { SplitWords } from "@/components/motion/split-words";
 import { QuoteSlider } from "@/components/quote-slider";
 import {
@@ -29,12 +28,6 @@ import { giveHref } from "@/lib/payment-links";
 import { pillars, upcomingEvents } from "@/lib/work";
 
 export const revalidate = 86400;
-
-// Home hero photos. The two frames rotate through this set; add a photo here to include it.
-const heroSlides: HeroSlide[] = [
-  { src: "/images/students-reading.jpg", alt: "Three students reading a book together in a library", caption: "Books that open young minds." },
-  { src: "/images/clean-water-handwashing.jpg", alt: "A girl washing her hands at a clean water tap as her mother looks on", caption: "Clean water. Brighter futures." },
-];
 
 const library = ["false-men-and-true-christians", "exploring-the-godhead", "the-criminal-in-heaven"].map((s) => getBook(s)!);
 
@@ -80,7 +73,22 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <HeroRotator slides={heroSlides} />
+          <div className="grid gap-3 self-center">
+            <div data-reveal="clip" data-reveal-delay="250" className="relative aspect-[16/11] overflow-hidden rounded-3xl">
+              <div data-parallax="0.05" className="absolute inset-0">
+                <Image src="/images/students-reading.jpg" alt="Three students reading a book together in a library" fill priority sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+              </div>
+            </div>
+            <div data-reveal="clip" data-reveal-delay="420" className="relative aspect-[16/10] overflow-hidden rounded-3xl">
+              <div data-parallax="0.05" className="absolute inset-0">
+                <Image src="/images/clean-water-handwashing.jpg" alt="A girl washing her hands at a clean water tap as her mother looks on" fill priority sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+              </div>
+              <span className="absolute bottom-3 left-3 flex animate-float items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-sm text-ink shadow-lg backdrop-blur motion-reduce:animate-none">
+                <span className="size-2 rounded-full bg-bronze" />
+                Clean water. Brighter futures.
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 
