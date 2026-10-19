@@ -23,12 +23,12 @@ export function emailConfigured() {
   return Boolean(accountId && token && to && from);
 }
 
-/** "CMF Website <website@cm.foundation>" → { name, email }; a bare address stays a string. */
+/** "CMF Website <website@cm.foundation>" → { address, name } (the REST API's named-address shape); a bare address stays a string. */
 function sender(value: string) {
   const match = value.trim().match(/^(.*?)\s*<([^>]+)>$/);
   if (!match) return value.trim();
   const name = match[1].replace(/^"|"$/g, "").trim();
-  return name ? { email: match[2].trim(), name } : match[2].trim();
+  return name ? { address: match[2].trim(), name } : match[2].trim();
 }
 
 /** Sends a plain-text message to the Foundation inbox. */
