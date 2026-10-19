@@ -25,13 +25,19 @@ The code is complete, and donations are live through the Foundation's Bachs nair
 | What | Where it goes | What happens until it is supplied |
 |---|---|---|
 | **Book PDFs** | `books/<slug>.pdf`. See [`books/README.md`](books/README.md) for the file names. | Cards show "Online edition coming soon · Request a printed copy". |
-| **Email (Cloudflare)** | `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_EMAIL_TOKEN`, `CONTACT_TO`, `CONTACT_FROM` | In production, the contact and newsletter forms return "temporarily unavailable". In development they accept submissions without sending. |
+| **Email** | `RESEND_API_KEY` (or the Cloudflare fallback `CLOUDFLARE_ACCOUNT_ID` + `CLOUDFLARE_EMAIL_TOKEN`), `CONTACT_TO`, `CONTACT_FROM` | In production, the contact and newsletter forms return "temporarily unavailable". In development they accept submissions without sending. |
 
 All variables are documented in [`.env.example`](.env.example). After you change a variable or add a PDF, redeploy.
 
 **Bachs.** The naira link (`https://checkout.bachs.io/pay/pl_af3bb8de098d`) is built into `src/lib/payment-links.ts`. To add US-dollar or monthly giving, create those links in the Bachs dashboard so the donor chooses the amount, with the post-payment redirect set to `https://cm.foundation/support/thank-you`. Then set `BACHS_PAYMENT_LINK_USD` or `BACHS_PAYMENT_LINK_MONTHLY`.
 
-**Email.** cm.foundation's DNS is on Cloudflare. Email Routing forwards mail sent to hello@cm.foundation to the Foundation's Gmail. Email Sending is enabled for the domain, and the website sends through it with an API token that has the "Email Sending: Edit" permission. Contact messages and newsletter sign-ups both arrive in `CONTACT_TO`. That must be a verified destination address (cmf.helloo@gmail.com), because on Cloudflare's free plan the site can only send to verified addresses. Sending to anyone else needs the Workers Paid plan.
+**Email.**
+- **DNS:** cm.foundation's DNS is on Cloudflare.
+- **Receiving:** Cloudflare Email Routing forwards hello@ and every other @cm.foundation address to the Foundation's Gmail.
+- **Sending:** the domain is verified in Resend. The website sends through Resend with a sending-only key (`RESEND_API_KEY`). Gmail also uses Resend's SMTP server to send as hello@cm.foundation.
+- **Fallback:** without the Resend key, the site sends through Cloudflare Email Service. On the free plan that can only reach verified destination addresses.
+- **DMARC:** set to `p=quarantine`.
+- **Where messages go:** contact messages and newsletter sign-ups arrive in `CONTACT_TO`.
 
 ## How it fits together
 
@@ -46,7 +52,7 @@ src/components/reader/     PDF.js reader (canvas rendering, zoom, page colours, 
 src/lib/books.ts           Book catalogue: titles, covers, collections, topics
 src/lib/manuscripts.ts     Which books have PDFs
 src/lib/payment-links.ts   Bachs payment links from the environment
-src/lib/email.ts           Cloudflare Email Service client
+src/lib/email.ts           Email sending (Resend, Cloudflare fallback)
 src/lib/site.ts            Name, contact details, navigation, social links
 ```
 

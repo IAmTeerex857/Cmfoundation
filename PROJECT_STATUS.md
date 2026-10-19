@@ -152,4 +152,8 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
   - The website itself still sends through Cloudflare (`src/lib/email.ts`).
 - DMARC is `_dmarc` TXT `v=DMARC1; p=quarantine; adkim=r; aspf=r`. It was switched from `p=none` on October 19, 2026, at the Foundation's request.
 - mail-tester.com scored a Resend-sent email from hello@cm.foundation 10/10: SPF pass, DKIM pass (d=cm.foundation), DMARC pass.
-- Website emails sent through Cloudflare were not checked against DMARC before the switch. If contact-form emails start landing in spam, check "Show original" in Gmail. If DMARC fails there, move `src/lib/email.ts` to Resend.
+- The website now sends through Resend (`RESEND_API_KEY`: a sending-only key for cm.foundation, named "CMF website"), because Cloudflare doesn't document how mail sent to verified addresses is signed. Cloudflare Email Service remains the fallback in `src/lib/email.ts`.
+- End-to-end checks on October 19, 2026:
+  - All DNS records resolve: Cloudflare MX, SPF, both DKIM keys, Resend's `send` and `rsend`, and DMARC with `p=quarantine`.
+  - An external email to hello@cm.foundation was accepted by Cloudflare's mail servers.
+  - The live contact form and newsletter sign-up both sent through Resend.
