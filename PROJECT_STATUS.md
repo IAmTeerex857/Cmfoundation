@@ -150,6 +150,6 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
   - The domain is verified in Resend (eu-west-1). Its records are `resend._domainkey` TXT, and `send` and `rsend` CNAMEs to Resend.
   - Open and click tracking are off.
   - The website itself still sends through Cloudflare (`src/lib/email.ts`).
-- DMARC is `_dmarc` TXT `v=DMARC1; p=none; adkim=r; aspf=r`.
+- DMARC is `_dmarc` TXT `v=DMARC1; p=quarantine; adkim=r; aspf=r`. It was switched from `p=none` on October 19, 2026, at the Foundation's request.
 - mail-tester.com scored a Resend-sent email from hello@cm.foundation 10/10: SPF pass, DKIM pass (d=cm.foundation), DMARC pass.
-- Before moving DMARC to `p=quarantine`, confirm in Gmail ("Show original") that a website contact email from Cloudflare passes DMARC.
+- Website emails sent through Cloudflare were not checked against DMARC before the switch. If contact-form emails start landing in spam, check "Show original" in Gmail. If DMARC fails there, move `src/lib/email.ts` to Resend.
