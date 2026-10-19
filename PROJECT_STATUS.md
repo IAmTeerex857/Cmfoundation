@@ -143,3 +143,13 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
   - `CLOUDFLARE_EMAIL_TOKEN` is set in Vercel and production was redeployed.
   - Live tests passed. The contact form and newsletter sign-up both returned success, and Cloudflare reported each email as delivered to cmf.helloo@gmail.com.
   - Email setup is complete.
+
+## Replying as hello@cm.foundation, and DMARC — October 19, 2026
+
+- Gmail (cmf.helloo@gmail.com) sends as hello@cm.foundation using Gmail's "Send mail as" through Resend SMTP (`smtp.resend.com:465`, user `resend`), on Resend's free plan.
+  - The domain is verified in Resend (eu-west-1). Its records are `resend._domainkey` TXT, and `send` and `rsend` CNAMEs to Resend.
+  - Open and click tracking are off.
+  - The website itself still sends through Cloudflare (`src/lib/email.ts`).
+- DMARC is `_dmarc` TXT `v=DMARC1; p=none; adkim=r; aspf=r`.
+- mail-tester.com scored a Resend-sent email from hello@cm.foundation 10/10: SPF pass, DKIM pass (d=cm.foundation), DMARC pass.
+- Before moving DMARC to `p=quarantine`, confirm in Gmail ("Show original") that a website contact email from Cloudflare passes DMARC.
