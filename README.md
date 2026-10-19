@@ -25,13 +25,13 @@ The code is complete, and donations are live through the Foundation's Bachs nair
 | What | Where it goes | What happens until it is supplied |
 |---|---|---|
 | **Book PDFs** | `books/<slug>.pdf`. See [`books/README.md`](books/README.md) for the file names. | Cards show "Online edition coming soon · Request a printed copy". |
-| **Resend** | `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`, and optionally `RESEND_SEGMENT_ID` | In production, the contact and newsletter forms return "temporarily unavailable". In development they accept submissions without sending. |
+| **Email (Cloudflare)** | `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_EMAIL_TOKEN`, `CONTACT_TO`, `CONTACT_FROM` | In production, the contact and newsletter forms return "temporarily unavailable". In development they accept submissions without sending. |
 
 All variables are documented in [`.env.example`](.env.example). After you change a variable or add a PDF, redeploy.
 
 **Bachs.** The naira link (`https://checkout.bachs.io/pay/pl_af3bb8de098d`) is built into `src/lib/payment-links.ts`. To add US-dollar or monthly giving, create those links in the Bachs dashboard so the donor chooses the amount, with the post-payment redirect set to `https://cm.foundation/support/thank-you`. Then set `BACHS_PAYMENT_LINK_USD` or `BACHS_PAYMENT_LINK_MONTHLY`.
 
-**Resend.** Verify the sending domain (`cm.foundation`) in Resend, and use an address on it for `CONTACT_FROM`. To collect newsletter subscribers as Resend contacts, create a segment and set `RESEND_SEGMENT_ID`. This needs a full-access API key. Without a segment, each sign-up is emailed to `CONTACT_TO`.
+**Email.** cm.foundation's DNS is on Cloudflare. Email Routing forwards mail sent to hello@cm.foundation to the Foundation's Gmail. Email Sending is enabled for the domain, and the website sends through it with an API token that has the "Email Sending: Edit" permission. Contact messages and newsletter sign-ups both arrive in `CONTACT_TO`.
 
 ## How it fits together
 
@@ -40,13 +40,13 @@ books/                     Book PDFs (private, not in public/)
 src/app/(site)/            Public pages, wrapped in the header and footer
 src/app/read/[slug]/       Full-screen reader, one page per book with a PDF
 src/app/api/books/[slug]/  Streams a PDF to the reader in byte ranges
-src/app/api/contact/       Contact form → Resend
-src/app/api/newsletter/    Newsletter sign-up → Resend
+src/app/api/contact/       Contact form → Foundation inbox
+src/app/api/newsletter/    Newsletter sign-up → Foundation inbox
 src/components/reader/     PDF.js reader (canvas rendering, zoom, page colours, resume)
 src/lib/books.ts           Book catalogue: titles, covers, collections, topics
 src/lib/manuscripts.ts     Which books have PDFs
 src/lib/payment-links.ts   Bachs payment links from the environment
-src/lib/email.ts           Resend client
+src/lib/email.ts           Cloudflare Email Service client
 src/lib/site.ts            Name, contact details, navigation, social links
 ```
 

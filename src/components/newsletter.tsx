@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import { Icon } from "./icons";
 
-// Sign-ups go to /api/newsletter, which adds the address to Resend (or emails the Foundation inbox).
+// Sign-ups go to /api/newsletter, which emails the address to the Foundation inbox.
 export function Newsletter() {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState("");

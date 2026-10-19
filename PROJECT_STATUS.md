@@ -128,3 +128,14 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 - **Dependencies:** `border-beam`, `liquid-gooey` and `metal-fx` were uninstalled.
 - **Donate buttons go to checkout:** the header and mobile-menu "Donate Now", the home hero's "Donate Now", the "Give Now" image banners on Home and Support, and the "Give a Donation" card all link straight to the checkout (`giveHref()` in `src/lib/payment-links.ts`, which honours `BACHS_PAYMENT_LINK_NGN`). "Support the Mission" links still go to the Support page.
 - **Giving card button:** now reads just "Give", with no payment-method line or checkout note underneath. The footer's large "CMF" mark is centred.
+
+## Email moves from Resend to Cloudflare — October 19, 2026
+
+- `src/lib/email.ts` now sends through Cloudflare Email Service's REST API (`/accounts/{id}/email/sending/send`). Resend and the newsletter segment option were removed; newsletter sign-ups are emailed to `CONTACT_TO`.
+- Receiving: Cloudflare Email Routing will forward hello@cm.foundation to cmf.helloo@gmail.com.
+- Remaining:
+  - Add cm.foundation to Cloudflare (a Cloudflare account is signed in through the `cf` CLI).
+  - Move the nameservers at Namecheap.
+  - Enable Email Routing and Email Sending.
+  - Set `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_EMAIL_TOKEN` in Vercel.
+  - Send a test message.

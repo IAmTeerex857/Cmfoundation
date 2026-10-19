@@ -1,66 +1,57 @@
 import "server-only";
 
-// Resend (https://resend.com): the only email provider the site uses.
-//   RESEND_API_KEY      API key with "sending" access (and "full access" if RESEND_SEGMENT_ID is used)
-//   CONTACT_TO          inbox(es) that receive website messages, comma-separated
-//   CONTACT_FROM        sender on a domain verified in Resend, e.g. "CMF Website <website@cm.foundation>"
-//   RESEND_SEGMENT_ID   optional: newsletter sign-ups are added to this Resend segment
-
-const API = "https://api.resend.com";
+// Cloudflare Email Service (https://developers.cloudflare.com/email-service/): the only email provider
+// the site uses. Mail to @cm.foundation is received by Cloudflare Email Routing and forwarded to the
+// Foundation's inbox; the website sends through the Email Sending REST API.
+//   CLOUDFLARE_ACCOUNT_ID    the Cloudflare account that has cm.foundation onboarded for sending
+//   CLOUDFLARE_EMAIL_TOKEN   API token with the "Email Sending: Edit" permission
+//   CONTACT_TO               inbox(es) that receive website messages, comma-separated
+//   CONTACT_FROM             sender on the onboarded domain, e.g. "CMF Website <website@cm.foundation>"
 
 export const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export class EmailNotConfigured extends Error {}
 
 function config() {
-  const { RESEND_API_KEY, CONTACT_TO, CONTACT_FROM, RESEND_SEGMENT_ID } = process.env;
-  return { apiKey: RESEND_API_KEY, to: CONTACT_TO, from: CONTACT_FROM, segmentId: RESEND_SEGMENT_ID };
+  const { CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_EMAIL_TOKEN, CONTACT_TO, CONTACT_FROM } = process.env;
+  return { accountId: CLOUDFLARE_ACCOUNT_ID?.trim(), token: CLOUDFLARE_EMAIL_TOKEN?.trim(), to: CONTACT_TO, from: CONTACT_FROM };
 }
 
 export function emailConfigured() {
-  const { apiKey, to, from } = config();
-  return Boolean(apiKey && to && from);
+  const { accountId, token, to, from } = config();
+  return Boolean(accountId && token && to && from);
 }
 
-async function resend(path: string, body: unknown) {
-  const { apiKey } = config();
-  if (!apiKey) throw new EmailNotConfigured("RESEND_API_KEY is not set");
-  return fetch(`${API}${path}`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-    cache: "no-store",
-  });
+/** "CMF Website <website@cm.foundation>" → { name, email }; a bare address stays a string. */
+function sender(value: string) {
+  const match = value.trim().match(/^(.*?)\s*<([^>]+)>$/);
+  if (!match) return value.trim();
+  const name = match[1].replace(/^"|"$/g, "").trim();
+  return name ? { email: match[2].trim(), name } : match[2].trim();
 }
 
 /** Sends a plain-text message to the Foundation inbox. */
 export async function sendToFoundation({ subject, text, replyTo }: { subject: string; text: string; replyTo?: string }) {
-  const { to, from } = config();
-  if (!emailConfigured() || !to || !from) throw new EmailNotConfigured("RESEND_API_KEY / CONTACT_TO / CONTACT_FROM not set");
-  const res = await resend("/emails", {
-    from,
-    to: to.split(",").map((s) => s.trim()),
-    ...(replyTo ? { reply_to: replyTo } : {}),
-    subject,
-    text,
+  const { accountId, token, to, from } = config();
+  if (!accountId || !token || !to || !from) throw new EmailNotConfigured("CLOUDFLARE_ACCOUNT_ID / CLOUDFLARE_EMAIL_TOKEN / CONTACT_TO / CONTACT_FROM not set");
+
+  const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(accountId)}/email/sending/send`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from: sender(from),
+      to: to.split(",").map((s) => s.trim()).filter(Boolean),
+      ...(replyTo ? { reply_to: replyTo } : {}),
+      subject,
+      text,
+    }),
+    cache: "no-store",
   });
-  if (!res.ok) throw new Error(`Resend /emails ${res.status}: ${await res.text().catch(() => "")}`);
+  const data = (await res.json().catch(() => null)) as { success?: boolean; errors?: { code: number; message: string }[] } | null;
+  if (!res.ok || !data?.success) throw new Error(`Cloudflare email ${res.status}: ${JSON.stringify(data?.errors ?? data)}`);
 }
 
-/**
- * Adds a newsletter subscriber. With RESEND_SEGMENT_ID set, the address becomes a Resend contact in
- * that segment (ready for Broadcasts). Without it, the sign-up is emailed to the Foundation inbox.
- */
+/** Newsletter sign-ups are emailed to the Foundation inbox, which keeps the subscriber list. */
 export async function subscribe(email: string) {
-  const { segmentId } = config();
-  if (!segmentId) {
-    await sendToFoundation({ subject: "[CMF website] Newsletter sign-up", text: `Please add ${email} to the CMF newsletter.`, replyTo: email });
-    return;
-  }
-  const res = await resend("/contacts", { email, unsubscribed: false, segments: [{ id: segmentId }] });
-  // An existing contact is not an error for the subscriber.
-  if (res.ok || res.status === 409) return;
-  const detail = await res.text().catch(() => "");
-  if (res.status === 422 && /already exists/i.test(detail)) return;
-  throw new Error(`Resend /contacts ${res.status}: ${detail}`);
+  await sendToFoundation({ subject: "[CMF website] Newsletter sign-up", text: `Please add ${email} to the CMF newsletter.`, replyTo: email });
 }

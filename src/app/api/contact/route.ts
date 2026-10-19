@@ -6,7 +6,7 @@ function bad(error: string, status = 400) {
   return Response.json({ error }, { status });
 }
 
-// Delivers contact-form messages to the Foundation inbox through Resend (see lib/email.ts).
+// Delivers contact-form messages to the Foundation inbox through Cloudflare Email Service (see lib/email.ts).
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
   if (!body || typeof body !== "object") return bad("Invalid request.");
