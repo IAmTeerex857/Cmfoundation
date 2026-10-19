@@ -7,10 +7,10 @@ export const defaultTitle = `${site.name} | ${site.tagline}`;
 
 /** The social share card (1200 × 630), used by every page. */
 export const shareImage = {
-  url: "/og-image.jpg",
+  url: "/og-hero.jpg",
   width: 1200,
   height: 630,
-  alt: "Chinwoke Mbadinuju Foundation: Knowledge changes lives. A better tomorrow is possible. Christian literature, education and community development in Nigeria.",
+  alt: "The Chinwoke Mbadinuju Foundation home page: Knowledge changes lives. A better tomorrow is possible. Students reading together and a girl washing her hands at a clean water tap.",
 };
 
 /**

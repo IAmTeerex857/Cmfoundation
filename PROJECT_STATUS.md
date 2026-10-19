@@ -160,7 +160,7 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 
 ## Social sharing and search metadata — October 19, 2026
 
-- **Share card:** `public/og-image.jpg` (1200 × 630). It shows the logo, the headline "Knowledge changes lives. A better tomorrow is possible." and the students-reading photo on navy. Every page uses it for Open Graph and as a large Twitter/X card.
+- **Share card:** `public/og-hero.jpg` (1200 × 630) is a capture of the home page hero: header, headline and both hero photos. Every page uses it for Open Graph and as a large Twitter/X card. If the hero changes, recapture it at a 1680 × 882 viewport.
 - **Per-page metadata:** each page sets its title, description, canonical URL, `og:url` and Twitter tags through `pageMetadata()` in `src/lib/metadata.ts`. Privacy, Terms, Donation Policy and Thank You gained descriptions.
 - **Root layout:** keywords, author, publisher and format detection.
 - **Icons and structured data:** `src/app/apple-icon.png` is the gold mark on navy. The home page carries schema.org `NGO` JSON-LD with name, logo, founder, contact details and Abuja address. Social profile links are not included because the footer's social URLs are still placeholders.

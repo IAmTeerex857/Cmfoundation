@@ -42,7 +42,7 @@ const organization = {
   alternateName: site.shortName,
   url: site.url,
   logo: `${site.url}/images/logo-full.png`,
-  image: `${site.url}/og-image.jpg`,
+  image: `${site.url}/og-hero.jpg`,
   description: site.description,
   foundingDate: String(site.founded),
   founder: { "@type": "Person", name: founder.name },
