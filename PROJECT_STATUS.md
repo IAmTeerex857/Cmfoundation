@@ -139,7 +139,7 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
   - A test email from website@cm.foundation reached that inbox.
   - `CLOUDFLARE_ACCOUNT_ID`, `CONTACT_TO` (cmf.helloo@gmail.com) and `CONTACT_FROM` are set in Vercel production.
 - The account is on Cloudflare's free plan, so Email Sending for the domain could not be enabled (API error 2036). The site can still send to verified destination addresses, which is all it needs.
-- Remaining:
-  - Create an API token with the "Email Sending: Edit" permission.
-  - Set it as `CLOUDFLARE_EMAIL_TOKEN` in Vercel production and redeploy.
-  - Test the contact form.
+- Done October 19, 2026:
+  - `CLOUDFLARE_EMAIL_TOKEN` is set in Vercel and production was redeployed.
+  - Live tests passed. The contact form and newsletter sign-up both returned success, and Cloudflare reported each email as delivered to cmf.helloo@gmail.com.
+  - Email setup is complete.
