@@ -47,7 +47,7 @@ export const initiatives = [
     title: "Sustainable Community Infrastructure",
     body: "Initiatives such as clean water projects and other community infrastructure.",
     icon: "drop" as IconName,
-    image: "/images/water-project.jpg",
+    image: "/images/clean-water-handwashing.jpg",
   },
 ];
 
@@ -75,7 +75,7 @@ export const events: CmfEvent[] = [
 
 export const milestones = [
   { title: "Children's Ministry Support", category: "Education & Faith", image: "/images/generated/childrens-ministry.jpg" },
-  { title: "Uli Community Solar Waterworks", category: "Community Development", image: "/images/water-project.jpg" },
+  { title: "Uli Community Solar Waterworks", category: "Community Development", image: "/images/clean-water-handwashing.jpg" },
   { title: "Peace and Security Posthumous Award", category: "Legacy", image: "/images/generated/award-ceremony.jpg" },
   { title: "CMF Literature Series Launch (Abuja)", category: "Literature", image: "/images/generated/literature-launch.jpg" },
 ];

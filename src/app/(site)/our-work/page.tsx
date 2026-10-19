@@ -19,7 +19,7 @@ const initiativeImages: Record<string, string> = {
   "Education Support": "/images/generated/education-support.jpg",
   "Community Projects": "/images/generated/community-tree-planting.jpg",
   "Free Literature Distribution": "/images/generated/book-distribution.jpg",
-  "Sustainable Community Infrastructure": "/images/water-project.jpg",
+  "Sustainable Community Infrastructure": "/images/clean-water-handwashing.jpg",
 };
 
 export default function OurWorkPage() {
@@ -30,7 +30,7 @@ export default function OurWorkPage() {
       <PageHero
         title={<>From ideas to lasting impact.</>}
         images={[
-          { src: "/images/children-community.jpg", alt: "Children from a community CMF supports" },
+          { src: "/images/students-reading.jpg", alt: "Three students reading a book together in a library" },
         ]}
         actions={
           <>
