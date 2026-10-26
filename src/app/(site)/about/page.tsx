@@ -40,13 +40,14 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About the Chinwoke Mbadinuju Foundation"
         compact
+        short
         title={
           <>
             A Foundation Built on Values.
             <br />A Mission Focused on Impact.
           </>
         }
-        image={{ src: "/images/generated/literature-archive.jpg", alt: "A quiet reading room lined with bookshelves", position: "60% center" }}
+        image={{ src: "/images/about-book-stack.jpg", alt: "A stack of CMF Literature Series books beside a potted plant", position: "left bottom", contained: true }}
         footer={
           <div className="overflow-hidden">
             <ul className={`${ruled} text-[0.78rem] font-semibold tracking-[0.14em] text-bronze uppercase`}>

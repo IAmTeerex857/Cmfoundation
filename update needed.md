@@ -110,7 +110,14 @@ No API keys are needed. In the Bachs dashboard, create payment links where the d
 ### Content to review and approve
 - [ ] **FAQ answers.** The designs only listed the questions, so we drafted the answers.
 - [ ] **Privacy Policy, Terms of Use and Donation Policy.** These pages are placeholders.
-- [ ] **Event details.** Confirm the dates and times, add registration links, and give the exact day for the "Judge Not!" presentation (currently shown as April 2027, TBC).
+- [ ] **Event details.** Dates set on October 26, 2026: Abuja presentation 24 Nov 2026, Judge Not! 1 Jan 2027, All Is Vanity 11 Feb 2027. Still needed: times and registration links.
+- [ ] **Founder page photos (empty frames on the page now).** The design's photos exist only inside the mockup at low resolution, so they were left blank:
+  - one photo for each of the seven timeline periods (1945, 1960s, 1970s, 1980s, 1990s, 1999–2003, 2000s–2023);
+  - one for each of the eight chapters (Early Life, Education, Professional Life, Faith & Ministry, Governorship, Writer & Author, Family Life, Later Years);
+  - four for the "Many Chapters" collage (desk portrait, speaking at a podium, group photo, meeting);
+  - three for the memory cards: one for the Photo Gallery card and two for Burial Tribute.
+  - Add each path to `image` in `src/lib/founder.ts`, or to the `collage` and `memories` lists in the founder page.
+- [ ] **CAC registration number** (optional). The FAQ says the Foundation is registered with the CAC but shows no number.
 - [ ] **Wording change.** We changed "His passing did not *create* the mission" to "did not *end* the mission", which reads like the intended meaning. Please confirm.
 - [ ] **Quote attribution.** "Service is the rental we pay for the space we occupy" is usually credited to Shirley Chisholm. Please confirm it should be attributed to Dr Mbadinuju.
 

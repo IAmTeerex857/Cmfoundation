@@ -167,7 +167,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
           <div className="px-5 py-16 sm:px-8 lg:py-20 lg:pr-12 lg:pl-[max(2rem,calc((100vw-1140px)/2))]">
             <SectionIntro eyebrow="Frequently asked questions" title="Quick Answers." />
             <div className="mt-8">
-              <Faq items={[faqs.books, faqs.partner, faqs.inKind, faqs.invite]} />
+              <Faq items={[faqs.cac, faqs.books, faqs.free, faqs.visit, faqs.partner, faqs.invite, faqs.volunteer]} />
             </div>
           </div>
           <div className="relative isolate flex items-center overflow-hidden bg-blush px-5 py-16 sm:px-8 lg:py-20 lg:pr-[max(2rem,calc((100vw-1140px)/2))] lg:pl-12">

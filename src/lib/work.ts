@@ -68,9 +68,9 @@ export type CmfEvent = {
 
 // TODO(client): confirm dates, times and registration links.
 export const events: CmfEvent[] = [
-  { date: "2026-11-15", title: "CMF Literature Series & Books Presentation", location: "Abuja, Nigeria", online: false, book: "the-criminal-in-heaven" },
+  { date: "2026-11-24", title: "CMF Literature Series & Books Presentation", location: "Abuja, Nigeria", online: false, book: "the-criminal-in-heaven" },
+  { date: "2027-01-01", title: "Online Book Presentation (Judge Not!)", location: "Online", online: true, book: "judge-not" },
   { date: "2027-02-11", title: "Online Book Presentation (All Is Vanity)", location: "Online", online: true, book: "all-is-vanity" },
-  { date: "2027-04", title: "Online Book Presentation (Judge Not!)", location: "Online", online: true, book: "judge-not" },
 ];
 
 export const milestones = [

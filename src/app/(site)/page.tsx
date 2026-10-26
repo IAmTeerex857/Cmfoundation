@@ -45,12 +45,8 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization).replace(/</g, "\\u003c") }} />
 
       <PageHero
-        eyebrow={
-          <>
-            Ideas. People. Communities.
-            <br />A better tomorrow.
-          </>
-        }
+        short
+        eyebrow="Ideas. People. Communities. A better tomorrow."
         title="Knowledge Changes Lives."
         image={{ src: "/images/students-reading.jpg", alt: "Three students reading a book together in a library", position: "45% center" }}
         aside={<QuoteBlock text="A better tomorrow is possible." by={quotes[3].by} />}
@@ -66,15 +62,8 @@ export default function Home() {
         <p>{site.description}</p>
       </PageHero>
 
-      {/* Four pillars */}
-      <section className="border-b border-line bg-paper py-12">
-        <div className="wrap">
-          <IconPillars items={pillars.map((p) => ({ icon: p.icon, title: p.label, body: p.short }))} />
-        </div>
-      </section>
-
       {/* Featured books */}
-      <section className="py-16 lg:py-20">
+      <section className="pt-12 pb-16 lg:pt-8 lg:pb-14">
         <div className="wrap grid gap-12 lg:grid-cols-[1.25fr_2fr_0.85fr] lg:gap-8">
           <div>
             <p data-reveal="fade" className="eyebrow">
@@ -99,7 +88,7 @@ export default function Home() {
               const canRead = readable.includes(b.slug);
               return (
                 <li key={b.slug} data-reveal data-reveal-delay={String(i * 100)} className="group flex h-full flex-col items-center text-center">
-                  <Link href={canRead ? `/read/${b.slug}` : "/literature#library"} className="block w-full max-w-[11.5rem]" tabIndex={-1} aria-hidden="true">
+                  <Link href={canRead ? `/read/${b.slug}` : "/literature#library"} className="block w-full max-w-[10rem]" tabIndex={-1} aria-hidden="true">
                     <BookCover book={b} className="book-tilt w-full" />
                   </Link>
                   <h3 className="mt-4 font-display text-lg leading-snug text-ink">{b.title}</h3>
@@ -107,7 +96,7 @@ export default function Home() {
                   <Button
                     href={canRead ? `/read/${b.slug}` : `/contact?enquiry=books&book=${b.slug}`}
                     icon={null}
-                    className="mt-auto w-full max-w-[11.5rem] px-3!"
+                    className="mt-auto w-full max-w-[10rem] px-3!"
                   >
                     {canRead ? "Read Free" : "Request a Copy"}
                   </Button>
@@ -125,10 +114,17 @@ export default function Home() {
               ))}
             </ul>
             <p className="mt-5 text-sm text-muted">More titles currently in preparation.</p>
-            <Button href="/literature#forthcoming" variant="outline" className="mt-6 w-full px-4! leading-snug">
+            <Button href="/literature?collection=forthcoming#library" variant="outline" className="mt-6 w-full px-4! leading-snug">
               Forthcoming Books
             </Button>
           </aside>
+        </div>
+      </section>
+
+      {/* Four pillars */}
+      <section className="border-t border-line bg-paper py-12">
+        <div className="wrap">
+          <IconPillars items={pillars.map((p) => ({ icon: p.icon, title: p.label, body: p.short }))} />
         </div>
       </section>
 

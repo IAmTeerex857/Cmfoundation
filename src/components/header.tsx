@@ -11,7 +11,7 @@ import { smoothScroll } from "./motion/smooth-scroll";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-export function Header({ giveHref }: { giveHref: string }) {
+export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -66,15 +66,15 @@ export function Header({ giveHref }: { giveHref: string }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href={giveHref}
+          <Link
+            href="/support"
             className="group hidden items-center gap-2 rounded-full bg-bronze py-3 pr-3 pl-5 text-[0.92rem] font-medium whitespace-nowrap text-white transition-colors hover:bg-bronze-dark sm:inline-flex"
           >
-            Donate Now
+            Support Our Mission
             <span className="flex size-7 items-center justify-center rounded-full bg-white/15">
               <Icon name="arrowUpRight" className="size-3.5" strokeWidth={2.2} />
             </span>
-          </a>
+          </Link>
           <button
             type="button"
             className="relative flex size-11 items-center justify-center rounded-full text-slate transition-colors hover:bg-slate/5 lg:hidden"
@@ -125,9 +125,9 @@ export function Header({ giveHref }: { giveHref: string }) {
               ))}
             </ul>
             <motion.div className="wrap pb-10" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.45 }}>
-              <a href={giveHref} onClick={() => setOpen(false)} className="block rounded-full bg-bronze px-5 py-4 text-center font-medium text-white">
-                Donate Now
-              </a>
+              <Link href="/support" onClick={() => setOpen(false)} className="block rounded-full bg-bronze px-5 py-4 text-center font-medium text-white">
+                Support Our Mission
+              </Link>
             </motion.div>
           </motion.nav>
         )}

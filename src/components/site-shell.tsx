@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { giveHref } from "@/lib/payment-links";
 import { Footer } from "./footer";
 import { Header } from "./header";
 import { ScrollEffects } from "./motion/scroll-effects";
@@ -15,7 +14,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <SmoothScroll />
       <ScrollEffects />
       <ScrollProgress />
-      <Header giveHref={giveHref()} />
+      <Header />
       <main id="main" className="flex-1">
         {children}
       </main>

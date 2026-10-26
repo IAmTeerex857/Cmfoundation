@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { EventCard } from "@/components/event-card";
 import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
 import { ArrowLink, Button, GoldRule, IconPillars, PageHero, QuoteBlock, SectionIntro } from "@/components/ui";
 import { founder, quotes } from "@/lib/founder";
-import { approach, initiatives, milestones, pillars, upcomingEvents } from "@/lib/work";
+import { approach, initiatives, milestones, pillars } from "@/lib/work";
 import { pageMetadata } from "@/lib/metadata";
-
-// Re-render daily so past events drop off.
-export const revalidate = 86400;
 
 export const metadata: Metadata = pageMetadata({
   title: "Our Work",
@@ -29,15 +25,15 @@ const pillarLinks = ["Visit the Literature Series", "Learn more", "Learn more", 
 
 // Section order follows the Foundation's Our Work design (../drive_assets/5 CMF Our Work 26.png).
 export default function OurWorkPage() {
-  const events = upcomingEvents();
   const service = quotes.find((q) => q.text.startsWith("Service"))!;
 
   return (
     <>
       <PageHero
         eyebrow="Our work"
+        short
         title="From Ideas to Lasting Impact."
-        image={{ src: "/images/generated/reader-with-book.jpg", alt: "A young reader absorbed in a book", position: "30% center" }}
+        image={{ src: "/images/cmf-water-project.jpg", alt: "A CMF community water project: a row of taps along a newly built wall, dressed in green ribbon for its opening", position: "45% 78%" }}
         aside={<QuoteBlock text={service.text} by={founder.name} />}
         actions={
           <>
@@ -122,30 +118,6 @@ export default function OurWorkPage() {
           </div>
         </div>
       </section>
-
-      {/* Events */}
-      {events.length > 0 && (
-        <section id="events" className="scroll-mt-24 border-b border-line py-16 lg:py-20">
-          <div className="wrap grid gap-10 lg:grid-cols-[1fr_2.3fr] lg:gap-10">
-            <SectionIntro eyebrow="Events & engagement" title="Where the Mission Comes Together" size="md">
-              <p>
-                CMF events bring people together around literature, education, remembrance and community service, turning the Foundation&rsquo;s work into
-                opportunities for participation and engagement.
-              </p>
-            </SectionIntro>
-            <div>
-              <div data-reveal="fade" className="mb-4 flex justify-end">
-                <ArrowLink href="/events">View all events</ArrowLink>
-              </div>
-              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
-                {events.slice(0, 3).map((e) => (
-                  <EventCard key={e.title} event={e} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Milestones */}
       <section className="py-16 lg:py-20">

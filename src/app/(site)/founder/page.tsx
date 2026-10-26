@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { SplitWords } from "@/components/motion/split-words";
-import { Button, GoldRule, PageHero, QuoteBlock, SectionIntro } from "@/components/ui";
-import { chapters, founder, gallery, quotes, timeline } from "@/lib/founder";
+import { Button, PageHero, QuoteBlock, SectionIntro } from "@/components/ui";
+import { chapters, founder, quotes, timeline } from "@/lib/founder";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -11,11 +11,33 @@ export const metadata: Metadata = pageMetadata({
   path: "/founder",
 });
 
-// Framed photos for the "Many Chapters" collage: position and tilt on the collage canvas.
-const collage = [
-  { src: "/images/founder-bowler.jpg", alt: "Early portrait of Dr Chinwoke Mbadinuju in a bowler hat", box: "left-[40%] top-[4%] w-[27%] -rotate-3", position: "50% 30%" },
-  { src: "/images/founder-portrait.jpg", alt: "Dr Chinwoke Mbadinuju wearing a red cap and coral beads", box: "left-[70%] top-[8%] w-[28%] rotate-3", position: "50% 20%" },
-  { src: "/images/founder-smiling.jpg", alt: "Dr Chinwoke Mbadinuju smiling at a public ceremony", box: "left-[52%] top-[50%] w-[30%] rotate-2", position: "60% 25%" },
+// Framed photos for the "Many Chapters" collage, as placed in the design. They stay empty frames
+// until the Foundation supplies the photos (the design's versions exist only inside its mockup).
+const collage: { src?: string; alt: string; box: string }[] = [
+  { alt: "", box: "left-[40%] top-[3%] w-[27%] -rotate-3" },
+  { alt: "", box: "left-[69%] top-[0%] w-[30%] rotate-3" },
+  { alt: "", box: "left-[45%] top-[50%] w-[31%] -rotate-1" },
+  { alt: "", box: "left-[78%] top-[55%] w-[21%] rotate-2" },
+];
+
+/** A photo, or an empty frame where the Foundation's photo will go. */
+function PhotoSlot({ src, alt = "", sizes, position = "50% 25%", className = "" }: { src?: string; alt?: string; sizes: string; position?: string; className?: string }) {
+  return (
+    <div aria-hidden={src ? undefined : true} className={`relative overflow-hidden bg-[#eee4d4] ${className}`}>
+      {src && <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" style={{ objectPosition: position }} />}
+    </div>
+  );
+}
+
+// The design's two memory cards. Only the bowler-hat portrait exists so far; the other frames stay
+// empty until the Foundation supplies the gallery and burial tribute photos.
+const memories: { title: string; body: string; photos: { src?: string; alt?: string; position?: string }[] }[] = [
+  {
+    title: "Photo Gallery",
+    body: `A visual journey through the life and times of ${founder.name}.`,
+    photos: [{ src: "/images/founder-bowler.jpg", alt: "Early portrait of Dr Chinwoke Mbadinuju in a bowler hat", position: "50% 20%" }, {}],
+  },
+  { title: "Burial Tribute", body: "Honouring a life of service, faith and enduring impact.", photos: [{}, {}] },
 ];
 
 // Section order follows the Foundation's founder page design (../drive_assets/3 CMF Founder Page 26.png).
@@ -102,14 +124,12 @@ export default function FounderPage() {
             </div>
             {collage.map((c, i) => (
               <figure
-                key={c.src}
+                key={c.box}
                 data-reveal="scale"
                 data-reveal-delay={String(150 + i * 120)}
                 className={`absolute aspect-[4/3] bg-white p-[1.2%] shadow-[0_18px_40px_-20px_rgba(12,31,66,0.55)] transition-transform duration-500 hover:z-10 hover:rotate-0 ${c.box}`}
               >
-                <div className="relative size-full overflow-hidden">
-                  <Image src={c.src} alt={c.alt} fill sizes="(min-width: 1024px) 20vw, 30vw" className="object-cover sepia-[0.2]" style={{ objectPosition: c.position }} />
-                </div>
+                <PhotoSlot src={c.src} alt={c.alt} sizes="(min-width: 1024px) 20vw, 30vw" className="size-full" />
               </figure>
             ))}
           </div>
@@ -130,7 +150,8 @@ export default function FounderPage() {
               <li key={t.period} data-reveal data-reveal-delay={String(i * 70)} className="relative">
                 <span aria-hidden="true" className="absolute top-1.5 -left-[33px] size-2.5 rounded-full bg-bronze ring-4 ring-paper lg:-top-[37px] lg:left-0" />
                 <p className="font-semibold text-ink tabular-nums">{t.period}</p>
-                <h3 className="mt-2 font-display text-lg leading-snug text-ink">{t.title}</h3>
+                <PhotoSlot src={t.image} alt={t.title} sizes="(min-width: 1024px) 13vw, 80vw" className="mt-3 aspect-[4/3] max-w-xs" />
+                <h3 className="mt-3 font-display text-lg leading-snug text-ink">{t.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{t.body}</p>
               </li>
             ))}
@@ -149,12 +170,13 @@ export default function FounderPage() {
                 id={c.id}
                 data-reveal
                 data-reveal-delay={String((i % 4) * 80)}
-                className="tile group scroll-mt-28 p-4 sm:p-6 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(12,31,66,0.45)]"
+                className="tile group scroll-mt-28 overflow-hidden transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(12,31,66,0.45)]"
               >
-                <p className="font-display text-2xl text-bronze tabular-nums">{String(i + 1).padStart(2, "0")}</p>
-                <GoldRule className="mt-3 w-8" />
-                <h3 className="mt-4 font-display text-xl text-ink">{c.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{c.body}</p>
+                <PhotoSlot src={c.image} alt={c.title} sizes="(min-width: 1024px) 22vw, 50vw" className="aspect-[4/3]" />
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-display text-xl text-ink">{c.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{c.body}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -164,29 +186,18 @@ export default function FounderPage() {
       {/* Gallery and legacy */}
       <section className="border-t border-line py-16 lg:py-20">
         <div className="wrap grid gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-0">
-          <div id="gallery" className="scroll-mt-24 lg:border-r lg:border-bronze/30 lg:pr-12">
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {gallery.map((g, i) => (
-                <figure key={g.src} data-reveal data-reveal-delay={String(i * 80)} className="group">
-                  <div className="relative aspect-[3/4] overflow-hidden">
-                    <Image
-                      src={g.src}
-                      alt={g.alt}
-                      fill
-                      sizes="(min-width: 1024px) 14vw, (min-width: 640px) 25vw, 50vw"
-                      className="object-cover object-top transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                    />
-                  </div>
-                  <figcaption className="mt-2 text-sm text-muted">{g.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-            <h2 data-reveal className="mt-6 font-display text-xl text-ink">
-              Photo Gallery
-            </h2>
-            <p data-reveal className="mt-1 text-sm leading-relaxed text-body">
-              A visual journey through the life and times of {founder.name}.
-            </p>
+          <div id="gallery" className="grid scroll-mt-24 gap-8 sm:grid-cols-2 lg:border-r lg:border-bronze/30 lg:pr-12">
+            {memories.map((m, i) => (
+              <article key={m.title} data-reveal data-reveal-delay={String(i * 120)}>
+                <div className="grid aspect-[16/10] grid-cols-[0.8fr_1.2fr] gap-1.5">
+                  {m.photos.map((ph, j) => (
+                    <PhotoSlot key={j} src={ph.src} alt={ph.alt} sizes="(min-width: 1024px) 12vw, 25vw" position={ph.position} className="h-full" />
+                  ))}
+                </div>
+                <h2 className="mt-4 font-display text-xl text-ink">{m.title}</h2>
+                <p className="mt-1 text-sm leading-relaxed text-body">{m.body}</p>
+              </article>
+            ))}
           </div>
           <div id="legacy" className="scroll-mt-24 lg:pl-12">
             <p data-reveal="fade" className="eyebrow">

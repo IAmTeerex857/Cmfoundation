@@ -2,20 +2,23 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { type ReactNode, useEffect, useMemo, useState } from "react";
-import { availableBooks, type Collection, topics } from "@/lib/books";
+import { books, type Collection, topics } from "@/lib/books";
 import { BookCard } from "./book-card";
 import { Icon } from "./icons";
 import { smoothScroll } from "./motion/smooth-scroll";
 import { SplitWords } from "./motion/split-words";
 import { Button, SlideIcon } from "./ui";
 
-type Tab = "all" | Exclude<Collection, "forthcoming">;
+type Tab = "all" | Collection;
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "all", label: "All" },
   { id: "founder", label: "Founder's Library" },
   { id: "current", label: "Current Series" },
+  { id: "forthcoming", label: "Forthcoming" },
 ];
+
+const isTab = (v: string | null): v is Tab => tabs.some((t) => t.id === v);
 
 const PAGE = 12;
 
@@ -65,16 +68,22 @@ export function Library({ readable }: { readable: string[] }) {
       setLimit(PAGE);
     };
     window.addEventListener(SELECT_EVENT, select);
+    // Links from other pages can open one collection: /literature?collection=forthcoming#library
+    const requested = new URLSearchParams(window.location.search).get("collection");
+    if (isTab(requested)) window.dispatchEvent(new CustomEvent(SELECT_EVENT, { detail: requested }));
     return () => window.removeEventListener(SELECT_EVENT, select);
   }, []);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return availableBooks
+    return books
       .filter((b) => tab === "all" || b.collection === tab)
       .filter((b) => !topic || b.topics.includes(topic))
       .filter((b) => !q || `${b.title} ${b.subtitle ?? ""} ${b.author}`.toLowerCase().includes(q))
       .sort((a, b) => {
+        // Published titles come before forthcoming ones.
+        const upcoming = Number(a.collection === "forthcoming") - Number(b.collection === "forthcoming");
+        if (upcoming) return upcoming;
         if (sort === "title") return a.title.localeCompare(b.title);
         const diff = (a.year ?? 0) - (b.year ?? 0);
         return sort === "latest" ? -diff : diff;
@@ -124,9 +133,6 @@ export function Library({ readable }: { readable: string[] }) {
             {t.label}
           </button>
         ))}
-        <a href="#forthcoming" className={`${tabClass} bg-white text-ink hover:text-bronze`}>
-          Forthcoming
-        </a>
       </div>
 
       <ul className="mt-4 flex flex-wrap gap-x-7 gap-y-2" aria-label="Filter by topic">

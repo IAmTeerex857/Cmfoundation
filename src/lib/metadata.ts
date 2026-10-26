@@ -10,7 +10,7 @@ export const shareImage = {
   url: "/og-hero.jpg",
   width: 1200,
   height: 630,
-  alt: "The Chinwoke Mbadinuju Foundation home page: Knowledge Changes Lives. Three students reading a book together, beside the quote \"A better tomorrow is possible.\"",
+  alt: "The Chinwoke Mbadinuju Foundation home page: Knowledge Changes Lives. Three students reading a book together, above featured books from the free CMF Literature Series.",
 };
 
 /**

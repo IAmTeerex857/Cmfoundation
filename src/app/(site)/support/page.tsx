@@ -213,7 +213,7 @@ export default function SupportPage() {
           <div>
             <SectionIntro eyebrow="Frequent questions" title="Common Questions" />
             <div className="mt-8">
-              <Faq items={[faqs.secure, faqs.project, faqs.inKind, faqs.partner]} />
+              <Faq items={[faqs.cac, faqs.secure, faqs.project, faqs.use, faqs.inKind, faqs.partner, faqs.volunteer]} />
             </div>
           </div>
           <div data-reveal="fade" className="relative isolate flex flex-col overflow-hidden bg-blush lg:min-h-[24rem] lg:justify-center">

@@ -60,7 +60,7 @@ export default function EventsPage() {
           <div>
             <SectionIntro eyebrow="Frequent questions" title="Quick Answers." size="md" />
             <div className="mt-8">
-              <Faq items={[faqs.invite, faqs.books, faqs.partner]} />
+              <Faq items={[faqs.cac, faqs.invite, faqs.books, faqs.partner, faqs.volunteer]} />
             </div>
           </div>
           <div data-reveal="fade" className="flex flex-col bg-blush p-8 lg:self-start lg:p-10">

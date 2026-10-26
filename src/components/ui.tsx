@@ -90,38 +90,42 @@ export function PageHero({
   badge,
   as: Tag = "h1",
   compact = false,
+  short = false,
 }: {
   eyebrow?: ReactNode;
   title: ReactNode;
   children?: ReactNode;
   actions?: ReactNode;
   footer?: ReactNode;
-  image: { src: string; alt: string; position?: string };
+  /** `contained` keeps a small or detailed image near its natural size, with only a light fade. */
+  image: { src: string; alt: string; position?: string; contained?: boolean };
   aside?: ReactNode;
   badge?: ReactNode;
   as?: "h1" | "h2";
   /** A smaller heading on a wider column, for long titles (two sentences or a full name). */
   compact?: boolean;
+  /** A shorter hero, so the next section shows on first load. */
+  short?: boolean;
 }) {
   return (
     <section className="relative flex flex-col overflow-hidden bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
-      <div className={`wrap relative z-10 py-14 lg:flex lg:items-center lg:py-20 ${Tag === "h1" ? "lg:min-h-[35rem]" : "lg:min-h-[30rem]"}`}>
+      <div className={`wrap relative z-10 lg:flex lg:items-center ${short ? "py-12 lg:min-h-[22rem] lg:py-8" : `py-14 lg:py-20 ${Tag === "h1" ? "lg:min-h-[35rem]" : "lg:min-h-[30rem]"}`}`}>
         <div className={`max-w-xl ${compact ? "lg:max-w-[min(40rem,52%)]" : "lg:max-w-[min(36rem,46%)]"}`}>
           {eyebrow && (
             <p data-reveal="fade" className="eyebrow">
               {eyebrow}
             </p>
           )}
-          <Tag data-reveal="words" className={`${Tag === "h2" ? "display-lg" : compact ? "display-lg lg:text-[clamp(2.3rem,3.2vw,2.9rem)]" : "display-xl"} mt-4`}>
+          <Tag data-reveal="words" className={`${Tag === "h2" ? "display-lg" : compact ? "display-lg lg:text-[clamp(2.3rem,3.2vw,2.9rem)]" : short ? "display-xl lg:text-[clamp(2.7rem,4.2vw,3.5rem)]" : "display-xl"} mt-4`}>
             <SplitWords>{title}</SplitWords>
           </Tag>
           {children && (
-            <div data-reveal data-reveal-delay="300" className={`mt-6 space-y-4 leading-relaxed text-body ${Tag === "h1" ? "text-[1.08rem]" : ""}`}>
+            <div data-reveal data-reveal-delay="300" className={`${short ? "mt-4" : "mt-6"} space-y-4 leading-relaxed text-body ${Tag === "h1" ? "text-[1.08rem]" : ""}`}>
               {children}
             </div>
           )}
           {actions && (
-            <div data-reveal data-reveal-delay="420" className="mt-8 flex flex-wrap gap-4">
+            <div data-reveal data-reveal-delay="420" className={`${short ? "mt-6" : "mt-8"} flex flex-wrap gap-4`}>
               {actions}
             </div>
           )}
@@ -136,13 +140,15 @@ export function PageHero({
         className={`relative aspect-[4/3] sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto ${
           aside
             ? "lg:w-[57%] xl:right-[calc(max(2rem,(100vw-1140px)/2)+11rem)] xl:left-[calc(max(2rem,(100vw-1140px)/2)+400px)] xl:w-auto"
-            : "lg:w-[57%]"
+            : image.contained
+              ? "lg:w-[46%]"
+              : "lg:w-[57%]"
         }`}
       >
         <div
           data-reveal="fade"
           data-reveal-delay="150"
-          className={`absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_22%)] lg:[mask-image:linear-gradient(to_right,transparent,#000_38%)] ${
+          className={`absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_22%)] ${image.contained ? "lg:[mask-image:linear-gradient(to_right,transparent,#000_9%)]" : "lg:[mask-image:linear-gradient(to_right,transparent,#000_38%)]"} ${
             aside ? "xl:[mask-image:linear-gradient(to_right,transparent,#000_32%,#000_80%,transparent)]" : ""
           }`}
         >

@@ -187,3 +187,21 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
   - Contact: CMF-branded book spines and the CMF mug.
   - Existing photos stand in for all of these.
 - **Verified:** ESLint, `tsc` and `next build` pass. Every page was checked at 390 and 1440 px (heroes also at 1280 and 1920): no horizontal overflow, no runtime errors, no em dashes, no visible "Bachs". The library search and filters and the contact form's prefill and validation still work. The give buttons still go to checkout.
+
+## Page review tweaks — October 26, 2026
+
+- **Header:** "Donate Now" is now "Support Our Mission" and goes to /support (desktop and mobile).
+- **Home:** a shorter hero, with Featured Books straight after it, so the books show on first load at 1440 × 900; the pillars row follows the books.
+- **About:** the hero image is the design's own book stack (`public/images/about-book-stack.jpg`), cut from `2 CMF About Us 26.png`, enlarged 2× with light sharpening, and shown at a modest size so it stays clear.
+- **Our Work:** the hero is the Foundation's water project photo (`public/images/cmf-water-project.jpg`, from `drive_assets/CMF Water Project.jpg`). The events section was removed.
+- **Events:** 24 Nov 2026 (Abuja), 1 Jan 2027 (Judge Not!), 11 Feb 2027 (All Is Vanity).
+- **FAQs:** fuller answers and new questions:
+  - New questions: CAC registration, reading for free, how donations are used, volunteering, and where we are based.
+  - Every FAQ list opens with the CAC question.
+- **Literature:**
+  - Forthcoming titles are part of the library. "All" shows all 11 books and "Forthcoming" filters to the five upcoming titles.
+  - `/literature?collection=forthcoming#library` opens that filter; the home page links to it.
+  - The separate forthcoming section was removed.
+  - The hero covers are larger, and All Is Vanity carries a "Coming 2027" label.
+  - Both author photos are the same size.
+- **Founder:** empty photo frames for the timeline, the chapters, the collage and the memory cards (Photo Gallery and Burial Tribute) until the Foundation sends photos. The hero keeps the supplied photo `Odera 4.jpg`.

@@ -8,7 +8,11 @@ export const founder = {
     "A life of ideas, conviction and service. From humble beginnings in Uli to universities across the world, from journalism and law to Christian ministry and public office, Dr Chinwoke Mbadinuju lived a remarkable life of purpose.",
 };
 
-export const timeline = [
+// Photos for each period and chapter: add the path (under public/images) to `image` when the
+// Foundation supplies one. Until then the page shows an empty frame.
+type Photo = { image?: string };
+
+export const timeline: ({ period: string; title: string; body: string } & Photo)[] = [
   {
     period: "1945",
     title: "Humble Beginnings",
@@ -46,7 +50,7 @@ export const timeline = [
   },
 ];
 
-export const chapters = [
+export const chapters: ({ id: string; title: string; body: string } & Photo)[] = [
   { id: "early-life", title: "Early Life", body: "A disciplined upbringing in a Christian home in Uli shaped his values and character." },
   { id: "education", title: "Education", body: "An extraordinary academic journey across Nigeria, the United States and Britain." },
   { id: "professional-life", title: "Professional Life", body: "Journalism, university teaching, legal practice and public service." },
@@ -55,13 +59,6 @@ export const chapters = [
   { id: "writer-author", title: "Writer & Author", body: "22 published works on Christianity, leadership, law, governance and society." },
   { id: "family-life", title: "Family Life", body: "A devoted husband, father and grandfather." },
   { id: "later-years", title: "Later Years", body: "Continuing the mission through the Foundation." },
-];
-
-export const gallery = [
-  { src: "/images/founder-barrister.jpg", alt: "Dr Chinwoke Mbadinuju in barrister's wig and gown", caption: "Called to the Bar" },
-  { src: "/images/founder-bowler.jpg", alt: "Early portrait of Dr Chinwoke Mbadinuju in a bowler hat and pinstripe suit", caption: "An early portrait" },
-  { src: "/images/founder-portrait.jpg", alt: "Dr Chinwoke Mbadinuju wearing a red cap and coral beads", caption: "Odera 1 of Uli" },
-  { src: "/images/founder-smiling.jpg", alt: "Dr Chinwoke Mbadinuju smiling at a public ceremony", caption: "In his later years" },
 ];
 
 // Quotes as given in the Foundation's page designs.
