@@ -139,7 +139,7 @@ export function PageHero({
         </div>
       </div>
       <div
-        className={`relative aspect-[4/3] sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto ${compact ? "lg:left-[54%]" : "lg:left-[51%]"}`}
+        className={`relative aspect-[4/3] sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-8 lg:aspect-auto xl:right-[calc((100vw-1140px)/2)] ${compact ? "lg:left-[54%]" : "lg:left-[49%]"}`}
       >
         <div
           data-reveal="fade"
@@ -151,7 +151,7 @@ export function PageHero({
             alt={image.alt}
             fill
             priority={Tag === "h1"}
-            sizes="(min-width: 1024px) 55vw, 100vw"
+            sizes="(min-width: 1024px) 45vw, 100vw"
             className="object-cover"
             style={{ objectPosition: image.position ?? "center" }}
           />
