@@ -144,7 +144,7 @@ export function PageHero({
         <div
           data-reveal="fade"
           data-reveal-delay="150"
-          className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_10%)] lg:[mask-image:linear-gradient(to_right,transparent,#000_12%)]"
+          className="absolute inset-0"
         >
           <Image
             src={image.src}
@@ -157,7 +157,7 @@ export function PageHero({
           />
         </div>
         {badge && (
-          <div className="absolute right-4 bottom-4 flex items-center gap-3 rounded-[3px] bg-white/95 px-4 py-2.5 shadow-[0_12px_30px_-18px_rgba(12,31,66,0.5)] sm:right-8 sm:bottom-8">
+          <div className="absolute right-4 bottom-4 flex items-center gap-3 rounded-[3px] bg-white/95 px-4 py-2.5 sm:right-8 sm:bottom-8">
             {badge}
           </div>
         )}
@@ -166,7 +166,7 @@ export function PageHero({
         <div
           data-reveal="fade"
           data-reveal-delay="500"
-          className="absolute right-[max(2rem,calc((100vw-1140px)/2))] bottom-8 hidden max-w-[15rem] rounded-[3px] bg-paper/95 px-6 py-5 shadow-[0_18px_40px_-24px_rgba(12,31,66,0.55)] xl:block [&_.pull-quote]:text-[1.2rem]"
+          className="absolute right-[max(2rem,calc((100vw-1140px)/2))] bottom-8 hidden max-w-[15rem] rounded-[3px] bg-paper/95 px-6 py-5 xl:block [&_.pull-quote]:text-[1.2rem]"
         >
           {aside}
         </div>

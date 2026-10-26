@@ -15,6 +15,7 @@ type Photo = { image?: string };
 export const timeline: ({ period: string; title: string; body: string } & Photo)[] = [
   {
     period: "1945",
+    image: "/images/founder/early-life-schoolboy.jpg",
     title: "Humble Beginnings",
     body: "Born on 14 June 1945 into a Christian home in Uli, Anambra State.",
   },
@@ -57,7 +58,7 @@ export const timeline: ({ period: string; title: string; body: string } & Photo)
 ];
 
 export const chapters: ({ id: string; title: string; body: string } & Photo)[] = [
-  { id: "early-life", title: "Early Life", body: "A disciplined upbringing in a Christian home in Uli shaped his values and character." },
+  { id: "early-life", title: "Early Life", body: "A disciplined upbringing in a Christian home in Uli shaped his values and character.", image: "/images/founder/early-life-schoolboy.jpg" },
   { id: "education", title: "Education", body: "An extraordinary academic journey across Nigeria, the United States and Britain.", image: "/images/founder/graduation-dignitaries.jpg" },
   { id: "professional-life", title: "Professional Life", body: "Journalism, university teaching, legal practice and public service.", image: "/images/founder/bow-tie.jpg" },
   { id: "christian-ministry", title: "Faith & Ministry", body: "A committed evangelist and Christian leader, involved in national and international fellowships." },
