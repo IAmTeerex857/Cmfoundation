@@ -144,7 +144,7 @@ export function PageHero({
         <div
           data-reveal="fade"
           data-reveal-delay="150"
-          className="absolute inset-0"
+          className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_6%)] lg:[mask-image:linear-gradient(to_right,transparent,rgba(0,0,0,0.6)_2.5%,#000_6%,#000_94%,rgba(0,0,0,0.6)_97.5%,transparent)]"
         >
           <Image
             src={image.src}

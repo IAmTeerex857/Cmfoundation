@@ -61,7 +61,7 @@ export const chapters: ({ id: string; title: string; body: string } & Photo)[] =
   { id: "early-life", title: "Early Life", body: "A disciplined upbringing in a Christian home in Uli shaped his values and character.", image: "/images/founder/early-life-schoolboy.jpg" },
   { id: "education", title: "Education", body: "An extraordinary academic journey across Nigeria, the United States and Britain.", image: "/images/founder/graduation-dignitaries.jpg" },
   { id: "professional-life", title: "Professional Life", body: "Journalism, university teaching, legal practice and public service.", image: "/images/founder/bow-tie.jpg" },
-  { id: "christian-ministry", title: "Faith & Ministry", body: "A committed evangelist and Christian leader, involved in national and international fellowships." },
+  { id: "christian-ministry", title: "Faith & Ministry", body: "A committed evangelist and Christian leader, involved in national and international fellowships.", image: "/images/founder/faith-ministry-suit.jpg" },
   { id: "governorship", title: "Governorship", body: "Leadership in challenging times, with enduring contributions to Anambra State.", image: "/images/founder/podium-wave.jpg" },
   { id: "writer-author", title: "Writer & Author", body: "22 published works on Christianity, leadership, law, governance and society.", image: "/images/founder/bowler-seated.jpg" },
   { id: "family-life", title: "Family Life", body: "A devoted husband, father and grandfather.", image: "/images/founder/family.jpg" },
