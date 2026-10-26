@@ -233,3 +233,4 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 - **Follow-up:** hero photos now stop at the content's right edge (in line with the header's "Support Our Mission" button) instead of running to the screen edge. They are still unboxed, with the soft left edge and no frame. On phones they are unchanged.
 - **Follow-up:** the Founder hero uses the supplied portrait (`founder/hero-portrait.jpg`, red cap and white lace). The earlier ceremony photo stays in the gallery.
 - **Follow-up:** the About hero uses the supplied book stack photo (`about-hero-books.jpg`); the low-resolution cut-out from the design mockup was removed.
+- **Follow-up:** the Support hero uses the supplied seedling photo (`support-hero.jpg`), cropped to the plant. The words baked into the right of the original would have been cut mid-word at this hero shape, so the page keeps its own Luke 6:38 quote card.

@@ -56,7 +56,7 @@ export default function SupportPage() {
       <PageHero
         eyebrow="Support the mission"
         title="Invest in A Better Tomorrow."
-        image={{ src: "/images/stock/seedling-hands.jpg", alt: "Hands cupping a young seedling in dark soil", position: "center 40%" }}
+        image={{ src: "/images/support-hero.jpg", alt: "A young seedling growing from rich soil in warm morning light", position: "55% center" }}
         aside={<QuoteBlock text={<>Give, and it shall be given unto you&hellip;</>} by="Luke 6:38 (KJV)" />}
         actions={
           <>
