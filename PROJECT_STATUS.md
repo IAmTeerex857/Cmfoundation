@@ -208,8 +208,8 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 
 ## Clean heroes, Read Now and the Drive additions — October 26, 2026
 
-- **Heroes:** the photo now sits beside the text as a clean, sharp-edged image (two columns, with the quote as a third column on wide screens). Every fade and blur glow was removed from heroes and other images site-wide.
-- **Home:** more room in the hero and featured books, while the books (covers, titles and buttons) still show on the first screen at 1440 × 900.
+- **Heroes:** the photo fills the right side of the hero, unboxed, from top to bottom and out to the screen edge, with only a short soft edge where it meets the background (the earlier wide washed-out fade and glows are gone). Pages with a quote keep it in its own space at the far right. The home hero no longer has the quote, so its photo is larger.
+- **Home:** more room in the hero and featured books, while the books (covers, titles and buttons) still show on the first screen at 1440 × 900. Books readable online now come first in Featured Books, marked "Read free" (today: God's Kind of Leader). Covers of different shapes share one baseline.
 - **Read Now:** every published book's button reads "Read Now" and opens `/read/<slug>`. Without a PDF, that page says the online edition is being prepared and offers "Request a Copy".
 - **Drive additions** (copied into `drive_assets/`):
   - Final covers for A Criminal in Heaven, A Lawyer's Woes, False Men and True Christians and God's Kind of Leader.

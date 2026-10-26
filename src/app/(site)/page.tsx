@@ -5,7 +5,8 @@ import { BookCover } from "@/components/book-cover";
 import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
 import { Button, GoldRule, IconPillars, PageHero, QuoteBlock } from "@/components/ui";
-import { forthcomingBooks, getBook } from "@/lib/books";
+import { availableBooks, forthcomingBooks, getBook } from "@/lib/books";
+import { readableSlugs } from "@/lib/manuscripts";
 import { founder, quotes } from "@/lib/founder";
 import { pillars } from "@/lib/work";
 import { pageMetadata } from "@/lib/metadata";
@@ -32,11 +33,16 @@ const organization = {
   address: { "@type": "PostalAddress", streetAddress: "Otunba Kayode Close, Asokoro", addressLocality: "Abuja", addressRegion: "FCT", addressCountry: "NG" },
 };
 
-const featured = ["false-men-and-true-christians", "exploring-the-godhead", "the-criminal-in-heaven"].map((s) => getBook(s)!);
+// Books that can be read online now come first; the rest of the row is filled from these.
+const featuredDefaults = ["false-men-and-true-christians", "exploring-the-godhead", "the-criminal-in-heaven"];
 
 // Section order follows the Foundation's home page design (../drive_assets/1 CMF Homepage 26.png).
 export default function Home() {
   const comingSoon = forthcomingBooks.filter((b) => b.year === 2027).slice(0, 2);
+  const readable = readableSlugs();
+  const featured = [...availableBooks.filter((b) => readable.includes(b.slug)), ...featuredDefaults.map((s) => getBook(s)!)]
+    .filter((b, i, all) => all.findIndex((x) => x.slug === b.slug) === i)
+    .slice(0, 3);
 
   return (
     <>
@@ -46,8 +52,7 @@ export default function Home() {
         short
         eyebrow="Ideas. People. Communities. A better tomorrow."
         title="Knowledge Changes Lives."
-        image={{ src: "/images/students-reading.jpg", alt: "Three students reading a book together in a library", aspect: "aspect-[16/10]" }}
-        aside={<QuoteBlock text="A better tomorrow is possible." by={quotes[3].by} />}
+        image={{ src: "/images/students-reading.jpg", alt: "Three students reading a book together in a library", position: "45% center" }}
         actions={
           <>
             <Button href="/literature">Explore Our Books</Button>
@@ -85,12 +90,20 @@ export default function Home() {
             {featured.map((b, i) => {
               return (
                 <li key={b.slug} data-reveal data-reveal-delay={String(i * 100)} className="group flex h-full flex-col items-center text-center">
-                  <Link href={`/read/${b.slug}`} className="block w-full max-w-[10.5rem]" tabIndex={-1} aria-hidden="true">
-                    <BookCover book={b} className="book-tilt w-full" />
+                  {/* Covers differ in shape, so each sits on the baseline of the tallest (5:8). */}
+                  <Link href={`/read/${b.slug}`} className="flex aspect-[5/8] w-full max-w-[10rem] items-end" tabIndex={-1} aria-hidden="true">
+                    <span className="relative block w-full">
+                      <BookCover book={b} className="book-tilt w-full" />
+                      {readable.includes(b.slug) && (
+                        <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-[2px] bg-bronze px-2.5 py-1 text-[0.62rem] font-semibold tracking-[0.1em] whitespace-nowrap text-white uppercase shadow">
+                          Read free
+                        </span>
+                      )}
+                    </span>
                   </Link>
                   <h3 className="mt-4 font-display text-lg leading-snug text-ink">{b.title}</h3>
                   <p className="mb-4 text-sm text-muted">{b.author}</p>
-                  <Button href={`/read/${b.slug}`} icon={null} className="mt-auto w-full max-w-[10.5rem] px-3!">
+                  <Button href={`/read/${b.slug}`} icon={null} className="mt-auto w-full max-w-[10rem] px-3!">
                     Read Now
                   </Button>
                 </li>

@@ -74,10 +74,12 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
 /* ---------- Page hero (designs) ---------- */
 
 /**
- * Text on warm paper at the left and a clean photo at the right. `aside` (a short quote) takes a
- * third column on wide screens; `badge` is a label pinned to the photo's lower right; `footer` holds
- * a row of tags or a note under the actions. With `as="h2"` it serves as a feature band further down
- * a page. `compact` suits long titles; `short` trims the padding so the next section shows sooner.
+ * Text on warm paper at the left; the photo fills the right of the hero, unframed, from top to
+ * bottom and out to the edge of the screen, with a short soft edge where it meets the paper. `aside`
+ * (a short quote) keeps its own space at the far right on wide screens, and the photo then softens
+ * on both sides. `badge` is a label on the photo's lower right; `footer` holds a row of tags or a note
+ * under the actions. With `as="h2"` it serves as a feature band further down a page. `compact` suits
+ * long titles; `short` trims the height so the next section shows sooner.
  */
 export function PageHero({
   eyebrow,
@@ -97,19 +99,18 @@ export function PageHero({
   children?: ReactNode;
   actions?: ReactNode;
   footer?: ReactNode;
-  /** `aspect` is a Tailwind aspect class for the photo frame (default 4:3). */
-  image: { src: string; alt: string; position?: string; aspect?: string };
+  image: { src: string; alt: string; position?: string };
   aside?: ReactNode;
   badge?: ReactNode;
   as?: "h1" | "h2";
   compact?: boolean;
   short?: boolean;
 }) {
-  const columns = aside ? "lg:grid-cols-[1.15fr_1fr] xl:grid-cols-[1.25fr_1fr_11rem]" : "lg:grid-cols-[1.1fr_1fr]";
+  const height = short ? "py-12 lg:min-h-[25rem] lg:py-10" : `py-14 lg:py-20 ${Tag === "h1" ? "lg:min-h-[33rem]" : "lg:min-h-[30rem]"}`;
   return (
-    <section className="bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
-      <div className={`wrap grid items-center gap-10 lg:gap-12 ${columns} ${short ? "py-12 lg:py-11" : "py-14 lg:py-20"}`}>
-        <div>
+    <section className="relative flex flex-col overflow-hidden bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
+      <div className={`wrap relative z-10 lg:flex lg:items-center ${height}`}>
+        <div className={`max-w-xl ${compact ? "lg:max-w-[min(38rem,50%)]" : "lg:max-w-[min(34rem,45%)]"}`}>
           {eyebrow && (
             <p data-reveal="fade" className="eyebrow">
               {eyebrow}
@@ -137,28 +138,42 @@ export function PageHero({
             </div>
           )}
         </div>
-        <div data-reveal="fade" data-reveal-delay="150" className={`relative w-full overflow-hidden rounded-[4px] shadow-[0_24px_50px_-30px_rgba(12,31,66,0.45)] ${image.aspect ?? "aspect-[4/3]"}`}>
+      </div>
+      <div
+        className={`relative aspect-[4/3] sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto ${compact ? "lg:left-[49%]" : "lg:left-[45%]"} ${
+          aside ? "xl:right-[calc(max(2rem,(100vw-1140px)/2)+12rem)]" : ""
+        }`}
+      >
+        <div
+          data-reveal="fade"
+          data-reveal-delay="150"
+          className={`absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_10%)] lg:[mask-image:linear-gradient(to_right,transparent,#000_12%)] ${
+            aside ? "xl:[mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)]" : ""
+          }`}
+        >
           <Image
             src={image.src}
             alt={image.alt}
             fill
             priority={Tag === "h1"}
-            sizes="(min-width: 1280px) 34vw, (min-width: 1024px) 45vw, 100vw"
+            sizes="(min-width: 1024px) 55vw, 100vw"
             className="object-cover"
             style={{ objectPosition: image.position ?? "center" }}
           />
-          {badge && (
-            <div className="absolute right-3 bottom-3 flex items-center gap-3 rounded-[3px] bg-white/95 px-4 py-2.5 shadow-[0_12px_30px_-18px_rgba(12,31,66,0.5)] sm:right-5 sm:bottom-5">
-              {badge}
-            </div>
-          )}
         </div>
-        {aside && (
-          <div data-reveal="fade" data-reveal-delay="500" className="hidden xl:block">
-            {aside}
+        {badge && (
+          <div className="absolute right-4 bottom-4 flex items-center gap-3 rounded-[3px] bg-white/95 px-4 py-2.5 shadow-[0_12px_30px_-18px_rgba(12,31,66,0.5)] sm:right-8 sm:bottom-8">
+            {badge}
           </div>
         )}
       </div>
+      {aside && (
+        <div className="absolute inset-y-0 right-[max(2rem,calc((100vw-1140px)/2))] z-10 hidden w-[11rem] items-center xl:flex">
+          <div data-reveal="fade" data-reveal-delay="500">
+            {aside}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

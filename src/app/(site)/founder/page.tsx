@@ -63,7 +63,7 @@ export default function FounderPage() {
         eyebrow="The Founder"
         compact
         title={founder.name}
-        image={{ src: "/images/founder/hero-smiling.jpg", alt: "Dr Chinwoke Clement Mbadinuju smiling at a public ceremony", position: "50% 12%", aspect: "aspect-[5/4]" }}
+        image={{ src: "/images/founder/hero-smiling.jpg", alt: "Dr Chinwoke Clement Mbadinuju smiling at a public ceremony", position: "50% 12%" }}
         actions={
           <>
             <Button href="#journey" icon="arrowDown">
