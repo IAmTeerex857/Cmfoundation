@@ -231,3 +231,4 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 - **Literature:** larger hero covers; the "Coming 2027" tag sits above All Is Vanity, and library cards no longer put a tag on the cover (the card text already says when a title is coming).
 - **Follow-up:** the header bar is shorter (80 px, 64 px once scrolled). Featured Books has a single "View All Books" button. The covers, titles and "Read Now" buttons all show on the first screen at 1440 × 900 and 1710 × 980.
 - **Follow-up:** hero photos now stop at the content's right edge (in line with the header's "Support Our Mission" button) instead of running to the screen edge. They are still unboxed, with the soft left edge and no frame. On phones they are unchanged.
+- **Follow-up:** the Founder hero uses the supplied portrait (`founder/hero-portrait.jpg`, red cap and white lace). The earlier ceremony photo stays in the gallery.
