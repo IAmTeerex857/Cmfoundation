@@ -22,7 +22,7 @@ export default function EventsPage() {
       <PageHero
         eyebrow="Events & engagement"
         title="Where the Mission Comes Together."
-        image={{ src: "/images/stock/launch-hall.jpg", alt: "Guests gathered in a hall for a book presentation" }}
+        image={{ src: "/images/generated/literature-launch.jpg", alt: "A speaker at a lectern addressing guests at a CMF book presentation", position: "40% center" }}
         actions={
           <>
             <Button href="#upcoming">Upcoming Events</Button>

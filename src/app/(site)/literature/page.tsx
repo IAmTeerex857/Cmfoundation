@@ -52,7 +52,7 @@ export default function LiteraturePage() {
     <>
       {/* Hero: copy at the left, three covers standing on a warm shelf at the right */}
       <section className="relative overflow-hidden bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
-        <div className="wrap relative grid items-center gap-12 pt-14 pb-10 lg:grid-cols-[1.1fr_1fr] lg:pt-16 lg:pb-12">
+        <div className="wrap relative grid items-center gap-12 pt-14 pb-10 lg:grid-cols-[1fr_1.15fr] lg:gap-10 lg:pt-16 lg:pb-12">
           <div>
             <p data-reveal="fade" className="eyebrow">
               The CMF Literature Series
@@ -78,18 +78,18 @@ export default function LiteraturePage() {
           </div>
 
           <div data-reveal="fade" data-reveal-delay="200" className="group relative" aria-hidden="true">
-            <div className="relative flex items-end justify-center gap-[2.5%] px-1">
+            <div className="relative flex items-end justify-center gap-[3%] px-1 pt-10">
               <BookCover
                 book={heroBooks[0]}
-                className="w-[31%] shadow-[0_24px_40px_-22px_rgba(12,31,66,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-2 group-hover:-rotate-2"
+                className="w-[30%] shadow-[0_24px_40px_-22px_rgba(12,31,66,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-2 group-hover:-rotate-2"
               />
               <BookCover
                 book={heroBooks[1]}
-                className="z-10 w-[36%] shadow-[0_30px_50px_-22px_rgba(12,31,66,0.65)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2"
+                className="z-10 w-[37%] shadow-[0_30px_50px_-22px_rgba(12,31,66,0.65)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2"
               />
-              <div className="relative w-[31%] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2 group-hover:rotate-2">
+              <div className="relative w-[30%] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2 group-hover:rotate-2">
                 <BookCover book={heroBooks[2]} className="w-full shadow-[0_24px_40px_-22px_rgba(12,31,66,0.6)]" />
-                <span className="absolute inset-x-0 bottom-[1.5%] mx-auto w-fit rounded-[2px] bg-bronze px-3 py-1 text-[0.68rem] font-semibold tracking-[0.12em] text-white uppercase shadow-md">
+                <span className="absolute inset-x-0 bottom-full mx-auto mb-2.5 w-fit rounded-[2px] bg-bronze px-3 py-1.5 text-[0.7rem] font-semibold tracking-[0.12em] whitespace-nowrap text-white uppercase shadow-md">
                   Coming {heroBooks[2].year}
                 </span>
               </div>
@@ -99,7 +99,7 @@ export default function LiteraturePage() {
           </div>
         </div>
 
-        <div className="wrap relative grid items-center gap-10 border-t border-line/70 py-8 lg:grid-cols-[1.1fr_1fr]">
+        <div className="wrap relative grid items-center gap-10 border-t border-line/70 py-8 lg:grid-cols-[1.3fr_1fr]">
           <div data-reveal="fade">
             <GoldRule className="mb-5" />
             <ul className="flex flex-wrap gap-y-2 text-[0.72rem] font-medium tracking-[0.1em] text-ink uppercase" aria-label="Themes of the Series">

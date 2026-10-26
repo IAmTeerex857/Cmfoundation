@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BookCover } from "@/components/book-cover";
 import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
-import { Button, GoldRule, IconPillars, PageHero, QuoteBlock } from "@/components/ui";
+import { Button, IconPillars, PageHero, QuoteBlock } from "@/components/ui";
 import { availableBooks, forthcomingBooks, getBook } from "@/lib/books";
 import { readableSlugs } from "@/lib/manuscripts";
 import { founder, quotes } from "@/lib/founder";
@@ -34,7 +34,7 @@ const organization = {
 };
 
 // Books that can be read online now come first; the rest of the row is filled from these.
-const featuredDefaults = ["false-men-and-true-christians", "exploring-the-godhead", "the-criminal-in-heaven"];
+const featuredDefaults = ["false-men-and-true-christians", "exploring-the-godhead", "the-criminal-in-heaven", "the-wages-of-sin", "the-present-truth"];
 
 // Section order follows the Foundation's home page design (../drive_assets/1 CMF Homepage 26.png).
 export default function Home() {
@@ -42,7 +42,7 @@ export default function Home() {
   const readable = readableSlugs();
   const featured = [...availableBooks.filter((b) => readable.includes(b.slug)), ...featuredDefaults.map((s) => getBook(s)!)]
     .filter((b, i, all) => all.findIndex((x) => x.slug === b.slug) === i)
-    .slice(0, 3);
+    .slice(0, 5);
 
   return (
     <>
@@ -66,64 +66,54 @@ export default function Home() {
       </PageHero>
 
       {/* Featured books */}
-      <section className="pt-12 pb-16 lg:pt-8 lg:pb-14">
-        <div className="wrap grid gap-12 lg:grid-cols-[1.4fr_2fr_0.9fr] lg:gap-10">
-          <div>
-            <p data-reveal="fade" className="eyebrow">
-              Featured books
-            </p>
-            <h2 data-reveal="words" className="display mt-3 text-[clamp(2.1rem,3.2vw,2.5rem)] leading-[1.08]">
-              <SplitWords>Faith for Today. Ideas for Tomorrow.</SplitWords>
-            </h2>
-            <GoldRule className="mt-6" />
-            <p data-reveal data-reveal-delay="200" className="mt-6 max-w-xs text-[1.05rem] leading-relaxed text-body">
-              Selected works from the CMF Literature Series, freely available to read and share.
-            </p>
-            <div data-reveal data-reveal-delay="300">
-              <Button href="/literature#library" variant="outline" className="mt-8">
-                View All Books
-              </Button>
+      <section className="pt-12 pb-16 lg:pt-7 lg:pb-16">
+        <div className="wrap">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p data-reveal="fade" className="eyebrow">
+                Featured books
+              </p>
+              <h2 data-reveal="words" className="display mt-3 text-[clamp(2.1rem,3.2vw,2.5rem)] leading-[1.08]">
+                <SplitWords>Faith for Today. Ideas for Tomorrow.</SplitWords>
+              </h2>
+            </div>
+            <div data-reveal data-reveal-delay="200" className="flex flex-col gap-3 lg:items-end lg:text-right">
+              <p className="text-sm leading-relaxed text-muted">
+                Free to read and share. Coming in 2027: {comingSoon.map((b) => b.title).join(" and ")}.
+              </p>
+              <div className="flex flex-wrap gap-3 lg:justify-end">
+                <Button href="/literature#library" variant="outline">
+                  View All Books
+                </Button>
+                <Button href="/literature?collection=forthcoming#library" variant="outline" icon={null}>
+                  Forthcoming
+                </Button>
+              </div>
             </div>
           </div>
 
-          <ul className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-7">
-            {featured.map((b, i) => {
-              return (
-                <li key={b.slug} data-reveal data-reveal-delay={String(i * 100)} className="group flex h-full flex-col items-center text-center">
-                  {/* Covers differ in shape, so each sits on the baseline of the tallest (5:8). */}
-                  <Link href={`/read/${b.slug}`} className="flex aspect-[5/8] w-full max-w-[10rem] items-end" tabIndex={-1} aria-hidden="true">
-                    <span className="relative block w-full">
-                      <BookCover book={b} className="book-tilt w-full" />
-                      {readable.includes(b.slug) && (
-                        <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-[2px] bg-bronze px-2.5 py-1 text-[0.62rem] font-semibold tracking-[0.1em] whitespace-nowrap text-white uppercase shadow">
-                          Read free
-                        </span>
-                      )}
-                    </span>
-                  </Link>
-                  <h3 className="mt-4 font-display text-lg leading-snug text-ink">{b.title}</h3>
-                  <p className="mb-4 text-sm text-muted">{b.author}</p>
-                  <Button href={`/read/${b.slug}`} icon={null} className="mt-auto w-full max-w-[10rem] px-3!">
-                    Read Now
-                  </Button>
-                </li>
-              );
-            })}
+          <ul className="mt-7 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-12">
+            {featured.map((b, i) => (
+              <li key={b.slug} data-reveal data-reveal-delay={String(i * 80)} className="group flex h-full flex-col items-center text-center">
+                {/* Covers differ in shape, so each sits on the baseline of the tallest (5:8). */}
+                <Link href={`/read/${b.slug}`} className="flex aspect-[5/8] w-full max-w-[9.5rem] items-end" tabIndex={-1} aria-hidden="true">
+                  <span className="relative block w-full">
+                    <BookCover book={b} className="book-tilt w-full" />
+                    {readable.includes(b.slug) && (
+                      <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-[2px] bg-bronze px-2.5 py-1 text-[0.62rem] font-semibold tracking-[0.1em] whitespace-nowrap text-white uppercase shadow">
+                        Read free
+                      </span>
+                    )}
+                  </span>
+                </Link>
+                <h3 className="mt-4 font-display text-lg leading-snug text-ink">{b.title}</h3>
+                <p className="mb-4 text-sm text-muted">{b.author}</p>
+                <Button href={`/read/${b.slug}`} icon={null} className="mt-auto w-full max-w-[9.5rem] px-3!">
+                  Read Now
+                </Button>
+              </li>
+            ))}
           </ul>
-
-          <aside data-reveal="fade" data-reveal-delay="300" className="flex flex-col bg-blush p-7 lg:self-start">
-            <p className="eyebrow">Coming in 2027</p>
-            <GoldRule className="mt-4" />
-            <ul className="mt-5 space-y-1 font-display text-xl text-ink">
-              {comingSoon.map((b) => (
-                <li key={b.slug}>{b.title}</li>
-              ))}
-            </ul>
-            <p className="mt-5 text-sm text-muted">More titles currently in preparation.</p>
-            <Button href="/literature?collection=forthcoming#library" variant="outline" className="mt-6 w-full px-4! leading-snug">
-              Forthcoming Books
-            </Button>
-          </aside>
         </div>
       </section>
 

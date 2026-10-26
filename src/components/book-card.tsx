@@ -19,9 +19,6 @@ export function BookCard({ book, readable = false }: { book: Book; readable?: bo
       {forthcoming ? (
         <div className="relative flex aspect-[5/8] items-end">
           {cover}
-          <span className="absolute inset-x-0 bottom-3 mx-auto w-fit rounded-[2px] bg-bronze px-2.5 py-1 text-[0.68rem] font-semibold tracking-[0.1em] text-white uppercase shadow">
-            Coming {book.year ?? "soon"}
-          </span>
         </div>
       ) : (
         <Link href={href} tabIndex={-1} aria-hidden="true" className="flex aspect-[5/8] items-end">

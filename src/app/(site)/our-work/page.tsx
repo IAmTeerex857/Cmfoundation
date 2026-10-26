@@ -18,7 +18,7 @@ const initiativeImages: Record<string, string> = {
   "Education Support": "/images/generated/education-support.jpg",
   "Community Projects": "/images/stock/seedling-hands.jpg",
   "Free Literature Distribution": "/images/generated/book-distribution.jpg",
-  "Sustainable Community Infrastructure": "/images/clean-water-handwashing.jpg",
+  "Sustainable Community Infrastructure": "/images/cmf-water-project.jpg",
 };
 
 const pillarLinks = ["Visit the Literature Series", "Learn more", "Learn more", "Learn more"];
@@ -33,7 +33,7 @@ export default function OurWorkPage() {
         eyebrow="Our work"
         short
         title="From Ideas to Lasting Impact."
-        image={{ src: "/images/cmf-water-project.jpg", alt: "A CMF community water project: a row of taps along a newly built wall, dressed in green ribbon for its opening", position: "45% 78%" }}
+        image={{ src: "/images/clean-water-handwashing.jpg", alt: "A girl washing her hands at a clean water tap as her mother looks on", position: "60% center" }}
         aside={<QuoteBlock text={service.text} by={founder.name} />}
         actions={
           <>

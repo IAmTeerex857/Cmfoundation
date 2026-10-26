@@ -76,9 +76,8 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
 /**
  * Text on warm paper at the left; the photo fills the right of the hero, unframed, from top to
  * bottom and out to the edge of the screen, with a short soft edge where it meets the paper. `aside`
- * (a short quote) keeps its own space at the far right on wide screens, and the photo then softens
- * on both sides. `badge` is a label on the photo's lower right; `footer` holds a row of tags or a note
- * under the actions. With `as="h2"` it serves as a feature band further down a page. `compact` suits
+ * (a short quote) sits on a small card over the photo's lower right on wide screens. `badge` is a
+ * label in the same place; `footer` holds a row of tags or a note under the actions. With `as="h2"` it serves as a feature band further down a page. `compact` suits
  * long titles; `short` trims the height so the next section shows sooner.
  */
 export function PageHero({
@@ -106,7 +105,7 @@ export function PageHero({
   compact?: boolean;
   short?: boolean;
 }) {
-  const height = short ? "py-12 lg:min-h-[25rem] lg:py-10" : `py-14 lg:py-20 ${Tag === "h1" ? "lg:min-h-[33rem]" : "lg:min-h-[30rem]"}`;
+  const height = short ? "py-12 lg:min-h-[23rem] lg:py-9" : "py-14 lg:min-h-[29rem] lg:py-16";
   return (
     <section className="relative flex flex-col overflow-hidden bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
       <div className={`wrap relative z-10 lg:flex lg:items-center ${height}`}>
@@ -140,16 +139,12 @@ export function PageHero({
         </div>
       </div>
       <div
-        className={`relative aspect-[4/3] sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto ${compact ? "lg:left-[49%]" : "lg:left-[45%]"} ${
-          aside ? "xl:right-[calc(max(2rem,(100vw-1140px)/2)+12rem)]" : ""
-        }`}
+        className={`relative aspect-[4/3] sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto ${compact ? "lg:left-[54%]" : "lg:left-[51%]"}`}
       >
         <div
           data-reveal="fade"
           data-reveal-delay="150"
-          className={`absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_10%)] lg:[mask-image:linear-gradient(to_right,transparent,#000_12%)] ${
-            aside ? "xl:[mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)]" : ""
-          }`}
+          className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_10%)] lg:[mask-image:linear-gradient(to_right,transparent,#000_12%)]"
         >
           <Image
             src={image.src}
@@ -168,10 +163,12 @@ export function PageHero({
         )}
       </div>
       {aside && (
-        <div className="absolute inset-y-0 right-[max(2rem,calc((100vw-1140px)/2))] z-10 hidden w-[11rem] items-center xl:flex">
-          <div data-reveal="fade" data-reveal-delay="500">
-            {aside}
-          </div>
+        <div
+          data-reveal="fade"
+          data-reveal-delay="500"
+          className="absolute right-[max(2rem,calc((100vw-1140px)/2))] bottom-8 hidden max-w-[15rem] rounded-[3px] bg-paper/95 px-6 py-5 shadow-[0_18px_40px_-24px_rgba(12,31,66,0.55)] xl:block [&_.pull-quote]:text-[1.2rem]"
+        >
+          {aside}
         </div>
       )}
     </section>

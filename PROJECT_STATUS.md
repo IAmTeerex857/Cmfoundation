@@ -222,3 +222,10 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
   - "View Gallery" opens `/founder/gallery`: 50 photos with a full-size viewer that has previous, next, Escape and arrow-key controls.
   - Three frames remain empty: 1945, Early Life, and Faith & Ministry.
 - **Repository size:** the two PDFs add about 82 MB (the largest file is 62 MB, under GitHub's 100 MB limit).
+
+## Hero size, five featured books and image swaps — October 26, 2026
+
+- **Heroes:** the unboxed photo now starts at about the middle of the hero (51%, or 54% for long titles) with a slightly shorter hero, so it is bigger than the boxed version but no longer dominates. Quotes on Our Work, Support and Contact sit on a small card over the photo's lower right, so the photo no longer fades on both sides.
+- **Home:** Featured Books shows five books in a spaced row under the heading (readable titles first, marked "Read free"); "Coming in 2027" is a short line beside the heading with a Forthcoming button. All five covers show on the first screen at 1440 × 900; titles and buttons too at 1920 × 1080.
+- **Images:** Our Work's hero is the clean-water photo (`clean-water-handwashing.jpg`); the Foundation's own water project photo moved to the "Sustainable Community Infrastructure" card. Events' hero is `generated/literature-launch.jpg`.
+- **Literature:** larger hero covers; the "Coming 2027" tag sits above All Is Vanity, and library cards no longer put a tag on the cover (the card text already says when a title is coming).
