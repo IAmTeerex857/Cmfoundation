@@ -40,7 +40,7 @@ export function LibraryLink({ collection, children }: { collection: Tab; childre
         requestAnimationFrame(() => {
           const target = document.getElementById("library");
           if (!target) return;
-          if (smoothScroll.current) smoothScroll.current.scrollTo(target, { offset: -96 });
+          if (smoothScroll.current) smoothScroll.current.scrollTo(target, { offset: -80 });
           else target.scrollIntoView({ behavior: "smooth" });
         });
       }}

@@ -41,7 +41,7 @@ export function Header() {
         hidden && !open ? "-translate-y-full" : ""
       } ${scrolled || open ? "bg-cream/85 shadow-[0_8px_30px_-18px_rgba(14,33,50,0.35)] backdrop-blur-xl" : "bg-sand/90 backdrop-blur-md"}`}
     >
-      <div className={`wrap flex items-center justify-between gap-6 transition-[height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${scrolled ? "h-[4.5rem]" : "h-24"}`}>
+      <div className={`wrap flex items-center justify-between gap-6 transition-[height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${scrolled ? "h-16" : "h-20"}`}>
         <Logo />
 
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex" onMouseLeave={() => setHovered(null)}>
@@ -101,7 +101,7 @@ export function Header() {
             animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
             exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.55, ease }}
-            className={`overflow-y-auto bg-cream lg:hidden ${scrolled ? "h-[calc(100dvh-4.5rem)]" : "h-[calc(100dvh-6rem)]"}`}
+            className={`overflow-y-auto bg-cream lg:hidden ${scrolled ? "h-[calc(100dvh-4rem)]" : "h-[calc(100dvh-5rem)]"}`}
           >
             <ul className="wrap py-4">
               {[{ label: "Home", href: "/" }, ...nav].map((item, i) => (

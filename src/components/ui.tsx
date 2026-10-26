@@ -105,7 +105,7 @@ export function PageHero({
   compact?: boolean;
   short?: boolean;
 }) {
-  const height = short ? "py-12 lg:min-h-[23rem] lg:py-9" : "py-14 lg:min-h-[29rem] lg:py-16";
+  const height = short ? "py-12 lg:min-h-[21rem] lg:py-8" : "py-14 lg:min-h-[29rem] lg:py-16";
   return (
     <section className="relative flex flex-col overflow-hidden bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
       <div className={`wrap relative z-10 lg:flex lg:items-center ${height}`}>
@@ -117,17 +117,17 @@ export function PageHero({
           )}
           <Tag
             data-reveal="words"
-            className={`${Tag === "h2" ? "display-lg" : compact ? "display-lg lg:text-[clamp(2.3rem,3.2vw,2.9rem)]" : short ? "display-xl lg:text-[clamp(2.7rem,4.2vw,3.6rem)]" : "display-xl"} mt-4`}
+            className={`${Tag === "h2" ? "display-lg" : compact ? "display-lg lg:text-[clamp(2.3rem,3.2vw,2.9rem)]" : short ? "display-xl lg:text-[clamp(2.6rem,3.8vw,3.3rem)]" : "display-xl"} mt-4`}
           >
             <SplitWords>{title}</SplitWords>
           </Tag>
           {children && (
-            <div data-reveal data-reveal-delay="300" className={`mt-6 space-y-4 leading-relaxed text-body ${Tag === "h1" ? "text-[1.08rem]" : ""}`}>
+            <div data-reveal data-reveal-delay="300" className={`${short ? "mt-5" : "mt-6"} space-y-4 leading-relaxed text-body ${Tag === "h1" ? "text-[1.08rem]" : ""}`}>
               {children}
             </div>
           )}
           {actions && (
-            <div data-reveal data-reveal-delay="420" className="mt-8 flex flex-wrap gap-4">
+            <div data-reveal data-reveal-delay="420" className={`${short ? "mt-6" : "mt-8"} flex flex-wrap gap-4`}>
               {actions}
             </div>
           )}

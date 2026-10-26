@@ -5,7 +5,7 @@ import { BookCover } from "@/components/book-cover";
 import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
 import { Button, IconPillars, PageHero, QuoteBlock } from "@/components/ui";
-import { availableBooks, forthcomingBooks, getBook } from "@/lib/books";
+import { availableBooks, getBook } from "@/lib/books";
 import { readableSlugs } from "@/lib/manuscripts";
 import { founder, quotes } from "@/lib/founder";
 import { pillars } from "@/lib/work";
@@ -38,7 +38,6 @@ const featuredDefaults = ["false-men-and-true-christians", "exploring-the-godhea
 
 // Section order follows the Foundation's home page design (../drive_assets/1 CMF Homepage 26.png).
 export default function Home() {
-  const comingSoon = forthcomingBooks.filter((b) => b.year === 2027).slice(0, 2);
   const readable = readableSlugs();
   const featured = [...availableBooks.filter((b) => readable.includes(b.slug)), ...featuredDefaults.map((s) => getBook(s)!)]
     .filter((b, i, all) => all.findIndex((x) => x.slug === b.slug) === i)
@@ -66,37 +65,29 @@ export default function Home() {
       </PageHero>
 
       {/* Featured books */}
-      <section className="pt-12 pb-16 lg:pt-7 lg:pb-16">
+      <section className="pt-12 pb-16 lg:pt-6 lg:pb-16">
         <div className="wrap">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p data-reveal="fade" className="eyebrow">
                 Featured books
               </p>
-              <h2 data-reveal="words" className="display mt-3 text-[clamp(2.1rem,3.2vw,2.5rem)] leading-[1.08]">
+              <h2 data-reveal="words" className="display mt-2 text-[clamp(2rem,3vw,2.3rem)] leading-[1.08]">
                 <SplitWords>Faith for Today. Ideas for Tomorrow.</SplitWords>
               </h2>
             </div>
-            <div data-reveal data-reveal-delay="200" className="flex flex-col gap-3 lg:items-end lg:text-right">
-              <p className="text-sm leading-relaxed text-muted">
-                Free to read and share. Coming in 2027: {comingSoon.map((b) => b.title).join(" and ")}.
-              </p>
-              <div className="flex flex-wrap gap-3 lg:justify-end">
-                <Button href="/literature#library" variant="outline">
-                  View All Books
-                </Button>
-                <Button href="/literature?collection=forthcoming#library" variant="outline" icon={null}>
-                  Forthcoming
-                </Button>
-              </div>
+            <div data-reveal data-reveal-delay="200">
+              <Button href="/literature#library" variant="outline">
+                View All Books
+              </Button>
             </div>
           </div>
 
-          <ul className="mt-7 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-12">
+          <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-10">
             {featured.map((b, i) => (
               <li key={b.slug} data-reveal data-reveal-delay={String(i * 80)} className="group flex h-full flex-col items-center text-center">
                 {/* Covers differ in shape, so each sits on the baseline of the tallest (5:8). */}
-                <Link href={`/read/${b.slug}`} className="flex aspect-[5/8] w-full max-w-[9.5rem] items-end" tabIndex={-1} aria-hidden="true">
+                <Link href={`/read/${b.slug}`} className="flex aspect-[5/8] w-full max-w-[8.75rem] items-end" tabIndex={-1} aria-hidden="true">
                   <span className="relative block w-full">
                     <BookCover book={b} className="book-tilt w-full" />
                     {readable.includes(b.slug) && (
@@ -106,9 +97,9 @@ export default function Home() {
                     )}
                   </span>
                 </Link>
-                <h3 className="mt-4 font-display text-lg leading-snug text-ink">{b.title}</h3>
-                <p className="mb-4 text-sm text-muted">{b.author}</p>
-                <Button href={`/read/${b.slug}`} icon={null} className="mt-auto w-full max-w-[9.5rem] px-3!">
+                <h3 className="mt-3 font-display text-[1.05rem] leading-snug text-ink">{b.title}</h3>
+                <p className="mb-3 text-sm text-muted">{b.author}</p>
+                <Button href={`/read/${b.slug}`} icon={null} className="mt-auto w-full max-w-[8.75rem] px-3!">
                   Read Now
                 </Button>
               </li>
