@@ -7,12 +7,12 @@ const button =
 
 /**
  * A title in the free library, as in the Literature Series design: cover, title, author, year and one
- * button. Readable titles (their PDF is in books/) open the online reader; published titles without
- * their PDF yet offer a copy by request; forthcoming titles show when they are coming.
+ * button. Published titles open the online reader (which says when an edition is still being
+ * prepared); forthcoming titles show when they are coming.
  */
 export function BookCard({ book, readable = false }: { book: Book; readable?: boolean }) {
   const forthcoming = book.collection === "forthcoming" && !readable;
-  const href = readable ? `/read/${book.slug}` : `/contact?enquiry=books&book=${book.slug}`;
+  const href = `/read/${book.slug}`;
   const cover = <BookCover book={book} className={forthcoming ? "w-full" : "book-tilt w-full"} />;
   return (
     <article data-reveal className="group flex h-full flex-col">
@@ -35,7 +35,6 @@ export function BookCard({ book, readable = false }: { book: Book; readable?: bo
       ) : (
         <>
           {book.year && <p className="text-sm text-muted">{book.year}</p>}
-          {!readable && <p className="mt-1 text-xs text-muted">Online edition coming soon</p>}
         </>
       )}
       <div className="mt-auto pt-4">
@@ -45,9 +44,9 @@ export function BookCard({ book, readable = false }: { book: Book; readable?: bo
           <Link
             href={href}
             className={`${button} bg-bronze text-white hover:bg-bronze-dark`}
-            aria-label={`${readable ? "Read free" : "Request a copy of"} ${book.title}`}
+            aria-label={`Read ${book.title} now`}
           >
-            {readable ? "Read Free" : "Request a Copy"}
+            Read Now
           </Link>
         )}
       </div>

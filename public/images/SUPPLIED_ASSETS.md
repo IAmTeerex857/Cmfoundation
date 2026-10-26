@@ -15,3 +15,23 @@ Exact downloaded originals are preserved in the workspace's `drive_assets/` dire
 The supplied cover corrects the previous catalogue title “The Criminal in Heaven” to “A Criminal in Heaven”, with subtitle “The Scandals of Grace and Entitlement”. The existing `the-criminal-in-heaven` internal slug is retained for compatibility with event and book-request links. Other titles/subtitles are transcribed from the supplied covers; existing publication years and collection assignments still require Foundation confirmation.
 
 Six titles still use generated interim covers: False Men and True Christians, God's Kind of Leader, The Present Truth, A Lawyer's Woes, Judge Not!, and Assured, Not Entitled. No downloadable book PDFs were present in the shared folder during this update.
+
+## Covers and founder photographs added October 26, 2026
+
+Retrieved from the same shared Drive folder. Originals are in `../drive_assets/`; the cover copies under `covers/official/` are byte-for-byte identical.
+
+| Catalogue title | Original filename | Website asset | Dimensions |
+| --- | --- | --- | --- |
+| A Criminal in Heaven (final cover; replaces the earlier supplied cover) | A CRIMINAL IN HEAVEN FINAL COVER 26.png | `covers/official/a-criminal-in-heaven-final.png` | 1027 × 1531 |
+| A Lawyer's Woes | A LAWYERS WOES FINAL COVER 26.png | `covers/official/a-lawyers-woes.png` | 1027 × 1531 |
+| False Men and True Christians | False Men, True Christians.png | `covers/official/false-men-and-true-christians.png` | 992 × 1586 |
+| God's Kind of Leader | God’s Kind of Leader.png | `covers/official/gods-kind-of-leader.png` | 1086 × 1448 |
+| Journey Into the Past | Journey Into the Past.png | `covers/official/journey-into-the-past.png` | 1086 × 1448 |
+| Law and Religion in Nigeria | Law and Religion in Nigeria Cover.png | `covers/official/law-and-religion-in-nigeria.png` | 1086 × 1448 |
+| Spiritual Worship | Spiritual Worship Book Cover.png | `covers/official/spiritual-worship.png` | 1086 × 1448 |
+| Who Then Is This Jesus? | Who Then Is This Jesus_.png | `covers/official/who-then-is-this-jesus.png` | 1086 × 1448 |
+| Destiny Fulfilled: The Life & Times (memorial brochure) | Destiny Fulfilled_ The Life & Times.png | `covers/official/destiny-fulfilled.png` | 1086 × 1448 |
+
+Generated interim covers remain for The Present Truth, Judge Not! and Assured, Not Entitled.
+
+**Founder photographs:** `founder/*.jpg` are the Foundation's archive photos (the numbered `20231031_*`, `1700*`, `IMG-*` and `Screenshot_*` files in `drive_assets/`, plus `IMG_0123.HEIC` converted to JPEG), resized to at most 1800 px and recompressed for the web. The higher-resolution originals of the earlier `founder-smiling.jpg` and `founder-portrait.jpg` replaced them.

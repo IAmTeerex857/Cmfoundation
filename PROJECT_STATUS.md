@@ -205,3 +205,20 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
   - The hero covers are larger, and All Is Vanity carries a "Coming 2027" label.
   - Both author photos are the same size.
 - **Founder:** empty photo frames for the timeline, the chapters, the collage and the memory cards (Photo Gallery and Burial Tribute) until the Foundation sends photos. The hero keeps the supplied photo `Odera 4.jpg`.
+
+## Clean heroes, Read Now and the Drive additions — October 26, 2026
+
+- **Heroes:** the photo now sits beside the text as a clean, sharp-edged image (two columns, with the quote as a third column on wide screens). Every fade and blur glow was removed from heroes and other images site-wide.
+- **Home:** more room in the hero and featured books, while the books (covers, titles and buttons) still show on the first screen at 1440 × 900.
+- **Read Now:** every published book's button reads "Read Now" and opens `/read/<slug>`. Without a PDF, that page says the online edition is being prepared and offers "Request a Copy".
+- **Drive additions** (copied into `drive_assets/`):
+  - Final covers for A Criminal in Heaven, A Lawyer's Woes, False Men and True Christians and God's Kind of Leader.
+  - Four more founder titles: Journey Into the Past, Law and Religion in Nigeria, Spiritual Worship and Who Then Is This Jesus?
+  - The memorial brochure "Destiny Fulfilled: The Life & Times", readable from the founder page's Burial Tribute card. It is not listed in the library.
+  - Two PDFs, so God's Kind of Leader and the brochure are readable online.
+  - About 60 archive photographs.
+- **Founder page:**
+  - Archive photos fill the hero, collage, timeline, chapters and memory cards.
+  - "View Gallery" opens `/founder/gallery`: 50 photos with a full-size viewer that has previous, next, Escape and arrow-key controls.
+  - Three frames remain empty: 1945, Early Life, and Faith & Ministry.
+- **Repository size:** the two PDFs add about 82 MB (the largest file is 62 MB, under GitHub's 100 MB limit).

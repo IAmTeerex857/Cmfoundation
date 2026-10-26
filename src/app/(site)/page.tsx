@@ -7,7 +7,6 @@ import { SplitWords } from "@/components/motion/split-words";
 import { Button, GoldRule, IconPillars, PageHero, QuoteBlock } from "@/components/ui";
 import { forthcomingBooks, getBook } from "@/lib/books";
 import { founder, quotes } from "@/lib/founder";
-import { readableSlugs } from "@/lib/manuscripts";
 import { pillars } from "@/lib/work";
 import { pageMetadata } from "@/lib/metadata";
 import { site } from "@/lib/site";
@@ -37,7 +36,6 @@ const featured = ["false-men-and-true-christians", "exploring-the-godhead", "the
 
 // Section order follows the Foundation's home page design (../drive_assets/1 CMF Homepage 26.png).
 export default function Home() {
-  const readable = readableSlugs();
   const comingSoon = forthcomingBooks.filter((b) => b.year === 2027).slice(0, 2);
 
   return (
@@ -48,7 +46,7 @@ export default function Home() {
         short
         eyebrow="Ideas. People. Communities. A better tomorrow."
         title="Knowledge Changes Lives."
-        image={{ src: "/images/students-reading.jpg", alt: "Three students reading a book together in a library", position: "45% center" }}
+        image={{ src: "/images/students-reading.jpg", alt: "Three students reading a book together in a library", aspect: "aspect-[16/10]" }}
         aside={<QuoteBlock text="A better tomorrow is possible." by={quotes[3].by} />}
         actions={
           <>
@@ -64,7 +62,7 @@ export default function Home() {
 
       {/* Featured books */}
       <section className="pt-12 pb-16 lg:pt-8 lg:pb-14">
-        <div className="wrap grid gap-12 lg:grid-cols-[1.25fr_2fr_0.85fr] lg:gap-8">
+        <div className="wrap grid gap-12 lg:grid-cols-[1.4fr_2fr_0.9fr] lg:gap-10">
           <div>
             <p data-reveal="fade" className="eyebrow">
               Featured books
@@ -83,22 +81,17 @@ export default function Home() {
             </div>
           </div>
 
-          <ul className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-5">
+          <ul className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-7">
             {featured.map((b, i) => {
-              const canRead = readable.includes(b.slug);
               return (
                 <li key={b.slug} data-reveal data-reveal-delay={String(i * 100)} className="group flex h-full flex-col items-center text-center">
-                  <Link href={canRead ? `/read/${b.slug}` : "/literature#library"} className="block w-full max-w-[10rem]" tabIndex={-1} aria-hidden="true">
+                  <Link href={`/read/${b.slug}`} className="block w-full max-w-[10.5rem]" tabIndex={-1} aria-hidden="true">
                     <BookCover book={b} className="book-tilt w-full" />
                   </Link>
                   <h3 className="mt-4 font-display text-lg leading-snug text-ink">{b.title}</h3>
                   <p className="mb-4 text-sm text-muted">{b.author}</p>
-                  <Button
-                    href={canRead ? `/read/${b.slug}` : `/contact?enquiry=books&book=${b.slug}`}
-                    icon={null}
-                    className="mt-auto w-full max-w-[10rem] px-3!"
-                  >
-                    {canRead ? "Read Free" : "Request a Copy"}
+                  <Button href={`/read/${b.slug}`} icon={null} className="mt-auto w-full max-w-[10.5rem] px-3!">
+                    Read Now
                   </Button>
                 </li>
               );
@@ -156,11 +149,11 @@ export default function Home() {
         <div className="grid lg:grid-cols-[0.95fr_1.25fr_0.9fr]">
           <div data-reveal="fade" className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[26rem]">
             <Image
-              src="/images/founder-portrait.jpg"
+              src="/images/founder/red-cap-portrait.jpg"
               alt="Dr Chinwoke Clement Mbadinuju wearing a red cap"
               fill
               sizes="(min-width: 1024px) 32vw, 100vw"
-              className="object-cover object-top lg:[mask-image:linear-gradient(to_right,#000_70%,transparent)]"
+              className="object-cover object-top"
             />
           </div>
           <div className="px-5 py-14 sm:px-8 lg:py-16 lg:pr-10 lg:pl-12">

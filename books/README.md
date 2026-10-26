@@ -6,8 +6,12 @@ becomes readable on the website. No code change is needed.
 | Book | File name |
 |---|---|
 | False Men and True Christians | `false-men-and-true-christians.pdf` |
-| God's Kind of Leader | `gods-kind-of-leader.pdf` |
+| God's Kind of Leader | `gods-kind-of-leader.pdf` *(added October 26, 2026)* |
 | The Present Truth | `the-present-truth.pdf` |
+| Journey Into the Past | `journey-into-the-past.pdf` |
+| Law and Religion in Nigeria | `law-and-religion-in-nigeria.pdf` |
+| Spiritual Worship | `spiritual-worship.pdf` |
+| Who Then Is This Jesus? | `who-then-is-this-jesus.pdf` |
 | Exploring the Godhead | `exploring-the-godhead.pdf` |
 | The Wages of Sin | `the-wages-of-sin.pdf` |
 | A Criminal in Heaven | `the-criminal-in-heaven.pdf` |
@@ -16,10 +20,11 @@ becomes readable on the website. No code change is needed.
 | Judge Not! *(forthcoming)* | `judge-not.pdf` |
 | Much Ado About Rapture *(forthcoming)* | `much-ado-about-rapture.pdf` |
 | Assured, Not Entitled *(forthcoming)* | `assured-not-entitled.pdf` |
+| Destiny Fulfilled: The Life & Times *(memorial brochure, not listed in the library; opened from the founder page)* | `destiny-fulfilled.pdf` *(added October 26, 2026)* |
 
 When a PDF is present:
 
-- The book's card in the library changes to **Read online — free** and opens the reader at `/read/<slug>`.
+- The book's **Read Now** button opens the reader at `/read/<slug>`. Without the PDF, that page says the online edition is being prepared and offers a copy.
 - The reader page is listed in the sitemap.
 - A forthcoming title also becomes readable. When it is published, change its `collection` and `year` in `src/lib/books.ts` so it moves into the main library.
 

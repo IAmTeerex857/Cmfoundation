@@ -15,6 +15,8 @@ export type Book = {
   collection: Collection;
   topics: string[];
   cover: CoverArtwork;
+  /** false keeps a title out of the library lists while it can still open in the reader (the memorial brochure). */
+  listed?: boolean;
 };
 
 // A title becomes readable online when books/<slug>.pdf exists (see lib/manuscripts.ts), so the
@@ -30,16 +32,17 @@ export const books: Book[] = [
     author: FOUNDER,
     collection: "founder",
     topics: ["Christianity", "Christian Living"],
-    cover: { motif: "sunrise", from: "#f2b45a", to: "#3f6b3a", ink: "#ffffff", image: "/images/covers/false-men-and-true-christians.jpg" },
+    cover: { type: "official", image: "/images/covers/official/false-men-and-true-christians.png", width: 992, height: 1586 },
   },
   {
     slug: "gods-kind-of-leader",
     title: "God's Kind of Leader",
+    subtitle: "The Righteous & Responsible Man",
     author: FOUNDER,
     year: 1991,
     collection: "founder",
     topics: ["Leadership", "Governance"],
-    cover: { motif: "silhouettes", from: "#f0a347", to: "#7a3510", ink: "#2b1406", image: "/images/covers/gods-kind-of-leader.jpg" },
+    cover: { type: "official", image: "/images/covers/official/gods-kind-of-leader.png", width: 1086, height: 1448 },
   },
   {
     slug: "the-present-truth",
@@ -49,6 +52,40 @@ export const books: Book[] = [
     collection: "founder",
     topics: ["Christianity"],
     cover: { motif: "cross", from: "#6f9fd0", to: "#163a66", ink: "#ffffff", image: "/images/covers/the-present-truth.jpg" },
+  },
+  // Years for the four titles below are not yet confirmed.
+  {
+    slug: "journey-into-the-past",
+    title: "Journey Into the Past",
+    subtitle: "Ordeal of a State Governor",
+    author: FOUNDER,
+    collection: "founder",
+    topics: ["Memoir", "Governance"],
+    cover: { type: "official", image: "/images/covers/official/journey-into-the-past.png", width: 1086, height: 1448 },
+  },
+  {
+    slug: "law-and-religion-in-nigeria",
+    title: "Law and Religion in Nigeria",
+    author: FOUNDER,
+    collection: "founder",
+    topics: ["Law & Society", "Christianity"],
+    cover: { type: "official", image: "/images/covers/official/law-and-religion-in-nigeria.png", width: 1086, height: 1448 },
+  },
+  {
+    slug: "spiritual-worship",
+    title: "Spiritual Worship",
+    author: FOUNDER,
+    collection: "founder",
+    topics: ["Christianity", "Christian Living"],
+    cover: { type: "official", image: "/images/covers/official/spiritual-worship.png", width: 1086, height: 1448 },
+  },
+  {
+    slug: "who-then-is-this-jesus",
+    title: "Who Then Is This Jesus?",
+    author: FOUNDER,
+    collection: "founder",
+    topics: ["Christianity"],
+    cover: { type: "official", image: "/images/covers/official/who-then-is-this-jesus.png", width: 1086, height: 1448 },
   },
   {
     slug: "exploring-the-godhead",
@@ -78,7 +115,7 @@ export const books: Book[] = [
     year: 2022,
     collection: "current",
     topics: ["Christianity"],
-    cover: { type: "official", image: "/images/covers/official/a-criminal-in-heaven.png", width: 1029, height: 1529 },
+    cover: { type: "official", image: "/images/covers/official/a-criminal-in-heaven-final.png", width: 1027, height: 1531 },
   },
   {
     slug: "all-is-vanity",
@@ -93,11 +130,12 @@ export const books: Book[] = [
   {
     slug: "a-lawyers-woes",
     title: "A Lawyer's Woes",
+    subtitle: "Burdens, Complicity and the Key of Knowledge",
     author: CHETA,
     year: 2027,
     collection: "forthcoming",
     topics: ["Law & Society"],
-    cover: { motif: "scales", from: "#1d2f4d", to: "#0a1424", ink: "#e5b94e", image: "/images/covers/a-lawyers-woes.jpg" },
+    cover: { type: "official", image: "/images/covers/official/a-lawyers-woes.png", width: 1027, height: 1531 },
   },
   {
     slug: "judge-not",
@@ -127,12 +165,25 @@ export const books: Book[] = [
     topics: ["Christian Living"],
     cover: { motif: "path", from: "#b9d0a3", to: "#3e5b33", ink: "#ffffff", image: "/images/covers/assured-not-entitled.jpg" },
   },
+  // The memorial brochure. It opens in the reader from the founder page but isn't a Series title.
+  {
+    slug: "destiny-fulfilled",
+    title: "Destiny Fulfilled: The Life & Times",
+    subtitle: "Of His Excellency Dr Chinwoke Clement Mbadinuju (Odera)",
+    author: "In memory of Dr C. C. Mbadinuju",
+    collection: "founder",
+    topics: [],
+    cover: { type: "official", image: "/images/covers/official/destiny-fulfilled.png", width: 1086, height: 1448 },
+    listed: false,
+  },
 ];
 
 export const topics = ["Christianity", "Christian Living", "Leadership", "Law & Society", "Governance", "Memoir", "Contemporary Issues"];
 
-export const availableBooks = books.filter((b) => b.collection !== "forthcoming");
-export const forthcomingBooks = books.filter((b) => b.collection === "forthcoming");
+/** Titles shown in the library (everything except unlisted items such as the memorial brochure). */
+export const libraryBooks = books.filter((b) => b.listed !== false);
+export const availableBooks = libraryBooks.filter((b) => b.collection !== "forthcoming");
+export const forthcomingBooks = libraryBooks.filter((b) => b.collection === "forthcoming");
 
 export function getBook(slug: string) {
   return books.find((b) => b.slug === slug);

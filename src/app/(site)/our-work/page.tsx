@@ -154,7 +154,7 @@ export default function OurWorkPage() {
               alt=""
               fill
               sizes="144px"
-              className="object-cover [mask-image:radial-gradient(closest-side,#000_55%,transparent)]"
+              className="rounded-[4px] object-cover"
             />
           </div>
           <div className="flex-1">

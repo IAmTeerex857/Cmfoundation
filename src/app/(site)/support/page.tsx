@@ -139,7 +139,7 @@ export default function SupportPage() {
               alt="A smiling student at his desk in a classroom"
               fill
               sizes="(min-width: 1024px) 38vw, 100vw"
-              className="object-cover object-[35%_center] lg:[mask-image:linear-gradient(to_right,#000_70%,transparent)]"
+              className="object-cover object-[35%_center]"
             />
           </div>
           <div className="grid items-center gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_auto] lg:py-14 lg:pr-[max(2rem,calc((100vw-1140px)/2))] lg:pl-10">
@@ -216,17 +216,11 @@ export default function SupportPage() {
               <Faq items={[faqs.cac, faqs.secure, faqs.project, faqs.use, faqs.inKind, faqs.partner, faqs.volunteer]} />
             </div>
           </div>
-          <div data-reveal="fade" className="relative isolate flex flex-col overflow-hidden bg-blush lg:min-h-[24rem] lg:justify-center">
-            <div className="relative aspect-[16/9] lg:absolute lg:inset-0 lg:-z-10 lg:aspect-auto">
-              <Image
-                src="/images/generated/family-reading.jpg"
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="object-cover object-[70%_center] [mask-image:linear-gradient(to_bottom,#000_70%,transparent)] lg:[mask-image:linear-gradient(to_right,transparent_38%,#000_85%)]"
-              />
+          <div data-reveal="fade" className="grid overflow-hidden rounded-[4px] bg-blush sm:grid-cols-2 lg:min-h-[24rem]">
+            <div className="relative aspect-[16/9] sm:order-2 sm:aspect-auto">
+              <Image src="/images/generated/family-reading.jpg" alt="" fill sizes="(min-width: 1024px) 22vw, (min-width: 640px) 50vw, 100vw" className="object-cover object-[70%_center]" />
             </div>
-            <div className="p-8 sm:p-10 lg:max-w-[22rem]">
+            <div className="flex flex-col justify-center p-8 sm:p-10">
               <h2 className="display-md lg:max-w-[19rem]">
                 <SplitWords>A Better Tomorrow Is Possible.</SplitWords>
               </h2>

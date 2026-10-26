@@ -5,7 +5,7 @@ import { Icon, type IconName } from "./icons";
 import { SplitWords } from "./motion/split-words";
 
 // Motion conventions (see globals.css and components/motion/scroll-effects.tsx):
-// data-reveal animates an element in on scroll, data-parallax drifts an image against the scroll.
+// data-reveal animates an element in on scroll.
 
 /* ---------- Buttons ---------- */
 
@@ -74,10 +74,10 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
 /* ---------- Page hero (designs) ---------- */
 
 /**
- * Text on warm paper at the left; the photo fills the right side and fades into the paper.
- * `aside` (a short quote) sits over the photo's right edge on wide screens; `badge` is a label
- * pinned to the photo's lower right; `footer` holds a row of tags or a note under the actions.
- * With `as="h2"` it serves as a feature band further down a page.
+ * Text on warm paper at the left and a clean photo at the right. `aside` (a short quote) takes a
+ * third column on wide screens; `badge` is a label pinned to the photo's lower right; `footer` holds
+ * a row of tags or a note under the actions. With `as="h2"` it serves as a feature band further down
+ * a page. `compact` suits long titles; `short` trims the padding so the next section shows sooner.
  */
 export function PageHero({
   eyebrow,
@@ -97,35 +97,37 @@ export function PageHero({
   children?: ReactNode;
   actions?: ReactNode;
   footer?: ReactNode;
-  /** `contained` keeps a small or detailed image near its natural size, with only a light fade. */
-  image: { src: string; alt: string; position?: string; contained?: boolean };
+  /** `aspect` is a Tailwind aspect class for the photo frame (default 4:3). */
+  image: { src: string; alt: string; position?: string; aspect?: string };
   aside?: ReactNode;
   badge?: ReactNode;
   as?: "h1" | "h2";
-  /** A smaller heading on a wider column, for long titles (two sentences or a full name). */
   compact?: boolean;
-  /** A shorter hero, so the next section shows on first load. */
   short?: boolean;
 }) {
+  const columns = aside ? "lg:grid-cols-[1.15fr_1fr] xl:grid-cols-[1.25fr_1fr_11rem]" : "lg:grid-cols-[1.1fr_1fr]";
   return (
-    <section className="relative flex flex-col overflow-hidden bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
-      <div className={`wrap relative z-10 lg:flex lg:items-center ${short ? "py-12 lg:min-h-[22rem] lg:py-8" : `py-14 lg:py-20 ${Tag === "h1" ? "lg:min-h-[35rem]" : "lg:min-h-[30rem]"}`}`}>
-        <div className={`max-w-xl ${compact ? "lg:max-w-[min(40rem,52%)]" : "lg:max-w-[min(36rem,46%)]"}`}>
+    <section className="bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
+      <div className={`wrap grid items-center gap-10 lg:gap-12 ${columns} ${short ? "py-12 lg:py-11" : "py-14 lg:py-20"}`}>
+        <div>
           {eyebrow && (
             <p data-reveal="fade" className="eyebrow">
               {eyebrow}
             </p>
           )}
-          <Tag data-reveal="words" className={`${Tag === "h2" ? "display-lg" : compact ? "display-lg lg:text-[clamp(2.3rem,3.2vw,2.9rem)]" : short ? "display-xl lg:text-[clamp(2.7rem,4.2vw,3.5rem)]" : "display-xl"} mt-4`}>
+          <Tag
+            data-reveal="words"
+            className={`${Tag === "h2" ? "display-lg" : compact ? "display-lg lg:text-[clamp(2.3rem,3.2vw,2.9rem)]" : short ? "display-xl lg:text-[clamp(2.7rem,4.2vw,3.6rem)]" : "display-xl"} mt-4`}
+          >
             <SplitWords>{title}</SplitWords>
           </Tag>
           {children && (
-            <div data-reveal data-reveal-delay="300" className={`${short ? "mt-4" : "mt-6"} space-y-4 leading-relaxed text-body ${Tag === "h1" ? "text-[1.08rem]" : ""}`}>
+            <div data-reveal data-reveal-delay="300" className={`mt-6 space-y-4 leading-relaxed text-body ${Tag === "h1" ? "text-[1.08rem]" : ""}`}>
               {children}
             </div>
           )}
           {actions && (
-            <div data-reveal data-reveal-delay="420" className={`${short ? "mt-6" : "mt-8"} flex flex-wrap gap-4`}>
+            <div data-reveal data-reveal-delay="420" className="mt-8 flex flex-wrap gap-4">
               {actions}
             </div>
           )}
@@ -135,48 +137,28 @@ export function PageHero({
             </div>
           )}
         </div>
-      </div>
-      <div
-        className={`relative aspect-[4/3] sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto ${
-          aside
-            ? "lg:w-[57%] xl:right-[calc(max(2rem,(100vw-1140px)/2)+11rem)] xl:left-[calc(max(2rem,(100vw-1140px)/2)+400px)] xl:w-auto"
-            : image.contained
-              ? "lg:w-[46%]"
-              : "lg:w-[57%]"
-        }`}
-      >
-        <div
-          data-reveal="fade"
-          data-reveal-delay="150"
-          className={`absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_22%)] ${image.contained ? "lg:[mask-image:linear-gradient(to_right,transparent,#000_9%)]" : "lg:[mask-image:linear-gradient(to_right,transparent,#000_38%)]"} ${
-            aside ? "xl:[mask-image:linear-gradient(to_right,transparent,#000_32%,#000_80%,transparent)]" : ""
-          }`}
-        >
-          <div data-parallax="0.05" className="absolute inset-0">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              priority={Tag === "h1"}
-              sizes="(min-width: 1024px) 60vw, 100vw"
-              className="object-cover"
-              style={{ objectPosition: image.position ?? "center" }}
-            />
-          </div>
+        <div data-reveal="fade" data-reveal-delay="150" className={`relative w-full overflow-hidden rounded-[4px] shadow-[0_24px_50px_-30px_rgba(12,31,66,0.45)] ${image.aspect ?? "aspect-[4/3]"}`}>
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            priority={Tag === "h1"}
+            sizes="(min-width: 1280px) 34vw, (min-width: 1024px) 45vw, 100vw"
+            className="object-cover"
+            style={{ objectPosition: image.position ?? "center" }}
+          />
+          {badge && (
+            <div className="absolute right-3 bottom-3 flex items-center gap-3 rounded-[3px] bg-white/95 px-4 py-2.5 shadow-[0_12px_30px_-18px_rgba(12,31,66,0.5)] sm:right-5 sm:bottom-5">
+              {badge}
+            </div>
+          )}
         </div>
-        {badge && (
-          <div data-reveal data-reveal-delay="400" className="absolute right-4 bottom-4 flex items-center gap-3 rounded-[3px] bg-white/95 px-5 py-3 shadow-[0_12px_30px_-18px_rgba(12,31,66,0.5)] sm:right-8 sm:bottom-8">
-            {badge}
+        {aside && (
+          <div data-reveal="fade" data-reveal-delay="500" className="hidden xl:block">
+            {aside}
           </div>
         )}
       </div>
-      {aside && (
-        <div className="absolute inset-y-0 right-[max(2rem,calc((100vw-1140px)/2))] hidden w-[13rem] items-center xl:flex">
-          <div data-reveal="fade" data-reveal-delay="500">
-            {aside}
-          </div>
-        </div>
-      )}
     </section>
   );
 }

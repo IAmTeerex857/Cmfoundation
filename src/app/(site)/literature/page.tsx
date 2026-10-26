@@ -78,7 +78,6 @@ export default function LiteraturePage() {
           </div>
 
           <div data-reveal="fade" data-reveal-delay="200" className="group relative" aria-hidden="true">
-            <div className="pointer-events-none absolute -inset-x-10 -top-10 bottom-6 rounded-full bg-gold/15 blur-3xl" />
             <div className="relative flex items-end justify-center gap-[2.5%] px-1">
               <BookCover
                 book={heroBooks[0]}

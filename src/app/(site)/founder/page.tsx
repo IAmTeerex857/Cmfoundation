@@ -11,13 +11,12 @@ export const metadata: Metadata = pageMetadata({
   path: "/founder",
 });
 
-// Framed photos for the "Many Chapters" collage, as placed in the design. They stay empty frames
-// until the Foundation supplies the photos (the design's versions exist only inside its mockup).
-const collage: { src?: string; alt: string; box: string }[] = [
-  { alt: "", box: "left-[40%] top-[3%] w-[27%] -rotate-3" },
-  { alt: "", box: "left-[69%] top-[0%] w-[30%] rotate-3" },
-  { alt: "", box: "left-[45%] top-[50%] w-[31%] -rotate-1" },
-  { alt: "", box: "left-[78%] top-[55%] w-[21%] rotate-2" },
+// Framed archive photos for the "Many Chapters" collage, placed as in the design.
+const collage: { src?: string; alt: string; box: string; position?: string }[] = [
+  { src: "/images/founder/robes-seated.jpg", alt: "Dr Mbadinuju seated in academic robes on a university campus", box: "left-[40%] top-[3%] w-[27%] -rotate-3", position: "50% 40%" },
+  { src: "/images/founder/podium-wave.jpg", alt: "Dr Mbadinuju waving from a podium", box: "left-[69%] top-[0%] w-[30%] rotate-3", position: "50% 30%" },
+  { src: "/images/founder/group.jpg", alt: "Dr Mbadinuju with a group of men", box: "left-[45%] top-[50%] w-[31%] -rotate-1", position: "50% 30%" },
+  { src: "/images/founder/handshake.jpg", alt: "Dr Mbadinuju shaking hands at a formal reception", box: "left-[78%] top-[55%] w-[21%] rotate-2", position: "60% 30%" },
 ];
 
 /** A photo, or an empty frame where the Foundation's photo will go. */
@@ -29,15 +28,28 @@ function PhotoSlot({ src, alt = "", sizes, position = "50% 25%", className = "" 
   );
 }
 
-// The design's two memory cards. Only the bowler-hat portrait exists so far; the other frames stay
-// empty until the Foundation supplies the gallery and burial tribute photos.
-const memories: { title: string; body: string; photos: { src?: string; alt?: string; position?: string }[] }[] = [
+// The design's two memory cards: the photo gallery and the memorial brochure (read in the reader).
+const memories: { title: string; body: string; cta: string; href: string; photos: { src: string; alt: string; position?: string; contain?: boolean }[] }[] = [
   {
     title: "Photo Gallery",
     body: `A visual journey through the life and times of ${founder.name}.`,
-    photos: [{ src: "/images/founder-bowler.jpg", alt: "Early portrait of Dr Chinwoke Mbadinuju in a bowler hat", position: "50% 20%" }, {}],
+    cta: "View Gallery",
+    href: "/founder/gallery",
+    photos: [
+      { src: "/images/founder-bowler.jpg", alt: "Early portrait of Dr Chinwoke Mbadinuju in a bowler hat", position: "50% 20%" },
+      { src: "/images/founder/doctoral-robes.jpg", alt: "Dr Mbadinuju in doctoral robes at his graduation", position: "50% 20%" },
+    ],
   },
-  { title: "Burial Tribute", body: "Honouring a life of service, faith and enduring impact.", photos: [{}, {}] },
+  {
+    title: "Burial Tribute",
+    body: "Destiny Fulfilled: The Life & Times. Honouring a life of service, faith and enduring impact.",
+    cta: "Read Tribute",
+    href: "/read/destiny-fulfilled",
+    photos: [
+      { src: "/images/founder/yellow-agbada.jpg", alt: "Dr Mbadinuju in a yellow agbada and red cap", position: "50% 20%" },
+      { src: "/images/covers/official/destiny-fulfilled.png", alt: "Cover of Destiny Fulfilled: The Life & Times", contain: true },
+    ],
+  },
 ];
 
 // Section order follows the Foundation's founder page design (../drive_assets/3 CMF Founder Page 26.png).
@@ -51,7 +63,7 @@ export default function FounderPage() {
         eyebrow="The Founder"
         compact
         title={founder.name}
-        image={{ src: "/images/founder-smiling.jpg", alt: "Dr Chinwoke Clement Mbadinuju smiling at a public ceremony", position: "60% 0%" }}
+        image={{ src: "/images/founder/hero-smiling.jpg", alt: "Dr Chinwoke Clement Mbadinuju smiling at a public ceremony", position: "50% 12%", aspect: "aspect-[5/4]" }}
         actions={
           <>
             <Button href="#journey" icon="arrowDown">
@@ -119,7 +131,7 @@ export default function FounderPage() {
                 alt="Dr Chinwoke Mbadinuju in barrister's wig and gown"
                 fill
                 sizes="(min-width: 1024px) 30vw, 45vw"
-                className="object-cover object-[50%_15%] sepia-[0.35] [mask-image:linear-gradient(to_right,transparent,#000_18%,#000_82%,transparent)]"
+                className="object-cover object-[50%_15%] sepia-[0.35]"
               />
             </div>
             {collage.map((c, i) => (
@@ -129,7 +141,7 @@ export default function FounderPage() {
                 data-reveal-delay={String(150 + i * 120)}
                 className={`absolute aspect-[4/3] bg-white p-[1.2%] shadow-[0_18px_40px_-20px_rgba(12,31,66,0.55)] transition-transform duration-500 hover:z-10 hover:rotate-0 ${c.box}`}
               >
-                <PhotoSlot src={c.src} alt={c.alt} sizes="(min-width: 1024px) 20vw, 30vw" className="size-full" />
+                <PhotoSlot src={c.src} alt={c.alt} sizes="(min-width: 1024px) 20vw, 30vw" position={c.position} className="size-full" />
               </figure>
             ))}
           </div>
@@ -191,11 +203,21 @@ export default function FounderPage() {
               <article key={m.title} data-reveal data-reveal-delay={String(i * 120)}>
                 <div className="grid aspect-[16/10] grid-cols-[0.8fr_1.2fr] gap-1.5">
                   {m.photos.map((ph, j) => (
-                    <PhotoSlot key={j} src={ph.src} alt={ph.alt} sizes="(min-width: 1024px) 12vw, 25vw" position={ph.position} className="h-full" />
+                    <PhotoSlot
+                      key={j}
+                      src={ph.src}
+                      alt={ph.alt}
+                      sizes="(min-width: 1024px) 12vw, 25vw"
+                      position={ph.contain ? "center" : ph.position}
+                      className={`h-full ${ph.contain ? "bg-black [&_img]:object-contain" : ""}`}
+                    />
                   ))}
                 </div>
                 <h2 className="mt-4 font-display text-xl text-ink">{m.title}</h2>
                 <p className="mt-1 text-sm leading-relaxed text-body">{m.body}</p>
+                <Button href={m.href} variant="outline" className="mt-4">
+                  {m.cta}
+                </Button>
               </article>
             ))}
           </div>

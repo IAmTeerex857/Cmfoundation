@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { type ReactNode, useEffect, useMemo, useState } from "react";
-import { books, type Collection, topics } from "@/lib/books";
+import { type Collection, libraryBooks, topics } from "@/lib/books";
 import { BookCard } from "./book-card";
 import { Icon } from "./icons";
 import { smoothScroll } from "./motion/smooth-scroll";
@@ -76,7 +76,7 @@ export function Library({ readable }: { readable: string[] }) {
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return books
+    return libraryBooks
       .filter((b) => tab === "all" || b.collection === tab)
       .filter((b) => !topic || b.topics.includes(topic))
       .filter((b) => !q || `${b.title} ${b.subtitle ?? ""} ${b.author}`.toLowerCase().includes(q))
