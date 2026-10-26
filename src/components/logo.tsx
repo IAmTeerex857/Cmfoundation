@@ -12,7 +12,7 @@ export function Logo({ tone = "dark", className = "" }: { tone?: "dark" | "light
         priority
         className="h-10 w-auto transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-rotate-6 group-hover:scale-110"
       />
-      <span className={`font-display text-[0.95rem] leading-[1.1] font-semibold tracking-[0.06em] whitespace-nowrap uppercase ${tone === "dark" ? "text-ink" : "text-white"}`}>
+      <span className={`font-ui text-[0.95rem] leading-[1.1] font-semibold tracking-[0.06em] whitespace-nowrap uppercase ${tone === "dark" ? "text-slate" : "text-white"}`}>
         Chinwoke Mbadinuju
         <br />
         Foundation

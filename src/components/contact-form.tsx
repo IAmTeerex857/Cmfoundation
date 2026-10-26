@@ -38,9 +38,9 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
           initial={{ scale: 0, rotate: -45 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", stiffness: 420, damping: 14, delay: 0.15 }}
-          className="mx-auto flex size-16 items-center justify-center rounded-full bg-bronze text-white"
+          className="mx-auto flex size-14 items-center justify-center rounded-full bg-bronze text-white"
         >
-          <Icon name="check" className="size-8" strokeWidth={2} />
+          <Icon name="check" className="size-7" strokeWidth={2} />
         </motion.span>
         <h3 className="display-sm mt-4">Thank you. Your message has been sent.</h3>
         <p className="mt-2 text-muted">We aim to respond within 1–2 business days.</p>
@@ -54,16 +54,19 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
       <input name="email" type="email" required maxLength={254} placeholder="Your Email Address *" autoComplete="email" className="field" aria-label="Your email address" />
       <label className="block">
         <span className="mb-2 block text-sm font-medium text-ink">Nature of Enquiry *</span>
-        <select name="enquiry" required defaultValue={initialEnquiry ?? ""} className="field">
-          <option value="" disabled>
-            Select an option
-          </option>
-          {enquiryTypes.map((t) => (
-            <option key={t.id} value={t.id}>
-              {t.label}
+        <span className="relative block">
+          <select name="enquiry" required defaultValue={initialEnquiry ?? ""} className="field appearance-none pr-11">
+            <option value="" disabled>
+              Select an option
             </option>
-          ))}
-        </select>
+            {enquiryTypes.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.label}
+              </option>
+            ))}
+          </select>
+          <Icon name="chevronRight" className="pointer-events-none absolute top-1/2 right-4 size-4 -translate-y-1/2 rotate-90 text-bronze" strokeWidth={2} />
+        </span>
       </label>
       <textarea
         name="message"
@@ -79,7 +82,7 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
       <input name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
       {status === "error" && (
-        <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-800">
+        <p role="alert" className="rounded-[3px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
           {error}
         </p>
       )}
@@ -87,7 +90,7 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
       <button
         type="submit"
         disabled={status === "sending"}
-        className="group inline-flex items-center gap-2.5 rounded-full bg-bronze px-7 py-3.5 font-medium text-white transition-colors duration-300 hover:bg-bronze-dark disabled:opacity-80"
+        className="group inline-flex items-center gap-3 rounded-[3px] bg-bronze px-7 py-4 text-[0.82rem] leading-none font-semibold tracking-[0.08em] text-white uppercase transition-colors duration-300 hover:bg-bronze-dark disabled:opacity-80"
       >
         {status === "sending" ? (
           <>
@@ -95,7 +98,7 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
           </>
         ) : (
           <>
-            Send message <SlideIcon name="arrowUpRight" />
+            Send Message <SlideIcon name="arrow" />
           </>
         )}
       </button>

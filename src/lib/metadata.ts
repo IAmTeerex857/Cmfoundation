@@ -10,7 +10,7 @@ export const shareImage = {
   url: "/og-hero.jpg",
   width: 1200,
   height: 630,
-  alt: "The Chinwoke Mbadinuju Foundation home page: Knowledge changes lives. A better tomorrow is possible. Students reading together and a girl washing her hands at a clean water tap.",
+  alt: "The Chinwoke Mbadinuju Foundation home page: Knowledge Changes Lives. Three students reading a book together, beside the quote \"A better tomorrow is possible.\"",
 };
 
 /**

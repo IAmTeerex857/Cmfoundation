@@ -1,57 +1,58 @@
 import Link from "next/link";
 import type { Book } from "@/lib/books";
 import { BookCover } from "./book-cover";
-import { CircleArrow } from "./ui";
+
+const button =
+  "flex w-full items-center justify-center rounded-[3px] px-3 py-3 text-[0.76rem] leading-none font-semibold tracking-[0.08em] uppercase transition-colors duration-300";
 
 /**
- * Three states: readable (its PDF is in books/) opens the online reader; an available title without
- * its PDF yet offers a copy by request; forthcoming titles are display-only.
+ * A title in the free library, as in the Literature Series design: cover, title, author, year and one
+ * button. Readable titles (their PDF is in books/) open the online reader; the rest offer a copy by
+ * request until their online edition is added.
  */
 export function BookCard({ book, readable = false }: { book: Book; readable?: boolean }) {
-  const forthcoming = book.collection === "forthcoming" && !readable;
   const href = readable ? `/read/${book.slug}` : `/contact?enquiry=books&book=${book.slug}`;
-  const action = readable ? "Read online, free" : forthcoming ? `Coming ${book.year ?? "soon"}` : "Online edition coming soon";
+  return (
+    <article data-reveal className="group flex h-full flex-col">
+      <Link href={href} tabIndex={-1} aria-hidden="true" className="flex aspect-[2/3] items-end">
+        <BookCover book={book} className="book-tilt w-full" />
+      </Link>
+      <h3 className="mt-4 font-display text-[1.1rem] leading-snug text-ink transition-colors group-hover:text-bronze">{book.title}</h3>
+      <p className="text-sm text-muted">{book.author}</p>
+      {book.year && <p className="text-sm text-muted">{book.year}</p>}
+      {!readable && <p className="mt-1 text-xs text-muted">Online edition coming soon</p>}
+      <div className="mt-auto pt-4">
+        <Link
+          href={href}
+          className={`${button} bg-bronze text-white hover:bg-bronze-dark`}
+          aria-label={`${readable ? "Read free" : "Request a copy of"} ${book.title}`}
+        >
+          {readable ? "Read Free" : "Request a Copy"}
+        </Link>
+      </div>
+    </article>
+  );
+}
 
-  const body = (
-    <>
-      <div className="relative flex justify-center overflow-hidden rounded-xl bg-cream px-8 py-7">
-        <BookCover book={book} className="book-tilt w-full max-w-44" />
-        {readable && (
-          <span className="absolute top-3 left-3 rounded-full bg-bronze px-2.5 py-1 text-[0.7rem] font-medium tracking-wide text-white uppercase">Read free</span>
+/** A forthcoming title: small cover beside its details and a "Coming soon" label. */
+export function ForthcomingCard({ book, readable = false }: { book: Book; readable?: boolean }) {
+  return (
+    <article data-reveal className="flex items-end gap-3">
+      <div className="w-[44%] max-w-28 shrink-0">
+        <BookCover book={book} className="w-full" />
+      </div>
+      <div className="min-w-0 pb-1">
+        <h3 className="font-display text-[1rem] leading-tight text-ink">{book.title}</h3>
+        <p className="mt-1 text-[0.7rem] leading-snug text-muted">{book.author}</p>
+        <p className="text-[0.7rem] text-bronze">Coming {book.year ?? "soon"}</p>
+        {readable ? (
+          <Link href={`/read/${book.slug}`} className={`mt-3 ${button} bg-bronze px-3 text-white hover:bg-bronze-dark`}>
+            Read Free
+          </Link>
+        ) : (
+          <span className={`mt-3 ${button} border border-bronze/70 px-2! py-2.5! text-[0.66rem]! whitespace-nowrap text-bronze`}>Coming Soon</span>
         )}
       </div>
-      <div className="flex flex-1 flex-col px-1 pt-4 pb-1">
-        <p className="text-xs text-bronze">
-          {"//"}
-          {book.year ?? (book.collection === "founder" ? "Founder's Library" : "CMF Literature Series")}
-        </p>
-        <h3 className="display-sm mt-1 text-xl transition-colors group-hover:text-bronze">{book.title}</h3>
-        <p className="mt-1 text-sm text-muted">{book.author}</p>
-        <div className="mt-auto flex items-center justify-between gap-3 pt-4 text-sm text-ink">
-          <span>
-            {action}
-            {!readable && !forthcoming && <span className="block text-xs text-muted">Request a printed copy</span>}
-          </span>
-          {!forthcoming && <CircleArrow className="size-8" tone={readable ? "primary" : "dark"} />}
-        </div>
-      </div>
-    </>
-  );
-
-  if (forthcoming)
-    return (
-      <article data-reveal className="tile group flex flex-col p-3">
-        {body}
-      </article>
-    );
-  return (
-    <article data-reveal>
-      <Link
-        href={href}
-        className="group tile flex h-full flex-col p-3 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-28px_rgba(14,33,50,0.5)]"
-      >
-        {body}
-      </Link>
     </article>
   );
 }

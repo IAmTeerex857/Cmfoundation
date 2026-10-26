@@ -1,13 +1,17 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { availableBooks, type Collection, topics } from "@/lib/books";
 import { BookCard } from "./book-card";
 import { Icon } from "./icons";
-import { SlideIcon } from "./ui";
+import { smoothScroll } from "./motion/smooth-scroll";
+import { SplitWords } from "./motion/split-words";
+import { Button, SlideIcon } from "./ui";
 
-const tabs: { id: "all" | Exclude<Collection, "forthcoming">; label: string }[] = [
+type Tab = "all" | Exclude<Collection, "forthcoming">;
+
+const tabs: { id: Tab; label: string }[] = [
   { id: "all", label: "All" },
   { id: "founder", label: "Founder's Library" },
   { id: "current", label: "Current Series" },
@@ -15,12 +19,54 @@ const tabs: { id: "all" | Exclude<Collection, "forthcoming">; label: string }[] 
 
 const PAGE = 12;
 
+// Links elsewhere on the page (the author cards) open the library on one collection.
+const SELECT_EVENT = "cmf:library-collection";
+
+/** A button that scrolls to the library and switches it to one collection. */
+export function LibraryLink({ collection, children }: { collection: Tab; children: ReactNode }) {
+  return (
+    <Button
+      href="#library"
+      variant="outline"
+      className="whitespace-nowrap"
+      scroll={false}
+      onClick={(e) => {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent(SELECT_EVENT, { detail: collection }));
+        // Scroll after the library has re-rendered with the new collection.
+        requestAnimationFrame(() => {
+          const target = document.getElementById("library");
+          if (!target) return;
+          if (smoothScroll.current) smoothScroll.current.scrollTo(target, { offset: -96 });
+          else target.scrollIntoView({ behavior: "smooth" });
+        });
+      }}
+    >
+      {children}
+    </Button>
+  );
+}
+
+const tabClass =
+  "border border-line px-5 py-2.5 text-[0.75rem] font-semibold tracking-[0.08em] whitespace-nowrap uppercase transition-colors duration-300 -ml-px first:ml-0 first:rounded-l-[3px] last:rounded-r-[3px]";
+
 export function Library({ readable }: { readable: string[] }) {
-  const [tab, setTab] = useState<(typeof tabs)[number]["id"]>("all");
+  const [tab, setTab] = useState<Tab>("all");
   const [topic, setTopic] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<"latest" | "oldest" | "title">("latest");
   const [limit, setLimit] = useState(PAGE);
+
+  useEffect(() => {
+    const select = (e: Event) => {
+      setTab((e as CustomEvent<Tab>).detail);
+      setTopic(null);
+      setQuery("");
+      setLimit(PAGE);
+    };
+    window.addEventListener(SELECT_EVENT, select);
+    return () => window.removeEventListener(SELECT_EVENT, select);
+  }, []);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -37,38 +83,24 @@ export function Library({ readable }: { readable: string[] }) {
 
   return (
     <div>
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div role="tablist" aria-label="Collection" className="flex gap-1 overflow-x-auto rounded-xl bg-sand p-1">
-          {tabs.map((t) => (
-            <button
-              key={t.id}
-              role="tab"
-              aria-selected={tab === t.id}
-              onClick={() => {
-                setTab(t.id);
-                setLimit(PAGE);
-              }}
-              className="relative rounded-lg px-5 py-2.5 text-sm whitespace-nowrap text-ink transition-colors duration-300 hover:text-bronze aria-selected:text-white aria-selected:hover:text-white"
-            >
-              {tab === t.id && (
-                <motion.span layoutId="library-tab" className="absolute inset-0 rounded-lg bg-ink" transition={{ type: "spring", stiffness: 420, damping: 34 }} />
-              )}
-              <span className="relative">{t.label}</span>
-            </button>
-          ))}
-          <a href="#forthcoming" className="rounded-lg px-5 py-2.5 text-sm whitespace-nowrap text-ink transition-colors hover:text-bronze">
-            Forthcoming
-          </a>
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p data-reveal="fade" className="eyebrow">
+            The free library
+          </p>
+          <h2 data-reveal="words" className="display-lg mt-3">
+            <SplitWords>Read. Reflect. Share.</SplitWords>
+          </h2>
         </div>
         <div className="flex gap-3">
-          <label className="relative flex-1 lg:w-72">
+          <label className="relative flex-1 lg:w-64">
             <span className="sr-only">Search books</span>
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search books…" className="field pr-10" type="search" />
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search books…" className="field py-3 pr-10" type="search" />
             <Icon name="search" className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-ink" strokeWidth={2} />
           </label>
           <label>
             <span className="sr-only">Sort by</span>
-            <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} className="field w-auto">
+            <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} className="field w-auto py-3 text-sm">
               <option value="latest">Sort by: Latest</option>
               <option value="oldest">Sort by: Oldest</option>
               <option value="title">Sort by: Title</option>
@@ -77,13 +109,33 @@ export function Library({ readable }: { readable: string[] }) {
         </div>
       </div>
 
-      <ul className="mt-5 flex flex-wrap gap-2" aria-label="Filter by topic">
+      <div role="tablist" aria-label="Collection" className="mt-6 flex overflow-x-auto">
+        {tabs.map((t) => (
+          <button
+            key={t.id}
+            role="tab"
+            aria-selected={tab === t.id}
+            onClick={() => {
+              setTab(t.id);
+              setLimit(PAGE);
+            }}
+            className={`${tabClass} bg-white text-ink hover:text-bronze aria-selected:border-bronze aria-selected:bg-bronze aria-selected:text-white`}
+          >
+            {t.label}
+          </button>
+        ))}
+        <a href="#forthcoming" className={`${tabClass} bg-white text-ink hover:text-bronze`}>
+          Forthcoming
+        </a>
+      </div>
+
+      <ul className="mt-4 flex flex-wrap gap-x-7 gap-y-2" aria-label="Filter by topic">
         {topics.map((t) => (
           <li key={t}>
             <button
               aria-pressed={topic === t}
               onClick={() => setTopic(topic === t ? null : t)}
-              className="rounded-full border border-ink/20 px-4 py-1.5 text-sm text-ink transition-[background-color,border-color,color,transform] duration-300 hover:-translate-y-0.5 hover:border-bronze active:scale-95 aria-pressed:border-bronze aria-pressed:bg-bronze aria-pressed:text-white"
+              className="border-b border-transparent py-1 text-sm text-ink transition-colors duration-300 hover:text-bronze aria-pressed:border-bronze aria-pressed:text-bronze"
             >
               {t}
             </button>
@@ -96,10 +148,10 @@ export function Library({ readable }: { readable: string[] }) {
           No books match your search. Try another topic or clear the filters.
         </motion.p>
       ) : (
-        <motion.div layout className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.ul layout className="mt-8 grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
           <AnimatePresence mode="popLayout" initial={false}>
             {results.slice(0, limit).map((b) => (
-              <motion.div
+              <motion.li
                 key={b.slug}
                 layout
                 initial={{ opacity: 0, scale: 0.94 }}
@@ -108,17 +160,17 @@ export function Library({ readable }: { readable: string[] }) {
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               >
                 <BookCard book={b} readable={readable.includes(b.slug)} />
-              </motion.div>
+              </motion.li>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </motion.ul>
       )}
 
       {results.length > limit && (
         <div className="mt-10 text-center">
           <button
             onClick={() => setLimit(limit + PAGE)}
-            className="group inline-flex items-center gap-2 rounded-full border border-ink px-6 py-3.5 text-ink transition-colors hover:bg-ink hover:text-white active:scale-[0.97]"
+            className="group inline-flex items-center gap-3 rounded-[3px] border border-bronze px-6 py-3.5 text-[0.82rem] leading-none font-semibold tracking-[0.08em] text-bronze uppercase transition-colors hover:bg-bronze hover:text-white"
           >
             Load more books <SlideIcon name="arrowDown" />
           </button>

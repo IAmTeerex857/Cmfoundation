@@ -41,7 +41,7 @@ Reviewed October 14, 2026 from the local source, assets, project notes, and avai
 ## Assets already prepared
 
 - Original Drive reference assets are retained in `../drive_assets/`.
-- Founder portraits are used throughout the site. The home hero shows two supplied photos (`students-reading.jpg` and `clean-water-handwashing.jpg`), which replaced the earlier community and water-project photographs everywhere on October 19, 2026. The original water-project photo is still in `drive_assets/`.
+- Founder portraits are used throughout the site. The home hero shows one supplied photo (`students-reading.jpg`); `clean-water-handwashing.jpg` illustrates the home page's community section. Both replaced the earlier community and water-project photographs everywhere on October 19, 2026. The original water-project photo is still in `drive_assets/`.
 - Thirteen generated editorial illustrations cover former stock-image placements.
 - Five supplied official covers now display complete artwork without generated typography or cropping. Six titles still use generated interim backgrounds with live HTML titles/authors. See `public/images/SUPPLIED_ASSETS.md` for provenance.
 - A public NILA portrait of Cheta is present; Foundation permission and an original replacement are still pending.
@@ -160,7 +160,30 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 
 ## Social sharing and search metadata — October 19, 2026
 
-- **Share card:** `public/og-hero.jpg` (1200 × 630) is a capture of the home page hero: header, headline and both hero photos. Every page uses it for Open Graph and as a large Twitter/X card. If the hero changes, recapture it at a 1680 × 882 viewport.
+- **Share card:** `public/og-hero.jpg` (1200 × 630) is a capture of the home page hero (recaptured October 26, 2026 for the redesign). Every page uses it for Open Graph and as a large Twitter/X card. If the hero changes, recapture it at a 1680 × 882 viewport.
 - **Per-page metadata:** each page sets its title, description, canonical URL, `og:url` and Twitter tags through `pageMetadata()` in `src/lib/metadata.ts`. Privacy, Terms, Donation Policy and Thank You gained descriptions.
 - **Root layout:** keywords, author, publisher and format detection.
 - **Icons and structured data:** `src/app/apple-icon.png` is the gold mark on navy. The home page carries schema.org `NGO` JSON-LD with name, logo, founder, contact details and Abuja address. Social profile links are not included because the footer's social URLs are still placeholders.
+
+## Pages rebuilt to the Foundation's designs — October 26, 2026
+
+- **Design:** every page now follows its page design in `../drive_assets/` (Home, About, Founder, Literature, Our Work, Support, Contact). Events, the policy pages, Thank You and 404 use the same style. The header and footer are unchanged.
+- **Type and colour:**
+  - Headings are EB Garamond, self-hosted from `src/app/fonts/` (variable weight, Latin subset, from Fontsource 5.3.0, SIL Open Font License). Text stays Inter.
+  - Headings and text are navy blue (`ink` #0c1f42, `body` #2a3a55). The header and logo keep their earlier slate (`text-slate`) and Geist (`font-ui`).
+  - Buttons are square and uppercase; eyebrows are bronze; cards are white with hairline borders.
+- **Shared pieces (`src/components/ui.tsx`):**
+  - `PageHero`: text on warm paper with one photo fading in from the right, an optional quote at the right, a badge, and a `compact` size for long titles.
+  - `SectionIntro`, `IconPillars`, `QuoteBlock`, `CtaBand`, `ArrowLink`, `GoldRule` and a squarer `Faq`.
+  - The RiseUp and Altruva components, the quote slider, count-up and spotlight were removed.
+- **Home:** one hero photo (`students-reading.jpg`), four pillars, featured books with a "Coming in 2027" panel, the clean-water community band and the founder section.
+  - The marquee, statistics, FAQ, events and image banner were removed, since the design doesn't have them.
+- **Book buttons:** "Read Free" when a title's PDF is in `books/`, otherwise "Request a Copy". Nothing is called a download.
+- **Design images we don't have yet:**
+  - About: the book-spine stack hero, and photos of an open book, a boy writing and a water tower.
+  - Founder: photos for each period of his life and each chapter, the collage's group photo and archive notebook, and burial tribute photos and text.
+  - Our Work: a landscape, a water tower and event photos.
+  - Support: a seedling against a bokeh background, a sunset landscape, and a girl in a classroom.
+  - Contact: CMF-branded book spines and the CMF mug.
+  - Existing photos stand in for all of these.
+- **Verified:** ESLint, `tsc` and `next build` pass. Every page was checked at 390 and 1440 px (heroes also at 1280 and 1920): no horizontal overflow, no runtime errors, no em dashes, no visible "Bachs". The library search and filters and the contact form's prefill and validation still work. The give buttons still go to checkout.

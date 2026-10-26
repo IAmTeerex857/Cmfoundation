@@ -3,7 +3,8 @@ import Image from "next/image";
 import { GiveCard } from "@/components/give-card";
 import { Icon, type IconName } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
-import { Button, Faq, ImageCta, SectionHead, SlideIcon, Statement } from "@/components/ui";
+import { Button, Faq, GoldRule, PageHero, QuoteBlock, SectionIntro, SlideIcon } from "@/components/ui";
+import { getBook } from "@/lib/books";
 import { faqs } from "@/lib/faqs";
 import { giveHref, givingOptions } from "@/lib/payment-links";
 import { site } from "@/lib/site";
@@ -19,7 +20,7 @@ export const metadata: Metadata = pageMetadata({
 // A way without an href goes straight to the checkout.
 const ways: { title: string; body: string; icon: IconName; cta: string; href?: string }[] = [
   { title: "Give a Donation", body: "Support our work with a one-time or monthly gift.", icon: "heart", cta: "Give now" },
-  { title: "Sponsor Books", body: "Help print and distribute our books to schools, churches and communities.", icon: "books", cta: "Sponsor a print run", href: "/contact?enquiry=sponsor" },
+  { title: "Sponsor Books", body: "Help print and distribute our books to schools, churches and communities.", icon: "books", cta: "Learn more", href: "/contact?enquiry=sponsor" },
   { title: "Partner With Us", body: "Partner as an individual, organisation or corporate supporter.", icon: "handshake", cta: "Become a partner", href: "/contact?enquiry=partnership" },
   { title: "Volunteer", body: "Contribute your time, skills and expertise to our initiatives.", icon: "people", cta: "Get involved", href: "/contact?enquiry=volunteer" },
   { title: "Leave a Legacy", body: "Include the Foundation in your estate plans and be part of a lasting impact.", icon: "gift", cta: "Learn more", href: "/contact?enquiry=legacy" },
@@ -31,36 +32,95 @@ const uses: [IconName, string][] = [
   ["drop", "Fund community projects such as clean water"],
 ];
 
+const impact: [IconName, string][] = [
+  ["book", "Free Literature"],
+  ["cap", "Education Supported"],
+  ["people", "Communities Reached"],
+  ["gear", "Projects Delivered"],
+];
+
+// Spines for the stacked-books picture between the print-run and partnership columns.
+const spines = [
+  { slug: "exploring-the-godhead", tone: "bg-[#14233d] text-white" },
+  { slug: "the-wages-of-sin", tone: "bg-[#6b1f22] text-white" },
+  { slug: "the-criminal-in-heaven", tone: "bg-[#1c2430] text-white" },
+  { slug: "all-is-vanity", tone: "bg-[#efe4cf] text-ink" },
+  { slug: "a-lawyers-woes", tone: "bg-[#0f1b2e] text-gold" },
+].map((s) => ({ ...s, title: getBook(s.slug)?.title ?? s.slug }));
+
 export default function SupportPage() {
   const options = givingOptions();
+  const give = giveHref();
   return (
     <>
-      {/* Hero with the giving card (Altruva layout) */}
-      <section id="give" className="relative scroll-mt-24 overflow-hidden bg-sand">
-        <div aria-hidden="true" className="pointer-events-none absolute -top-40 -right-40 size-[36rem] rounded-full bg-gold/20 blur-3xl" />
-        <div aria-hidden="true" className="pointer-events-none absolute -bottom-48 -left-32 size-[30rem] rounded-full bg-bronze/10 blur-3xl" />
-        <div className="wrap relative grid items-center gap-12 py-14 lg:grid-cols-[1fr_1.05fr] lg:py-20">
+      <PageHero
+        eyebrow="Support the mission"
+        title="Invest in A Better Tomorrow."
+        image={{ src: "/images/stock/seedling-hands.jpg", alt: "Hands cupping a young seedling in dark soil", position: "center 40%" }}
+        aside={
+          <>
+            <QuoteBlock text={<>Give, and it shall be given unto you&hellip;</>} by="Luke 6:38 (KJV)" />
+            <GoldRule className="mt-6 w-10" />
+            <p className="mt-5 font-display text-xl leading-snug text-bronze italic">
+              Ideas.
+              <br />
+              People.
+              <br />
+              Communities.
+              <br />A Better Tomorrow.
+            </p>
+          </>
+        }
+        actions={
+          <>
+            <Button href={give}>Give Now</Button>
+            <Button href="#ways" variant="outline">
+              Explore Other Ways to Support
+            </Button>
+          </>
+        }
+      >
+        <p>
+          Your support helps us keep life-changing books in people&rsquo;s hands, strengthen communities and invest in future generations. Together, we can
+          preserve a legacy of faith, knowledge and service.
+        </p>
+      </PageHero>
+
+      {/* Ways to support */}
+      <section id="ways" className="scroll-mt-24 border-t border-line py-16 lg:py-20">
+        <div className="wrap">
+          <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+            <SectionIntro eyebrow="Ways to support" title="Many Ways. One Mission." />
+            <p data-reveal data-reveal-delay="200" className="max-w-md leading-relaxed text-body lg:pb-2">
+              Choose the way that works best for you. Every contribution, in big or small measure, makes a difference.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {ways.map((w, i) => (
+              <article key={w.title} data-reveal data-reveal-delay={String(i * 80)} className="tile group flex flex-col items-center px-5 py-8 text-center">
+                <Icon name={w.icon} className="size-12 text-bronze transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1" strokeWidth={1.1} />
+                <h3 className="display-sm mt-4">{w.title}</h3>
+                <p className="mt-2 flex-1 text-[0.92rem] leading-relaxed text-muted">{w.body}</p>
+                <Button href={w.href ?? give} variant="outline" className="mt-6 w-full px-2! text-[0.74rem]! tracking-[0.06em]!">
+                  {w.cta}
+                </Button>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Give online */}
+      <section id="give" className="scroll-mt-24 bg-blush py-16 lg:py-20">
+        <div className="wrap grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
           <div>
-            <p data-reveal="fade" className="eyebrow">
-              Support the mission
-            </p>
-            <h1 data-reveal="words" className="display-xl mt-4">
-              <SplitWords>Invest in a better tomorrow.</SplitWords>
-            </h1>
-            <p data-reveal data-reveal-delay="250" className="lede mt-6 max-w-lg">
-              Your support helps us keep life-changing books in people&rsquo;s hands, strengthen communities and invest in future generations. Together, we
-              can preserve a legacy of faith, knowledge and service.
-            </p>
-            <blockquote data-reveal data-reveal-delay="350" className="mt-10 max-w-md border-l-2 border-bronze pl-5">
-              <p className="font-display text-xl font-medium tracking-[-0.02em] text-ink">&ldquo;Give, and it shall be given unto you&hellip;&rdquo;</p>
-              <cite className="mt-1 block text-sm text-muted not-italic">Luke 6:38 (KJV)</cite>
-            </blockquote>
-            <ul className="mt-10 space-y-3">
+            <SectionIntro eyebrow="Give online" title="Every Gift Plants a Seed." rule>
+              <p className="max-w-md">Choose what you&rsquo;d like to support, then give any amount at checkout. Your gift helps us:</p>
+            </SectionIntro>
+            <ul className="mt-8 space-y-4">
               {uses.map(([icon, text]) => (
-                <li key={text} data-reveal="left" className="group flex items-center gap-4 text-ink">
-                  <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-bronze text-white transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-12">
-                    <Icon name={icon} className="size-5" />
-                  </span>
+                <li key={text} data-reveal="left" className="flex items-center gap-4 text-ink">
+                  <Icon name={icon} className="size-7 shrink-0 text-bronze" strokeWidth={1.3} />
                   {text}
                 </li>
               ))}
@@ -70,71 +130,118 @@ export default function SupportPage() {
         </div>
       </section>
 
-      <section className="py-24">
-        <div className="wrap">
-          <Statement highlight="Many ways. One mission.">
-            Choose the way that works best for you. Every contribution, in big or small measure, makes a difference.
-          </Statement>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {ways.map((w) => (
-              <a
-                key={w.title}
-                href={w.href ?? giveHref()}
-                data-reveal
-                className="group tile flex flex-col p-6 transition-[transform,background-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:bg-white hover:shadow-[0_24px_50px_-28px_rgba(14,33,50,0.45)]"
-              >
-                <span className="flex size-12 items-center justify-center rounded-2xl bg-cream text-ink transition-[background-color,color,transform] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-rotate-6 group-hover:bg-bronze group-hover:text-white">
-                  <Icon name={w.icon} className="size-6" strokeWidth={1.4} />
-                </span>
-                <h3 className="display-sm mt-10">{w.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{w.body}</p>
-                <span className="mt-6 flex items-center justify-between text-sm font-medium text-ink">
-                  {w.cta}
-                  <span className="flex size-8 items-center justify-center rounded-full bg-bronze text-white">
-                    <SlideIcon name="arrow" className="size-4" />
-                  </span>
-                </span>
-              </a>
-            ))}
+      {/* Real impact */}
+      <section className="overflow-hidden border-y border-line bg-paper">
+        <div className="grid lg:grid-cols-[0.85fr_1.4fr]">
+          <div data-reveal="fade" className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[22rem]">
+            <Image
+              src="/images/stock/student-smiling.jpg"
+              alt="A smiling student at his desk in a classroom"
+              fill
+              sizes="(min-width: 1024px) 38vw, 100vw"
+              className="object-cover object-[35%_center] lg:[mask-image:linear-gradient(to_right,#000_70%,transparent)]"
+            />
+          </div>
+          <div className="grid items-center gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_auto] lg:py-14 lg:pr-[max(2rem,calc((100vw-1140px)/2))] lg:pl-10">
+            <div>
+              <SectionIntro eyebrow="Real impact" title="Your Support Changes Lives.">
+                <p className="max-w-lg">Together, we are making knowledge, opportunity and compassion a reality in communities across Nigeria and beyond.</p>
+              </SectionIntro>
+              <ul className="mt-8 grid grid-cols-2 gap-y-8 sm:grid-cols-4 sm:divide-x sm:divide-line">
+                {impact.map(([icon, label], i) => (
+                  <li key={label} data-reveal data-reveal-delay={String(i * 80)} className="flex flex-col items-center px-3 text-center">
+                    <Icon name={icon} className="size-10 text-bronze" strokeWidth={1.1} />
+                    <span className="mt-3 text-[0.95rem] leading-snug text-ink">{label}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div data-reveal="fade" data-reveal-delay="300" className="lg:max-w-[13rem] lg:border-l lg:border-bronze/40 lg:pl-8">
+              <QuoteBlock text="A small seed of kindness can transform a generation." />
+              <GoldRule className="mt-5 w-10" />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-24">
-        <div className="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div data-reveal="clip" className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-            <div data-parallax="0.06" className="absolute inset-0">
-              <Image src="/images/generated/partnership-meeting.jpg" alt="Nigerian professionals concluding a partnership meeting" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+      {/* Print runs and partnerships */}
+      <section className="py-16 lg:py-20">
+        <div className="wrap grid items-center gap-12 lg:grid-cols-[1fr_0.9fr_1fr] lg:gap-10">
+          <div>
+            <SectionIntro eyebrow="Featured opportunity" title="Help Us Reach More Readers" size="md">
+              <p>Support the next print run of our books and help us place them in schools, churches and communities across Nigeria.</p>
+            </SectionIntro>
+            <div data-reveal data-reveal-delay="300">
+              <Button href="/contact?enquiry=sponsor" className="mt-8">
+                Sponsor a Print Run
+              </Button>
             </div>
           </div>
+
+          <div data-reveal="fade" aria-hidden="true" className="mx-auto w-full max-w-sm space-y-1 [perspective:900px]">
+            {spines.map((s, i) => (
+              <div
+                key={s.slug}
+                className={`flex h-12 items-center justify-between rounded-[3px] border-l-[6px] border-black/25 px-4 shadow-[0_8px_18px_-10px_rgba(12,31,66,0.55)] ${s.tone}`}
+                style={{ transform: `translateX(${[6, -4, 2, -6, 4][i]}px)` }}
+              >
+                <span className="font-ui text-[0.82rem] font-medium tracking-[0.04em] uppercase">{s.title}</span>
+                <span className="font-display text-sm font-semibold text-gold">CMF</span>
+              </div>
+            ))}
+          </div>
+
           <div>
-            <h2 data-reveal="words" className="display-lg">
-              <SplitWords>Corporate &amp; institutional support</SplitWords>
-            </h2>
-            <p data-reveal data-reveal-delay="200" className="lede mt-6 max-w-md">
-              We welcome partnerships with companies, foundations and institutions that share our vision for an informed, compassionate and opportunity-rich
-              society, from sponsoring a print run to supporting community projects.
-            </p>
-            <div data-reveal data-reveal-delay="320" className="mt-8 flex flex-wrap gap-4">
-              <Button href="/contact?enquiry=partnership">Explore Partnerships</Button>
-              <Button href="/contact?enquiry=sponsor" variant="outline">
-                Sponsor a Print Run
+            <SectionIntro eyebrow="Corporate & institutional support" title="Stronger Together" size="md">
+              <p>
+                We welcome partnerships with companies, foundations and institutions that share our vision for an informed, compassionate and
+                opportunity-rich society.
+              </p>
+            </SectionIntro>
+            <div data-reveal data-reveal-delay="300">
+              <Button href="/contact?enquiry=partnership" className="mt-8">
+                Explore Partnerships
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="pb-8">
-        <div className="wrap">
-          <SectionHead center title="Common questions" aside="About giving to the Chinwoke Mbadinuju Foundation." />
-          <div className="mx-auto mt-14 max-w-3xl">
-            <Faq items={[faqs.secure, faqs.project, faqs.inKind, faqs.partner]} />
+      {/* Questions */}
+      <section className="border-t border-line bg-paper py-16 lg:py-20">
+        <div className="wrap grid gap-10 lg:grid-cols-[1fr_1.05fr]">
+          <div>
+            <SectionIntro eyebrow="Frequent questions" title="Common Questions" />
+            <div className="mt-8">
+              <Faq items={[faqs.secure, faqs.project, faqs.inKind, faqs.partner]} />
+            </div>
+          </div>
+          <div data-reveal="fade" className="relative isolate flex flex-col overflow-hidden bg-blush lg:min-h-[24rem] lg:justify-center">
+            <div className="relative aspect-[16/9] lg:absolute lg:inset-0 lg:-z-10 lg:aspect-auto">
+              <Image
+                src="/images/generated/family-reading.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover object-[70%_center] [mask-image:linear-gradient(to_bottom,#000_70%,transparent)] lg:[mask-image:linear-gradient(to_right,transparent_38%,#000_85%)]"
+              />
+            </div>
+            <div className="p-8 sm:p-10 lg:max-w-[22rem]">
+              <h2 className="display-md lg:max-w-[19rem]">
+                <SplitWords>A Better Tomorrow Is Possible.</SplitWords>
+              </h2>
+              <p className="mt-4 leading-relaxed text-body lg:max-w-[15rem]">Join us in preserving a legacy of faith, knowledge and service for succeeding generations.</p>
+              <a
+                href={give}
+                className="group mt-7 inline-flex items-center gap-3 rounded-[3px] bg-bronze px-6 py-3.5 text-[0.82rem] leading-none font-semibold tracking-[0.08em] text-white uppercase transition-colors duration-300 hover:bg-bronze-dark"
+              >
+                Give Now
+                <SlideIcon name="arrow" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
-
-      <ImageCta word="Give" title="A better tomorrow is possible" cta="Give Now" href={giveHref()} image="/images/generated/family-reading.jpg" position="50% 48%" />
     </>
   );
 }

@@ -3,7 +3,8 @@ import Image from "next/image";
 import { EventCard } from "@/components/event-card";
 import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
-import { Button, IconList, ImageCard, ImageCta, Marquee, NumberedCards, PageHero, SectionHead, Statement } from "@/components/ui";
+import { ArrowLink, Button, GoldRule, IconPillars, PageHero, QuoteBlock, SectionIntro } from "@/components/ui";
+import { founder, quotes } from "@/lib/founder";
 import { approach, initiatives, milestones, pillars, upcomingEvents } from "@/lib/work";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -19,21 +20,25 @@ export const metadata: Metadata = pageMetadata({
 
 const initiativeImages: Record<string, string> = {
   "Education Support": "/images/generated/education-support.jpg",
-  "Community Projects": "/images/generated/community-tree-planting.jpg",
+  "Community Projects": "/images/stock/seedling-hands.jpg",
   "Free Literature Distribution": "/images/generated/book-distribution.jpg",
   "Sustainable Community Infrastructure": "/images/clean-water-handwashing.jpg",
 };
 
+const pillarLinks = ["Visit the Literature Series", "Learn more", "Learn more", "Learn more"];
+
+// Section order follows the Foundation's Our Work design (../drive_assets/5 CMF Our Work 26.png).
 export default function OurWorkPage() {
   const events = upcomingEvents();
+  const service = quotes.find((q) => q.text.startsWith("Service"))!;
 
   return (
     <>
       <PageHero
-        title={<>From ideas to lasting impact.</>}
-        images={[
-          { src: "/images/students-reading.jpg", alt: "Three students reading a book together in a library" },
-        ]}
+        eyebrow="Our work"
+        title="From Ideas to Lasting Impact."
+        image={{ src: "/images/generated/reader-with-book.jpg", alt: "A young reader absorbed in a book", position: "30% center" }}
+        aside={<QuoteBlock text={service.text} by={founder.name} />}
         actions={
           <>
             <Button href="#approach">Our Approach</Button>
@@ -49,97 +54,154 @@ export default function OurWorkPage() {
         </p>
       </PageHero>
 
-      <Marquee items={["Education Support", "Community Projects", "Free Literature", "Clean Water", "Legacy"]} />
-
-      <section className="py-24">
+      {/* Four pillars */}
+      <section className="border-b border-line bg-paper py-12">
         <div className="wrap">
-          <Statement highlight="Service is the rental we pay for the space we occupy.">
-            From schools and scholarships to community projects and the free distribution of books, our work is rooted in the belief that knowledge,
-            opportunity and compassion can transform lives.
-          </Statement>
-          <div className="mt-14">
-            <IconList items={pillars.map((p) => ({ icon: p.icon, title: p.title, body: p.body, href: p.href }))} />
-          </div>
+          <IconPillars items={pillars.map((p, i) => ({ icon: p.icon, title: p.title, body: p.short, href: p.href, cta: pillarLinks[i] }))} />
         </div>
       </section>
 
-      <section id="initiatives" className="scroll-mt-24 pb-24">
-        <div className="wrap">
-          <SectionHead title="Real people. Real progress." aside="The initiatives through which the Foundation's pillars become practical help." />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {initiatives.map((i) =>
-              initiativeImages[i.title] ? (
-                <ImageCard key={i.title} href="/support#give" title={i.title} image={initiativeImages[i.title]} alt={i.title} />
-              ) : (
-                <ImageCard key={i.title} href="/support#give" title={i.title}>
-                  <div className="flex h-full flex-col justify-between bg-navy p-6 text-white">
-                    <Icon name={i.icon} className="size-12 text-gold transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-6" strokeWidth={1.3} />
-                    <p className="text-sm leading-relaxed text-white/85">{i.body}</p>
-                  </div>
-                </ImageCard>
-              ),
-            )}
+      {/* Initiatives */}
+      <section id="initiatives" className="scroll-mt-24 py-16 lg:py-20">
+        <div className="wrap grid gap-10 lg:grid-cols-[0.95fr_3fr] lg:gap-8">
+          <div>
+            <SectionIntro eyebrow="Our initiatives" title="Real People. Real Progress." rule>
+              <p>
+                From schools and scholarships to community projects and the free distribution of books, our work is rooted in the belief that knowledge,
+                opportunity and compassion can transform lives.
+              </p>
+            </SectionIntro>
+            <div data-reveal data-reveal-delay="300">
+              <Button href="/contact?enquiry=volunteer" variant="outline" className="mt-8">
+                Get Involved
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
-
-      <section id="approach" className="scroll-mt-24 bg-bronze py-24">
-        <div className="wrap">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <h2 data-reveal="words" className="display-lg max-w-xl text-white">
-              <SplitWords>Principled. Practical. People-centred.</SplitWords>
-            </h2>
-            <p data-reveal data-reveal-delay="250" className="max-w-sm text-white/90">
-              How we work, wherever the Foundation is involved.
-            </p>
-          </div>
-          <div className="mt-12">
-            <NumberedCards items={approach.map((a) => ({ title: a.title, body: a.body }))} />
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24">
-        <div className="wrap">
-          <SectionHead title="Moments that mark the journey" aside="Impact and milestones from the Foundation's work." />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {milestones.map((m, i) => (
-              <article
-                key={m.title}
-                data-reveal
-                className="tile group flex flex-col p-3 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-28px_rgba(14,33,50,0.5)]"
-              >
-                <div className={`relative aspect-[4/3] overflow-hidden rounded-xl ${["bg-parchment", "bg-tan", "bg-navy-soft", "bg-navy"][i % 4]}`}>
-                  {m.image ? (
-                    <Image src={m.image} alt="" fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.07]" />
-                  ) : (
-                    <Icon name="leaf" className={`absolute top-5 left-5 size-10 ${i === 0 ? "text-navy-soft" : "text-white/80"}`} strokeWidth={1.3} />
-                  )}
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+            {initiatives.map((it, i) => (
+              <li key={it.title} data-reveal data-reveal-delay={String(i * 90)} className="tile group flex flex-col overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={initiativeImages[it.title]}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+                  />
                 </div>
-                <div className="px-1 pt-4 pb-1">
-                  <p className="text-xs text-bronze">{"//"}{m.category}</p>
-                  <h3 className="display-sm mt-1 text-xl">{m.title}</h3>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="font-display text-xl leading-snug text-ink">{it.title}</h3>
+                  <p className="mt-2 text-[0.92rem] leading-relaxed text-muted">{it.body}</p>
+                  <ArrowLink href="/support" className="mt-auto pt-5">
+                    Support this
+                  </ArrowLink>
                 </div>
-              </article>
+              </li>
             ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Approach */}
+      <section id="approach" className="scroll-mt-24 overflow-hidden border-y border-line bg-blush">
+        <div className="grid lg:grid-cols-2">
+          <div data-reveal="fade" className="relative aspect-[16/9] lg:aspect-auto lg:min-h-[24rem]">
+            <Image src="/images/stock/linked-hands.jpg" alt="Hands linked together in a circle" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          </div>
+          <div className="px-5 py-14 sm:px-8 lg:py-16 lg:pr-[max(2rem,calc((100vw-1140px)/2))] lg:pl-12">
+            <SectionIntro eyebrow="Our approach" title="Principled. Practical. People-Centred." size="md" />
+            <ul className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-line">
+              {approach.map((a, i) => (
+                <li key={a.title} data-reveal data-reveal-delay={String(i * 90)} className="flex flex-col items-center px-4 text-center">
+                  <Icon name={a.icon} className="size-11 text-bronze" strokeWidth={1.1} />
+                  <h3 className="mt-3 font-display text-xl text-ink">{a.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{a.body}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
+      {/* Events */}
       {events.length > 0 && (
-        <section id="events" className="scroll-mt-24 pb-8">
-          <div className="wrap">
-            <SectionHead title="Where the mission comes together" aside="Literature, education, remembrance and community service, turning the work into opportunities for participation." />
-            <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {events.map((e, i) => (
-                <EventCard key={e.title} event={e} index={i} />
-              ))}
+        <section id="events" className="scroll-mt-24 border-b border-line py-16 lg:py-20">
+          <div className="wrap grid gap-10 lg:grid-cols-[1fr_2.3fr] lg:gap-10">
+            <SectionIntro eyebrow="Events & engagement" title="Where the Mission Comes Together" size="md">
+              <p>
+                CMF events bring people together around literature, education, remembrance and community service, turning the Foundation&rsquo;s work into
+                opportunities for participation and engagement.
+              </p>
+            </SectionIntro>
+            <div>
+              <div data-reveal="fade" className="mb-4 flex justify-end">
+                <ArrowLink href="/events">View all events</ArrowLink>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
+                {events.slice(0, 3).map((e) => (
+                  <EventCard key={e.title} event={e} />
+                ))}
+              </div>
             </div>
           </div>
         </section>
       )}
 
-      <ImageCta word="Join" title="Be part of the work" cta="Partner With Us" href="/contact?enquiry=partnership" image="/images/generated/volunteer-gathering.jpg" />
+      {/* Milestones */}
+      <section className="py-16 lg:py-20">
+        <div className="wrap">
+          <SectionIntro eyebrow="Impact & milestones" title="Moments That Mark the Journey" size="md" />
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {milestones.map((m, i) => (
+              <li key={m.title} data-reveal data-reveal-delay={String(i * 90)} className="tile group flex items-stretch overflow-hidden">
+                <div className="relative w-[42%] shrink-0 overflow-hidden">
+                  <Image
+                    src={m.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 10vw, 40vw"
+                    className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+                  />
+                </div>
+                <div className="flex min-h-32 flex-col justify-center p-4">
+                  <h3 className="font-display text-[1.05rem] leading-snug text-ink">{m.title}</h3>
+                  <p className="mt-1.5 text-xs text-muted">{m.category}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Be part of the work */}
+      <section className="overflow-hidden border-t border-line bg-blush">
+        <div className="wrap relative flex flex-col gap-8 py-12 lg:flex-row lg:items-center lg:gap-10 lg:py-10">
+          <div aria-hidden="true" className="relative hidden h-28 w-36 shrink-0 lg:block">
+            <Image
+              src="/images/stock/seedling-hands.jpg"
+              alt=""
+              fill
+              sizes="144px"
+              className="object-cover [mask-image:radial-gradient(closest-side,#000_55%,transparent)]"
+            />
+          </div>
+          <div className="flex-1">
+            <h2 data-reveal="words" className="display-md">
+              <SplitWords>Be Part of the Work</SplitWords>
+            </h2>
+            <GoldRule className="mt-3 lg:hidden" />
+            <p data-reveal data-reveal-delay="200" className="mt-3 text-body">
+              Support our initiatives, volunteer, partner with us or simply help us share the message.
+            </p>
+          </div>
+          <div data-reveal data-reveal-delay="300" className="flex flex-wrap gap-4">
+            <Button href="/support">Support the Mission</Button>
+            <Button href="/contact?enquiry=partnership" variant="outline" icon={null}>
+              Partner With Us
+            </Button>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { BookCard } from "@/components/book-card";
+import Image from "next/image";
+import { ForthcomingCard } from "@/components/book-card";
 import { BookCover } from "@/components/book-cover";
-import { Library } from "@/components/library";
+import { Icon, type IconName } from "@/components/icons";
+import { Library, LibraryLink } from "@/components/library";
 import { SplitWords } from "@/components/motion/split-words";
-import { Button, GreenBand, IconList, Marquee, NestedFrame, ReadMore, SectionHead, Split, Statement } from "@/components/ui";
+import { Button, GoldRule, SectionIntro } from "@/components/ui";
 import { forthcomingBooks, getBook } from "@/lib/books";
 import { readableSlugs } from "@/lib/manuscripts";
 import { pageMetadata } from "@/lib/metadata";
@@ -17,126 +19,177 @@ export const metadata: Metadata = pageMetadata({
 
 const heroBooks = ["false-men-and-true-christians", "much-ado-about-rapture", "all-is-vanity"].map((s) => getBook(s)!);
 
+const themes = ["Faith", "Leadership", "Society", "Christian Living", "Governance", "History"];
+
+const mission: { icon: IconName; title: string; body: string }[] = [
+  { icon: "book", title: "Preserve", body: "Recover and digitise earlier works." },
+  { icon: "pen", title: "Publish", body: "Introduce new works for contemporary readers." },
+  { icon: "people", title: "Share", body: "Make the literature freely accessible." },
+];
+
+const authors = [
+  {
+    eyebrow: "The Founder's Library",
+    name: "Dr Chinwoke Clement Mbadinuju",
+    body: "22 published works spanning Christian thought, leadership, law, governance, memoir and public affairs.",
+    image: { src: "/images/founder-bowler.jpg", alt: "Early portrait of Dr Chinwoke Clement Mbadinuju in a bowler hat", position: "50% 25%" },
+    collection: "founder" as const,
+    cta: "Explore Founder's Books",
+  },
+  {
+    eyebrow: "The Series Continues",
+    name: "Cheta C. Mbadinuju",
+    body: "New works examining faith, God, grace, mortality, meaning, society and contemporary life.",
+    image: { src: "/images/cheta-mbadinuju.jpg", alt: "Cheta C. Mbadinuju", position: "50% 18%" },
+    collection: "current" as const,
+    cta: "Explore Current Books",
+  },
+];
+
+// Section order follows the Literature Series design (../drive_assets/4 CMF Literature Series 26.png).
 export default function LiteraturePage() {
   const readable = readableSlugs();
   return (
     <>
-      <section className="relative overflow-hidden bg-sand">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-32 -bottom-40 size-[34rem] rounded-full bg-gold/20 blur-3xl" />
-        <div className="wrap relative grid items-center gap-12 py-14 lg:grid-cols-[1.25fr_1fr] lg:py-20">
+      {/* Hero: copy at the left, three covers standing on a warm shelf at the right */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
+        <div className="wrap relative grid items-center gap-12 pt-14 pb-10 lg:grid-cols-[1.35fr_1fr] lg:pt-20 lg:pb-12">
           <div>
             <p data-reveal="fade" className="eyebrow">
               The CMF Literature Series
             </p>
-            <h1 data-reveal="words" className="display-xl mt-4">
-              <SplitWords>Books freely given. Knowledge freely shared.</SplitWords>
+            <h1 data-reveal="words" className="display mt-4 text-[clamp(2.5rem,4.4vw,3.6rem)] leading-[1.05]">
+              <SplitWords>Books Freely Given. Knowledge Freely Shared.</SplitWords>
             </h1>
-            <div data-reveal data-reveal-delay="350" className="lede mt-6 max-w-xl space-y-4">
+            <div data-reveal data-reveal-delay="300" className="mt-6 max-w-xl space-y-4 text-[1.08rem] leading-relaxed text-body">
               <p>
                 The CMF Literature Series preserves the writings of Dr Chinwoke Clement Mbadinuju and continues his tradition of making Christian and
                 public-interest literature freely available to succeeding generations.
               </p>
-              <p>Every book can be read free online, right here. No account, no download, no charge. Readers may support the mission voluntarily, but no donation is required.</p>
+              <p>
+                Every publication in the Series can be read free online, right here. Readers may support the mission voluntarily, but no donation is required
+                to read a book.
+              </p>
             </div>
-            <div data-reveal data-reveal-delay="480" className="mt-8 flex flex-wrap gap-4">
+            <div data-reveal data-reveal-delay="420" className="mt-8">
               <Button href="#library" icon="arrowDown">
                 Explore the Library
               </Button>
-              <Button href="/support" variant="outline">
-                Support the Series
-              </Button>
             </div>
           </div>
-          <div data-reveal="scale" data-reveal-delay="200" className="tile group flex items-end justify-center gap-4 overflow-hidden bg-cream px-6 pt-10 pb-0 lg:px-10">
-            <BookCover
-              book={heroBooks[0]}
-              className="w-[30%] -rotate-3 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-x-3 group-hover:-rotate-[9deg]"
-            />
-            <div className="z-10 mb-6 w-[36%] animate-float motion-reduce:animate-none">
-              <BookCover book={heroBooks[1]} className="transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-3 group-hover:scale-105" />
+
+          <div data-reveal="fade" data-reveal-delay="200" className="group relative" aria-hidden="true">
+            <div className="pointer-events-none absolute -inset-x-10 -top-10 bottom-6 rounded-full bg-gold/15 blur-3xl" />
+            <div className="relative flex items-end justify-center gap-3 px-2 sm:gap-4">
+              <BookCover
+                book={heroBooks[0]}
+                className="w-[29%] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-2 group-hover:-rotate-2"
+              />
+              <BookCover
+                book={heroBooks[1]}
+                className="z-10 w-[36%] shadow-[0_30px_50px_-25px_rgba(12,31,66,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2"
+              />
+              <BookCover
+                book={heroBooks[2]}
+                className="w-[29%] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2 group-hover:rotate-2"
+              />
             </div>
-            <BookCover
-              book={heroBooks[2]}
-              className="w-[30%] rotate-3 transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-3 group-hover:rotate-[9deg]"
-            />
+            {/* The shelf */}
+            <div className="relative -mx-6 h-5 rounded-[2px] bg-gradient-to-b from-[#b07a45] to-[#7c4f26] shadow-[0_18px_30px_-16px_rgba(60,35,10,0.6)]" />
           </div>
         </div>
-      </section>
 
-      <Marquee items={["Faith", "Leadership", "Society", "Christian Living", "Governance", "History"]} />
-
-      <section className="py-24">
-        <div className="wrap">
-          <Statement highlight="Preserve. Publish. Share.">One literary heritage across two generations: recovering earlier works, introducing new ones and keeping them free for all.</Statement>
-          <div className="mt-14">
-            <IconList
-              items={[
-                { icon: "book", title: "Preserve", body: "Recover and digitise the earlier works of Dr Chinwoke Clement Mbadinuju." },
-                { icon: "pen", title: "Publish", body: "Introduce new works for contemporary readers on faith, grace, society and meaning." },
-                { icon: "people", title: "Share", body: "Make the literature freely accessible to churches, schools, communities and every reader." },
-                { icon: "books", title: "Grow", body: "In time, welcome worthy works by other authors consistent with the Foundation's mission." },
-              ]}
-            />
+        <div className="wrap relative grid items-center gap-10 border-t border-line/70 py-8 lg:grid-cols-[1.35fr_1fr]">
+          <div data-reveal="fade">
+            <GoldRule className="mb-5" />
+            <ul className="flex flex-wrap gap-y-2 text-[0.72rem] font-medium tracking-[0.1em] text-ink uppercase" aria-label="Themes of the Series">
+              {themes.map((t, i) => (
+                <li key={t} className="flex items-center">
+                  {i > 0 && <span className="mx-2.5 h-3 w-px bg-bronze/50" aria-hidden="true" />}
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
+          <ul className="grid grid-cols-3 divide-x divide-line">
+            {mission.map((m, i) => (
+              <li key={m.title} data-reveal data-reveal-delay={String(i * 90)} className="flex flex-col items-center px-3 text-center">
+                <Icon name={m.icon} className="size-8 text-bronze" strokeWidth={1.3} />
+                <p className="mt-2 text-[0.8rem] font-semibold tracking-[0.1em] text-ink uppercase">{m.title}</p>
+                <p className="mt-1 text-[0.82rem] leading-snug text-muted">{m.body}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      <section className="bg-white py-24">
-        <div className="wrap space-y-24">
-          <Split title="The Founder's Library" image={<NestedFrame src="/images/founder-bowler.jpg" alt="Dr Chinwoke Clement Mbadinuju" position="50% 25%" />}>
-            <p className="text-ink">Dr Chinwoke Clement Mbadinuju</p>
-            <p>22 published works spanning Christian thought, leadership, law, governance, memoir and public affairs.</p>
-            <ReadMore href="#library">Explore the founder&rsquo;s books</ReadMore>
-          </Split>
-          <Split
-            reverse
-            title="The Series Continues"
-            image={<NestedFrame src="/images/cheta-mbadinuju.jpg" alt="Cheta C. Mbadinuju" tone="navy" flip position="50% 18%" />}
-          >
-            <p className="text-ink">Cheta C. Mbadinuju</p>
-            <p>New works examining faith, God, grace, mortality, meaning, society and contemporary life.</p>
-            <ReadMore href="#library">Explore current books</ReadMore>
-          </Split>
-        </div>
-      </section>
-
-      <section id="library" className="scroll-mt-24 py-24">
+      {/* Two generations of authors */}
+      <section className="border-b border-line py-16 lg:py-20">
         <div className="wrap">
-          <SectionHead title={<>Read. Reflect. Share.</>} aside="Every title is free to read online. Search, filter by topic and open a book to start reading." className="mb-12" />
-          <Library readable={readable} />
-        </div>
-      </section>
-
-      <section id="forthcoming" className="scroll-mt-24 bg-bronze py-24 text-white">
-        <div className="wrap">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <h2 data-reveal="words" className="display-lg text-white">
-              <SplitWords>Forthcoming from CMF</SplitWords>
-            </h2>
-            <p data-reveal data-reveal-delay="250" className="max-w-sm text-white/90">
-              New titles from Cheta C. Mbadinuju, coming in 2027.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {forthcomingBooks.map((b) => (
-              <BookCard key={b.slug} book={b} readable={readable.includes(b.slug)} />
+          <p data-reveal="fade" className="eyebrow">
+            One literary heritage, two generations
+          </p>
+          <div className="mt-8 grid gap-12 lg:grid-cols-2 lg:divide-x lg:divide-line">
+            {authors.map((a, i) => (
+              <article key={a.name} data-reveal data-reveal-delay={String(i * 120)} className={`grid gap-6 sm:grid-cols-[0.72fr_1fr] ${i ? "lg:pl-10" : "lg:pr-10"}`}>
+                <div className="relative aspect-[4/5] w-full max-w-[15rem] overflow-hidden bg-sand sm:max-w-none">
+                  <Image src={a.image.src} alt={a.image.alt} fill sizes="(min-width: 1024px) 20vw, (min-width: 640px) 40vw, 100vw" className="object-cover" style={{ objectPosition: a.image.position }} />
+                </div>
+                <div className="flex flex-col">
+                  <p className="eyebrow">{a.eyebrow}</p>
+                  <h2 className="display-md mt-3">{a.name}</h2>
+                  <p className="mt-4 leading-relaxed text-body">{a.body}</p>
+                  <div className="mt-6 sm:mt-auto sm:pt-6">
+                    <LibraryLink collection={a.collection}>{a.cta}</LibraryLink>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <GreenBand
-        title="Beyond One Author. Beyond One Generation."
-        body="The Literature Series is intended to grow beyond the writings of its Founder and succeeding family authors, keeping worthy works available through the same tradition of accessible knowledge."
-        image="/images/generated/literature-archive.jpg"
-      >
-        <Button href="#library" variant="dark" icon={null}>
-          Explore the Free Library
-        </Button>
-        <Button href="/support" variant="light" icon={null}>
-          Support the Mission
-        </Button>
-      </GreenBand>
+      {/* Free library */}
+      <section id="library" className="scroll-mt-24 py-16 lg:py-20">
+        <div className="wrap">
+          <Library readable={readable} />
+        </div>
+      </section>
+
+      {/* Forthcoming titles */}
+      <section id="forthcoming" className="scroll-mt-24 border-t border-line bg-paper py-14 lg:py-16">
+        <div className="wrap">
+          <p data-reveal="fade" className="eyebrow">
+            Forthcoming from CMF
+          </p>
+          <div className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-0 lg:divide-x lg:divide-line">
+            {forthcomingBooks.map((b) => (
+              <div key={b.slug} className="lg:px-4 lg:first:pl-0 lg:last:pr-0">
+                <ForthcomingCard book={b} readable={readable.includes(b.slug)} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Closing band */}
+      <section className="border-t border-line bg-blush py-14 lg:py-16">
+        <div className="wrap grid items-center gap-8 lg:grid-cols-[1.35fr_1.15fr]">
+          <SectionIntro eyebrow="A platform for the future" title="Beyond One Author. Beyond One Generation." size="md">
+            <p className="max-w-2xl">
+              The CMF Literature Series is intended to grow beyond the writings of its Founder and succeeding family authors. In time, the Foundation hopes
+              to make worthy works consistent with its literary, educational and humanitarian mission available to readers through the same tradition of
+              accessible knowledge.
+            </p>
+          </SectionIntro>
+          <div data-reveal data-reveal-delay="300" className="flex flex-wrap gap-3 lg:justify-end">
+            <Button href="#library">Explore the Free Library</Button>
+            <Button href="/support" variant="outline">
+              Support the Mission
+            </Button>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

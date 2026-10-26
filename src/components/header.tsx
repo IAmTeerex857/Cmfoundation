@@ -51,12 +51,12 @@ export function Header({ giveHref }: { giveHref: string }) {
               href={item.href}
               onMouseEnter={() => setHovered(item.href)}
               aria-current={isActive(item.href) ? "page" : undefined}
-              className="relative rounded-full px-3.5 py-2 text-[0.92rem] whitespace-nowrap text-ink transition-colors aria-[current=page]:text-bronze"
+              className="relative rounded-full px-3.5 py-2 text-[0.92rem] whitespace-nowrap text-slate transition-colors aria-[current=page]:text-bronze"
             >
               {indicator === item.href && (
                 <motion.span
                   layoutId="nav-indicator"
-                  className="absolute inset-0 -z-10 rounded-full bg-ink/[0.06]"
+                  className="absolute inset-0 -z-10 rounded-full bg-slate/[0.06]"
                   transition={{ type: "spring", stiffness: 420, damping: 34 }}
                 />
               )}
@@ -77,7 +77,7 @@ export function Header({ giveHref }: { giveHref: string }) {
           </a>
           <button
             type="button"
-            className="relative flex size-11 items-center justify-center rounded-full text-ink transition-colors hover:bg-ink/5 lg:hidden"
+            className="relative flex size-11 items-center justify-center rounded-full text-slate transition-colors hover:bg-slate/5 lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen(!open)}
@@ -110,13 +110,13 @@ export function Header({ giveHref }: { giveHref: string }) {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease, delay: 0.08 + i * 0.05 }}
-                  className="border-b border-ink/10"
+                  className="border-b border-slate/10"
                 >
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
                     aria-current={(item.href === "/" ? pathname === "/" : isActive(item.href)) ? "page" : undefined}
-                    className="group flex items-center justify-between py-4 font-display text-3xl font-semibold tracking-[-0.03em] text-ink aria-[current=page]:text-bronze"
+                    className="group flex items-center justify-between py-4 font-ui text-3xl font-semibold tracking-[-0.03em] text-slate aria-[current=page]:text-bronze"
                   >
                     {item.label}
                     <Icon name="arrow" className="size-5 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" strokeWidth={1.8} />

@@ -6,7 +6,7 @@ The CMF website, built with Next.js 16, React 19, TypeScript and Tailwind CSS 4.
 2. **Reading**: the CMF Literature Series is free to read online in a built-in reader. Downloads are not offered.
 3. **Donations**: through Bachs payment links.
 
-The layout follows the [RiseUp](https://riseupx.framer.website/) and [Altruva](https://altruva.framer.website/) references. The colours are the CMF brand palette from the Foundation's designs in `../drive_assets/`: bronze, navy, cream and logo gold.
+The pages follow the Foundation's page designs in `../drive_assets/`: EB Garamond headings in navy, bronze eyebrows and square uppercase buttons on warm paper, in the CMF palette (bronze, navy, cream and logo gold). The header and footer keep their earlier look (Geist).
 
 ## Run it
 
