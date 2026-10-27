@@ -45,4 +45,7 @@ screen.
 - **Use text-based PDFs** exported from the typesetting file (InDesign, Word and so on), not scans. They are smaller and sharper.
 - **Optimise for the web.** In Acrobat use *Save as Other → Optimized PDF*, with "fast web view" on. Aim for under about 30 MB per book. Large photographs should be downscaled to about 150 dpi.
 - **Leave the PDF unencrypted.** The reader cannot open password-protected files.
+- **Run `npm run prepare-book -- books/<slug>.pdf` before committing.** Without it, many exported PDFs (CorelDRAW's
+  among them) make the reader download most of the book before page 1 appears, which can take a minute on a phone.
+  The script repacks the file so the reader opens it from a few hundred kilobytes. Pages look exactly the same.
 - **Hosting limit.** The PDFs ship with the website's server function. On Vercel the whole function must stay under 250 MB. If the collection grows beyond about 200 MB, move the files to object storage (Vercel Blob, S3 or R2) and change `src/app/api/books/[slug]/route.ts` to read from there.
