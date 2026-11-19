@@ -6,11 +6,11 @@
    eyebrows and square uppercase buttons on warm paper. The header and footer keep their own look
    (Geist, slate ink), pinned with font-ui and text-slate. Type: EB Garamond for headings, Inter for text. */
 @theme {
-  --color-cream: #fcf8f3; /* header background */
-  --color-paper: #fdfbf7; /* page background, as in the designs */
-  --color-blush: #faf4ea; /* soft panels */
-  --color-sand: #f5ecdd; /* tiles, header */
-  --color-parchment: #efe2cc; /* light accent tiles */
+  --color-cream: #fffdfa; /* header background */
+  --color-paper: #fffefb; /* page background: lightened Nov 2026 at the Foundation's request (was #fdfbf7) */
+  --color-blush: #fdf9f2; /* soft panels */
+  --color-sand: #f9f3ea; /* tiles, header */
+  --color-parchment: #f4eadb; /* light accent tiles */
   --color-bronze: #a2601a; /* primary actions and labels (design buttons ≈ #a8641a, darkened for AA text contrast) */
   --color-bronze-dark: #844d12;
   --color-gold: #d4a82a; /* logo gold: accents on navy, highlights */
@@ -238,4 +238,86 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ---------- Online reader: the book's text (components/reader/text-reader.tsx) ---------- */
+.reader-prose {
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.reader-prose p {
+  margin: 0 0 1em;
+}
+.reader-prose h3 {
+  margin: 2em 0 0.7em;
+  font-size: 1.22em;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.reader-prose h4 {
+  margin: 1.6em 0 0.5em;
+  font-size: 1.05em;
+  font-weight: 600;
+  font-style: italic;
+}
+.reader-prose ul,
+.reader-prose ol {
+  margin: 0 0 1em;
+  padding-left: 1.4em;
+}
+.reader-prose ul {
+  list-style: disc;
+}
+.reader-prose ol {
+  list-style: decimal;
+}
+.reader-prose li {
+  margin: 0.3em 0;
+}
+.reader-prose li p {
+  margin: 0;
+}
+.reader-prose blockquote {
+  margin: 1.2em 0;
+  padding-left: 1em;
+  border-left: 2px solid var(--color-bronze);
+  font-style: italic;
+}
+.reader-prose a {
+  color: var(--color-bronze);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.reader-night .reader-prose a {
+  color: var(--color-gold);
+}
+/* The rebuilt title page */
+.reader-prose .tp-title {
+  margin: 12vh 0 0.4em;
+  text-align: center;
+  font-size: 2.2em;
+  line-height: 1.1;
+  font-weight: 500;
+  text-wrap: balance;
+}
+.reader-prose .tp-subtitle {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.15em;
+  opacity: 0.8;
+}
+.reader-prose .tp-author {
+  margin-top: 3em;
+  text-align: center;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+.reader-prose .tp-publisher {
+  margin-top: 6em;
+  text-align: center;
+  font-size: 0.8em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.7;
 }

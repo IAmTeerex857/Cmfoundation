@@ -4,6 +4,7 @@ import { InlineLoader } from "generative-loaders";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { type EnquiryType, enquiryTypes } from "@/lib/enquiries";
+import { track } from "@/lib/analytics";
 import { Icon } from "./icons";
 import { SlideIcon } from "./ui";
 
@@ -23,6 +24,7 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error ?? "Your message could not be sent.");
+      track("generate_lead", { enquiry: String(new FormData(form).get("enquiry") ?? "") });
       form.reset();
       setStatus("sent");
     } catch (err) {

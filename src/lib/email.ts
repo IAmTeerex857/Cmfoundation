@@ -1,4 +1,5 @@
 import "server-only";
+import { site } from "./site";
 
 // Website email: contact messages and newsletter sign-ups are sent to the Foundation inbox.
 // Mail to @cm.foundation is received by Cloudflare Email Routing and forwarded to the Foundation's Gmail.
@@ -70,6 +71,21 @@ export async function sendToFoundation({ subject, text, replyTo }: { subject: st
   const message = { from, to, subject, text, replyTo };
   if (resendKey) await sendWithResend(resendKey, message);
   else await sendWithCloudflare(accountId!, cfToken!, message);
+}
+
+/**
+ * Sends a plain-text message to a reader (sign-in links, copies of notes and feedback). Needs
+ * Resend: Cloudflare's free plan can only send to the Foundation's own verified addresses.
+ */
+export async function sendToReader({ to, subject, text }: { to: string; subject: string; text: string }) {
+  const { resendKey, from } = config();
+  if (!resendKey || !from) throw new EmailNotConfigured("Sending to readers needs RESEND_API_KEY and CONTACT_FROM");
+  await sendWithResend(resendKey, { from, to: [to], subject, text, replyTo: site.contact.email });
+}
+
+export function readerEmailConfigured() {
+  const { resendKey, from } = config();
+  return Boolean(resendKey && from);
 }
 
 /** Newsletter sign-ups are emailed to the Foundation inbox, which keeps the subscriber list. */

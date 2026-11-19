@@ -3,9 +3,9 @@ export const founder = {
   title: "Odera 1 of Uli",
   born: "14 June 1945",
   died: "11 April 2023",
-  roles: ["Scholar", "Lawyer", "Journalist", "Evangelist", "Author", "Governor", "Statesman"],
+  roles: ["Author", "Evangelist", "Scholar", "Lawyer", "Journalist", "Statesman"],
   summary:
-    "A life of ideas, conviction and service. From humble beginnings in Uli to universities across the world, from journalism and law to Christian ministry and public office, Dr Chinwoke Mbadinuju lived a remarkable life of purpose.",
+    "A life of ideas, faith and quiet generosity. From humble beginnings in Uli to universities abroad, through journalism, law, Christian ministry and public service, Dr Chinwoke Mbadinuju wrote constantly, and used what his books earned to keep children in school and help families in need. The Foundation was formed to join those two commitments.",
 };
 
 // Photos for each period and chapter, from the Foundation's archive (public/images/founder). A period
@@ -134,3 +134,11 @@ export const quotes = [
   { text: "Service is the rental we pay for the space we occupy.", by: "Dr Chinwoke Clement Mbadinuju", role: "Founder", place: "Uli, Anambra State" },
   { text: "A better tomorrow is possible.", by: "Chetachi Chinwoke Mbadinuju", role: "Chinwoke Mbadinuju Foundation", place: "Abuja, Nigeria" },
 ];
+
+/** A quotation taken from the founder's own published text, with its source (verifiable, §11.4). */
+export const bookQuote = {
+  text: "All our efforts will be doomed to failure until we find the right leadership – the righteous leadership that hears from God and takes directions from above.",
+  by: "Dr Chinwoke C. Mbadinuju",
+  source: "God's Kind of Leader (1988)",
+  slug: "gods-kind-of-leader",
+};

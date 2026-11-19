@@ -81,14 +81,16 @@ export function Library({ readable }: { readable: string[] }) {
       .filter((b) => !topic || b.topics.includes(topic))
       .filter((b) => !q || `${b.title} ${b.subtitle ?? ""} ${b.author}`.toLowerCase().includes(q))
       .sort((a, b) => {
-        // Published titles come before forthcoming ones.
+        // Titles readable now come first, then published titles, then forthcoming ones.
+        const online = Number(readable.includes(b.slug)) - Number(readable.includes(a.slug));
+        if (online) return online;
         const upcoming = Number(a.collection === "forthcoming") - Number(b.collection === "forthcoming");
         if (upcoming) return upcoming;
         if (sort === "title") return a.title.localeCompare(b.title);
         const diff = (a.year ?? 0) - (b.year ?? 0);
         return sort === "latest" ? -diff : diff;
       });
-  }, [tab, topic, query, sort]);
+  }, [tab, topic, query, sort, readable]);
 
   return (
     <div>

@@ -107,7 +107,7 @@ export function PageHero({
 }) {
   const height = short ? "py-12 lg:min-h-[21rem] lg:py-8" : "py-14 lg:min-h-[29rem] lg:py-16";
   return (
-    <section className="relative flex flex-col overflow-hidden bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
+    <section className="relative flex flex-col overflow-hidden bg-gradient-to-r from-[#fcf5ea] via-blush to-blush">
       <div className={`wrap relative z-10 lg:flex lg:items-center ${height}`}>
         <div className={`max-w-xl ${compact ? "lg:max-w-[min(38rem,50%)]" : "lg:max-w-[min(34rem,45%)]"}`}>
           {eyebrow && (

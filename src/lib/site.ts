@@ -1,9 +1,9 @@
 export const site = {
   name: "Chinwoke Mbadinuju Foundation",
   shortName: "CMF",
-  tagline: "Ideas. People. Communities. A Better Tomorrow.",
+  tagline: "Uplifting Humanity, Advancing God's Work.",
   description:
-    "The Chinwoke Mbadinuju Foundation advances Christian literature, education and community development while preserving a legacy of faith, knowledge and service.",
+    "The Chinwoke Mbadinuju Foundation preserves and shares a legacy of faith, knowledge and service through literature, educational assistance and practical acts of goodwill.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://cm.foundation",
   founded: 2012,
   contact: {
@@ -54,6 +54,7 @@ export const site = {
 } as const;
 
 export const nav = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "The Founder", href: "/founder" },
   { label: "Literature", href: "/literature" },
@@ -62,7 +63,7 @@ export const nav = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-export const footerExplore = [{ label: "Home", href: "/" }, ...nav, { label: "Support the Mission", href: "/support" }] as const;
+export const footerExplore = [...nav, { label: "Support the Mission", href: "/support" }, { label: "Your Reader Account", href: "/reader" }] as const;
 
 export const legal = [
   { label: "Privacy Policy", href: "/privacy" },

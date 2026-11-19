@@ -5,7 +5,8 @@ import { Icon, type IconName } from "@/components/icons";
 import { Library, LibraryLink } from "@/components/library";
 import { SplitWords } from "@/components/motion/split-words";
 import { Button, GoldRule, SectionIntro } from "@/components/ui";
-import { getBook } from "@/lib/books";
+import Link from "next/link";
+import { bookHref, getBook } from "@/lib/books";
 import { readableSlugs } from "@/lib/manuscripts";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -51,7 +52,7 @@ export default function LiteraturePage() {
   return (
     <>
       {/* Hero: copy at the left, three covers standing on a warm shelf at the right */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
+      <section className="relative overflow-hidden bg-gradient-to-r from-[#fcf5ea] via-blush to-blush">
         <div className="wrap relative grid items-center gap-12 pt-14 pb-10 lg:grid-cols-[1fr_1.15fr] lg:gap-10 lg:pt-16 lg:pb-12">
           <div>
             <p data-reveal="fade" className="eyebrow">
@@ -66,8 +67,8 @@ export default function LiteraturePage() {
                 public-interest literature freely available to succeeding generations.
               </p>
               <p>
-                Every publication in the Series can be read free online, right here. Readers may support the mission voluntarily, but no donation is required
-                to read a book.
+                Five books can now be read free online, in full, with no account needed. Further titles will follow as their digital editions are prepared.
+                Readers may support the mission voluntarily, but no donation is required to read a book.
               </p>
             </div>
             <div data-reveal data-reveal-delay="420" className="mt-8">
@@ -77,20 +78,26 @@ export default function LiteraturePage() {
             </div>
           </div>
 
-          <div data-reveal="fade" data-reveal-delay="200" className="group relative" aria-hidden="true">
+          <div data-reveal="fade" data-reveal-delay="200" className="group relative">
             <div className="relative flex items-end justify-center gap-[3%] px-1 pt-10">
+              <Link href={bookHref(heroBooks[0].slug)} aria-label={`${heroBooks[0].title}: book details`} className="contents">
               <BookCover
                 book={heroBooks[0]}
                 className="w-[30%] shadow-[0_24px_40px_-22px_rgba(12,31,66,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-2 group-hover:-rotate-2"
               />
+              </Link>
+              <Link href={bookHref(heroBooks[1].slug)} aria-label={`${heroBooks[1].title}: book details`} className="contents">
               <BookCover
                 book={heroBooks[1]}
                 className="z-10 w-[37%] shadow-[0_30px_50px_-22px_rgba(12,31,66,0.65)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2"
               />
+              </Link>
               <div className="relative w-[30%] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2 group-hover:rotate-2">
-                <BookCover book={heroBooks[2]} className="w-full shadow-[0_24px_40px_-22px_rgba(12,31,66,0.6)]" />
+                <Link href={bookHref(heroBooks[2].slug)} aria-label={`${heroBooks[2].title}: book details`}>
+                  <BookCover book={heroBooks[2]} className="w-full shadow-[0_24px_40px_-22px_rgba(12,31,66,0.6)]" />
+                </Link>
                 <span className="absolute inset-x-0 bottom-full mx-auto mb-2.5 w-fit rounded-[2px] bg-bronze px-3 py-1.5 text-[0.7rem] font-semibold tracking-[0.12em] whitespace-nowrap text-white uppercase shadow-md">
-                  Coming {heroBooks[2].year}
+                  Coming Soon
                 </span>
               </div>
             </div>

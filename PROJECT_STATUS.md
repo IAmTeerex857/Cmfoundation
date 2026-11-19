@@ -236,3 +236,35 @@ See `update needed.md` for the existing book-by-book and image-placement checkli
 - **Follow-up:** the Support hero uses the supplied seedling photo (`support-hero.jpg`), cropped to the plant. The words baked into the right of the original would have been cut mid-word at this hero shape, so the page keeps its own Luke 6:38 quote card.
 - **Follow-up:** hero photos no longer fade into the background on any page (the soft gradient edge read as a shadowy blur); they sit cleanly beside the text, unboxed, full height. The quote cards on them lost their drop shadow. The Founder page uses the supplied schoolboy photo (`founder/early-life-schoolboy.jpg`) for Humble Beginnings (1945) and Early Life.
 - **Follow-up:** with no fade the hero photos looked boxed, so they now have a very short, gentle fade on the left and right edges (about 6% of the photo width; top edge on phones). The Faith & Ministry chapter uses the supplied photo (`founder/faith-ministry-suit.jpg`), so every chapter tile now has a photo.
+
+## Foundation instructions of 18 November 2026: all three phases — November 19, 2026
+
+The Foundation's *Master Implementation Instructions* (`../drive_assets/email-2026-11-18/CMF Website Instructions 26.pdf`) and the five
+launch books (PDF, EPUB, covers) arrived by email on 18 November 2026; all 22 attachments are in `../drive_assets/email-2026-11-18/`.
+Full report, testing checklist and open questions: `docs/IMPLEMENTATION_PLAN.md`. Setup steps: `docs/SETUP.md`.
+
+- **Books:** the five launch titles are imported from their EPUBs as structured text (`books/<slug>/edition.json`, `npm run import-book`).
+  Metadata corrected from their copyright pages (Cheta's three are 2026 first editions, not 2018/2020/2022; *God's Kind of Leader* is 1988, not 1991).
+  Back covers for Cheta's three were cropped from the cover wraps because the separate back images carry placeholder/duplicate ISBNs.
+- **Book pages:** `/books/<slug>` for every title: front/back covers (no spine), bibliographic details, a 100–150-word description,
+  Read Free Online, Audiobook Coming Soon, Buy on Amazon (only when a URL is set), institutional orders, contents, Book JSON-LD.
+  Every cover on the site now opens the book page.
+- **Text reader** (`components/reader/text-reader.tsx`): opens at the title page, "Go to the Prologue", contents, size/spacing/colour/typeface,
+  resume, notes (with selected passage), bookmarks, feedback to CMF, a one-time registration invitation after the introduction, reading analytics.
+  The PDF reader remains for the memorial brochure.
+- **Reader accounts:** passwordless, single-use 30-minute email links, signed http-only session. With Supabase: cross-device sync of positions,
+  notes, bookmarks, preferences and library; self-service data download and deletion.
+- **Supabase** schema in `supabase/migrations/`; server-only REST client `lib/db.ts`; RLS on, no public policies.
+- **Dashboard** `/admin` (ADMIN_EMAILS): overview, literature performance, audience, support, inbox, donation/sponsorship records, CSV exports.
+  **Reports:** `/api/cron/report` daily/weekly/monthly via `vercel.json`; also applies the Privacy Policy retention rules.
+- **Measurement:** GTM/GA4 behind a consent banner (`components/analytics.tsx`), events in `lib/analytics.ts` (`docs/ANALYTICS.md`),
+  cookieless aggregate counts for the dashboard, Search Console verification, sitemap of book pages, UTM short links `/qr`, `/wa`, `/li`, `/press`.
+- **Pages:** Home rebuilt to §4.2; Home in the nav; lighter paper colours; About (origins, character, discreet service, nonprofit statement);
+  four activities per §2.3; Support rebuilt (six pathways, `/give/<purpose>`, partnerships); new Privacy Policy; event page
+  `/events/book-presentation-2026`; order form `/books/order`; unverified quotes removed from Home and Our Work; milestone pictures replaced by icons.
+- **Verified:** ESLint, TypeScript and the production build pass (67 routes). In headless Chrome at 1440 and 390 px: every page loads with no console
+  errors or sideways scrolling; the full guest reading journey, registration and sign-in by link, admin refusal for non-staff, feedback and
+  order forms. Supabase, GA4 and live email are not connected yet, so sync, the dashboard with data, GA events and real email delivery are untested.
+- **Local build note:** this Mac's shell runs Node as x64 while `node_modules` was installed for arm64; the x64 native binaries were added with
+  `--no-save` for the build and the arm64 ones restored afterwards. `package.json` gained only the `import-book` script.
+- Nothing was committed, pushed or deployed. `books/destiny-fulfilled.pdf` was already deleted in the working tree before this work and was left as it was.

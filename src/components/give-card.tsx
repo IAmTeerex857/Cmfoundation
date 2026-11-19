@@ -1,27 +1,18 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
+import { track } from "@/lib/analytics";
 import { givingFocuses } from "@/lib/giving";
-import type { GivingOption } from "@/lib/payment-links";
 import { Icon } from "./icons";
 import { SlideIcon } from "./ui";
 
-const ease = [0.16, 1, 0.3, 1] as const;
-
-// The donation card in the Support hero. Donors pick what they'd like to support, then continue to
-// the hosted checkout and enter any amount there. The checkout can't carry the choice, so for a
-// specific cause the card offers a prefilled email.
-export function GiveCard({ options, email }: { options: GivingOption[]; email: string }) {
+// The giving card on /support. The donor picks a purpose and continues to that purpose's own
+// checkout (via /give/<category>), so the payment record carries the purpose and nobody has to
+// email afterwards (instructions §8.4).
+export function GiveCard({ hasCheckout, email }: { hasCheckout: boolean; email: string }) {
   const [active, setActive] = useState(0);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
-
-  const [primary, ...others] = options;
   const focus = givingFocuses[active];
-
-  const mail = `mailto:${email}?subject=${encodeURIComponent(`My gift to CMF: ${focus.title}`)}&body=${encodeURIComponent(
-    `Hello CMF team,\n\nI have just made a gift and would like it to support: ${focus.title}.\n\nThank you.`,
-  )}`;
 
   const onKey = (e: React.KeyboardEvent) => {
     const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
@@ -33,9 +24,9 @@ export function GiveCard({ options, email }: { options: GivingOption[]; email: s
   };
 
   return (
-    <div data-reveal="fade" data-reveal-delay="200" className="tile self-start p-6 shadow-[0_30px_60px_-40px_rgba(12,31,66,0.35)] sm:p-8">
+    <div className="tile self-start p-6 shadow-[0_30px_60px_-40px_rgba(12,31,66,0.35)] sm:p-8">
       <h2 className="display-md">Give online</h2>
-      <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">Choose what you&rsquo;d like to support, then give any amount at checkout.</p>
+      <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">Choose what your gift is for, then give any amount at checkout.</p>
 
       <div role="tablist" aria-label="What would you like to support?" className="mt-6 grid grid-cols-2 gap-1 rounded-[3px] bg-blush p-1 sm:grid-cols-4" onKeyDown={onKey}>
         {givingFocuses.map((f, i) => (
@@ -51,75 +42,40 @@ export function GiveCard({ options, email }: { options: GivingOption[]; email: s
             aria-controls="give-panel"
             tabIndex={i === active ? 0 : -1}
             onClick={() => setActive(i)}
-            className="relative rounded-[3px] px-3 py-2.5 text-sm font-medium whitespace-nowrap text-muted transition-colors duration-300 hover:text-ink aria-selected:text-white"
+            className="rounded-[3px] px-3 py-2.5 text-sm font-medium whitespace-nowrap text-muted transition-colors hover:text-ink aria-selected:bg-ink aria-selected:text-white"
           >
-            {i === active && <motion.span layoutId="give-tab" transition={{ duration: 0.35, ease }} className="absolute inset-0 rounded-[3px] bg-ink" />}
-            <span className="relative">{f.tab}</span>
+            {f.tab}
           </button>
         ))}
       </div>
 
-      <div id="give-panel" role="tabpanel" aria-labelledby={`give-tab-${focus.id}`} className="mt-6 min-h-[5.5rem]">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={focus.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="flex items-start gap-4"
-          >
-            <Icon name={focus.icon} className="mt-0.5 size-9 shrink-0 text-bronze" strokeWidth={1.2} />
-            <div>
-              <p className="font-display text-xl text-ink">{focus.title}</p>
-              <p className="mt-1 text-sm leading-relaxed text-muted">{focus.body}</p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+      <div id="give-panel" role="tabpanel" aria-labelledby={`give-tab-${focus.id}`} className="mt-6 flex min-h-[5.5rem] items-start gap-4">
+        <Icon name={focus.icon} className="mt-0.5 size-9 shrink-0 text-bronze" strokeWidth={1.2} />
+        <div>
+          <p className="font-display text-xl text-ink">{focus.title}</p>
+          <p className="mt-1 text-sm leading-relaxed text-muted">{focus.body}</p>
+        </div>
       </div>
 
-      {primary ? (
+      {hasCheckout ? (
         <>
           <a
-            href={primary.href}
+            href={`/give/${focus.id}`}
             rel="noopener"
+            onClick={() => track("donate_click", { category: focus.id })}
             className="group mt-6 flex w-full items-center justify-center gap-3 rounded-[3px] bg-bronze px-6 py-4 text-[0.82rem] leading-none font-semibold tracking-[0.08em] text-white uppercase transition-colors duration-300 hover:bg-bronze-dark"
           >
-            {primary.label}
+            Give to {focus.tab === "General" ? "the Foundation" : focus.tab.toLowerCase()}
             <SlideIcon name="arrow" />
           </a>
-          {others.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {others.map((o) => (
-                <a
-                  key={o.id}
-                  href={o.href}
-                  rel="noopener"
-                  className="flex flex-1 items-center justify-between gap-2 rounded-[3px] border border-bronze px-4 py-2.5 text-sm text-bronze transition-colors hover:bg-bronze hover:text-white"
-                >
-                  {o.label}
-                  <Icon name="arrowUpRight" className="size-3.5" />
-                </a>
-              ))}
-            </div>
-          )}
-          {focus.id !== "general" && (
-            <p className="mt-4 text-center text-xs text-muted">
-              After giving,{" "}
-              <a href={mail} className="font-medium text-bronze underline-offset-2 hover:underline">
-                tell us it&rsquo;s for {focus.tab.toLowerCase()}
-              </a>{" "}
-              and we&rsquo;ll direct it there.
-            </p>
-          )}
         </>
       ) : (
         <p className="mt-6 rounded-[3px] bg-blush p-5 text-sm text-muted">
           Online giving opens soon. In the meantime, email{" "}
           <a className="text-bronze underline" href={`mailto:${email}`}>
             {email}
-          </a>{" "}
-          and we&rsquo;ll help you give.
+          </a>
+          .
         </p>
       )}
     </div>

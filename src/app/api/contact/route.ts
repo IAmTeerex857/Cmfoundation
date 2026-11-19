@@ -1,5 +1,6 @@
 import { EMAIL_PATTERN, EmailNotConfigured, sendToFoundation } from "@/lib/email";
 import { enquiryTypes, isEnquiryType } from "@/lib/enquiries";
+import { countMetric, recordEnquiry } from "@/lib/db";
 import { site } from "@/lib/site";
 
 function bad(error: string, status = 400) {
@@ -21,6 +22,8 @@ export async function POST(req: Request) {
   if (!EMAIL_PATTERN.test(email)) return bad("Please enter a valid email address.");
 
   const label = enquiryTypes.find((t) => t.id === enquiry)!.label;
+  await recordEnquiry({ kind: "contact", topic: enquiry, name, email, payload: { message } });
+  await countMetric(`enquiry_${enquiry}`);
   try {
     await sendToFoundation({
       subject: `[CMF website] ${label}: ${name}`,

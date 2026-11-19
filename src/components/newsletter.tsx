@@ -3,6 +3,7 @@
 import { InlineLoader } from "generative-loaders";
 import { motion } from "motion/react";
 import { useState } from "react";
+import { track } from "@/lib/analytics";
 import { Icon } from "./icons";
 
 // Sign-ups go to /api/newsletter, which emails the address to the Foundation inbox.
@@ -23,6 +24,7 @@ export function Newsletter() {
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body.error ?? "Something went wrong. Please try again.");
       setState("done");
+      track("newsletter_signup", { location: "footer" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
       setState("error");

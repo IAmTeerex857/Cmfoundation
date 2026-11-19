@@ -1,5 +1,9 @@
 # Updates Needed — CMF Foundation Website
 
+> **19 November 2026:** the Foundation's instructions of 18 November are implemented. The current list of open questions
+> (ISBNs, back covers, typos in the source files, forthcoming titles, Amazon links, audiobooks, Zenith details, quotations,
+> event venue and time) is in `docs/IMPLEMENTATION_PLAN.md` §6, and the accounts to set up are in `docs/SETUP.md`.
+
 What we still need from the Foundation to finish the website. Items are in priority order.
 
 The original audit counted **49 image slots**: 23 using real CMF photos, 15 using stock photos, and 11 using placeholder book covers.
@@ -17,12 +21,12 @@ Five official covers were supplied and installed on October 14, 2026. Six covers
 
 | Book | Author | Collection | Cover | PDF |
 |---|---|---|---|---|
-| False Men and True Christians | Dr C. C. Mbadinuju | Founder's Library | ☐ | ☐ |
-| God's Kind of Leader (1991) | Dr C. C. Mbadinuju | Founder's Library | ☐ | ☐ |
+| False Men and True Christians (1986) | Dr Chinwoke C. Mbadinuju | Founder's Library | ✓ (back cover needed) | ✓ text edition, 19 Nov 2026 |
+| God's Kind of Leader (1988) | Dr Chinwoke C. Mbadinuju | Founder's Library | ✓ (back cover needed) | ✓ text edition, 19 Nov 2026 |
 | The Present Truth (1998) | Dr C. C. Mbadinuju | Founder's Library | ☐ | ☐ |
-| Exploring the Godhead (2018) | Cheta C. Mbadinuju | Current Series | ✓ | ☐ |
-| The Wages of Sin (2020) | Cheta C. Mbadinuju | Current Series | ✓ | ☐ |
-| A Criminal in Heaven (2022) | Cheta C. Mbadinuju | Current Series | ✓ | ☐ |
+| Exploring the Godhead (2026) | Cheta C. Mbadinuju | Current Series | ✓ front and back | ✓ text edition, 19 Nov 2026 |
+| The Wages of Sin (2026) | Cheta C. Mbadinuju | Current Series | ✓ front and back | ✓ text edition, 19 Nov 2026 |
+| A Criminal in Heaven (2026) | Cheta C. Mbadinuju | Current Series | ✓ front and back | ✓ text edition, 19 Nov 2026 |
 | All Is Vanity | Cheta C. Mbadinuju | Forthcoming 2027 | ✓ | — |
 | A Lawyer's Woes | Cheta C. Mbadinuju | Forthcoming 2027 | ☐ | — |
 | Judge Not! | Cheta C. Mbadinuju | Forthcoming 2027 | ☐ | — |

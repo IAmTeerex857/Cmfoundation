@@ -1,3 +1,4 @@
+import { countMetric, recordEnquiry } from "@/lib/db";
 import { EMAIL_PATTERN, EmailNotConfigured, subscribe } from "@/lib/email";
 
 function bad(error: string, status = 400) {
@@ -12,6 +13,8 @@ export async function POST(req: Request) {
   const email = String(body.email ?? "").trim().toLowerCase().slice(0, 254);
   if (!EMAIL_PATTERN.test(email)) return bad("Please enter a valid email address.");
 
+  await recordEnquiry({ kind: "newsletter", topic: "footer", email });
+  await countMetric("newsletter_optin", "footer");
   try {
     await subscribe(email);
   } catch (err) {

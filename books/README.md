@@ -1,7 +1,23 @@
-# Book PDFs
+# Book files
 
-Put each book's PDF in this folder, named exactly after its slug. Then commit it and redeploy. The book
-becomes readable on the website. No code change is needed.
+## Text editions (preferred)
+
+Books are read online as structured text, imported from the publisher's EPUB:
+
+```
+npm run import-book -- "path/to/BOOK.epub" <slug>
+```
+
+This writes `books/<slug>/edition.json`: every section in reading order, with the publisher's text
+unchanged and only layout markup removed. Commit it and redeploy; the book becomes readable, opening at
+its title page, with the registration invitation after its Prologue (or Introduction, or Preface).
+Re-run the command whenever a corrected EPUB arrives. The five launch titles were imported on
+19 November 2026 from the files emailed on 18 November (originals in `../drive_assets/email-2026-11-18/`).
+
+## PDF editions
+
+A title with no text edition can still be read from a PDF. Put the PDF in this folder, named exactly after
+its slug, then commit it and redeploy. No code change is needed. (The memorial brochure uses this.)
 
 | Book | File name |
 |---|---|

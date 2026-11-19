@@ -6,7 +6,7 @@ import { Button, GoldRule } from "./ui";
 export function PolicyPage({ title, intro }: { title: string; intro: string }) {
   return (
     <>
-      <section className="border-b border-line bg-gradient-to-r from-[#f8ecd9] via-blush to-blush py-16 lg:py-20">
+      <section className="border-b border-line bg-gradient-to-r from-[#fcf5ea] via-blush to-blush py-16 lg:py-20">
         <div className="wrap">
           <p data-reveal="fade" className="eyebrow">
             {site.name}

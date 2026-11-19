@@ -5,7 +5,7 @@ import { Button, GoldRule } from "@/components/ui";
 export default function NotFound() {
   return (
     <SiteShell>
-      <section className="bg-gradient-to-r from-[#f8ecd9] via-blush to-blush py-24 lg:py-32">
+      <section className="bg-gradient-to-r from-[#fcf5ea] via-blush to-blush py-24 lg:py-32">
         <div className="wrap max-w-2xl text-center">
           <p data-reveal="fade" className="eyebrow">
             Page not found

@@ -3,6 +3,7 @@ import { footerExplore, legal, site } from "@/lib/site";
 import { Icon } from "./icons";
 import { Logo } from "./logo";
 import { BackToTop } from "./motion/back-to-top";
+import { CookieSettingsLink } from "./analytics";
 import { Newsletter } from "./newsletter";
 
 export function SocialLinks({ className = "" }: { className?: string }) {
@@ -47,7 +48,13 @@ export function Footer() {
         <div className="mt-12 grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div data-reveal>
             <h2 className="font-ui text-[1.35rem] leading-[1.15] font-semibold tracking-[-0.025em] text-white">Subscribe to our newsletter</h2>
-            <p className="mt-2 mb-5 max-w-sm text-sm text-white/70">News on new books, events and the Foundation&rsquo;s work.</p>
+            <p className="mt-2 mb-5 max-w-sm text-sm text-white/70">
+              Occasional emails about new books, publications and the Foundation&rsquo;s work. Unsubscribe at any time; see our{" "}
+              <Link href="/privacy" className="underline underline-offset-2 hover:text-gold">
+                Privacy Policy
+              </Link>
+              .
+            </p>
             <Newsletter />
           </div>
 
@@ -98,6 +105,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+            <CookieSettingsLink className={`hover:text-gold ${linkUnderline}`} />
             <BackToTop />
           </div>
         </div>

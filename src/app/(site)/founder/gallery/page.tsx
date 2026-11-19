@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMetadata({
 export default function GalleryPage() {
   return (
     <>
-      <section className="bg-gradient-to-r from-[#f8ecd9] via-blush to-blush">
+      <section className="bg-gradient-to-r from-[#fcf5ea] via-blush to-blush">
         <div className="wrap py-14 lg:py-16">
           <Link
             href="/founder"

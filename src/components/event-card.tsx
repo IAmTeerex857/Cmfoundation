@@ -10,7 +10,7 @@ import { SlideIcon } from "./ui";
 export function EventCard({ event }: { event: CmfEvent }) {
   const { month, day, year } = eventDateParts(event.date);
   const book = event.book ? getBook(event.book) : undefined;
-  const href = `/contact?enquiry=events&event=${encodeURIComponent(event.title)}`;
+  const href = event.href ?? `/contact?enquiry=events&event=${encodeURIComponent(event.title)}`;
   return (
     <article data-reveal className="tile group flex flex-col p-3 transition-shadow duration-500 hover:shadow-[0_24px_50px_-30px_rgba(12,31,66,0.45)]">
       <div className="relative aspect-[16/10] overflow-hidden rounded-[2px] bg-gradient-to-br from-blush via-sand to-parchment">
@@ -35,7 +35,7 @@ export function EventCard({ event }: { event: CmfEvent }) {
             href={href}
             className="group/btn inline-flex items-center gap-3 rounded-[3px] border border-bronze px-4 py-2.5 text-[0.75rem] leading-none font-semibold tracking-[0.08em] text-bronze uppercase transition-colors duration-300 hover:bg-bronze hover:text-white"
           >
-            Register Interest
+            {event.href ? "Event details" : "Register Interest"}
             <SlideIcon name="arrow" />
           </Link>
         </div>

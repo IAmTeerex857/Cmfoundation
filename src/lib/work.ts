@@ -1,47 +1,51 @@
 import type { IconName } from "@/components/icons";
 
-export const pillars: { title: string; label: string; short: string; body: string; icon: IconName; cta: string; href: string }[] = [
+// The Foundation's four interconnected areas of activity (instructions §2.3). Literature and
+// education come first and carry the most weight: they are where the Foundation began.
+export const pillars: { title: string; label: string; short: string; body: string; icon: IconName; cta: string; href: string; primary?: boolean }[] = [
   {
-    title: "Literature & Publishing",
+    title: "Literature & Knowledge",
     label: "Literature",
-    short: "Christian thought for a better understanding of life.",
-    body: "Preserving and publishing works that inform faith, leadership and purposeful living. All CMF publications are freely available.",
+    short: "Writing, preserving and freely sharing Christian and public-interest literature.",
+    body: "Writing, publishing, preserving, digitising and freely sharing Christian and public-interest literature, beginning with the works of our founder.",
     icon: "book",
-    cta: "Explore the Literature Series",
-    href: "/literature",
+    cta: "Explore the free library",
+    href: "/literature#library",
+    primary: true,
   },
   {
-    title: "Education",
+    title: "Education & Scholarships",
     label: "Education",
-    short: "Supporting learning, opportunity and human potential.",
-    body: "Supporting educational opportunity, literacy and intellectual development to help individuals realise their human potential.",
+    short: "School fees, scholarships and learning materials for children and students.",
+    body: "Assisting children, students and families with school fees, scholarships, educational materials and related needs.",
     icon: "cap",
-    cta: "Our education work",
+    cta: "Our educational assistance",
+    href: "/our-work#initiatives",
+    primary: true,
+  },
+  {
+    title: "Humanitarian Assistance",
+    label: "Humanitarian",
+    short: "Practical support for individuals and families in difficulty.",
+    body: "Practical support for individuals and families facing financial or personal difficulty, including bereavement, family occasions and other circumstances where goodwill makes a difference.",
+    icon: "heart",
+    cta: "How we help",
     href: "/our-work#initiatives",
   },
   {
-    title: "Community Development",
+    title: "Community Initiatives",
     label: "Community",
-    short: "Practical initiatives that strengthen lives and communities.",
-    body: "Undertaking practical projects and interventions designed to improve lives and strengthen communities.",
-    icon: "people",
-    cta: "Our community projects",
+    short: "Carefully selected projects that meet identifiable community needs.",
+    body: "Undertaking or supporting carefully selected projects that meet identifiable community needs, including infrastructure, water access and other practical interventions.",
+    icon: "drop",
+    cta: "Community initiatives",
     href: "/our-work#initiatives",
-  },
-  {
-    title: "Legacy & Scholarship",
-    label: "Legacy",
-    short: "Preserving a remarkable life and inspiring future generations.",
-    body: "Preserving the writings, photographs, historical records and intellectual contributions of Dr Mbadinuju for future generations.",
-    icon: "pillar",
-    cta: "The Odera archive",
-    href: "/founder",
   },
 ];
 
 export const initiatives = [
-  { title: "Education Support", body: "Assisting schools, students and learning initiatives.", icon: "cap" as IconName },
-  { title: "Community Projects", body: "Supporting practical solutions that improve lives and livelihoods.", icon: "sprout" as IconName },
+  { title: "School Fees & Scholarships", body: "Helping children and students stay in school through school fees, scholarships and learning materials.", icon: "cap" as IconName },
+  { title: "Help for Families", body: "Quiet, practical assistance for individuals and families in difficulty, including at times of bereavement.", icon: "heart" as IconName },
   { title: "Free Literature Distribution", body: "Printing and freely distributing books to churches, schools and communities.", icon: "books" as IconName },
   {
     title: "Sustainable Community Infrastructure",
@@ -64,20 +68,24 @@ export type CmfEvent = {
   online: boolean;
   /** Book slug to feature on the event card. */
   book?: string;
+  /** The event's own page, when it has one. */
+  href?: string;
 };
 
 // TODO(client): confirm dates, times and registration links.
 export const events: CmfEvent[] = [
-  { date: "2026-11-24", title: "CMF Literature Series & Books Presentation", location: "Abuja, Nigeria", online: false, book: "the-criminal-in-heaven" },
+  { date: "2026-11-24", title: "CMF Literature Series & Books Presentation", location: "Abuja, Nigeria", online: false, book: "the-criminal-in-heaven", href: "/events/book-presentation-2026" },
   { date: "2027-01-01", title: "Online Book Presentation (Judge Not!)", location: "Online", online: true, book: "judge-not" },
   { date: "2027-02-11", title: "Online Book Presentation (All Is Vanity)", location: "Online", online: true, book: "all-is-vanity" },
 ];
 
-export const milestones = [
-  { title: "Children's Ministry Support", category: "Education & Faith", image: "/images/generated/childrens-ministry.jpg" },
-  { title: "Uli Community Solar Waterworks", category: "Community Development", image: "/images/clean-water-handwashing.jpg" },
-  { title: "Peace and Security Posthumous Award", category: "Legacy", image: "/images/generated/award-ceremony.jpg" },
-  { title: "CMF Literature Series Launch (Abuja)", category: "Literature", image: "/images/generated/literature-launch.jpg" },
+// Selected milestones (instructions §4.5). Shown with icons rather than illustrative pictures, so
+// nothing suggests a photograph of an event that it is not. Add `image` only for verified photos.
+export const milestones: { title: string; category: string; icon: IconName; href?: string; image?: string }[] = [
+  { title: "Children's Ministry Support", category: "Education & Faith", icon: "cap" },
+  { title: "Uli Community Solar Waterworks", category: "Community Initiatives", icon: "drop" },
+  { title: "Peace and Security Posthumous Award", category: "Legacy", icon: "star" },
+  { title: "CMF Literature Series Presentation, Abuja (24 November 2026)", category: "Literature", icon: "books", href: "/events/book-presentation-2026" },
 ];
 
 export const values = ["Faith", "Knowledge", "Service", "Stewardship", "Human Dignity", "Continuity"];

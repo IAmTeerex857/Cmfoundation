@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { Analytics } from "@/components/analytics";
 import { defaultTitle, shareImage } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -54,6 +55,8 @@ export const metadata: Metadata = {
   creator: site.name,
   publisher: site.name,
   formatDetection: { telephone: false, email: false, address: false },
+  // Google Search Console ownership (HTML tag method). Set GOOGLE_SITE_VERIFICATION to the tag's content value.
+  ...(process.env.GOOGLE_SITE_VERIFICATION ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } } : {}),
   openGraph: { type: "website", siteName: site.name, locale: "en_GB", title: defaultTitle, description: site.description, images: [shareImage] },
   twitter: { card: "summary_large_image", title: defaultTitle, description: site.description, images: [shareImage] },
 };
@@ -72,6 +75,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {revealScript}
         </Script>
         {children}
+        <Analytics />
       </body>
     </html>
   );

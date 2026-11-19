@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 // Bachs payment links redirect here after a successful payment (set in the Bachs dashboard).
 export default function ThankYouPage() {
   return (
-    <section className="bg-gradient-to-b from-[#f8ecd9] via-blush to-paper py-20 lg:py-28">
+    <section className="bg-gradient-to-b from-[#fcf5ea] via-blush to-paper py-20 lg:py-28">
       <div className="wrap max-w-2xl text-center">
         <Icon name="heart" className="mx-auto size-14 text-bronze" strokeWidth={1.1} />
         <p data-reveal="fade" className="eyebrow mt-6">

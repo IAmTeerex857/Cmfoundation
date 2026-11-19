@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "prepare-book": "node scripts/prepare-book.mjs"
+    "prepare-book": "node scripts/prepare-book.mjs",
+    "import-book": "node scripts/import-epub.mjs"
   },
   "dependencies": {
     "generative-loaders": "0.1.1",

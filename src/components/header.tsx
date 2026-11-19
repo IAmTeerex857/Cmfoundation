@@ -32,7 +32,7 @@ export function Header() {
     else smoothScroll.current?.start();
   }, [open]);
 
-  const isActive = (href: string) => pathname.startsWith(href);
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
   const indicator = hovered ?? nav.find((n) => isActive(n.href))?.href ?? null;
 
   return (
@@ -104,7 +104,7 @@ export function Header() {
             className={`overflow-y-auto bg-cream lg:hidden ${scrolled ? "h-[calc(100dvh-4rem)]" : "h-[calc(100dvh-5rem)]"}`}
           >
             <ul className="wrap py-4">
-              {[{ label: "Home", href: "/" }, ...nav].map((item, i) => (
+              {nav.map((item, i) => (
                 <motion.li
                   key={item.href}
                   initial={{ opacity: 0, y: 24 }}
@@ -115,7 +115,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    aria-current={(item.href === "/" ? pathname === "/" : isActive(item.href)) ? "page" : undefined}
+                    aria-current={isActive(item.href) ? "page" : undefined}
                     className="group flex items-center justify-between py-4 font-ui text-3xl font-semibold tracking-[-0.03em] text-slate aria-[current=page]:text-bronze"
                   >
                     {item.label}

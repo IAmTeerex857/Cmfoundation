@@ -6,11 +6,11 @@ export const faqs = {
   },
   books: {
     q: "How can I get your books?",
-    a: "Every title in the CMF Literature Series is free to read online in our Free Library. Open a book and start reading in your browser, with no account, payment or download needed. Schools, churches and community groups that would like printed copies can request them through our contact form, and we will let you know what is available.",
+    a: "Five books are free to read online in full: False Men and True Christians, God's Kind of Leader, Exploring the Godhead, The Wages of Sin and A Criminal in Heaven. Open a book's page and choose Read Free Online; no account, payment or download is needed. More titles will follow. Schools, churches, libraries and organisations can order printed copies through our institutional order form.",
   },
   free: {
     q: "Do I have to pay or donate to read the books?",
-    a: "No. Every digital publication in the Series is available without charge. Readers may support the mission voluntarily, but no donation is ever required to read or share a book.",
+    a: "No. Our online publications are free to read in full, with or without an account. Readers may support the Foundation voluntarily, but no donation is ever required to read or share a book.",
   },
   secure: {
     q: "Is my donation secure?",
@@ -18,11 +18,15 @@ export const faqs = {
   },
   project: {
     q: "Can I support a specific project?",
-    a: "Yes. On the Support page, choose what you would like to support: where it is needed most, books, learners or communities. After you give, use the email link under the Give button to tell us, and we will direct your gift accordingly.",
+    a: "Yes. On the Support page, choose general support, school fees and scholarships, printing and distribution of free literature, or community development before you give. There is nothing more to do afterwards.",
   },
   use: {
     q: "How are donations used?",
-    a: "Gifts support the Foundation's work: printing and freely distributing Christian literature, supporting students, schools and learning initiatives, funding community projects such as clean water, and preserving the writings and records of Dr Mbadinuju for future generations.",
+    a: "The Foundation is a nonprofit institution. Gifts, publication income and partnerships are applied to its literary, educational and humanitarian objectives, including the running costs that make that work possible. No income is distributed to trustees or private individuals as profit.",
+  },
+  orders: {
+    q: "Can we order printed copies for a school, church or organisation?",
+    a: "Yes. Use the institutional and commemorative order form on any book's page, or at cm.foundation/books/order. Tell us the title, quantity and purpose, and we will reply with pricing, delivery arrangements and availability. Book orders are purchases and are kept separate from donations.",
   },
   inKind: {
     q: "Do you accept in-kind donations?",

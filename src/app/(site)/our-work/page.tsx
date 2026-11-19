@@ -3,20 +3,20 @@ import Image from "next/image";
 import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
 import { ArrowLink, Button, GoldRule, IconPillars, PageHero, QuoteBlock, SectionIntro } from "@/components/ui";
-import { founder, quotes } from "@/lib/founder";
+
 import { approach, initiatives, milestones, pillars } from "@/lib/work";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Our Work",
   description:
-    "From ideas to lasting impact: the Chinwoke Mbadinuju Foundation translates ideas into action through literature, education, community development and legacy preservation.",
+    "How the Chinwoke Mbadinuju Foundation works: free literature, school fees and scholarships, humanitarian assistance and carefully selected community initiatives.",
   path: "/our-work",
 });
 
 const initiativeImages: Record<string, string> = {
-  "Education Support": "/images/generated/education-support.jpg",
-  "Community Projects": "/images/stock/seedling-hands.jpg",
+  "School Fees & Scholarships": "/images/generated/education-support.jpg",
+  "Help for Families": "/images/generated/family-support.jpg",
   "Free Literature Distribution": "/images/generated/book-distribution.jpg",
   "Sustainable Community Infrastructure": "/images/cmf-water-project.jpg",
 };
@@ -25,7 +25,6 @@ const pillarLinks = ["Visit the Literature Series", "Learn more", "Learn more", 
 
 // Section order follows the Foundation's Our Work design (../drive_assets/5 CMF Our Work 26.png).
 export default function OurWorkPage() {
-  const service = quotes.find((q) => q.text.startsWith("Service"))!;
 
   return (
     <>
@@ -34,7 +33,7 @@ export default function OurWorkPage() {
         short
         title="From Ideas to Lasting Impact."
         image={{ src: "/images/clean-water-handwashing.jpg", alt: "A girl washing her hands at a clean water tap as her mother looks on", position: "60% center" }}
-        aside={<QuoteBlock text={service.text} by={founder.name} />}
+        aside={<QuoteBlock text="Let not thy left hand know what thy right hand doeth." by="Matthew 6:3 (KJV)" />}
         actions={
           <>
             <Button href="#approach">Our Approach</Button>
@@ -45,8 +44,8 @@ export default function OurWorkPage() {
         }
       >
         <p>
-          The Chinwoke Mbadinuju Foundation translates ideas into action through literature, education, community development and legacy preservation,
-          advancing a more informed, compassionate and opportunity-rich society.
+          The Foundation shares literature freely and gives practical help: school fees and scholarships, assistance to families in difficulty, and
+          carefully selected community projects. Much of it is done quietly, as our founder preferred.
         </p>
       </PageHero>
 
@@ -126,17 +125,23 @@ export default function OurWorkPage() {
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {milestones.map((m, i) => (
               <li key={m.title} data-reveal data-reveal-delay={String(i * 90)} className="tile group flex items-stretch overflow-hidden">
-                <div className="relative w-[42%] shrink-0 overflow-hidden">
-                  <Image
-                    src={m.image}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 10vw, 40vw"
-                    className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
-                  />
+                <div className="flex w-[30%] shrink-0 items-center justify-center bg-blush">
+                  {m.image ? (
+                    <Image src={m.image} alt="" width={160} height={160} className="h-full w-full object-cover" />
+                  ) : (
+                    <Icon name={m.icon} className="size-10 text-bronze" strokeWidth={1.2} />
+                  )}
                 </div>
                 <div className="flex min-h-32 flex-col justify-center p-4">
-                  <h3 className="font-display text-[1.05rem] leading-snug text-ink">{m.title}</h3>
+                  <h3 className="font-display text-[1.05rem] leading-snug text-ink">
+                    {m.href ? (
+                      <a href={m.href} className="hover:text-bronze">
+                        {m.title}
+                      </a>
+                    ) : (
+                      m.title
+                    )}
+                  </h3>
                   <p className="mt-1.5 text-xs text-muted">{m.category}</p>
                 </div>
               </li>
