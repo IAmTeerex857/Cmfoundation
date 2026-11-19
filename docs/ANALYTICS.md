@@ -52,9 +52,13 @@ Confirmed donations are **not** measured from the thank-you page (§9.6); staff 
 
 ## GA4 settings to make in the Google Analytics interface
 
-1. In GA4 **Admin → Custom definitions**, add event-scoped dimensions `book`, `section`, `category`,
-   `purpose`, `enquiry`, `status`, and a metric `percent`. Mark `sign_up`, `institutional_order_submit`,
-   `donate_click` and `generate_lead` as **key events**.
+1. **Admin → Data collection and modification → Data retention**: event data retention **14 months**.
+2. **Admin → Data display → Custom definitions → Create custom dimension** (scope *Event*, parameter name the same as the
+   dimension name): `book`, `section`, `category`, `purpose`, `enquiry`, `status`, `percent`. They collect from the day they are created.
+3. **Admin → Data display → Key events → New key event**: `sign_up`, `institutional_order_submit`, `donate_click`, `generate_lead`.
+4. **Admin → Data streams → cm.foundation → Configure tag settings → List unwanted referrals**: referral domain contains
+   `checkout.bachs.io`, so donors returning to the thank-you page are not credited to the payment page.
+5. **Admin → Product links → Search Console links**: link the cm.foundation Search Console property to the web stream.
 
 ## Campaign tracking (UTM) (§9.7)
 
