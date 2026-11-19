@@ -1,5 +1,5 @@
 import "server-only";
-import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 
 // Free reader accounts without passwords (instructions §6.1). A reader confirms their email with a
@@ -58,14 +58,14 @@ function open<T>(token: string | undefined): T | null {
 export const createLinkToken = (payload: LinkPayload) => seal(payload, LINK_TTL);
 export const readLinkToken = (token: string | undefined) => open<LinkPayload & { exp: number; n: string }>(token);
 
-export async function startSession(session: Omit<Session, "since">) {
+export async function startSession(session: Omit<Session, "since">, ttl = SESSION_TTL) {
   const store = await cookies();
-  store.set(SESSION_COOKIE, seal({ ...session, since: Math.floor(Date.now() / 1000) }, SESSION_TTL), {
+  store.set(SESSION_COOKIE, seal({ ...session, since: Math.floor(Date.now() / 1000) }, ttl), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: SESSION_TTL,
+    maxAge: ttl,
   });
 }
 
@@ -95,3 +95,17 @@ export async function currentAdmin() {
   const reader = await currentReader();
   return reader && isAdminEmail(reader.email) ? reader : null;
 }
+
+/**
+ * Password sign-in for management, so staff need no emailed link. The password lives only in the
+ * hosting settings (ADMIN_PASSWORD, at least 12 characters), never in the code: the repository is
+ * public. Both an authorised email (ADMIN_EMAILS) and the password are required.
+ */
+export function checkAdminPassword(email: string, password: string) {
+  const expected = process.env.ADMIN_PASSWORD?.trim();
+  if (!expected || expected.length < 12 || !isAdminEmail(email)) return false;
+  const digest = (v: string) => createHash("sha256").update(v).digest();
+  return timingSafeEqual(digest(password), digest(expected));
+}
+
+export const ADMIN_SESSION_TTL = 7 * 24 * 60 * 60;

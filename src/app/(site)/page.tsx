@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { BookAction } from "@/components/book-card";
 import { BookCover } from "@/components/book-cover";
 import { StatusBadge } from "@/components/books/status-badge";
 import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
-import { ArrowLink, Button, GoldRule, PageHero, QuoteBlock, SectionIntro } from "@/components/ui";
+import { ArrowLink, Button, GoldRule, PageHero, QuoteBlock, SectionIntro, SlideIcon } from "@/components/ui";
 import { bookHref, bookStatus, getBook, launchBooks } from "@/lib/books";
 import { readableSlugs } from "@/lib/manuscripts";
 import { bookQuote, founder } from "@/lib/founder";
@@ -109,24 +110,16 @@ export default function Home() {
                   <Link href={bookHref(b.slug)} className="flex aspect-[5/8] w-full max-w-[8.75rem] items-end" aria-label={`${b.title}: book details`}>
                     <span className="relative block w-full">
                       <BookCover book={b} className="book-tilt w-full" />
-                      <StatusBadge status={status} className="absolute -top-2.5 left-1/2 -translate-x-1/2 shadow" />
+                      {status !== "read-free" && <StatusBadge status={status} className="absolute -top-2.5 left-1/2 -translate-x-1/2 shadow" />}
                     </span>
                   </Link>
-                  <h3 className="mt-3 font-display text-[1.05rem] leading-snug text-ink">
+                  <h3 className="mt-4 font-display text-[1.05rem] leading-snug text-ink">
                     <Link href={bookHref(b.slug)} className="hover:text-bronze">
                       {b.title}
                     </Link>
                   </h3>
                   <p className="mb-3 text-sm text-muted">{b.author}</p>
-                  {status === "read-free" ? (
-                    <Button href={`/read/${b.slug}`} icon={null} className="mt-auto w-full max-w-[8.75rem] px-3!">
-                      Read Free
-                    </Button>
-                  ) : (
-                    <Button href={bookHref(b.slug)} variant="outline" icon={null} className="mt-auto w-full max-w-[8.75rem] px-3!">
-                      Details
-                    </Button>
-                  )}
+                  <BookAction book={b} status={status} className="mt-auto" />
                 </li>
               );
             })}
@@ -222,8 +215,26 @@ export default function Home() {
                 His Books
               </Button>
             </div>
+            {event && (
+              <Link
+                href={event.href!}
+                className="group mt-10 flex max-w-xl items-center gap-5 border border-line bg-white p-4 transition-colors duration-300 hover:border-bronze/60 sm:p-5"
+              >
+                <span className="shrink-0 border-r border-line pr-5 text-center leading-none text-ink">
+                  <span className="block text-[0.7rem] font-semibold tracking-[0.12em]">{eventDateParts(event.date).month}</span>
+                  <span className="mt-1 block font-display text-[2.1rem]">{eventDateParts(event.date).day}</span>
+                  <span className="mt-1 block text-[0.7rem] text-muted">{eventDateParts(event.date).year}</span>
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="eyebrow block">Milestone · {event.location}</span>
+                  <span className="mt-1.5 block font-display text-[1.2rem] leading-snug text-ink">{event.title}</span>
+                  <span className="mt-1 block text-sm leading-relaxed text-muted">The presentation of the CMF Literature Series, with five books now free to read online.</span>
+                </span>
+                <SlideIcon name="arrow" className="size-5 shrink-0 text-bronze" />
+              </Link>
+            )}
           </div>
-          <div className="flex items-center px-5 pb-14 sm:px-8 lg:py-16 lg:pr-[max(2rem,calc((100vw-1140px)/2))] lg:pl-0">
+          <div className="flex items-center px-5 pb-14 sm:px-8 lg:py-16 lg:pr-[max(2.5rem,calc((100vw-1140px)/2-12rem))] lg:pl-0">
             <div className="lg:border-l lg:border-bronze/40 lg:pl-10">
               <QuoteBlock
                 text={bookQuote.text}
@@ -241,28 +252,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Selected milestone: the 24 November presentation */}
-      {event && (
-        <section className="border-t border-line py-14 lg:py-16">
-          <div className="wrap grid items-center gap-8 lg:grid-cols-[auto_1fr_auto] lg:gap-12">
-            <p className="w-fit bg-white px-5 py-4 text-center leading-none text-ink ring-1 ring-line">
-              <span className="block text-[0.75rem] font-semibold tracking-[0.12em]">{eventDateParts(event.date).month}</span>
-              <span className="mt-1 block font-display text-4xl">{eventDateParts(event.date).day}</span>
-              <span className="mt-1 block text-[0.75rem] text-muted">{eventDateParts(event.date).year}</span>
-            </p>
-            <div>
-              <p className="eyebrow">Milestone</p>
-              <h2 className="display-md mt-2">{event.title}</h2>
-              <p className="mt-2 max-w-2xl leading-relaxed text-body">
-                {event.location}. The presentation of the CMF Literature Series, with five books now free to read online.
-              </p>
-            </div>
-            <Button href={event.href!}>About the Presentation</Button>
-          </div>
-        </section>
-      )}
-
-      {/* 7. Voluntary support and partnerships */}
+      {/* 6. Voluntary support and partnerships */}
       <section className="border-t border-line bg-blush py-14 lg:py-16">
         <div className="wrap grid items-center gap-10 lg:grid-cols-[1.6fr_1fr]">
           <div>

@@ -173,9 +173,11 @@ export default function LiteraturePage() {
               accessible knowledge.
             </p>
           </SectionIntro>
-          <div data-reveal data-reveal-delay="300" className="flex flex-wrap gap-3 lg:justify-end">
-            <Button href="#library">Explore the Free Library</Button>
-            <Button href="/support" variant="outline">
+          <div data-reveal data-reveal-delay="300" className="grid gap-3 sm:w-fit sm:grid-cols-2 lg:grid-cols-1 lg:justify-self-end">
+            <Button href="#library" className="w-full">
+              Explore the Free Library
+            </Button>
+            <Button href="/support" variant="outline" className="w-full">
               Support the Mission
             </Button>
           </div>

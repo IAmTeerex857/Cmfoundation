@@ -5,11 +5,11 @@ For the Foundation's team in Abuja who look after the website day to day.
 ## Signing in
 
 1. Go to **cm.foundation/admin**.
-2. Click **Sign in**, enter your authorised CMF email address and press **Email Me a Sign-in Link**.
-3. Open the email and click the link within 30 minutes. Each link works once.
+2. Enter your authorised CMF email address and the management password, then press **Sign in**.
 
-Only addresses on the authorised list can open the dashboard. To add or remove someone, ask the web developer to update `ADMIN_EMAILS`.
-You stay signed in on that device for up to six months; sign out from **cm.foundation/reader** on shared computers.
+Only addresses on the authorised list (`ADMIN_EMAILS`) can open the dashboard, and only with the password (`ADMIN_PASSWORD`),
+both kept in the hosting settings, never in the code. To add someone or change the password, ask the web developer.
+You stay signed in on that device for 7 days; use **Sign out** at the top of the dashboard on shared computers.
 
 ## Every morning
 

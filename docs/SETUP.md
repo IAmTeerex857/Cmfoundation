@@ -38,6 +38,7 @@ Every table has row-level security switched on with no public access, so the pub
 | Variable | Value |
 |---|---|
 | `ADMIN_EMAILS` | Comma-separated emails of authorised CMF staff, e.g. `hello@cm.foundation,manager@cm.foundation` |
+| `ADMIN_PASSWORD` | Management password for `/admin` (at least 12 characters). Secret: hosting settings only, never in the code |
 | `REPORT_TO` | Who receives the daily, weekly and monthly reports (defaults to `CONTACT_TO`) |
 | `CRON_SECRET` | Any long random string. Vercel sends it to the report job automatically. |
 
