@@ -4,6 +4,8 @@ _Updated 19 November 2026._ Everything in the Foundation's instructions of 18 No
 [cm.foundation](https://cm.foundation). What remains is information only the Foundation can supply, and a few
 settings that are done by hand.
 
+**How to use the site and dashboard day to day:** see [MANUAL.md](MANUAL.md).
+
 > **Urgent:** item 1 (the venue and time of the 24 November presentation). Everything else can follow the launch.
 
 ---
@@ -84,7 +86,7 @@ Mail to hello@cm.foundation is forwarded by Cloudflare to cmf.helloo@gmail.com, 
 - **Sign out:** at the bottom of the sidebar; use it on shared computers.
 - **Add a person or change the password:** ask the developer to update `ADMIN_EMAILS` or `ADMIN_PASSWORD` in Vercel.
 
-Day-to-day use is described in `docs/ADMIN_GUIDE.md`.
+Day-to-day use (inbox, donations, reading the figures, privacy rules) is in [MANUAL.md](MANUAL.md).
 
 ### 3. Google Analytics settings (optional, about 10 minutes)
 
