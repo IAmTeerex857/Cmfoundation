@@ -39,15 +39,20 @@ Pushed to `dataLayer` as `{ event: "<name>", ...parameters }` (or sent with `gta
 
 Confirmed donations are **not** measured from the thank-you page (§9.6); staff record them from payment records.
 
-## Tag Manager configuration
+## How the tags are installed
 
-1. **Google tag** (GA4 configuration): Measurement ID `G-…`, trigger *Initialization – All Pages*.
-2. **Data Layer Variables**: `book`, `section`, `section_index`, `percent`, `status`, `category`, `purpose`, `enquiry`, `method`, `location`.
-3. **Trigger** *CMF events*: Custom Event, event name matches RegEx
-   `^(book_page_view|reading_start|chapter_reached|chapter_complete|reading_progress|book_complete|registration_invite_shown|registration_invite_continue|registration_submitted|sign_up|login|note_create|bookmark_create|notes_emailed|feedback_submit|audiobook_start|audiobook_progress|amazon_click|institutional_order_submit|donation_page_view|donate_click|generate_lead|newsletter_signup)$`
-4. **GA4 Event tag**: Event name `{{Event}}`, parameters from the variables above, trigger *CMF events*.
-5. Preview with Tag Assistant (accept the cookie banner first), then **Submit → Publish**.
-6. In GA4 **Admin → Custom definitions**, add event-scoped dimensions `book`, `section`, `category`,
+- **GA4** (`G-9V83DM9BEW`, set as `NEXT_PUBLIC_GA_ID`) is installed directly by the website after cookie consent.
+  Every event above is sent to it with `gtag`. No Tag Manager setup is needed for Analytics.
+- **Google Tag Manager** (`GTM-ND9ZDFMP`, set as `NEXT_PUBLIC_GTM_ID`) loads alongside it, also only after consent, for any
+  further tags the Foundation adds later (for example a Search Console or advertising tag).
+- **Do not add a "Google tag" or GA4 tag for `G-9V83DM9BEW` inside Tag Manager**: the site already sends it, and
+  visits would be counted twice. If the Foundation ever prefers to manage GA4 entirely in Tag Manager, remove
+  `NEXT_PUBLIC_GA_ID` from Vercel at the same moment it publishes the GA4 tag in the container.
+- To check it is working: open cm.foundation, accept analytics cookies, then look at **GA4 → Reports → Realtime**.
+
+## GA4 settings to make in the Google Analytics interface
+
+1. In GA4 **Admin → Custom definitions**, add event-scoped dimensions `book`, `section`, `category`,
    `purpose`, `enquiry`, `status`, and a metric `percent`. Mark `sign_up`, `institutional_order_submit`,
    `donate_click` and `generate_lead` as **key events**.
 

@@ -4,9 +4,11 @@ import Link from "next/link";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 
-// Google Tag Manager (preferred) or Google Analytics 4, loaded only after the visitor accepts
-// analytics cookies. Set NEXT_PUBLIC_GTM_ID (GTM-XXXXXXX) or NEXT_PUBLIC_GA_ID (G-XXXXXXXXXX) in the
-// hosting settings. With neither set, no banner is shown and nothing is loaded.
+// Google Analytics 4 and Google Tag Manager, loaded only after the visitor accepts analytics cookies.
+//   NEXT_PUBLIC_GA_ID   (G-XXXXXXXXXX)  GA4, installed directly: page views and the site's events (lib/analytics.ts).
+//   NEXT_PUBLIC_GTM_ID  (GTM-XXXXXXX)   the Foundation's Tag Manager container, for any further tags.
+// Both can be set. Do NOT also add a GA4 tag for the same measurement ID inside Tag Manager, or
+// visits are counted twice. With neither set, no banner is shown and nothing is loaded.
 //
 // The choice is kept in this browser. "Cookie settings" in the footer reopens the banner.
 
@@ -60,7 +62,7 @@ export function Analytics() {
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}
         </Script>
       )}
-      {choice === "granted" && !GTM_ID && GA_ID && (
+      {choice === "granted" && GA_ID && (
         <>
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
           <Script id="ga4" strategy="afterInteractive">
