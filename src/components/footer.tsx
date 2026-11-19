@@ -7,6 +7,7 @@ import { CookieSettingsLink } from "./analytics";
 import { Newsletter } from "./newsletter";
 
 export function SocialLinks({ className = "" }: { className?: string }) {
+  if (!site.social.length) return null;
   return (
     <ul className={`flex flex-wrap gap-2 ${className}`}>
       {site.social.map((s) => (

@@ -105,15 +105,16 @@ Corrected from the books' own copyright pages:
 
 Please confirm or supply:
 
-1. **ISBNs.** The separate back-cover images show a placeholder (*The Wages of Sin*, "ISBN 978-0-000000-00-0") and the same ISBN on two books (978-978-985-512-3). The full cover wraps show 978-978-67-3073-8, -3075-2 and -3071-4, which the site uses, with back covers taken from the wraps. Please confirm, and send final high-resolution back covers.
+1. **ISBNs: settled (19 Nov 2026).** The site uses the ISBNs on the full cover wraps, which are the only ones with a valid check digit. The separate back-cover images show a placeholder (*The Wages of Sin*, "ISBN 978-0-000000-00-0") and the same ISBN on two books (978-978-985-512-3). The full cover wraps show 978-978-67-3073-8, -3075-2 and -3071-4, which the site uses, with back covers taken from the wraps. Please confirm, and send final high-resolution back covers.
 2. **Back covers** for *False Men and True Christians* and *God's Kind of Leader*.
-3. **Typos in the source files:** "CMF Remebrance Series" (*The Wages of Sin* title page), "Chriatians" (*God's Kind of Leader*, chapter 12 title), "Chnwoke" (*False Men*, Important Note). *Exploring the Godhead* calls itself both the Remembrance Series and the Literature Series. The site reproduces the text as supplied; corrected EPUBs can be imported at any time.
+3. **Typos in the source files: corrected on the site (19 Nov 2026).** "Remebrance", "Chriatians" and "Chnwoke" are fixed by the importer's `CORRECTIONS` list (`scripts/import-epub.mjs`), so re-imports keep the fixes. The printed books and EPUBs still carry them.
 4. **Forthcoming list.** The books list *The Devil's Antics*, *Those Unanswered Prayers* and *Autopsy of The Last Temptation* as upcoming, while the site lists *A Lawyer's Woes*, *Judge Not!* and *Assured, Not Entitled*. Which is current?
 5. **Amazon links** for the three titles, and the **audiobook recordings** when ready.
 6. **Zenith account details** for local transfers (mentioned as attached, but not in the emails).
 7. **Quotations.** Unverified quotes have been taken off the home and Our Work pages. Others remain on the founder page awaiting confirmation (including "Service is the rental…", usually credited to Shirley Chisholm).
 8. **Nonprofit statement (§2.5)** and Privacy Policy: please confirm against the governing documents and the privacy compliance review.
-9. **24 November details:** venue and time to show on the event page.
+9. **24 November details:** venue and time to show on the event page. Not stated in any material received (instructions PDF, September design pack, emails); the page says they are shared with guests.
+10. **Contact details not yet live:** partnerships@, media@ and events@ addresses, office hours and social profiles. Hidden on the site until ready (the contact points open the enquiry form instead); add them in `src/lib/site.ts`.
 
 ## 7. Delivery timetable (§13.9)
 

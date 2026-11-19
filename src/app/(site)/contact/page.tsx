@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { SocialLinks } from "@/components/footer";
 import { Icon, type IconName } from "@/components/icons";
@@ -29,7 +30,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
 
   const channels: { icon: IconName; title: string; value: string; href?: string; note: string }[] = [
     { icon: "mail", title: "Email Us", value: site.contact.email, href: `mailto:${site.contact.email}`, note: "We aim to respond within 1–2 business days." },
-    { icon: "phone", title: "Call Us", value: site.contact.phone, href: site.contact.phoneHref, note: site.contact.hours },
+    { icon: "phone", title: "Call Us", value: site.contact.phone, href: site.contact.phoneHref, note: "CMF Head Office, Abuja." },
     { icon: "pin", title: "Visit Us", value: site.contact.location, href: site.contact.mapsUrl, note: "By appointment." },
   ];
 
@@ -62,7 +63,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
             </p>
           </div>
 
-          <div className="tile mt-10 grid gap-y-10 px-6 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-line lg:px-0">
+          <div className={`tile mt-10 grid gap-y-10 px-6 py-10 sm:grid-cols-2 ${site.social.length ? "lg:grid-cols-4" : "lg:grid-cols-3"} lg:divide-x lg:divide-line lg:px-0`}>
             {channels.map((c, i) => (
               <a
                 key={c.title}
@@ -78,11 +79,13 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
                 <p className="mt-1 text-sm leading-relaxed text-muted">{c.note}</p>
               </a>
             ))}
+            {site.social.length > 0 && (
             <div data-reveal data-reveal-delay="270" className="flex flex-col items-center px-6 text-center">
               <SocialLinks className="justify-center [&_a]:size-9 [&_a]:text-bronze [&_a]:ring-1 [&_a]:ring-bronze/60 [&_a:hover]:bg-bronze [&_a:hover]:text-white [&_svg]:size-4" />
               <h3 className="display-sm mt-4">Follow Us</h3>
               <p className="mt-1 text-sm leading-relaxed text-muted">Stay connected for updates and new releases.</p>
             </div>
+            )}
           </div>
         </div>
       </section>
@@ -144,9 +147,15 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
                   <Icon name={c.icon as IconName} className="size-9 shrink-0 text-bronze" strokeWidth={1.2} />
                   <div className="min-w-0">
                     <h3 className="font-display text-[1.25rem] leading-snug text-ink">{c.title}</h3>
-                    <a href={`mailto:${c.email}`} className="block break-words text-ink transition-colors hover:text-bronze">
-                      {c.email}
-                    </a>
+                    {"email" in c ? (
+                      <a href={`mailto:${c.email}`} className="block break-words text-ink transition-colors hover:text-bronze">
+                        {c.email}
+                      </a>
+                    ) : (
+                      <Link href={`/contact?enquiry=${c.enquiry}#message`} className="block text-ink underline-offset-2 transition-colors hover:text-bronze hover:underline">
+                        Send us a message
+                      </Link>
+                    )}
                     {"phone" in c && (
                       <a href={site.contact.phoneHref} className="block text-ink transition-colors hover:text-bronze">
                         {c.phone}

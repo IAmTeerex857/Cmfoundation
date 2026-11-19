@@ -10,7 +10,6 @@ export const site = {
     email: "hello@cm.foundation",
     phone: "+234 81 5675 2002",
     phoneHref: "tel:+2348156752002",
-    hours: "Mon – Fri, 9:00am – 5:00pm (WAT)",
     officeName: "CMF Head Office",
     location: "Otunba Kayode Close, Asokoro, Abuja FCT",
     mapsUrl: "https://maps.app.goo.gl/x88tX91qnFFyN3Aw6?g_st=aw",
@@ -26,31 +25,27 @@ export const site = {
     },
     {
       title: "Partnerships & Collaboration",
-      email: "partnerships@cm.foundation",
+      enquiry: "partnership",
       body: "For organisations, institutions and strategic partnerships.",
       icon: "handshake",
     },
     {
       title: "Media & Press",
-      email: "media@cm.foundation",
+      enquiry: "media",
       body: "For media enquiries, interviews and press materials.",
       icon: "document",
     },
     {
       title: "Events",
-      email: "events@cm.foundation",
+      enquiry: "events",
       body: "For information on upcoming events and past events.",
       icon: "calendar",
     },
   ],
-  // TODO(client): replace with the Foundation's real profile URLs.
-  social: [
-    { label: "Facebook", icon: "facebook", href: "https://facebook.com/" },
-    { label: "X", icon: "x", href: "https://x.com/" },
-    { label: "Instagram", icon: "instagram", href: "https://instagram.com/" },
-    { label: "YouTube", icon: "youtube", href: "https://youtube.com/" },
-    { label: "LinkedIn", icon: "linkedin", href: "https://linkedin.com/" },
-  ],
+  // The Foundation's social profiles, shown in the footer and on the contact page once they exist, e.g.
+  //   { label: "Facebook", icon: "facebook", href: "https://facebook.com/<page>" }
+  // Icons available: facebook, x, instagram, youtube, linkedin. Empty: no icons are shown.
+  social: [] as { label: string; icon: "facebook" | "x" | "instagram" | "youtube" | "linkedin"; href: string }[],
 } as const;
 
 export const nav = [

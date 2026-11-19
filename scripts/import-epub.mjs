@@ -5,7 +5,8 @@
 //
 // Writes books/<slug>/edition.json: every section of the book in reading order (title page,
 // copyright, front matter, prologue, parts, chapters, back matter) as clean, minimal HTML. The text
-// is the publisher's own, unchanged; only layout markup (drop caps, wrappers, classes) is removed.
+// is the publisher's own; only layout markup (drop caps, wrappers, classes) is removed, and the
+// spelling slips listed in CORRECTIONS are put right.
 // Re-run the command whenever the Foundation supplies a corrected EPUB.
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -240,8 +241,17 @@ const edition = {
   sections,
 };
 
+// Spelling slips in the supplied files, corrected for the online edition (approved 19 November 2026).
+const CORRECTIONS = [
+  ["Remebrance", "Remembrance"], // The Wages of Sin, title page
+  ["Chriatians", "Christians"], // God's Kind of Leader, chapter 12 title
+  ["CHNWOKE", "CHINWOKE"], // False Men and True Christians, contact note
+  ["Chnwoke", "Chinwoke"],
+];
+const json = CORRECTIONS.reduce((s, [wrong, right]) => s.replaceAll(wrong, right), JSON.stringify(edition, null, 1));
+
 const outDir = path.join(process.cwd(), "books", slug);
 mkdirSync(outDir, { recursive: true });
-writeFileSync(path.join(outDir, "edition.json"), JSON.stringify(edition, null, 1) + "\n");
+writeFileSync(path.join(outDir, "edition.json"), json + "\n");
 console.log(`${slug}: ${sections.length} sections, ${edition.words.toLocaleString()} words, introduction ends at "${edition.introEnds}"`);
 for (const s of sections) console.log(`  ${s.kind.padEnd(8)} ${s.id.padEnd(34)} ${s.title}${s.subtitle ? ` | ${s.subtitle}` : ""} (${s.words})`);
