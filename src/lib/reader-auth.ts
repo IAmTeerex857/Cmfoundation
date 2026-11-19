@@ -108,4 +108,5 @@ export function checkAdminPassword(email: string, password: string) {
   return timingSafeEqual(digest(password), digest(expected));
 }
 
-export const ADMIN_SESSION_TTL = 7 * 24 * 60 * 60;
+/** As long as browsers allow a cookie to last (400 days); signing in again renews it. */
+export const ADMIN_SESSION_TTL = 400 * 24 * 60 * 60;

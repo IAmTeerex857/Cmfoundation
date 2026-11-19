@@ -1,5 +1,7 @@
 # Updates Needed — CMF Foundation Website
 
+> **See [WHATS_LEFT.md](WHATS_LEFT.md)** for the current list of what is needed from the Foundation and the manual setup steps.
+>
 > **19 November 2026:** the Foundation's instructions of 18 November are implemented. The current list of open questions
 > (ISBNs, back covers, typos in the source files, forthcoming titles, Amazon links, audiobooks, Zenith details, quotations,
 > event venue and time) is in `docs/IMPLEMENTATION_PLAN.md` §6, and the accounts to set up are in `docs/SETUP.md`.

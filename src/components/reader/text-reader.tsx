@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
 import { Icon, type IconName } from "../icons";
+import { TextLines } from "../loaders";
 
 // The online reader for books with a text edition (instructions §5.4 to §6.5).
 //
@@ -500,10 +501,8 @@ export function TextReader({ slug, title, author, sections, introEnds }: Props) 
                   .
                 </p>
               ) : (
-                <div className="space-y-4 py-6" aria-busy="true" aria-label="Loading">
-                  {[92, 100, 96, 88, 100, 70].map((w, i) => (
-                    <div key={i} className="h-4 animate-pulse rounded bg-current opacity-10" style={{ width: `${w}%` }} />
-                  ))}
+                <div className="py-6">
+                  <TextLines blocks={4} size="1.6rem" label="Loading the chapter" />
                 </div>
               )}
               <div ref={endRef} aria-hidden="true" className="h-px" />

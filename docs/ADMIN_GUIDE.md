@@ -9,7 +9,7 @@ For the Foundation's team in Abuja who look after the website day to day.
 
 Only addresses on the authorised list (`ADMIN_EMAILS`) can open the dashboard, and only with the password (`ADMIN_PASSWORD`),
 both kept in the hosting settings, never in the code. To add someone or change the password, ask the web developer.
-You stay signed in on that device for 7 days; use **Sign out** at the top of the dashboard on shared computers.
+You stay signed in on that device for 400 days (the longest browsers allow); use **Sign out** at the bottom of the sidebar on shared computers.
 
 ## Every morning
 

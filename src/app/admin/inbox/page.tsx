@@ -16,12 +16,12 @@ function StatusForm({ id, status, options, action }: { id: string; status: strin
   return (
     <form action={action} className="flex items-center gap-2">
       <input type="hidden" name="id" value={id} />
-      <select name="status" defaultValue={status} className="rounded border border-line bg-white px-2 py-1 text-sm">
+      <select name="status" defaultValue={status} className="rounded-lg border border-black/[0.08] bg-[#faf7f2] px-2 py-1.5 text-sm">
         {options.map((o) => (
           <option key={o}>{o}</option>
         ))}
       </select>
-      <button className="rounded bg-ink px-3 py-1 text-xs font-semibold text-white">Save</button>
+      <button className="rounded-lg bg-navy px-3 py-1.5 text-xs font-semibold text-white">Save</button>
     </form>
   );
 }
@@ -37,20 +37,20 @@ export default async function Inbox({ searchParams }: PageProps<"/admin/inbox">)
   return (
     <div>
       <div className="flex items-end justify-between">
-        <h1 className="font-display text-4xl">Inbox</h1>
+        <h1 className="font-display text-[clamp(2.4rem,4vw,3.4rem)] leading-none">Inbox</h1>
         <a href={archived ? "/admin/inbox" : "/admin/inbox?show=all"} className="text-sm text-bronze underline">
           {archived ? "Hide archived" : "Show archived"}
         </a>
       </div>
 
-      <h2 className="mt-8 font-display text-2xl">Reader feedback ({feedback.length})</h2>
+      <h2 className="mt-8 text-[1.15rem] font-medium">Reader feedback ({feedback.length})</h2>
       <ul className="mt-4 space-y-3">
         {feedback.length === 0 && <li className="text-muted">No feedback.</li>}
         {feedback.map((f) => (
-          <li key={f.id} className="rounded-[4px] border border-line bg-white p-4">
+          <li key={f.id} className="rounded-[22px] bg-white p-5 ring-1 ring-black/[0.05]">
             <div className="flex flex-wrap items-start justify-between gap-3 text-sm">
               <p>
-                <strong>{f.name || "Anonymous"}</strong> {f.email && <a href={`mailto:${f.email}`} className="text-bronze underline">{f.email}</a>} {f.reader_id && <span className="ml-1 rounded bg-blush px-1.5 py-0.5 text-xs">verified reader</span>}
+                <strong>{f.name || "Anonymous"}</strong> {f.email && <a href={`mailto:${f.email}`} className="text-bronze underline">{f.email}</a>} {f.reader_id && <span className="ml-1 rounded-full bg-parchment px-1.5 py-0.5 text-xs">verified reader</span>}
                 <span className="block text-muted">
                   {when(f.created_at)} · {f.book ? getBook(f.book)?.title ?? f.book : "No book"}
                   {f.section ? ` · ${f.section}` : ""}
@@ -63,11 +63,11 @@ export default async function Inbox({ searchParams }: PageProps<"/admin/inbox">)
         ))}
       </ul>
 
-      <h2 className="mt-12 font-display text-2xl">Enquiries and orders ({enquiries.length})</h2>
+      <h2 className="mt-12 text-[1.15rem] font-medium">Enquiries and orders ({enquiries.length})</h2>
       <ul className="mt-4 space-y-3">
         {enquiries.length === 0 && <li className="text-muted">No enquiries.</li>}
         {enquiries.map((e) => (
-          <li key={e.id} className="rounded-[4px] border border-line bg-white p-4">
+          <li key={e.id} className="rounded-[22px] bg-white p-5 ring-1 ring-black/[0.05]">
             <div className="flex flex-wrap items-start justify-between gap-3 text-sm">
               <p>
                 <span className={`mr-2 rounded px-1.5 py-0.5 text-xs font-semibold uppercase ${e.kind === "order" ? "bg-ink text-white" : "bg-blush"}`}>

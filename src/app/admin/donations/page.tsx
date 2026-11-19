@@ -9,7 +9,7 @@ import { recordDonation, recordSponsorship } from "../actions";
 type Donation = { id: string; received_on: string; amount: number; currency: string; category: string; method: string; reference: string | null; donor_name: string | null; recorded_by: string | null };
 type Sponsorship = { id: string; organisation: string; arrangement: string; amount: number | null; currency: string | null; status: string; starts_on: string | null };
 
-const input = "w-full rounded border border-line bg-white px-3 py-2 text-sm";
+const input = "w-full rounded-xl border border-black/[0.08] bg-[#faf7f2] px-3 py-2.5 text-sm outline-none focus:border-bronze focus:bg-white";
 
 export default async function Donations() {
   if (!(await currentAdmin()) || !dbConfigured()) return null;
@@ -19,13 +19,13 @@ export default async function Donations() {
   ]);
   return (
     <div>
-      <h1 className="font-display text-4xl">Donations &amp; sponsorships</h1>
+      <h1 className="font-display text-[clamp(2.4rem,4vw,3.4rem)] leading-none">Donations &amp; sponsorships</h1>
       <p className="mt-2 max-w-3xl text-sm text-muted">
         Record each gift after confirming it in the payment partner&rsquo;s dashboard or on the bank statement. A visit to the thank-you page is not proof
         of payment.
       </p>
 
-      <form action={recordDonation} className="mt-6 grid gap-3 rounded-[4px] border border-line bg-white p-5 sm:grid-cols-4">
+      <form action={recordDonation} className="mt-6 grid gap-3 rounded-[22px] bg-white ring-1 ring-black/[0.05] p-5 sm:grid-cols-4">
         <label className="text-sm">
           Date received
           <input type="date" name="received_on" required className={input} />
@@ -77,10 +77,10 @@ export default async function Donations() {
           Note
           <input name="note" className={input} />
         </label>
-        <button className="self-end rounded bg-bronze px-4 py-2.5 text-sm font-semibold text-white">Record donation</button>
+        <button className="self-end rounded-xl bg-bronze px-4 py-2.5 text-sm font-semibold text-white">Record donation</button>
       </form>
 
-      <div className="mt-6 overflow-x-auto rounded-[4px] border border-line bg-white">
+      <div className="mt-6 overflow-x-auto rounded-[22px] bg-white ring-1 ring-black/[0.05]">
         <table className="w-full text-sm">
           <thead className="bg-[#faf8f4] text-left text-xs text-muted uppercase">
             <tr>
@@ -116,8 +116,8 @@ export default async function Donations() {
         </table>
       </div>
 
-      <h2 className="mt-12 font-display text-2xl">Sponsorships and project collaborations</h2>
-      <form action={recordSponsorship} className="mt-4 grid gap-3 rounded-[4px] border border-line bg-white p-5 sm:grid-cols-4">
+      <h2 className="mt-12 text-[1.15rem] font-medium">Sponsorships and project collaborations</h2>
+      <form action={recordSponsorship} className="mt-4 grid gap-3 rounded-[22px] bg-white ring-1 ring-black/[0.05] p-5 sm:grid-cols-4">
         <label className="text-sm sm:col-span-2">
           Organisation
           <input name="organisation" required className={input} />
@@ -145,11 +145,11 @@ export default async function Donations() {
             ))}
           </select>
         </label>
-        <button className="self-end rounded bg-bronze px-4 py-2.5 text-sm font-semibold text-white">Add</button>
+        <button className="self-end rounded-xl bg-bronze px-4 py-2.5 text-sm font-semibold text-white">Add</button>
       </form>
       <ul className="mt-4 space-y-2 text-sm">
         {sponsorships.map((s) => (
-          <li key={s.id} className="flex flex-wrap justify-between gap-3 rounded-[4px] border border-line bg-white px-4 py-3">
+          <li key={s.id} className="flex flex-wrap justify-between gap-3 rounded-[22px] bg-white ring-1 ring-black/[0.05] px-4 py-3">
             <span>
               <strong>{s.organisation}</strong> · {s.arrangement}
             </span>

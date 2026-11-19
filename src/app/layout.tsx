@@ -5,6 +5,7 @@ import Script from "next/script";
 import { Analytics } from "@/components/analytics";
 import { defaultTitle, shareImage } from "@/lib/metadata";
 import { site } from "@/lib/site";
+import "generative-loaders/styles.css";
 import "./globals.css";
 
 const geist = Geist({

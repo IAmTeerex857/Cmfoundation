@@ -76,30 +76,26 @@ export function Analytics() {
           role="dialog"
           aria-live="polite"
           aria-label="Cookie preferences"
-          className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-xl rounded-[4px] border border-line bg-white p-5 shadow-[0_24px_60px_-24px_rgba(12,31,66,0.45)] sm:p-6"
+          className="fixed bottom-4 left-4 z-[60] w-[calc(100%-2rem)] max-w-[22rem] rounded-2xl border border-line bg-white p-5 shadow-[0_18px_50px_-20px_rgba(12,31,66,0.35)]"
         >
-          <p className="font-display text-lg text-ink">Help us understand how the library is used</p>
-          <p className="mt-2 text-sm leading-relaxed text-muted">
-            With your permission we use Google Analytics cookies to count visits and see which books are read, so we can improve the site. We never send
-            your name, email or notes to Google. You can change your mind at any time from &ldquo;Cookie settings&rdquo; at the foot of every page.{" "}
-            <Link href="/privacy#cookies" className="text-bronze underline underline-offset-2">
-              Privacy Policy
-            </Link>
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={() => decide("granted")}
-              className="rounded-[3px] bg-bronze px-5 py-3 text-[0.78rem] font-semibold tracking-[0.08em] text-white uppercase hover:bg-bronze-dark"
-            >
-              Accept analytics
-            </button>
+          <p className="text-[0.95rem] leading-relaxed text-ink">We use cookies to see which books are read and to improve the library.</p>
+          <Link href="/privacy#cookies" className="mt-2 inline-block text-sm font-medium text-ink underline underline-offset-2 hover:text-bronze">
+            Read our Privacy Policy
+          </Link>
+          <div className="mt-4 grid grid-cols-2 gap-2.5">
             <button
               type="button"
               onClick={() => decide("denied")}
-              className="rounded-[3px] border border-bronze px-5 py-3 text-[0.78rem] font-semibold tracking-[0.08em] text-bronze uppercase hover:bg-bronze hover:text-white"
+              className="rounded-full border border-ink/80 px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-white"
             >
-              Decline
+              Reject All
+            </button>
+            <button
+              type="button"
+              onClick={() => decide("granted")}
+              className="rounded-full bg-bronze px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-bronze-dark"
+            >
+              Accept All
             </button>
           </div>
         </div>

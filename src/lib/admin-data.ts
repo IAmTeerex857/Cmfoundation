@@ -9,18 +9,22 @@ import { db, gte } from "./db";
 
 type Metric = { day: string; event: string; book: string; count: number };
 
-export type Period = { days: number; since: string; label: string };
+export type Period = { days: number; since: string; prevSince: string; label: string };
+
+const lagosDay = (ms: number) => new Date(ms).toLocaleDateString("en-CA", { timeZone: "Africa/Lagos" });
 
 export function period(days: number): Period {
   const d = [1, 7, 30, 90, 365].includes(days) ? days : 30;
-  const since = new Date(Date.now() - (d - 1) * 86400000).toLocaleDateString("en-CA", { timeZone: "Africa/Lagos" });
-  return { days: d, since, label: d === 1 ? "Today" : `Last ${d} days` };
+  const since = lagosDay(Date.now() - (d - 1) * 86400000);
+  const prevSince = lagosDay(Date.now() - (2 * d - 1) * 86400000);
+  return { days: d, since, prevSince, label: d === 1 ? "Today" : `Last ${d} days` };
 }
 
 export async function dashboard(p: Period) {
   const sinceTs = `${p.since}T00:00:00+01:00`;
-  const [metrics, readersAll, readersNew, enquiries, feedback, donations, newsletter, returning, countries] = await Promise.all([
-    db.select<Metric>("daily_metrics", { day: gte(p.since) }),
+  const prevTs = `${p.prevSince}T00:00:00+01:00`;
+  const [allMetrics, readersAll, readersNew, enquiries, feedback, donations, newsletter, returning, countries, readersPrev, newMessages, newOrders, newFeedback] = await Promise.all([
+    db.select<Metric>("daily_metrics", { day: gte(p.prevSince) }),
     db.count("readers", { deleted_at: "is.null" }),
     db.count("readers", { created_at: gte(sinceTs) }),
     db.select<{ kind: string; topic: string | null; book: string | null; quantity: number | null; created_at: string }>("enquiries", {
@@ -32,7 +36,13 @@ export async function dashboard(p: Period) {
     db.count("readers", { newsletter: "is.true", deleted_at: "is.null" }),
     db.count("readers", { last_seen_at: gte(sinceTs), deleted_at: "is.null" }),
     db.select<{ country: string }>("readers", { select: "country", deleted_at: "is.null" }),
+    db.count("readers", { and: `(created_at.gte.${encodeURIComponent(prevTs)},created_at.lt.${encodeURIComponent(sinceTs)})` }),
+    db.count("enquiries", { kind: "eq.contact", status: "eq.new" }),
+    db.count("enquiries", { kind: "eq.order", status: "eq.new" }),
+    db.count("feedback", { status: "eq.new" }),
   ]);
+  const metrics = allMetrics.filter((m) => m.day >= p.since);
+  const prevSum = (event: string) => allMetrics.filter((m) => m.day < p.since && m.event === event).reduce((n, m) => n + m.count, 0);
 
   const sum = (event: string, book?: string) => metrics.filter((m) => m.event === event && (book === undefined || m.book === book)).reduce((n, m) => n + m.count, 0);
 
@@ -82,6 +92,8 @@ export async function dashboard(p: Period) {
   const donateClicks = metrics.filter((m) => m.event === "donate_click").reduce<Record<string, number>>((acc, m) => ((acc[m.book || "general"] = (acc[m.book || "general"] ?? 0) + m.count), acc), {});
 
   return {
+    previous: { readingStarts: prevSum("reading_start"), bookPageViews: prevSum("book_page_view"), registrations: readersPrev },
+    needs: { messages: newMessages, orders: newOrders, feedback: newFeedback },
     overview: {
       readingStarts: sum("reading_start"),
       bookPageViews: sum("book_page_view"),
