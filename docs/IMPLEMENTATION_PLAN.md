@@ -130,7 +130,7 @@ Please confirm or supply:
 
 | Frequency | Task |
 |---|---|
-| Daily (CMF staff) | Inbox and daily summary (`docs/ADMIN_GUIDE.md`) |
+| Daily (CMF staff) | Inbox and daily summary (`MANUAL.md`) |
 | Weekly | Check the weekly report, Search Console coverage and Vercel errors |
 | Monthly | Dependency and security updates; review the monthly report; test sign-in and a donation link |
 | Quarterly | Review who has dashboard access; restore a backup to confirm backups work; review the Privacy Policy |
