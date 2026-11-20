@@ -34,7 +34,7 @@ export const faqs = {
   },
   partner: {
     q: "Can my organisation partner with CMF?",
-    a: "We welcome partnerships with companies, foundations, churches, schools and institutions that share our vision of an informed, compassionate and opportunity-rich society. Send us a message through the contact form, choosing \"Institutional sponsorship & project collaboration\", with a little about your organisation and what you have in mind, and we will be in touch.",
+    a: "We welcome partnerships with companies, foundations, churches, schools and institutions that share our vision of an informed, compassionate and opportunity-rich society. Use the \"Propose a Collaboration\" form on the Collaborate & Contact page; it goes straight to the Foundation's team. Each proposal is assessed and approved by the Foundation before any project is represented as a CMF initiative.",
   },
   volunteer: {
     q: "How can I volunteer?",
@@ -42,7 +42,7 @@ export const faqs = {
   },
   invite: {
     q: "How can I invite CMF to an event?",
-    a: "Send the details of your event (date, location, audience and what you have in mind) through the contact form, choosing \"Events & invitations\", and the team will respond within 1–2 business days.",
+    a: "Send the details of your event (date, location, audience and what you have in mind) through the contact form, choosing \"Events & invitations\", and the team will respond.",
   },
   visit: {
     q: "Where is the Foundation based?",

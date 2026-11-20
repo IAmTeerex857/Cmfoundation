@@ -104,6 +104,17 @@ export default async function Inbox({ searchParams }: PageProps<"/admin/inbox">)
                   </>
                 )}
               </dl>
+            ) : e.topic === "collaboration" ? (
+              <dl className="mt-3 grid grid-cols-[9rem_1fr] gap-y-1 text-sm">
+                <dt className="text-muted">Organisation</dt>
+                <dd>{e.payload.organisation}</dd>
+                <dt className="text-muted">Type</dt>
+                <dd>{e.payload.type}</dd>
+                <dt className="text-muted">Objective</dt>
+                <dd className="whitespace-pre-wrap">{e.payload.objective}</dd>
+                <dt className="text-muted">Message</dt>
+                <dd className="whitespace-pre-wrap">{e.payload.message}</dd>
+              </dl>
             ) : (
               <p className="mt-3 whitespace-pre-wrap">{e.payload.message}</p>
             )}

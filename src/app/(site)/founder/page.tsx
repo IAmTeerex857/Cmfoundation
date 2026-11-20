@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { BookCover } from "@/components/book-cover";
+import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
 import { Button, PageHero, QuoteBlock, SectionIntro } from "@/components/ui";
+import { LIFE_AND_TIMES, bookHref, getBook } from "@/lib/books";
 import { chapters, founder, quotes, timeline } from "@/lib/founder";
+import { interviews, tributeCount } from "@/lib/legacy";
+import { readableSlugs } from "@/lib/manuscripts";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -11,12 +17,20 @@ export const metadata: Metadata = pageMetadata({
   path: "/founder",
 });
 
-// Framed archive photos for the "Many Chapters" collage, placed as in the design.
+// Framed archive photos for the "Many Chapters" collage, beside the large barrister portrait. Order
+// and choice as the Foundation set them (further instructions, 20 November 2026, §2): the academic
+// gown; a young politician with Ekwueme and C. C. Onoh (top right); with Bill Clinton (bottom left);
+// with Obasanjo (bottom right).
 const collage: { src?: string; alt: string; box: string; position?: string }[] = [
   { src: "/images/founder/robes-seated.jpg", alt: "Dr Mbadinuju seated in academic robes on a university campus", box: "left-[40%] top-[3%] w-[27%] -rotate-3", position: "50% 40%" },
-  { src: "/images/founder/podium-wave.jpg", alt: "Dr Mbadinuju waving from a podium", box: "left-[69%] top-[0%] w-[30%] rotate-3", position: "50% 30%" },
-  { src: "/images/founder/group.jpg", alt: "Dr Mbadinuju with a group of men", box: "left-[45%] top-[50%] w-[31%] -rotate-1", position: "50% 30%" },
-  { src: "/images/founder/handshake.jpg", alt: "Dr Mbadinuju shaking hands at a formal reception", box: "left-[78%] top-[55%] w-[21%] rotate-2", position: "60% 30%" },
+  {
+    src: "/images/founder/airport-arrival.jpg",
+    alt: "A young Dr Mbadinuju walking behind Vice President Alex Ekwueme and Chief C. C. Onoh on arrival at an airport",
+    box: "left-[69%] top-[0%] w-[30%] rotate-3",
+    position: "50% 35%",
+  },
+  { src: "/images/founder/handshake.jpg", alt: "Dr Mbadinuju shaking hands with President Bill Clinton", box: "left-[45%] top-[50%] w-[31%] -rotate-1", position: "50% 25%" },
+  { src: "/images/founder/official-meeting.jpg", alt: "Dr Mbadinuju seated beside President Olusegun Obasanjo", box: "left-[78%] top-[55%] w-[21%] rotate-2", position: "50% 30%" },
 ];
 
 /** A photo, or an empty frame where the Foundation's photo will go. */
@@ -28,32 +42,18 @@ function PhotoSlot({ src, alt = "", sizes, position = "50% 25%", className = "" 
   );
 }
 
-// The design's two memory cards: the photo gallery and the memorial brochure (read in the reader).
-const memories: { title: string; body: string; cta: string; href: string; photos: { src: string; alt: string; position?: string; contain?: boolean }[] }[] = [
-  {
-    title: "Photo Gallery",
-    body: `A visual journey through the life and times of ${founder.name}.`,
-    cta: "View Gallery",
-    href: "/founder/gallery",
-    photos: [
-      { src: "/images/founder-bowler.jpg", alt: "Early portrait of Dr Chinwoke Mbadinuju in a bowler hat", position: "50% 20%" },
-      { src: "/images/founder/doctoral-robes.jpg", alt: "Dr Mbadinuju in doctoral robes at his graduation", position: "50% 20%" },
-    ],
-  },
-  {
-    title: "Burial Tribute",
-    body: "Destiny Fulfilled: The Life & Times. Honouring a life of service, faith and enduring impact.",
-    cta: "Read Tribute",
-    href: "/read/destiny-fulfilled",
-    photos: [
-      { src: "/images/founder/yellow-agbada.jpg", alt: "Dr Mbadinuju in a yellow agbada and red cap", position: "50% 20%" },
-      { src: "/images/covers/official/destiny-fulfilled.png", alt: "Cover of Destiny Fulfilled: The Life & Times", contain: true },
-    ],
-  },
-];
-
 // Section order follows the Foundation's founder page design (../drive_assets/3 CMF Founder Page 26.png).
+// "The Books Behind the Legacy": his books on this site, each with one line on what it is about.
+const legacyBooks = [
+  { slug: "false-men-and-true-christians", line: "His call to test Christian faith against Scripture, closing with the story of his own salvation." },
+  { slug: "gods-kind-of-leader", line: "A 1988 paper to Christian lawyers on finding righteous and responsible leadership for Nigeria." },
+  { slug: "law-and-religion-in-nigeria", line: "Written as both lawyer and lay preacher, on where law and religious life meet in Nigeria." },
+  { slug: "who-then-is-this-jesus", line: "His study, from the Scriptures, of who Jesus Christ is." },
+  { slug: "journey-into-the-past", line: "Ordeal of a State Governor: his memoir of the governorship and the years that followed." },
+].map(({ slug, line }) => ({ book: getBook(slug)!, line }));
+
 export default function FounderPage() {
+  const readable = readableSlugs();
   const faithful = quotes.find((q) => q.text.startsWith("Be faithful"))!;
   const strip = [...chapters.map((c) => ({ href: `#${c.id}`, label: c.title })), { href: "#legacy", label: "Legacy" }];
 
@@ -162,7 +162,7 @@ export default function FounderPage() {
               <li key={t.period} data-reveal data-reveal-delay={String(i * 70)} className="relative">
                 <span aria-hidden="true" className="absolute top-1.5 -left-[33px] size-2.5 rounded-full bg-bronze ring-4 ring-paper lg:-top-[37px] lg:left-0" />
                 <p className="font-semibold text-ink tabular-nums">{t.period}</p>
-                <PhotoSlot src={t.image} alt={t.title} sizes="(min-width: 1024px) 13vw, 80vw" className="mt-3 aspect-[4/3] max-w-xs" />
+                <PhotoSlot src={t.image} alt={t.imageAlt ?? t.title} sizes="(min-width: 1024px) 13vw, 80vw" className="mt-3 aspect-[4/3] max-w-xs" />
                 <h3 className="mt-3 font-display text-lg leading-snug text-ink">{t.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{t.body}</p>
               </li>
@@ -195,51 +195,154 @@ export default function FounderPage() {
         </div>
       </section>
 
-      {/* Gallery and legacy */}
+      {/* The books behind the legacy (further instructions §2) */}
       <section className="border-t border-line py-16 lg:py-20">
-        <div className="wrap grid gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-0">
-          <div id="gallery" className="grid scroll-mt-24 gap-8 sm:grid-cols-2 lg:border-r lg:border-bronze/30 lg:pr-12">
-            {memories.map((m, i) => (
-              <article key={m.title} data-reveal data-reveal-delay={String(i * 120)}>
-                <div className="grid aspect-[16/10] grid-cols-[0.8fr_1.2fr] gap-1.5">
-                  {m.photos.map((ph, j) => (
-                    <PhotoSlot
-                      key={j}
-                      src={ph.src}
-                      alt={ph.alt}
-                      sizes="(min-width: 1024px) 12vw, 25vw"
-                      position={ph.contain ? "center" : ph.position}
-                      className={`h-full ${ph.contain ? "bg-black [&_img]:object-contain" : ""}`}
-                    />
-                  ))}
-                </div>
-                <h2 className="mt-4 font-display text-xl text-ink">{m.title}</h2>
-                <p className="mt-1 text-sm leading-relaxed text-body">{m.body}</p>
-                <Button href={m.href} variant="outline" className="mt-4">
-                  {m.cta}
-                </Button>
-              </article>
-            ))}
+        <div className="wrap">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <SectionIntro eyebrow="His writing" title="The Books Behind the Legacy" size="md">
+              <p>Dr Mbadinuju wrote 22 books on faith, leadership, law and governance. These are the ones on this site.</p>
+            </SectionIntro>
+            <Button href="/literature#library" variant="outline">
+              The Full Library
+            </Button>
           </div>
-          <div id="legacy" className="scroll-mt-24 lg:pl-12">
-            <p data-reveal="fade" className="eyebrow">
-              A legacy that lives on
-            </p>
-            <h2 data-reveal="words" className="display-lg mt-3">
-              <SplitWords>More Than a Memory</SplitWords>
-            </h2>
-            <p data-reveal data-reveal-delay="200" className="mt-5 leading-relaxed text-body">
+          <ul className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {legacyBooks.map(({ book, line }) => (
+              <li key={book.slug}>
+                <Link href={bookHref(book.slug)} className="group grid grid-cols-[5.5rem_1fr] items-start gap-5">
+                  <BookCover book={book} className="book-tilt w-full" />
+                  <span>
+                    <span className="block font-display text-[1.2rem] leading-snug text-ink group-hover:text-bronze">{book.title}</span>
+                    <span className="mt-0.5 block text-sm text-muted tabular-nums">{book.year}</span>
+                    <span className="mt-2 block text-[0.95rem] leading-relaxed text-body">{line}</span>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-bronze">
+                      {readable.includes(book.slug) ? "Read free" : "Details"} <Icon name="arrow" className="size-3.5" />
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* A legacy that lives on: The Life & Times, the gallery, his own words, and the tributes */}
+      <section id="legacy" className="scroll-mt-24 border-t border-line bg-paper py-16 lg:py-20">
+        <div className="wrap">
+          <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-end lg:gap-16">
+            <div>
+              <p data-reveal="fade" className="eyebrow">
+                A legacy that lives on
+              </p>
+              <h2 data-reveal="words" className="display-lg mt-3">
+                <SplitWords>More Than a Memory</SplitWords>
+              </h2>
+            </div>
+            <p data-reveal data-reveal-delay="200" className="leading-relaxed text-body">
               His life left a legacy in ideas, institutions, books, people and communities. The Foundation he established in 2012 continues that work, so
               that future generations may be informed, encouraged and equipped to make a positive difference.
             </p>
-            <div data-reveal data-reveal-delay="300">
-              <Button href="/about" className="mt-8">
-                The Continuing Legacy
-              </Button>
-            </div>
+          </div>
+
+          <div id="gallery" className="mt-12 grid scroll-mt-24 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {/* 1. The Life & Times */}
+            <LegacyCard
+              number="01"
+              title="The Life & Times"
+              label="Biographical publication"
+              body="Destiny Fulfilled, published for his state burial in 2023: his life story, published works, photographs and tributes."
+              href={bookHref(LIFE_AND_TIMES.slug)}
+              cta="About the publication"
+              photos={[{ src: "/images/covers/official/destiny-fulfilled.png", alt: "Cover of Destiny Fulfilled: The Life & Times", contain: true }]}
+            />
+            {/* 2. Photo Gallery */}
+            <LegacyCard
+              number="02"
+              title="Photo Gallery"
+              body={`A visual journey through the life and times of ${founder.name}, from his student years to his later life.`}
+              href="/founder/gallery"
+              cta="View Gallery"
+              photos={[
+                { src: "/images/founder-bowler.jpg", alt: "Early portrait of Dr Chinwoke Mbadinuju in a bowler hat", position: "50% 20%" },
+                { src: "/images/founder/recent-with-wife.jpg", alt: "Dr Mbadinuju with his wife in his later years", position: "50% 25%" },
+              ]}
+            />
+            {/* 3. Words on Marble */}
+            <article data-reveal data-reveal-delay="160" className="tile flex flex-col p-6">
+              <p className="text-xs font-semibold tracking-[0.14em] text-bronze tabular-nums">03</p>
+              <h3 className="mt-3 font-display text-2xl text-ink">Words on Marble</h3>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-body">Two interviews in his own words, nearly twenty years apart.</p>
+              <ul className="mt-5 flex-1 space-y-3">
+                {interviews.map((iv) => (
+                  <li key={iv.slug}>
+                    <Link href={`/founder/words-on-marble/${iv.slug}`} className="group block rounded-[3px] border border-line bg-white p-4 transition-colors hover:border-bronze">
+                      <span className="block text-xs font-semibold tracking-[0.12em] text-bronze uppercase">{iv.dateline}</span>
+                      <span className="mt-1 block text-[0.92rem] leading-snug text-ink group-hover:text-bronze">{iv.source}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </article>
+            {/* 4. Burial Tributes */}
+            <LegacyCard
+              number="04"
+              title="Burial Tributes"
+              body={`${tributeCount} tributes and condolence letters from his family, leaders in public life, the Church, Uli and friends, each one listed with its source and date.`}
+              href="/founder/tributes"
+              cta="Read the Tributes"
+              photos={[{ src: "/images/founder/yellow-agbada.jpg", alt: "Dr Mbadinuju in a yellow agbada and red cap", position: "50% 20%" }]}
+            />
+          </div>
+
+          <div data-reveal data-reveal-delay="300" className="mt-10">
+            <Button href="/about">The Continuing Legacy</Button>
           </div>
         </div>
       </section>
     </>
+  );
+}
+
+function LegacyCard({
+  number,
+  title,
+  label,
+  body,
+  href,
+  cta,
+  photos,
+}: {
+  number: string;
+  title: string;
+  label?: string;
+  body: string;
+  href: string;
+  cta: string;
+  photos: { src: string; alt: string; position?: string; contain?: boolean }[];
+}) {
+  return (
+    <article data-reveal className="tile flex flex-col overflow-hidden">
+      <div className={`grid aspect-[16/10] gap-1 ${photos.length > 1 ? "grid-cols-2" : ""}`}>
+        {photos.map((ph) => (
+          <PhotoSlot
+            key={ph.src}
+            src={ph.src}
+            alt={ph.alt}
+            sizes="(min-width: 1024px) 22vw, 50vw"
+            position={ph.contain ? "center" : ph.position}
+            className={`h-full ${ph.contain ? "bg-black [&_img]:object-contain" : ""}`}
+          />
+        ))}
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <p className="text-xs font-semibold tracking-[0.14em] text-bronze tabular-nums">{number}</p>
+        <h3 className="mt-3 font-display text-2xl text-ink">{title}</h3>
+        {label && <p className="mt-1 text-xs font-semibold tracking-[0.1em] text-muted uppercase">{label}</p>}
+        <p className="mt-2 flex-1 text-[0.95rem] leading-relaxed text-body">{body}</p>
+        <Link href={href} className="mt-5 inline-flex items-center gap-2 self-start border-b border-bronze/40 pb-0.5 text-sm font-medium text-bronze hover:border-bronze">
+          {cta} <Icon name="arrow" className="size-3.5" />
+        </Link>
+      </div>
+    </article>
   );
 }

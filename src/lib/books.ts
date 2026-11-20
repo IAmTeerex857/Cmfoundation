@@ -47,6 +47,13 @@ export type Book = {
   orderable?: boolean;
   /** false keeps a title out of the library lists while it can still open in the reader (the memorial brochure). */
   listed?: boolean;
+  /**
+   * A biographical publication about the founder rather than a book he wrote (Life & Times). Labelled
+   * as such everywhere it appears, and never sold or ordered: it is for reading only.
+   */
+  biography?: boolean;
+  /** Contents of a PDF edition, with the page each section starts on (the reader opens at #page=N). */
+  pageContents?: { title: string; page: number; items?: { title: string; page: number }[] }[];
 };
 
 // A title is readable online when books/<slug>/edition.json (the text edition, imported from the
@@ -62,6 +69,19 @@ const TRADE = "Paperback, 127 × 203 mm";
 
 /** The five titles launched for free online reading on 24 November 2026, in the Foundation's order. */
 export const launchTitles = ["false-men-and-true-christians", "gods-kind-of-leader", "exploring-the-godhead", "the-wages-of-sin", "the-criminal-in-heaven"];
+
+/**
+ * The homepage book line (further instructions, 20 November 2026, §1): The Life & Times first, then
+ * False Men and True Christians, then Cheta Mbadinuju's three books. God's Kind of Leader stays in
+ * the library but is not on the homepage.
+ */
+export const homeTitles = ["destiny-fulfilled", "false-men-and-true-christians", "exploring-the-godhead", "the-wages-of-sin", "the-criminal-in-heaven"];
+
+/** Where the memorial brochure's sections start (pages of books/destiny-fulfilled.pdf). */
+export const LIFE_AND_TIMES = {
+  slug: "destiny-fulfilled",
+  pages: { lifeAndTimes: 6, books: 23, marble: 24, dateline1995: 25, dateline2016: 31, gallery: 37, tributes: 44 },
+} as const;
 
 export const books: Book[] = [
   {
@@ -96,17 +116,18 @@ export const books: Book[] = [
     slug: "the-present-truth",
     title: "The Present Truth",
     author: FOUNDER,
-    year: 1998,
+    year: 2008,
     collection: "founder",
     topics: ["Christianity"],
     cover: { motif: "cross", from: "#6f9fd0", to: "#163a66", ink: "#ffffff", image: "/images/covers/the-present-truth.jpg" },
   },
-  // Years for the four titles below are not yet confirmed.
+  // Years from the list of published books in Destiny Fulfilled (p. 23).
   {
     slug: "journey-into-the-past",
     title: "Journey Into the Past",
     subtitle: "Ordeal of a State Governor",
     author: FOUNDER,
+    year: 2015,
     collection: "founder",
     topics: ["Memoir", "Governance"],
     cover: { type: "official", image: "/images/covers/official/journey-into-the-past.png", width: 1086, height: 1448 },
@@ -115,6 +136,7 @@ export const books: Book[] = [
     slug: "law-and-religion-in-nigeria",
     title: "Law and Religion in Nigeria",
     author: FOUNDER,
+    year: 1987,
     collection: "founder",
     topics: ["Law & Society", "Christianity"],
     cover: { type: "official", image: "/images/covers/official/law-and-religion-in-nigeria.png", width: 1086, height: 1448 },
@@ -123,6 +145,7 @@ export const books: Book[] = [
     slug: "spiritual-worship",
     title: "Spiritual Worship",
     author: FOUNDER,
+    year: 1996,
     collection: "founder",
     topics: ["Christianity", "Christian Living"],
     cover: { type: "official", image: "/images/covers/official/spiritual-worship.png", width: 1086, height: 1448 },
@@ -131,6 +154,7 @@ export const books: Book[] = [
     slug: "who-then-is-this-jesus",
     title: "Who Then Is This Jesus?",
     author: FOUNDER,
+    year: 2014,
     collection: "founder",
     topics: ["Christianity"],
     cover: { type: "official", image: "/images/covers/official/who-then-is-this-jesus.png", width: 1086, height: 1448 },
@@ -233,23 +257,38 @@ export const books: Book[] = [
     topics: ["Christian Living"],
     cover: { motif: "path", from: "#b9d0a3", to: "#3e5b33", ink: "#ffffff", image: "/images/covers/assured-not-entitled.jpg" },
   },
-  // The memorial brochure. It opens in the reader from the founder page but isn't a Series title.
+  // The Life & Times: the biographical brochure published for the founder's state burial in November
+  // 2023. It is read online only (never sold or ordered) and is labelled as a biographical publication.
   {
     slug: "destiny-fulfilled",
-    title: "Destiny Fulfilled: The Life & Times",
-    subtitle: "Of His Excellency Dr Chinwoke Clement Mbadinuju (Odera)",
-    author: "In memory of Dr C. C. Mbadinuju",
+    title: "The Life & Times",
+    subtitle: "Destiny Fulfilled: The Life & Times of His Excellency Dr Chinwoke Clement Mbadinuju (Odera)",
+    author: "About Dr Chinwoke C. Mbadinuju",
+    year: 2023,
     collection: "founder",
-    topics: [],
+    topics: ["Memoir"],
+    biography: true,
     cover: { type: "official", image: "/images/covers/official/destiny-fulfilled.png", width: 1086, height: 1448 },
-    listed: false,
+    description:
+      "Destiny Fulfilled is the biographical publication prepared for the state burial of Dr Chinwoke Clement Mbadinuju, Governor of Anambra State from 1999 to 2003, in November 2023. It opens with the Anambra State Government's announcement of the funeral arrangements and an account of his life: his birth in Uli in 1945, his education in Nigeria and the United States, and his years in teaching, journalism, law, Christian ministry and government. It lists his published works and includes Words on Marble, two interviews in his own words from 1995 and 2016. A photo gallery follows his early years, his career and politics and his later years, and the publication closes with tributes and condolence letters from family, friends, colleagues and institutions.",
+    edition: { history: "Published for the state burial, November 2023.", publisher: "", pages: 150, format: "Illustrated memorial publication", language: "English" },
+    pageContents: [
+      { title: "State Burial Announcement, by the Anambra State Government", page: 5 },
+      { title: "Life and Times", page: 6 },
+      { title: "List of Published Books", page: 23 },
+      { title: "Words on Marble", page: 24, items: [{ title: "Dateline 1995", page: 25 }, { title: "Dateline 2016", page: 31 }] },
+      { title: "Photo Gallery", page: 37, items: [{ title: "Early Years", page: 38 }, { title: "Career and Politics", page: 40 }, { title: "Later Years", page: 42 }] },
+      { title: "Tributes & Condolence Letters", page: 44 },
+    ],
   },
 ];
 
 export const topics = ["Christianity", "Christian Living", "Leadership", "Law & Society", "Governance", "Memoir", "Contemporary Issues"];
 
-/** Titles shown in the library (everything except unlisted items such as the memorial brochure). */
-export const libraryBooks = books.filter((b) => b.listed !== false);
+/** Titles shown in the library: the books themselves (the biographical publication has its own page). */
+export const libraryBooks = books.filter((b) => b.listed !== false && !b.biography);
+/** Every title with its own book page. */
+export const bookPages = books.filter((b) => b.listed !== false);
 export const availableBooks = libraryBooks.filter((b) => b.collection !== "forthcoming");
 export const forthcomingBooks = libraryBooks.filter((b) => b.collection === "forthcoming");
 
@@ -259,6 +298,8 @@ export function getBook(slug: string) {
 
 /** The launch titles, in the Foundation's order. */
 export const launchBooks = launchTitles.map((s) => getBook(s)!);
+/** The homepage book line, in the Foundation's order. */
+export const homeBooks = homeTitles.map((s) => getBook(s)!);
 
 /**
  * The accurate reading status of a title (instructions §5.1). A title is never shown as readable

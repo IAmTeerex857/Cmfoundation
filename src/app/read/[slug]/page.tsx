@@ -22,7 +22,9 @@ export async function generateMetadata({ params }: PageProps<"/read/[slug]">): P
   return {
     ...pageMetadata({
       title: `Read ${book.title}`,
-      description: `Read ${book.title}${book.subtitle ? `: ${book.subtitle}` : ""} by ${book.author} free online. Part of the CMF Literature Series.`,
+      description: book.biography
+        ? `Read ${book.subtitle ?? book.title} free online: the biographical publication on Dr Chinwoke Clement Mbadinuju.`
+        : `Read ${book.title}${book.subtitle ? `: ${book.subtitle}` : ""} by ${book.author} free online. Part of the CMF Literature Series.`,
       path: `/read/${slug}`,
     }),
     // The book page (/books/<slug>) is the page for search engines; the reader points to it.

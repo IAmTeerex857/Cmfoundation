@@ -1,4 +1,4 @@
-import { EMAIL_PATTERN, EmailNotConfigured, sendToFoundation } from "@/lib/email";
+import { EMAIL_PATTERN, EmailNotConfigured, readerEmailConfigured, sendToFoundation, sendToReader } from "@/lib/email";
 import { enquiryTypes, isEnquiryType } from "@/lib/enquiries";
 import { countMetric, recordEnquiry } from "@/lib/db";
 import { site } from "@/lib/site";
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   const name = String(body.name ?? "").trim().slice(0, 120);
   const email = String(body.email ?? "").trim().slice(0, 254);
   const message = String(body.message ?? "").trim().slice(0, 5000);
-  const enquiry = isEnquiryType(body.enquiry) ? body.enquiry : null;
+  const enquiry = isEnquiryType(body.enquiry) && body.enquiry !== "collaboration" ? body.enquiry : null;
 
   if (body.company) return Response.json({ ok: true }); // honeypot tripped: pretend success
   if (!name || !email || !message || !enquiry) return bad("Please complete all required fields.");
@@ -41,6 +41,14 @@ export async function POST(req: Request) {
     }
     console.error("[contact] send failed", err);
     return bad(`Your message could not be sent. Please try again or email ${site.contact.email}.`, 502);
+  }
+  // Acknowledge receipt (further instructions §5). Never blocks the reply to the visitor.
+  if (readerEmailConfigured()) {
+    await sendToReader({
+      to: email,
+      subject: "We have received your message",
+      text: `Dear ${name},\n\nThank you for writing to the ${site.name}. We have received your message (${label}), and the right person at the Foundation will reply.\n\nWith thanks,\n${site.name}\n${site.url}`,
+    }).catch((err) => console.error("[contact] acknowledgement failed", err));
   }
   return Response.json({ ok: true });
 }

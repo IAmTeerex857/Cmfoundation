@@ -1,6 +1,7 @@
 # What's left: CMF website
 
-_Updated 19 November 2026._ Everything in the Foundation's instructions of 18 November is built and live at
+_Updated 20 November 2026._ Everything in the Foundation's instructions of 18 November, and in Cheta's further
+instructions of 20 November, is built and live at
 [cm.foundation](https://cm.foundation). What remains is information only the Foundation can supply, and a few
 settings that are done by hand.
 
@@ -26,8 +27,7 @@ The site already handles each gap cleanly: nothing is broken or marked as missin
 5. **Audiobook recordings** (when ready). The book pages already show "Audiobook Coming Soon".
 6. **The other founder books:**
    - EPUB or PDF files for *The Present Truth*, *Journey Into the Past*, *Law and Religion in Nigeria*, *Spiritual Worship* and *Who Then Is This Jesus?*.
-   - Publication years for the last four.
-   - Titles and covers for the rest of his 22 works.
+   - Titles and covers for the rest of his 22 works. (Publication years now come from the list in *Destiny Fulfilled*.)
 
 ### Payments
 
@@ -54,14 +54,21 @@ The site already reads as final; nothing on it says "draft" or "awaiting approva
 
 ### Photos
 
-16. **Real photos of the three milestones:**
+16. **The 1945 "young boy" picture.** Cheta asked for the same face with a plain shirt and a village-school background.
+    That is an AI image edit, and the image tool isn't available in this setup. Until the edited file arrives, the
+    current picture stays. Drop the new file in as `public/images/founder/early-life-schoolboy.jpg`.
+17. **Real photos of the three milestones:**
     - the children's ministry donation
     - the Peace and Security award
     - the Abuja launch
-17. **A portrait of Cheta** that the Foundation owns, and permission for the interim one currently used.
-18. **More photos of Dr Mbadinuju**, especially his early life and his faith and ministry.
+18. **A portrait of Cheta** that the Foundation owns, and permission for the interim one currently used.
+19. **More photos of Dr Mbadinuju**, especially his early life. Higher-resolution copies of the *Destiny Fulfilled*
+    gallery pictures would also help: the seven recent ones on the site were cut from the brochure and are small.
 
 **Settled, no longer needed:**
+- Founder pictures (20 November): collage swapped to the airport photo, Bill Clinton and Obasanjo; 1990s is now
+  Christian Leadership with the praying photo.
+- *The Present Truth* is 2008 (the brochure's list), not 1998.
 - ISBNs: the cover-wrap numbers are used, and they are the only ones with a valid check digit.
 - Typos in the books: corrected on the site.
 - Covers for the forthcoming books: left as they are.

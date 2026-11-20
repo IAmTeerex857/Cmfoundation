@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { CollaborationForm } from "@/components/collaboration-form";
 import { ContactForm } from "@/components/contact-form";
 import { SocialLinks } from "@/components/footer";
 import { Icon, type IconName } from "@/components/icons";
@@ -13,8 +14,8 @@ import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact Us",
-  description: "Get in touch with the Chinwoke Mbadinuju Foundation for questions, partnerships, media, events or to support our work.",
+  title: "Collaborate & Contact",
+  description: "Contact the Chinwoke Mbadinuju Foundation, or propose a collaboration: sponsorships, joint projects, book distribution and professional help.",
   path: "/contact",
 });
 
@@ -29,7 +30,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
       : "";
 
   const channels: { icon: IconName; title: string; value: string; href?: string; note: string }[] = [
-    { icon: "mail", title: "Email Us", value: site.contact.email, href: `mailto:${site.contact.email}`, note: "We aim to respond within 1–2 business days." },
+    { icon: "mail", title: "Email Us", value: site.contact.email, href: `mailto:${site.contact.email}`, note: "Every message is read by the Foundation’s team." },
     { icon: "phone", title: "Call Us", value: site.contact.phone, href: site.contact.phoneHref, note: "CMF Head Office, Abuja." },
     { icon: "pin", title: "Visit Us", value: site.contact.location, href: site.contact.mapsUrl, note: "By appointment." },
   ];
@@ -47,6 +48,14 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
             <p className="eyebrow mt-6">{site.tagline}</p>
           </>
         }
+        actions={
+          <>
+            <Button href="#message">Send a Message</Button>
+            <Button href="#collaborate" variant="outline">
+              Propose a Collaboration
+            </Button>
+          </>
+        }
       >
         <p className="max-w-[27rem]">
           We would love to hear from you, whether you have a question, want to support our work, explore a partnership, or simply share your thoughts.
@@ -59,7 +68,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <SectionIntro eyebrow="Get in touch" title="We’re Just a Message Away." />
             <p data-reveal data-reveal-delay="200" className="max-w-sm leading-relaxed text-body lg:pb-2">
-              Reach out through any of the channels below. We aim to respond within 1–2 business days.
+              Reach out through any of the channels below, or propose a collaboration.
             </p>
           </div>
 
@@ -152,8 +161,8 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
                         {c.email}
                       </a>
                     ) : (
-                      <Link href={`/contact?enquiry=${c.enquiry}#message`} className="block text-ink underline-offset-2 transition-colors hover:text-bronze hover:underline">
-                        Send us a message
+                      <Link href={c.enquiry === "partnership" ? "#collaborate" : `/contact?enquiry=${c.enquiry}#message`} className="block text-ink underline-offset-2 transition-colors hover:text-bronze hover:underline">
+                        {c.enquiry === "partnership" ? "Propose a collaboration" : "Send us a message"}
                       </Link>
                     )}
                     {"phone" in c && (
@@ -166,6 +175,33 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Propose a collaboration (further instructions §5) */}
+      <section id="collaborate" className="scroll-mt-24 border-b border-line bg-blush py-16 lg:py-20">
+        <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div>
+            <SectionIntro eyebrow="Collaborate" title="Propose a Collaboration" size="md">
+              <p>
+                Organisations, schools, churches and professionals can propose working with the Foundation on literature, education or community
+                projects.
+              </p>
+            </SectionIntro>
+            <ul className="mt-7 space-y-3 text-[0.95rem] text-body">
+              {["Tell us who you are and what you have in mind.", "The proposal goes straight to the Foundation’s team, and you get an acknowledgement by email.", "Each proposal is assessed and approved by the Foundation before any project is represented as a CMF initiative."].map(
+                (t) => (
+                  <li key={t} className="flex gap-3">
+                    <Icon name="check" className="mt-1 size-4 shrink-0 text-bronze" strokeWidth={2} />
+                    {t}
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
+          <div className="tile p-6 sm:p-8">
+            <CollaborationForm />
           </div>
         </div>
       </section>

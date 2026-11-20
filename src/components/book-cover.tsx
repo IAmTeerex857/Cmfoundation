@@ -98,7 +98,7 @@ export function BookCover({ book, className = "", style }: { book: Book; classNa
       >
         <Image
           src={book.cover.image}
-          alt={`Cover of ${book.title} by ${book.author}`}
+          alt={book.biography ? `Cover of ${book.title}, a biographical publication about Dr Chinwoke C. Mbadinuju` : `Cover of ${book.title} by ${book.author}`}
           fill
           sizes="(min-width: 1024px) 18vw, 44vw"
           className="object-contain"

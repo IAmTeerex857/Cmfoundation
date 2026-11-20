@@ -3,7 +3,7 @@
 import { InlineLoader } from "generative-loaders";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { type EnquiryType, enquiryTypes } from "@/lib/enquiries";
+import { type EnquiryType, contactFormTypes } from "@/lib/enquiries";
 import { track } from "@/lib/analytics";
 import { Icon } from "./icons";
 import { SlideIcon } from "./ui";
@@ -45,7 +45,7 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
           <Icon name="check" className="size-7" strokeWidth={2} />
         </motion.span>
         <h3 className="display-sm mt-4">Thank you. Your message has been sent.</h3>
-        <p className="mt-2 text-muted">We aim to respond within 1–2 business days.</p>
+        <p className="mt-2 text-muted">It has reached the Foundation, and the right person will reply to you by email.</p>
       </motion.div>
     );
   }
@@ -61,7 +61,7 @@ export function ContactForm({ initialEnquiry, initialMessage = "" }: { initialEn
             <option value="" disabled>
               Select an option
             </option>
-            {enquiryTypes.map((t) => (
+            {contactFormTypes.map((t) => (
               <option key={t.id} value={t.id}>
                 {t.label}
               </option>

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { bookHref, libraryBooks } from "@/lib/books";
+import { bookHref, bookPages } from "@/lib/books";
 import { isReadable } from "@/lib/manuscripts";
 import { site } from "@/lib/site";
 
@@ -8,6 +8,9 @@ const routes = [
   "/about",
   "/founder",
   "/founder/gallery",
+  "/founder/tributes",
+  "/founder/words-on-marble/dateline-1995",
+  "/founder/words-on-marble/dateline-2016",
   "/literature",
   "/our-work",
   "/events",
@@ -25,6 +28,6 @@ const routes = [
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...routes.map((r) => ({ url: `${site.url}${r}`, changeFrequency: "monthly" as const, priority: r === "" ? 1 : 0.7 })),
-    ...libraryBooks.map((b) => ({ url: `${site.url}${bookHref(b.slug)}`, changeFrequency: "monthly" as const, priority: isReadable(b.slug) ? 0.9 : 0.6 })),
+    ...bookPages.map((b) => ({ url: `${site.url}${bookHref(b.slug)}`, changeFrequency: "monthly" as const, priority: isReadable(b.slug) ? 0.9 : 0.6 })),
   ];
 }

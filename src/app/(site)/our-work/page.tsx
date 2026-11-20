@@ -173,7 +173,7 @@ export default function OurWorkPage() {
           </div>
           <div data-reveal data-reveal-delay="300" className="flex flex-wrap gap-4">
             <Button href="/support">Support the Mission</Button>
-            <Button href="/contact?enquiry=partnership" variant="outline" icon={null}>
+            <Button href="/contact#collaborate" variant="outline" icon={null}>
               Partner With Us
             </Button>
           </div>

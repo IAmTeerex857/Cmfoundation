@@ -23,7 +23,7 @@ The sidebar has four pages. **Inbox** shows a bronze number when something new i
 | Page | What it is for |
 |---|---|
 | **Overview** | How the library is being read, who the readers are, and what needs a reply |
-| **Inbox** | Contact messages, institutional book orders and reader feedback |
+| **Inbox** | Contact messages, collaboration proposals, institutional book orders and reader feedback |
 | **Donations** | Recording confirmed gifts and sponsorships |
 | **Readers** | Reader numbers and the newsletter export |
 
@@ -59,6 +59,8 @@ compared with the same number of days before it.
    - **Reader feedback:** reply by email if the reader left an address, then set the status to *replied* or *read*.
    - **Book orders:** reply with pricing, delivery arrangements and availability. Set *in-progress*, then *done*.
    - **Messages** (partnership, sponsorship, in-kind help, volunteering, events, media): reply, or pass to the right person.
+   - **Collaboration proposals** (from the "Propose a Collaboration" form): organisation, type, objective and message.
+     The proposer has already had an automatic acknowledgement; reply, and ask for any documents then.
 3. Glance at **Needs you** on the Overview. When it says **Nothing is waiting**, you are done.
 
 Every message sent through the website is saved in the Inbox, even if the email copy goes astray.
@@ -104,6 +106,10 @@ Book orders are **not** donations: they stay in the Inbox.
   The book gets its own page and becomes readable once it is added. Until then it shows **Coming Soon** or **Not Yet Online**.
 - **Correcting a book:** send the corrected EPUB; the online edition is re-imported in minutes.
 - **Amazon links and audiobooks:** send them when ready. The book pages show them automatically.
+
+- **The Life & Times** (*Destiny Fulfilled*) is shown first on the homepage, labelled "Biographical publication". It
+  is for reading only and never sold or ordered. Its two interviews have their own pages under
+  cm.foundation/founder/words-on-marble, and every tribute is listed at cm.foundation/founder/tributes.
 
 ## 9. Short links for printed and shared material
 

@@ -43,4 +43,4 @@ export const isGivingCategory = (v: unknown): v is GivingCategory => givingFocus
 
 /** The Foundation's public statement on how resources are applied (instructions §2.5). */
 export const nonprofitStatement =
-  "The Chinwoke Mbadinuju Foundation is a nonprofit institution. Resources generated through its publications, voluntary contributions and partnerships are applied to advancing its literary, educational and humanitarian objectives. No income is distributed to trustees or private individuals as profit.";
+  "The Chinwoke Mbadinuju Foundation is a nonprofit institution. Gifts, publication income and partnerships support its literary, educational and humanitarian purposes, including the legitimate operating costs that make that work possible, such as printing, staff and administration. No income is distributed to trustees or private individuals as profit.";

@@ -48,17 +48,18 @@ export const site = {
   social: [] as { label: string; icon: "facebook" | "x" | "instagram" | "youtube" | "linkedin"; href: string }[],
 } as const;
 
+// Primary navigation, as the Foundation's further instructions (20 November 2026, §1) list it:
+// Home, About/Founder, Free Library, Our Work, Collaborate/Contact and Support (the header button).
 export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "The Founder", href: "/founder" },
-  { label: "Literature", href: "/literature" },
+  { label: "Free Library", href: "/literature" },
   { label: "Our Work", href: "/our-work" },
-  { label: "Events", href: "/events" },
-  { label: "Contact", href: "/contact" },
+  { label: "Collaborate & Contact", short: "Contact", href: "/contact" },
 ] as const;
 
-export const footerExplore = [...nav, { label: "Support the Mission", href: "/support" }, { label: "Your Reader Account", href: "/reader" }] as const;
+export const footerExplore = [...nav, { label: "Events", href: "/events" }, { label: "Support the Mission", href: "/support" }, { label: "Your Reader Account", href: "/reader" }] as const;
 
 export const legal = [
   { label: "Privacy Policy", href: "/privacy" },

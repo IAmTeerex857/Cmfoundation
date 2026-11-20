@@ -145,10 +145,12 @@ export function BookReader({ book }: { book: Book }) {
     [numPages],
   );
 
-  // Resume where the reader left off.
+  // Open at a linked page (#page=24, as on the founder page's interview and tribute links), or
+  // resume where the reader left off.
   useEffect(() => {
     if (status !== "ready" || !pageWidth) return;
-    const saved = Number(load(pageKey));
+    const linked = Number(/^#page=(\d+)$/.exec(window.location.hash)?.[1]);
+    const saved = linked || Number(load(pageKey));
     if (saved > 1 && saved <= numPages) requestAnimationFrame(() => goTo(saved, "instant"));
     // Run once, when the book first becomes ready and laid out.
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -7,7 +7,7 @@ import { StatusBadge } from "@/components/books/status-badge";
 import { Icon } from "@/components/icons";
 import { SplitWords } from "@/components/motion/split-words";
 import { ArrowLink, Button, GoldRule, PageHero, QuoteBlock, SectionIntro, SlideIcon } from "@/components/ui";
-import { bookHref, bookStatus, getBook, launchBooks } from "@/lib/books";
+import { bookHref, bookStatus, getBook, homeBooks } from "@/lib/books";
 import { readableSlugs } from "@/lib/manuscripts";
 import { bookQuote, founder } from "@/lib/founder";
 import { eventDateParts, upcomingEvents, pillars } from "@/lib/work";
@@ -75,7 +75,8 @@ export default function Home() {
         </p>
       </PageHero>
 
-      {/* 2. The free library: the five launch titles, in the Foundation's order */}
+      {/* 2. The free library: The Life & Times, then four of the launch titles, in the Foundation's order
+          (further instructions, 20 November 2026, §1) */}
       <section className="pt-12 pb-16 lg:pt-10 lg:pb-16">
         <div className="wrap">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -102,7 +103,7 @@ export default function Home() {
           </div>
 
           <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-10">
-            {launchBooks.map((b) => {
+            {homeBooks.map((b) => {
               const status = bookStatus(b, readable.includes(b.slug));
               return (
                 <li key={b.slug} className="group flex h-full flex-col items-center text-center">
@@ -118,7 +119,11 @@ export default function Home() {
                       {b.title}
                     </Link>
                   </h3>
-                  <p className="mb-3 text-sm text-muted">{b.author}</p>
+                  {b.biography ? (
+                    <p className="mb-3 text-[0.72rem] font-semibold tracking-[0.1em] text-bronze uppercase">Biographical Publication</p>
+                  ) : (
+                    <p className="mb-3 text-sm text-muted">{b.author}</p>
+                  )}
                   <BookAction book={b} status={status} className="mt-auto" />
                 </li>
               );

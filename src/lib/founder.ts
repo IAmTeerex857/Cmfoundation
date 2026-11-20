@@ -10,7 +10,7 @@ export const founder = {
 
 // Photos for each period and chapter, from the Foundation's archive (public/images/founder). A period
 // or chapter without a suitable photo yet shows an empty frame; add the path to `image` to fill it.
-type Photo = { image?: string };
+type Photo = { image?: string; imageAlt?: string };
 
 export const timeline: ({ period: string; title: string; body: string } & Photo)[] = [
   {
@@ -39,9 +39,10 @@ export const timeline: ({ period: string; title: string; body: string } & Photo)
   },
   {
     period: "1990s",
-    image: "/images/founder/official-meeting.jpg",
-    title: "Public Service",
-    body: "Served in government and as Special Assistant to Vice President Dr Alex Ekwueme, and later returned to private legal practice in Onitsha.",
+    image: "/images/founder/christian-leadership.jpg",
+    imageAlt: "Dr Mbadinuju praying over a baby held in a colleague's arms",
+    title: "Christian Leadership",
+    body: "National President of the Christian Lawyers Fellowship of Nigeria (CLASFON) and President, Full Gospel Business Men's Fellowship International (FGBMFI), Onitsha Branch.",
   },
   {
     period: "1999 – 2003",
@@ -68,8 +69,19 @@ export const chapters: ({ id: string; title: string; body: string } & Photo)[] =
   { id: "later-years", title: "Later Years", body: "Continuing the mission through the Foundation.", image: "/images/founder/later-years-family.jpg" },
 ];
 
-// The photo gallery (/founder/gallery): photographs from the Foundation's archive.
+// The photo gallery (/founder/gallery): photographs from the Foundation's archive. The newest
+// additions (20 November 2026) come first: the photographs Cheta Mbadinuju sent, and later pictures
+// from the Career and Politics and Later Years pages of Destiny Fulfilled.
 export const gallery: { src: string; alt: string }[] = [
+  { src: "/images/founder/airport-arrival.jpg", alt: "A young Dr Mbadinuju walking behind Vice President Alex Ekwueme and Chief C. C. Onoh on arrival at an airport" },
+  { src: "/images/founder/christian-leadership.jpg", alt: "Dr Mbadinuju praying over a baby held in a colleague's arms" },
+  { src: "/images/founder/recent-with-wife.jpg", alt: "Dr Mbadinuju in a red cap with his wife, in his later years" },
+  { src: "/images/founder/recent-dancing.jpg", alt: "Dr Mbadinuju dancing with his wife at a family celebration" },
+  { src: "/images/founder/recent-family.jpg", alt: "Dr Mbadinuju with a member of his family" },
+  { src: "/images/founder/recent-toast.jpg", alt: "Dr Mbadinuju raising a glass with guests at a reception" },
+  { src: "/images/founder/recent-conversation.jpg", alt: "Dr Mbadinuju in conversation with a friend in red caps" },
+  { src: "/images/founder/recent-celebration.jpg", alt: "Dr Mbadinuju greeting guests at the high table of a public celebration" },
+  { src: "/images/founder/recent-reception.jpg", alt: "Dr Mbadinuju with a guest at a reception" },
   { src: "/images/founder/hero-smiling.jpg", alt: "Dr Mbadinuju smiling at a public ceremony" },
   { src: "/images/founder/red-cap-portrait.jpg", alt: "Portrait of Dr Mbadinuju in a red cap and coral beads" },
   { src: "/images/founder/doctoral-robes.jpg", alt: "Dr Mbadinuju in doctoral robes at his graduation" },
@@ -79,8 +91,8 @@ export const gallery: { src: string; alt: string }[] = [
   { src: "/images/founder/bow-tie.jpg", alt: "Dr Mbadinuju in a suit and bow tie" },
   { src: "/images/founder/law-office.jpg", alt: "Dr Mbadinuju at his desk in barrister's wig" },
   { src: "/images/founder/bowler-seated.jpg", alt: "Dr Mbadinuju in a bowler hat and pinstripe suit" },
-  { src: "/images/founder/official-meeting.jpg", alt: "Dr Mbadinuju at an official meeting" },
-  { src: "/images/founder/handshake.jpg", alt: "Dr Mbadinuju shaking hands at a formal reception" },
+  { src: "/images/founder/official-meeting.jpg", alt: "Dr Mbadinuju seated beside President Olusegun Obasanjo" },
+  { src: "/images/founder/handshake.jpg", alt: "Dr Mbadinuju shaking hands with President Bill Clinton" },
   { src: "/images/founder/podium-wave.jpg", alt: "Dr Mbadinuju waving from a podium" },
   { src: "/images/founder/salute-parade.jpg", alt: "Dr Mbadinuju taking a salute at a parade during his governorship" },
   { src: "/images/founder/red-caps-conversation.jpg", alt: "Dr Mbadinuju in conversation at a traditional gathering" },

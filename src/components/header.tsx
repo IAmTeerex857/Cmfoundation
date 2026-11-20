@@ -60,7 +60,14 @@ export function Header() {
                   transition={{ type: "spring", stiffness: 420, damping: 34 }}
                 />
               )}
-              {item.label}
+              {"short" in item ? (
+                <>
+                  <span className="2xl:hidden">{item.short}</span>
+                  <span className="hidden 2xl:inline">{item.label}</span>
+                </>
+              ) : (
+                item.label
+              )}
             </Link>
           ))}
         </nav>
@@ -70,19 +77,21 @@ export function Header() {
             href="/support"
             className="group hidden items-center gap-2 rounded-full bg-bronze py-3 pr-3 pl-5 text-[0.92rem] font-medium whitespace-nowrap text-white transition-colors hover:bg-bronze-dark sm:inline-flex"
           >
-            Support Our Mission
+            <span>
+              Support<span className="lg:max-xl:hidden"> Our Mission</span>
+            </span>
             <span className="flex size-7 items-center justify-center rounded-full bg-white/15">
               <Icon name="arrowUpRight" className="size-3.5" strokeWidth={2.2} />
             </span>
           </Link>
           <button
             type="button"
-            className="relative flex size-11 items-center justify-center rounded-full text-slate transition-colors hover:bg-slate/5 lg:hidden"
-            aria-label={open ? "Close menu" : "Open menu"}
+            className="relative flex h-11 shrink-0 items-center justify-center gap-2 rounded-full px-2 text-slate transition-colors hover:bg-slate/5 lg:hidden"
             aria-expanded={open}
+            aria-controls="mobile-menu"
             onClick={() => setOpen(!open)}
           >
-            <span className="sr-only">Menu</span>
+            <span className="text-[0.92rem] font-medium">{open ? "Close" : "Menu"}</span>
             <span aria-hidden="true" className="relative block h-3.5 w-5">
               <span className={`absolute left-0 h-[1.5px] w-5 bg-current transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
               <span className={`absolute top-1.5 left-0 h-[1.5px] w-5 bg-current transition-opacity duration-200 ${open ? "opacity-0" : ""}`} />
@@ -95,6 +104,7 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <motion.nav
+            id="mobile-menu"
             aria-label="Mobile"
             data-lenis-prevent
             initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
@@ -124,7 +134,10 @@ export function Header() {
                 </motion.li>
               ))}
             </ul>
-            <motion.div className="wrap pb-10" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.45 }}>
+            <motion.div className="wrap grid gap-3 pb-10" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.45 }}>
+              <Link href="/literature#library" onClick={() => setOpen(false)} className="block rounded-full border border-ink px-5 py-4 text-center font-medium text-ink">
+                Explore Our Free Library
+              </Link>
               <Link href="/support" onClick={() => setOpen(false)} className="block rounded-full bg-bronze px-5 py-4 text-center font-medium text-white">
                 Support Our Mission
               </Link>
