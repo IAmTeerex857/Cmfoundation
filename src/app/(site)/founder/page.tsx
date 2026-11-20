@@ -48,6 +48,7 @@ const legacyBooks = [
   { slug: "false-men-and-true-christians", line: "His call to test Christian faith against Scripture, closing with the story of his own salvation." },
   { slug: "gods-kind-of-leader", line: "A 1988 paper to Christian lawyers on finding righteous and responsible leadership for Nigeria." },
   { slug: "law-and-religion-in-nigeria", line: "Written as both lawyer and lay preacher, on where law and religious life meet in Nigeria." },
+  { slug: "the-present-truth", line: "A 2008 book on holding to the truth of Scripture in the present day." },
   { slug: "who-then-is-this-jesus", line: "His study, from the Scriptures, of who Jesus Christ is." },
   { slug: "journey-into-the-past", line: "Ordeal of a State Governor: his memoir of the governorship and the years that followed." },
 ].map(({ slug, line }) => ({ book: getBook(slug)!, line }));
