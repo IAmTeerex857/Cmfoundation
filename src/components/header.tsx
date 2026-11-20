@@ -42,7 +42,7 @@ export function Header() {
       } ${scrolled || open ? "bg-cream/85 shadow-[0_8px_30px_-18px_rgba(14,33,50,0.35)] backdrop-blur-xl" : "bg-sand/90 backdrop-blur-md"}`}
     >
       <div className={`wrap flex items-center justify-between gap-6 transition-[height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${scrolled ? "h-16" : "h-20"}`}>
-        <Logo />
+        <Logo className="shrink-0" />
 
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex" onMouseLeave={() => setHovered(null)}>
           {nav.map((item) => (
@@ -60,14 +60,8 @@ export function Header() {
                   transition={{ type: "spring", stiffness: 420, damping: 34 }}
                 />
               )}
-              {"short" in item ? (
-                <>
-                  <span className="2xl:hidden">{item.short}</span>
-                  <span className="hidden 2xl:inline">{item.label}</span>
-                </>
-              ) : (
-                item.label
-              )}
+              {/* The desktop bar is the content width at every screen size, so long labels use their short form. */}
+              {"short" in item ? item.short : item.label}
             </Link>
           ))}
         </nav>
