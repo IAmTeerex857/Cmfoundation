@@ -54,20 +54,18 @@ The site already reads as final; nothing on it says "draft" or "awaiting approva
 
 ### Photos
 
-16. **The 1945 "young boy" picture.** Cheta asked for the same face with a plain shirt and a village-school background.
-    That is an AI image edit, and the image tool isn't available in this setup. Until the edited file arrives, the
-    current picture stays. Drop the new file in as `public/images/founder/early-life-schoolboy.jpg`.
-17. **Real photos of the three milestones:**
+16. **Real photos of the three milestones:**
     - the children's ministry donation
     - the Peace and Security award
     - the Abuja launch
-18. **A portrait of Cheta** that the Foundation owns, and permission for the interim one currently used.
-19. **More photos of Dr Mbadinuju**, especially his early life. Higher-resolution copies of the *Destiny Fulfilled*
+17. **A portrait of Cheta** that the Foundation owns, and permission for the interim one currently used.
+18. **More photos of Dr Mbadinuju**, especially his early life. Higher-resolution copies of the *Destiny Fulfilled*
     gallery pictures would also help: the seven recent ones on the site were cut from the brochure and are small.
 
 **Settled, no longer needed:**
 - Founder pictures (20 November): collage swapped to the airport photo, Bill Clinton and Obasanjo; 1990s is now
   Christian Leadership with the praying photo.
+- The 1945 "young boy" picture: plain shirt and a village-school background, as Cheta asked.
 - *The Present Truth* is 2008 (the brochure's list), not 1998.
 - ISBNs: the cover-wrap numbers are used, and they are the only ones with a valid check digit.
 - Typos in the books: corrected on the site.
