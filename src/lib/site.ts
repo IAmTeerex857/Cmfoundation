@@ -45,10 +45,14 @@ export const site = {
       icon: "calendar",
     },
   ],
-  // The Foundation's social profiles, shown in the footer and on the contact page once they exist, e.g.
-  //   { label: "Facebook", icon: "facebook", href: "https://facebook.com/<page>" }
-  // Icons available: facebook, x, instagram, youtube, linkedin. Empty: no icons are shown.
-  social: [] as { label: string; icon: "facebook" | "x" | "instagram" | "youtube" | "linkedin"; href: string }[],
+  // The Foundation's social profiles (supplied 23 November 2026), shown in the footer and on the contact
+  // page. Icons available: facebook, x, instagram, youtube, linkedin. Empty: no icons are shown.
+  social: [
+    { label: "Facebook", icon: "facebook", href: "https://www.facebook.com/profile.php?id=61596217448016" },
+    { label: "Instagram", icon: "instagram", href: "https://www.instagram.com/thecmfofficial/" },
+    { label: "YouTube", icon: "youtube", href: "https://www.youtube.com/@TheCMFoundation" },
+    { label: "X", icon: "x", href: "https://x.com/TheCMFOfficial" },
+  ] as { label: string; icon: "facebook" | "x" | "instagram" | "youtube" | "linkedin"; href: string }[],
 } as const;
 
 // Primary navigation, as the Foundation's further instructions (20 November 2026, §1) list it:

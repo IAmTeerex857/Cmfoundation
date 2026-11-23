@@ -26,23 +26,22 @@ The site already handles each gap cleanly: nothing is broken or marked as missin
 4. **Bachs:** the details of Cheta's personal Bachs account, then one link per purpose (general, scholarships,
    literature, community), the checkout title (currently "Pay Meal") and the redirect to
    `https://cm.foundation/support/thank-you`.
-5. **Social media profile links.** The icons stay hidden until the links arrive.
 
 ### Events
 
-6. **Other event dates and registration links.** Only *All Is Vanity* (11 February 2027, online publication) is confirmed.
+5. **Other event dates and registration links.** Only *All Is Vanity* (11 February 2027, online publication) is confirmed.
 
 ### Photos
 
-7. **Letters requesting assistance** for the children's ministry milestone, to be shown with personal details concealed.
-8. **Photos of the Abuja launch** after 24 November. The invitation card is used until then.
-9. **More photos of Dr Mbadinuju** (via WhatsApp), especially early life, faith and ministry.
-10. **A portrait of Cheta** that the Foundation owns, and permission for the interim one.
+6. **Letters requesting assistance** for the children's ministry milestone, to be shown with personal details concealed.
+7. **Photos of the Abuja launch** after 24 November. The invitation card is used until then.
+8. **More photos of Dr Mbadinuju** (via WhatsApp), especially early life, faith and ministry.
+9. **A portrait of Cheta** that the Foundation owns, and permission for the interim one.
 
 ### To approve
 
-11. The nonprofit statement, Privacy Policy, Terms of Use, Donation Policy and FAQ answers.
-12. The quotations on the founder page, including "Service is the rent…", which is usually credited to Shirley Chisholm.
+10. The nonprofit statement, Privacy Policy, Terms of Use, Donation Policy and FAQ answers.
+11. The quotations on the founder page, including "Service is the rent…", which is usually credited to Shirley Chisholm.
 
 **Settled on 23 November:**
 - 24 November venue and time from the invitation card: The Meeting Room, Shehu Musa Yar'Adua Centre, CBD, Abuja,
@@ -60,6 +59,8 @@ The site already handles each gap cleanly: nothing is broken or marked as missin
   the toast picture, and five from the funeral in Uli in a new "Laid to Rest" section (one is on the Burial
   Tributes card). Six were already on the site, and one was too small to use.
 - Peace and Security Award (PASA 2026): two photos in a section of the gallery, one on the milestone.
+- Social media: Facebook, Instagram (@thecmfofficial), YouTube (@TheCMFoundation) and X (@TheCMFOfficial), in the
+  footer and on the contact page.
 - About page hero: the book stack photo. Founder 1980s: "Editor and Lecturer at Daily Times, Legal practice,
   Church Administration and Christian Literature."
 

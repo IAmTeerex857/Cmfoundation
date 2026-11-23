@@ -34,6 +34,7 @@ const organization = {
   email: site.contact.email,
   telephone: site.contact.phone,
   openingHours: site.contact.openingHours,
+  sameAs: site.social.map((s) => s.href),
   nonprofitStatus: "Nonprofit",
   address: { "@type": "PostalAddress", streetAddress: "Otunba Kayode Close, Asokoro", addressLocality: "Abuja", addressRegion: "FCT", addressCountry: "NG" },
 };
