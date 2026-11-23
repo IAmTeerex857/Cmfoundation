@@ -65,6 +65,8 @@ export type CmfEvent = {
   date: string; // "YYYY-MM-DD", or "YYYY-MM" when the day is not yet fixed
   title: string;
   location: string;
+  /** Shown under the place, e.g. "11:00 a.m. – 4:00 p.m." */
+  time?: string;
   online: boolean;
   /** Book slug to feature on the event card. */
   book?: string;
@@ -72,11 +74,19 @@ export type CmfEvent = {
   href?: string;
 };
 
-// TODO(client): confirm dates, times and registration links.
+// Only dates the Foundation has confirmed (response of 23 November 2026, Part A, §§1 and 12). Other
+// proposed dates and their registration links stay off the site until they are confirmed.
 export const events: CmfEvent[] = [
-  { date: "2026-11-24", title: "CMF Literature Series & Books Presentation", location: "Abuja, Nigeria", online: false, book: "the-criminal-in-heaven", href: "/events/book-presentation-2026" },
-  { date: "2027-01-01", title: "Online Book Presentation (Judge Not!)", location: "Online", online: true, book: "judge-not" },
-  { date: "2027-02-11", title: "Online Book Presentation (All Is Vanity)", location: "Online", online: true, book: "all-is-vanity" },
+  {
+    date: "2026-11-24",
+    title: "Book Presentation & Signing",
+    location: "Shehu Musa Yar'Adua Centre, Abuja",
+    time: "11:00 a.m. – 4:00 p.m.",
+    online: false,
+    book: "the-criminal-in-heaven",
+    href: "/events/book-presentation-2026",
+  },
+  { date: "2027-02-11", title: "Online Publication of All Is Vanity", location: "Online", online: true, book: "all-is-vanity" },
 ];
 
 // Selected milestones (instructions §4.5). Shown with icons rather than illustrative pictures, so
@@ -85,7 +95,14 @@ export const milestones: { title: string; category: string; icon: IconName; href
   { title: "Children's Ministry Support", category: "Education & Faith", icon: "cap" },
   { title: "Uli Community Solar Waterworks", category: "Community Initiatives", icon: "drop" },
   { title: "Peace and Security Posthumous Award", category: "Legacy", icon: "star" },
-  { title: "CMF Literature Series Presentation, Abuja (24 November 2026)", category: "Literature", icon: "books", href: "/events/book-presentation-2026" },
+  // The invitation card stands in until photographs of the day are supplied (Part A, §14).
+  {
+    title: "Book Presentation & Signing, Abuja (24 November 2026)",
+    category: "Literature",
+    icon: "books",
+    href: "/events/book-presentation-2026",
+    image: "/images/events/book-presentation-2026-books.jpg",
+  },
 ];
 
 export const values = ["Faith", "Knowledge", "Service", "Stewardship", "Human Dignity", "Continuity"];

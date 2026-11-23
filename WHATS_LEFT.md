@@ -1,75 +1,66 @@
 # What's left: CMF website
 
-_Updated 20 November 2026._ Everything in the Foundation's instructions of 18 November, and in Cheta's further
-instructions of 20 November, is built and live at
-[cm.foundation](https://cm.foundation). What remains is information only the Foundation can supply, and a few
-settings that are done by hand.
+_Updated 23 November 2026._ Everything in the Foundation's instructions of 18 and 20 November, and in Cheta's
+response of 23 November (Part A), is built and live at [cm.foundation](https://cm.foundation). What remains is
+information the Foundation said it will forward, and a few settings that are done by hand.
 
 **How to use the site and dashboard day to day:** see [MANUAL.md](MANUAL.md).
 
-> **Urgent:** item 1 (the venue and time of the 24 November presentation). Everything else can follow the launch.
-
 ---
 
-## Part A: Needed from Cheta
+## Part A: Still to come from Cheta (as promised in his response of 23 November)
 
 The site already handles each gap cleanly: nothing is broken or marked as missing while these are outstanding.
 
-### Before 24 November
-
-1. **Venue and start time of the 24 November presentation in Abuja.** It is not in any material received so far. The event page currently says the details are shared with guests.
-
 ### Books
 
-2. **Which upcoming titles are current?** Cheta's three new books list *The Devil's Antics*, *Those Unanswered Prayers* and *Autopsy of The Last Temptation*. The website lists *A Lawyer's Woes*, *Judge Not!* and *Assured, Not Entitled*. Both lists include *All Is Vanity* and *Much Ado About Rapture*.
-3. **Back covers** for *False Men and True Christians* and *God's Kind of Leader*.
-4. **Amazon links** for *Exploring the Godhead*, *The Wages of Sin* and *A Criminal in Heaven* (when ready).
-5. **Audiobook recordings** (when ready). The book pages already show "Audiobook Coming Soon".
-6. **The other founder books:**
-   - EPUB or PDF files for *The Present Truth*, *Journey Into the Past*, *Law and Religion in Nigeria*, *Spiritual Worship* and *Who Then Is This Jesus?*.
-   - Titles and covers for the rest of his 22 works. (Publication years now come from the list in *Destiny Fulfilled*.)
+1. **Amazon links** for *Exploring the Godhead* and *A Criminal in Heaven* (promised for 24 November), then *The Wages of Sin*.
+2. **Cover for *Autopsy of the Last Temptation*.** A plain generated cover stands in.
+3. **Is *A Lawyer's Woes* still forthcoming?** The response did not mention it, so it is still listed as Forthcoming 2027.
+4. **Kept in view (KIV), no action now:** audiobooks (recordings in progress); the founder's other books (titles,
+   covers, years and files); the back covers of *False Men and True Christians* and *God's Kind of Leader* (current
+   presentation kept). The book stack photo also shows *The Restored Church* and *How I Governed Anambra State*,
+   which are not on the site yet.
 
-### Payments
+### Payments and links
 
-7. **Zenith Bank details** for local transfers (bank, account name, account number).
-8. **Bachs:**
-   - One payment link for each purpose: general, scholarships, literature, community.
-   - Rename the checkout title, which currently reads "Pay Meal".
-   - Set the redirect after payment to `https://cm.foundation/support/thank-you`.
+5. **Bachs:** the details of Cheta's personal Bachs account, then one link per purpose (general, scholarships,
+   literature, community), the checkout title (currently "Pay Meal") and the redirect to
+   `https://cm.foundation/support/thank-you`.
+6. **Social media profile links.** The icons stay hidden until the links arrive.
 
-### Contact and events
+### Events
 
-9. **Social media profile links** (Facebook, X, Instagram, YouTube, LinkedIn). The icons are hidden until these exist.
-10. **partnerships@, media@ and events@ addresses:** create them, or keep everything going through hello@. Until then, those contact points open the contact form.
-11. **Office hours.** Hidden until confirmed.
-12. **Times and registration links** for *Judge Not!* (1 January 2027) and *All Is Vanity* (11 February 2027).
-13. **Staff** who need access to the management dashboard (their email addresses).
-
-### To approve
-
-The site already reads as final; nothing on it says "draft" or "awaiting approval".
-
-14. The nonprofit statement, Privacy Policy, Terms of Use, Donation Policy and FAQ answers.
-15. The quotations on the founder page, including "Service is the rent…", which is usually credited to Shirley Chisholm.
+7. **Other event dates and registration links.** Only *All Is Vanity* (11 February 2027, online publication) is confirmed.
 
 ### Photos
 
-16. **Real photos of the three milestones:**
-    - the children's ministry donation
-    - the Peace and Security award
-    - the Abuja launch
-17. **A portrait of Cheta** that the Foundation owns, and permission for the interim one currently used.
-18. **More photos of Dr Mbadinuju**, especially his early life. Higher-resolution copies of the *Destiny Fulfilled*
-    gallery pictures would also help: the seven recent ones on the site were cut from the brochure and are small.
+8. **Peace and Security Award** photos (via WhatsApp).
+9. **Letters requesting assistance** for the children's ministry milestone, to be shown with personal details concealed.
+10. **Photos of the Abuja launch** after 24 November. The invitation card is used until then.
+11. **More photos of Dr Mbadinuju** (via WhatsApp), especially early life, faith and ministry.
+12. **A portrait of Cheta** that the Foundation owns, and permission for the interim one.
 
-**Settled, no longer needed:**
-- Founder pictures (20 November): collage swapped to the airport photo, Bill Clinton and Obasanjo; 1990s is now
-  Christian Leadership with the praying photo.
-- The 1945 "young boy" picture: plain shirt and a village-school background, as Cheta asked.
-- *The Present Truth* is 2008 (the brochure's list), not 1998.
-- ISBNs: the cover-wrap numbers are used, and they are the only ones with a valid check digit.
-- Typos in the books: corrected on the site.
-- Covers for the forthcoming books: left as they are.
+### To approve
+
+13. The nonprofit statement, Privacy Policy, Terms of Use, Donation Policy and FAQ answers.
+14. The quotations on the founder page, including "Service is the rent…", which is usually credited to Shirley Chisholm.
+
+**Settled on 23 November:**
+- 24 November venue and time from the invitation card: The Meeting Room, Shehu Musa Yar'Adua Centre, CBD, Abuja,
+  11:00 a.m. – 4:00 p.m., with the RSVP contacts. The card is on the event page and is the Abuja milestone picture.
+- Upcoming books: *Judge Not!* and *Assured, Not Entitled* removed (their old links go to the forthcoming list).
+  *The Devil's Antics*, *Those Unanswered Prayers* and *Autopsy of the Last Temptation* added. All marked
+  Forthcoming 2027; *All Is Vanity* shows 11 February 2027.
+- Zenith Bank: Chinwoke Mbadinuju Foundation, 1313554886 and 1313554910, on the Support page.
+- All enquiries go through hello@cm.foundation; no separate addresses.
+- Office hours: Monday to Friday, 9:00 a.m. – 5:00 p.m. (contact page and footer).
+- Dashboard staff: three addresses supplied; they are added in Vercel (`ADMIN_EMAILS`), never in this public repository.
+- About page hero: the book stack photo. Founder 1980s: "Editor and Lecturer at Daily Times, Legal practice,
+  Church Administration and Christian Literature."
+
+**Settled earlier:** founder pictures and the 1945 picture (20 November); *The Present Truth* is 2008; ISBNs from the
+cover wraps; typos corrected; covers for the forthcoming books.
 
 ---
 
@@ -86,7 +77,7 @@ Mail to hello@cm.foundation is forwarded by Cloudflare to cmf.helloo@gmail.com, 
 ### 2. The management dashboard
 
 - **Address:** cm.foundation/admin.
-- **Sign in:** the email `hello@cm.foundation` and the management password (kept in Vercel as `ADMIN_PASSWORD`; ask the developer if you need it).
+- **Sign in:** an authorised email (`hello@cm.foundation`, or one of the three staff addresses once added) and the shared management password (kept in Vercel as `ADMIN_PASSWORD`; ask the developer if you need it).
 - **How long you stay signed in:** 400 days on each device, the longest browsers allow. The password itself never expires.
 - **Sign out:** at the bottom of the sidebar; use it on shared computers.
 - **Add a person or change the password:** ask the developer to update `ADMIN_EMAILS` or `ADMIN_PASSWORD` in Vercel.

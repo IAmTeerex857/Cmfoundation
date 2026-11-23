@@ -68,7 +68,11 @@ export function categoryLink(category: GivingCategory): { href: string; dedicate
 }
 
 /**
- * Bank details for local transfers, shown on the Support page once the Foundation supplies them
- * (Zenith Bank account in the Foundation's name). Leave null until confirmed.
+ * Bank details for local transfers, shown on the Support page: the Foundation's Zenith Bank accounts,
+ * supplied on 23 November 2026. Set to null to hide the block.
  */
-export const bankTransfer: { bank: string; accountName: string; accountNumber: string; note?: string } | null = null;
+export const bankTransfer: { bank: string; accountName: string; accountNumbers: string[]; note?: string } | null = {
+  bank: "Zenith Bank",
+  accountName: "Chinwoke Mbadinuju Foundation",
+  accountNumbers: ["1313554886", "1313554910"],
+};

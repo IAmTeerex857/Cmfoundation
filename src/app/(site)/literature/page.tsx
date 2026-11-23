@@ -97,7 +97,7 @@ export default function LiteraturePage() {
                   <BookCover book={heroBooks[2]} className="w-full shadow-[0_24px_40px_-22px_rgba(12,31,66,0.6)]" />
                 </Link>
                 <span className="absolute inset-x-0 bottom-full mx-auto mb-2.5 w-fit rounded-[2px] bg-bronze px-3 py-1.5 text-[0.7rem] font-semibold tracking-[0.12em] whitespace-nowrap text-white uppercase shadow-md">
-                  Coming Soon
+                  Forthcoming {heroBooks[2].year}
                 </span>
               </div>
             </div>

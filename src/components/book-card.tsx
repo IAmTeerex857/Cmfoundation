@@ -36,14 +36,14 @@ export function BookCard({ book, readable = false }: { book: Book; readable?: bo
       <Link href={href} className="relative flex aspect-[5/8] items-end" aria-label={`${book.title}: book details`}>
         <BookCover book={book} className="book-tilt w-full" />
       </Link>
-      {status !== "read-free" && <StatusBadge status={status} className="mt-3 self-start" />}
+      {status !== "read-free" && <StatusBadge status={status} book={book} className="mt-3 self-start" />}
       <h3 className={`${status === "read-free" ? "mt-4" : "mt-2"} font-display text-[1.15rem] leading-snug text-ink`}>
         <Link href={href} className="transition-colors group-hover:text-bronze">
           {book.title}
         </Link>
       </h3>
       <p className="mt-0.5 text-[0.92rem] text-body">{book.author}</p>
-      {book.year && <p className="text-sm text-muted">{book.collection === "forthcoming" ? `Expected ${book.year}` : book.year}</p>}
+      {book.year && <p className="text-sm text-muted">{book.collection === "forthcoming" ? `Expected ${book.release?.label ?? book.year}` : book.year}</p>}
       <div className="mt-auto pt-4">
         <BookAction book={book} status={status} />
       </div>

@@ -48,7 +48,11 @@ export default function AboutPage() {
             <br />A Mission Focused on Impact.
           </>
         }
-        image={{ src: "/images/about-hero-books.jpg", alt: "A stack of CMF Literature Series books, from False Men and True Christians to All Is Vanity, beside a potted plant", position: "68% 60%" }}
+        image={{
+          src: "/images/about-hero-books.jpg",
+          alt: "A stack of books by Dr Chinwoke C. Mbadinuju and Cheta C. Mbadinuju on a desk, from False Men and True Christians to A Criminal in Heaven",
+          position: "55% 70%",
+        }}
         footer={
           <div className="overflow-hidden">
             <ul className={`${ruled} text-[0.78rem] font-semibold tracking-[0.14em] text-bronze uppercase`}>

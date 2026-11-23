@@ -8,7 +8,7 @@ import { StatusBadge } from "@/components/books/status-badge";
 import { TrackedLink, TrackView } from "@/components/books/track-view";
 import { Icon } from "@/components/icons";
 import { Button, GoldRule } from "@/components/ui";
-import { type Book, bookHref, bookPages, bookStatus, getBook, libraryBooks } from "@/lib/books";
+import { type Book, bookHref, bookPages, bookStatus, getBook, libraryBooks, statusLabel } from "@/lib/books";
 import { isReadable, textEdition } from "@/lib/manuscripts";
 import { site } from "@/lib/site";
 
@@ -84,7 +84,17 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
   const details: [string, string | number | undefined][] = [
     biography ? ["About", "Dr Chinwoke Clement Mbadinuju (1945 – 2023)"] : ["Author", book.author],
     ["Subtitle", book.subtitle],
-    ["Published", book.edition?.history ?? (book.collection === "forthcoming" ? `Forthcoming${book.year ? `, ${book.year}` : ""}` : book.year ? String(book.year) : undefined)],
+    [
+      "Published",
+      book.edition?.history ??
+        (book.release
+          ? `Forthcoming: ${book.release.label}${book.release.note ? ` (${book.release.note})` : ""}`
+          : book.collection === "forthcoming"
+            ? `Forthcoming${book.year ? `, ${book.year}` : ""}`
+            : book.year
+              ? String(book.year)
+              : undefined),
+    ],
     ["Series", book.edition?.publisher],
     ["Format", book.edition?.format],
     ["Pages", book.edition?.pages],
@@ -123,7 +133,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
         <div>
           <div className="flex flex-wrap items-center gap-2">
             {biography && <BiographyLabel />}
-            <StatusBadge status={status} />
+            <StatusBadge status={status} book={book} />
           </div>
           <h1 className="display-xl mt-4 lg:text-[clamp(2.6rem,4vw,3.6rem)]">{book.title}</h1>
           {book.subtitle && <p className="mt-3 font-display text-[1.45rem] leading-snug text-body italic">{book.subtitle}</p>}
@@ -163,7 +173,13 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
               </Link>
             ) : (
               <p className={`${action} cursor-default border border-line bg-white text-muted sm:col-span-2`} aria-disabled="true">
-                {status === "coming-soon" ? "Coming Soon" : status === "forthcoming" ? "Forthcoming" : "Online edition in preparation"}
+                {status === "coming-soon"
+                  ? "Coming Soon"
+                  : status === "forthcoming"
+                    ? book.release
+                      ? `Forthcoming: ${book.release.label}`
+                      : statusLabel(status, book)
+                    : "Online edition in preparation"}
               </p>
             )}
 
@@ -327,7 +343,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
                     <BookCover book={b} className="book-tilt w-full" />
                     <span className="mt-3 block font-display text-[1.05rem] leading-snug text-ink group-hover:text-bronze">{b.title}</span>
                   </Link>
-                  <StatusBadge status={bookStatus(b, isReadable(b.slug))} className="mt-2" />
+                  <StatusBadge status={bookStatus(b, isReadable(b.slug))} book={b} className="mt-2" />
                 </li>
               ))}
             </ul>

@@ -86,6 +86,7 @@ export function Footer() {
                 <span>
                   <span className="block">{site.contact.officeName}</span>
                   <span className="mt-1.5 block font-sans text-sm leading-relaxed font-normal tracking-normal text-white/70">{site.contact.location}</span>
+                  <span className="mt-1 block font-sans text-sm leading-relaxed font-normal tracking-normal text-white/70">{site.contact.hours}</span>
                 </span>
               </a>
             </li>

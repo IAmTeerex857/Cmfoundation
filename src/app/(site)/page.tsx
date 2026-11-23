@@ -33,11 +33,12 @@ const organization = {
   founder: { "@type": "Person", name: founder.name },
   email: site.contact.email,
   telephone: site.contact.phone,
+  openingHours: site.contact.openingHours,
   nonprofitStatus: "Nonprofit",
   address: { "@type": "PostalAddress", streetAddress: "Otunba Kayode Close, Asokoro", addressLocality: "Abuja", addressRegion: "FCT", addressCountry: "NG" },
 };
 
-const comingSoon = ["much-ado-about-rapture", "all-is-vanity"].map((s) => getBook(s)!);
+const forthcoming = ["all-is-vanity", "much-ado-about-rapture"].map((s) => getBook(s)!);
 
 // Section order follows the Foundation's instructions (§4.2): headline, the free library, origins
 // and mission, the four areas of activity, the founder's literary legacy, the November event,
@@ -86,8 +87,8 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
               <p className="text-sm text-muted">
-                Coming soon:{" "}
-                {comingSoon.map((b, i) => (
+                Forthcoming 2027:{" "}
+                {forthcoming.map((b, i) => (
                   <span key={b.slug}>
                     {i > 0 && " and "}
                     <Link href={bookHref(b.slug)} className="text-ink underline-offset-2 hover:text-bronze hover:underline">
@@ -111,7 +112,7 @@ export default function Home() {
                   <Link href={bookHref(b.slug)} className="flex aspect-[5/8] w-full max-w-[8.75rem] items-end" aria-label={`${b.title}: book details`}>
                     <span className="relative block w-full">
                       <BookCover book={b} className="book-tilt w-full" />
-                      {status !== "read-free" && <StatusBadge status={status} className="absolute -top-2.5 left-1/2 -translate-x-1/2 shadow" />}
+                      {status !== "read-free" && <StatusBadge status={status} book={b} className="absolute -top-2.5 left-1/2 -translate-x-1/2 shadow" />}
                     </span>
                   </Link>
                   <h3 className="mt-4 font-display text-[1.05rem] leading-snug text-ink">
@@ -233,7 +234,9 @@ export default function Home() {
                 <span className="min-w-0 flex-1">
                   <span className="eyebrow block">Milestone · {event.location}</span>
                   <span className="mt-1.5 block font-display text-[1.2rem] leading-snug text-ink">{event.title}</span>
-                  <span className="mt-1 block text-sm leading-relaxed text-muted">The presentation of the CMF Literature Series, with five books now free to read online.</span>
+                  <span className="mt-1 block text-sm leading-relaxed text-muted">
+                    {event.time ? `${event.time}. ` : ""}A trilogy on God, life and grace by Cheta C. Mbadinuju, with five books now free to read online.
+                  </span>
                 </span>
                 <SlideIcon name="arrow" className="size-5 shrink-0 text-bronze" />
               </Link>

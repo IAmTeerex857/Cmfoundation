@@ -35,7 +35,7 @@ export const timeline: ({ period: string; title: string; body: string } & Photo)
     period: "1980s",
     image: "/images/founder/law-office.jpg",
     title: "Journalism & Law",
-    body: "Editor and lecturer with the Daily Times, later training in law and entering legal practice in Nigeria.",
+    body: "Editor and Lecturer at Daily Times, Legal practice, Church Administration and Christian Literature.",
   },
   {
     period: "1990s",

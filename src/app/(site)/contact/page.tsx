@@ -31,7 +31,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
 
   const channels: { icon: IconName; title: string; value: string; href?: string; note: string }[] = [
     { icon: "mail", title: "Email Us", value: site.contact.email, href: `mailto:${site.contact.email}`, note: "Every message is read by the Foundation’s team." },
-    { icon: "phone", title: "Call Us", value: site.contact.phone, href: site.contact.phoneHref, note: "CMF Head Office, Abuja." },
+    { icon: "phone", title: "Call Us", value: site.contact.phone, href: site.contact.phoneHref, note: `Open ${site.contact.hours}` },
     { icon: "pin", title: "Visit Us", value: site.contact.location, href: site.contact.mapsUrl, note: "By appointment." },
   ];
 

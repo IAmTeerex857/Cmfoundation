@@ -54,13 +54,19 @@ export default function SupportPage() {
             {bankTransfer && (
               <div className="tile mt-8 p-6">
                 <p className="text-xs font-semibold tracking-[0.14em] text-bronze uppercase">Local bank transfer</p>
-                <dl className="mt-3 grid grid-cols-[8rem_1fr] gap-y-2 text-[0.95rem]">
+                <dl className="mt-3 grid grid-cols-[9.5rem_1fr] gap-x-3 gap-y-2 text-[0.95rem]">
                   <dt className="text-muted">Bank</dt>
                   <dd className="text-ink">{bankTransfer.bank}</dd>
                   <dt className="text-muted">Account name</dt>
                   <dd className="text-ink">{bankTransfer.accountName}</dd>
-                  <dt className="text-muted">Account number</dt>
-                  <dd className="font-semibold text-ink tabular-nums">{bankTransfer.accountNumber}</dd>
+                  <dt className="text-muted">{bankTransfer.accountNumbers.length > 1 ? "Account numbers" : "Account number"}</dt>
+                  <dd className="font-semibold text-ink tabular-nums">
+                    {bankTransfer.accountNumbers.map((n) => (
+                      <span key={n} className="block select-all">
+                        {n}
+                      </span>
+                    ))}
+                  </dd>
                 </dl>
                 {bankTransfer.note && <p className="mt-3 text-sm text-muted">{bankTransfer.note}</p>}
               </div>

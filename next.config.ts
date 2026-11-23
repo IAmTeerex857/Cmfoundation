@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
       { source: "/qr/library", destination: `/literature?${utm("qr", "print")}#library`, permanent: false },
       { source: "/wa", destination: `${launch}?${utm("whatsapp", "social")}`, permanent: false },
       { source: "/li", destination: `${launch}?${utm("linkedin", "social")}`, permanent: false },
+      // Titles withdrawn from the site on 23 November 2026 (Part A, §2).
+      { source: "/books/judge-not", destination: "/literature?collection=forthcoming#library", permanent: true },
+      { source: "/books/assured-not-entitled", destination: "/literature?collection=forthcoming#library", permanent: true },
       { source: "/press", destination: `/?${utm("media", "referral", "media-coverage")}`, permanent: false },
     ];
   },

@@ -11,6 +11,9 @@ export const site = {
     phone: "+234 81 5675 2002",
     phoneHref: "tel:+2348156752002",
     officeName: "CMF Head Office",
+    /** Office hours (response of 23 November 2026, Part A, §11). */
+    hours: "Monday to Friday, 9:00 a.m. – 5:00 p.m.",
+    openingHours: "Mo-Fr 09:00-17:00",
     location: "Otunba Kayode Close, Asokoro, Abuja FCT",
     mapsUrl: "https://maps.app.goo.gl/x88tX91qnFFyN3Aw6?g_st=aw",
     mapsEmbedUrl: "https://www.google.com/maps?cid=10588573318859507519&output=embed",

@@ -30,6 +30,11 @@ export function EventCard({ event }: { event: CmfEvent }) {
         <p className="mt-2 flex items-center gap-2 text-sm text-muted">
           <Icon name={event.online ? "youtube" : "pin"} className="size-4 text-bronze" strokeWidth={1.6} /> {event.location}
         </p>
+        {event.time && (
+          <p className="mt-1 flex items-center gap-2 text-sm text-muted">
+            <Icon name="clock" className="size-4 text-bronze" strokeWidth={1.6} /> {event.time}
+          </p>
+        )}
         <div className="mt-auto pt-5">
           <Link
             href={href}

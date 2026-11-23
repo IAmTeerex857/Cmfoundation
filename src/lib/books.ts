@@ -36,6 +36,8 @@ export type Book = {
   edition?: Edition;
   /** Shown as "Coming Soon" (the Foundation's list); other unpublished titles show "Forthcoming". */
   comingSoon?: boolean;
+  /** A confirmed release date for a forthcoming title. Without one, only the year is shown. */
+  release?: { date: string; label: string; note?: string };
   /**
    * Audiobook: "coming-soon" shows a non-clickable "Audiobook Coming Soon". Set `src` only once the
    * approved recording has been uploaded to a media service and tested.
@@ -207,16 +209,58 @@ export const books: Book[] = [
     audiobook: { status: "coming-soon" },
     orderable: true,
   },
+  // Forthcoming titles, as confirmed in Cheta's response of 23 November 2026 (Part A, §2): all are
+  // marked "Forthcoming 2027", and only All Is Vanity has a confirmed date. Judge Not! and Assured,
+  // Not Entitled were withdrawn from the site at the same time.
   {
     slug: "all-is-vanity",
-    comingSoon: true,
     title: "All Is Vanity",
     subtitle: "From Futility to Fulfilment Through the Source",
     author: CHETA,
     year: 2027,
+    release: { date: "2027-02-11", label: "11 February 2027", note: "online publication" },
     collection: "forthcoming",
     topics: ["Christian Living", "Contemporary Issues"],
     cover: { type: "official", image: "/images/covers/official/all-is-vanity.png", width: 1686, height: 2528 },
+  },
+  {
+    slug: "the-devils-antics",
+    title: "The Devil's Antics",
+    subtitle: "Man without God",
+    author: CHETA,
+    year: 2027,
+    collection: "forthcoming",
+    topics: ["Christianity"],
+    cover: { type: "official", image: "/images/covers/official/the-devils-antics.png", width: 630, height: 936 },
+  },
+  {
+    slug: "those-unanswered-prayers",
+    title: "Those Unanswered Prayers",
+    author: CHETA,
+    year: 2027,
+    collection: "forthcoming",
+    topics: ["Christian Living"],
+    cover: { type: "official", image: "/images/covers/official/those-unanswered-prayers.png", width: 630, height: 934 },
+  },
+  {
+    slug: "much-ado-about-rapture",
+    title: "Much Ado About Rapture",
+    subtitle: "Beyond the Certainty of the Consummation",
+    author: CHETA,
+    year: 2027,
+    collection: "forthcoming",
+    topics: ["Christianity"],
+    cover: { type: "official", image: "/images/covers/official/much-ado-about-rapture.jpg", width: 965, height: 1431 },
+  },
+  {
+    // No cover yet (Part A, §2): the generated cover stands in until one is supplied.
+    slug: "autopsy-of-the-last-temptation",
+    title: "Autopsy of the Last Temptation",
+    author: CHETA,
+    year: 2027,
+    collection: "forthcoming",
+    topics: ["Christianity"],
+    cover: { motif: "tree", from: "#3b4252", to: "#151a24", ink: "#ead9b4" },
   },
   {
     slug: "a-lawyers-woes",
@@ -227,35 +271,6 @@ export const books: Book[] = [
     collection: "forthcoming",
     topics: ["Law & Society"],
     cover: { type: "official", image: "/images/covers/official/a-lawyers-woes.png", width: 1027, height: 1531 },
-  },
-  {
-    slug: "judge-not",
-    title: "Judge Not!",
-    author: CHETA,
-    year: 2027,
-    collection: "forthcoming",
-    topics: ["Law & Society", "Christianity"],
-    cover: { motif: "gavel", from: "#f3e6cf", to: "#a87a45", ink: "#1f1408", image: "/images/covers/judge-not.jpg" },
-  },
-  {
-    slug: "much-ado-about-rapture",
-    comingSoon: true,
-    title: "Much Ado About Rapture",
-    subtitle: "Beyond the Certainty of the Consummation",
-    author: CHETA,
-    year: 2027,
-    collection: "forthcoming",
-    topics: ["Christianity"],
-    cover: { type: "official", image: "/images/covers/official/much-ado-about-rapture.jpg", width: 965, height: 1431 },
-  },
-  {
-    slug: "assured-not-entitled",
-    title: "Assured, Not Entitled",
-    author: CHETA,
-    year: 2027,
-    collection: "forthcoming",
-    topics: ["Christian Living"],
-    cover: { motif: "path", from: "#b9d0a3", to: "#3e5b33", ink: "#ffffff", image: "/images/covers/assured-not-entitled.jpg" },
   },
   // The Life & Times: the biographical brochure published for the founder's state burial in November
   // 2023. It is read online only (never sold or ordered) and is labelled as a biographical publication.
@@ -320,6 +335,11 @@ export const statusLabels: Record<BookStatus, string> = {
   forthcoming: "Forthcoming",
   "in-preparation": "Not Yet Online",
 };
+
+/** The badge text: forthcoming titles carry their year ("Forthcoming 2027"). */
+export function statusLabel(status: BookStatus, book?: Pick<Book, "year">) {
+  return status === "forthcoming" && book?.year ? `Forthcoming ${book.year}` : statusLabels[status];
+}
 
 /** The permanent, shareable page for a book. */
 export const bookHref = (slug: string) => `/books/${slug}`;
