@@ -16,35 +16,34 @@ The site already handles each gap cleanly: nothing is broken or marked as missin
 
 1. **Amazon links** for *Exploring the Godhead* and *A Criminal in Heaven* (promised for 24 November), then *The Wages of Sin*.
 2. **Cover for *Autopsy of the Last Temptation*.** A plain generated cover stands in.
-3. **Is *A Lawyer's Woes* still forthcoming?** The response did not mention it, so it is still listed as Forthcoming 2027.
-4. **Kept in view (KIV), no action now:** audiobooks (recordings in progress); the founder's other books (titles,
+3. **Kept in view (KIV), no action now:** audiobooks (recordings in progress); the founder's other books (titles,
    covers, years and files); the back covers of *False Men and True Christians* and *God's Kind of Leader* (current
    presentation kept). The book stack photo also shows *The Restored Church* and *How I Governed Anambra State*,
    which are not on the site yet.
 
 ### Payments and links
 
-5. **Bachs:** the details of Cheta's personal Bachs account, then one link per purpose (general, scholarships,
+4. **Bachs:** the details of Cheta's personal Bachs account, then one link per purpose (general, scholarships,
    literature, community), the checkout title (currently "Pay Meal") and the redirect to
    `https://cm.foundation/support/thank-you`.
-6. **Social media profile links.** The icons stay hidden until the links arrive.
+5. **Social media profile links.** The icons stay hidden until the links arrive.
 
 ### Events
 
-7. **Other event dates and registration links.** Only *All Is Vanity* (11 February 2027, online publication) is confirmed.
+6. **Other event dates and registration links.** Only *All Is Vanity* (11 February 2027, online publication) is confirmed.
 
 ### Photos
 
-8. **Peace and Security Award** photos (via WhatsApp).
-9. **Letters requesting assistance** for the children's ministry milestone, to be shown with personal details concealed.
-10. **Photos of the Abuja launch** after 24 November. The invitation card is used until then.
-11. **More photos of Dr Mbadinuju** (via WhatsApp), especially early life, faith and ministry.
-12. **A portrait of Cheta** that the Foundation owns, and permission for the interim one.
+7. **Peace and Security Award** photos (via WhatsApp).
+8. **Letters requesting assistance** for the children's ministry milestone, to be shown with personal details concealed.
+9. **Photos of the Abuja launch** after 24 November. The invitation card is used until then.
+10. **More photos of Dr Mbadinuju** (via WhatsApp), especially early life, faith and ministry.
+11. **A portrait of Cheta** that the Foundation owns, and permission for the interim one.
 
 ### To approve
 
-13. The nonprofit statement, Privacy Policy, Terms of Use, Donation Policy and FAQ answers.
-14. The quotations on the founder page, including "Service is the rent…", which is usually credited to Shirley Chisholm.
+12. The nonprofit statement, Privacy Policy, Terms of Use, Donation Policy and FAQ answers.
+13. The quotations on the founder page, including "Service is the rent…", which is usually credited to Shirley Chisholm.
 
 **Settled on 23 November:**
 - 24 November venue and time from the invitation card: The Meeting Room, Shehu Musa Yar'Adua Centre, CBD, Abuja,
@@ -55,7 +54,9 @@ The site already handles each gap cleanly: nothing is broken or marked as missin
 - Zenith Bank: Chinwoke Mbadinuju Foundation, 1313554886 and 1313554910, on the Support page.
 - All enquiries go through hello@cm.foundation; no separate addresses.
 - Office hours: Monday to Friday, 9:00 a.m. – 5:00 p.m. (contact page and footer).
-- Dashboard staff: three addresses supplied; they are added in Vercel (`ADMIN_EMAILS`), never in this public repository.
+- Dashboard staff: the three addresses are added in Vercel (`ADMIN_EMAILS`, kept out of this public repository). They
+  sign in at cm.foundation/admin with their email and the shared management password.
+- *A Lawyer's Woes* stays, as Forthcoming 2027.
 - About page hero: the book stack photo. Founder 1980s: "Editor and Lecturer at Daily Times, Legal practice,
   Church Administration and Christian Literature."
 
@@ -77,7 +78,7 @@ Mail to hello@cm.foundation is forwarded by Cloudflare to cmf.helloo@gmail.com, 
 ### 2. The management dashboard
 
 - **Address:** cm.foundation/admin.
-- **Sign in:** an authorised email (`hello@cm.foundation`, or one of the three staff addresses once added) and the shared management password (kept in Vercel as `ADMIN_PASSWORD`; ask the developer if you need it).
+- **Sign in:** an authorised email (`hello@cm.foundation` or one of the three staff addresses) and the shared management password (kept in Vercel as `ADMIN_PASSWORD`; ask the developer if you need it).
 - **How long you stay signed in:** 400 days on each device, the longest browsers allow. The password itself never expires.
 - **Sign out:** at the bottom of the sidebar; use it on shared computers.
 - **Add a person or change the password:** ask the developer to update `ADMIN_EMAILS` or `ADMIN_PASSWORD` in Vercel.
