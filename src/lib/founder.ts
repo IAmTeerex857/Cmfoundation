@@ -153,6 +153,13 @@ export const gallery: { src: string; alt: string }[] = [
   { src: "/images/founder/archive-32.jpg", alt: "Dr Mbadinuju at a celebration with guests" },
 ];
 
+// The posthumous Peace and Security Award (PASA 2026), received on his behalf (photographs sent by
+// Cheta Mbadinuju, 23 November 2026). Shown as their own section of the gallery and on the milestone.
+export const awardGallery: { src: string; alt: string }[] = [
+  { src: "/images/founder/pasa-2026-award.jpg", alt: "The Peace and Security Award (PASA 2026) plaque, received posthumously on Dr Mbadinuju's behalf" },
+  { src: "/images/founder/pasa-2026-presentation.jpg", alt: "The posthumous Peace and Security Award being presented on stage at PASA 2026" },
+];
+
 // The funeral ceremony in Uli, November 2023 (photographs sent by Cheta Mbadinuju, 23 November 2026),
 // shown as their own section of the gallery.
 export const burialGallery: { src: string; alt: string }[] = [

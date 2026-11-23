@@ -94,7 +94,13 @@ export const events: CmfEvent[] = [
 export const milestones: { title: string; category: string; icon: IconName; href?: string; image?: string }[] = [
   { title: "Children's Ministry Support", category: "Education & Faith", icon: "cap" },
   { title: "Uli Community Solar Waterworks", category: "Community Initiatives", icon: "drop" },
-  { title: "Peace and Security Posthumous Award", category: "Legacy", icon: "star" },
+  {
+    title: "Peace and Security Posthumous Award",
+    category: "Legacy",
+    icon: "star",
+    href: "/founder/gallery#award",
+    image: "/images/events/pasa-2026-award-thumb.jpg",
+  },
   // The invitation card stands in until photographs of the day are supplied (Part A, §14).
   {
     title: "Book Presentation & Signing, Abuja (24 November 2026)",

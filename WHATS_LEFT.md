@@ -34,16 +34,15 @@ The site already handles each gap cleanly: nothing is broken or marked as missin
 
 ### Photos
 
-7. **Peace and Security Award** photos (via WhatsApp).
-8. **Letters requesting assistance** for the children's ministry milestone, to be shown with personal details concealed.
-9. **Photos of the Abuja launch** after 24 November. The invitation card is used until then.
-10. **More photos of Dr Mbadinuju** (via WhatsApp), especially early life, faith and ministry.
-11. **A portrait of Cheta** that the Foundation owns, and permission for the interim one.
+7. **Letters requesting assistance** for the children's ministry milestone, to be shown with personal details concealed.
+8. **Photos of the Abuja launch** after 24 November. The invitation card is used until then.
+9. **More photos of Dr Mbadinuju** (via WhatsApp), especially early life, faith and ministry.
+10. **A portrait of Cheta** that the Foundation owns, and permission for the interim one.
 
 ### To approve
 
-12. The nonprofit statement, Privacy Policy, Terms of Use, Donation Policy and FAQ answers.
-13. The quotations on the founder page, including "Service is the rent…", which is usually credited to Shirley Chisholm.
+11. The nonprofit statement, Privacy Policy, Terms of Use, Donation Policy and FAQ answers.
+12. The quotations on the founder page, including "Service is the rent…", which is usually credited to Shirley Chisholm.
 
 **Settled on 23 November:**
 - 24 November venue and time from the invitation card: The Meeting Room, Shehu Musa Yar'Adua Centre, CBD, Abuja,
@@ -60,6 +59,7 @@ The site already handles each gap cleanly: nothing is broken or marked as missin
 - Photos of Dr Mbadinuju (WhatsApp, 23 November): 17 new pictures at the front of the gallery, a sharper copy of
   the toast picture, and five from the funeral in Uli in a new "Laid to Rest" section (one is on the Burial
   Tributes card). Six were already on the site, and one was too small to use.
+- Peace and Security Award (PASA 2026): two photos in a section of the gallery, one on the milestone.
 - About page hero: the book stack photo. Founder 1980s: "Editor and Lecturer at Daily Times, Legal practice,
   Church Administration and Christian Literature."
 

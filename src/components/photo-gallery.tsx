@@ -7,7 +7,7 @@ import { Icon } from "./icons";
 type Photo = { src: string; alt: string };
 
 /** A grid of photographs; selecting one opens it full size, with previous and next controls. */
-export function PhotoGallery({ photos }: { photos: Photo[] }) {
+export function PhotoGallery({ photos, columns = "columns-2 sm:columns-3 lg:columns-4" }: { photos: Photo[]; columns?: string }) {
   const [open, setOpen] = useState<number | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
 
@@ -32,7 +32,7 @@ export function PhotoGallery({ photos }: { photos: Photo[] }) {
 
   return (
     <>
-      <ul className="columns-2 gap-3 sm:columns-3 lg:columns-4">
+      <ul className={`${columns} gap-3`}>
         {photos.map((p, i) => (
           <li key={p.src} className="mb-3 break-inside-avoid">
             <button type="button" onClick={() => show(i)} className="group block w-full overflow-hidden rounded-[3px] bg-sand" aria-label={`View larger: ${p.alt}`}>

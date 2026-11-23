@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FounderSubpageHero } from "@/components/founder-subpage-hero";
 import { PhotoGallery } from "@/components/photo-gallery";
-import { burialGallery, founder, gallery } from "@/lib/founder";
+import { awardGallery, burialGallery, founder, gallery } from "@/lib/founder";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -20,6 +20,16 @@ export default function GalleryPage() {
       <section className="py-14 lg:py-16">
         <div className="wrap">
           <PhotoGallery photos={gallery} />
+        </div>
+      </section>
+      <section id="award" className="scroll-mt-24 border-t border-line py-14 lg:py-16">
+        <div className="wrap grid gap-8 lg:grid-cols-[1fr_2fr] lg:items-start">
+          <div>
+            <p className="eyebrow">PASA 2026</p>
+            <h2 className="display-md mt-2">Peace and Security Award</h2>
+            <p className="mt-3 max-w-md leading-relaxed text-body">The posthumous Peace and Security Award conferred on Dr Mbadinuju, received on his behalf.</p>
+          </div>
+          <PhotoGallery photos={awardGallery} columns="columns-1 sm:columns-2" />
         </div>
       </section>
       <section id="funeral" className="scroll-mt-24 border-t border-line bg-blush py-14 lg:py-16">
