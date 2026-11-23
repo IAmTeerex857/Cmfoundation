@@ -291,7 +291,7 @@ export default function FounderPage() {
               body={`${tributeCount} tributes and condolence letters from his family, leaders in public life, the Church, Uli and friends, each one listed with its source and date.`}
               href="/founder/tributes"
               cta="Read the Tributes"
-              photos={[{ src: "/images/founder/yellow-agbada.jpg", alt: "Dr Mbadinuju in a yellow agbada and red cap", position: "50% 20%" }]}
+              photos={[{ src: "/images/founder/burial-casket.jpg", alt: "Dr Mbadinuju's casket, draped in flags and surrounded by white flowers, at his funeral in Uli", position: "45% 40%" }]}
             />
           </div>
 

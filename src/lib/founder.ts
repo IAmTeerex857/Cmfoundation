@@ -70,9 +70,28 @@ export const chapters: ({ id: string; title: string; body: string } & Photo)[] =
 ];
 
 // The photo gallery (/founder/gallery): photographs from the Foundation's archive. The newest
-// additions (20 November 2026) come first: the photographs Cheta Mbadinuju sent, and later pictures
-// from the Career and Politics and Later Years pages of Destiny Fulfilled.
+// additions come first: the photographs Cheta Mbadinuju sent on 23 November 2026, then those of
+// 20 November and the later pictures from the Career and Politics and Later Years pages of Destiny
+// Fulfilled. Captions describe only what the picture shows; nobody but Dr Mbadinuju is named unless
+// the Foundation has identified them.
 export const gallery: { src: string; alt: string }[] = [
+  { src: "/images/founder/young-portrait.jpg", alt: "Black-and-white portrait of a young Dr Mbadinuju in a jacket and tie" },
+  { src: "/images/founder/grey-suit.jpg", alt: "A young Dr Mbadinuju smiling in a grey suit and red tie" },
+  { src: "/images/founder/friends-gathering.jpg", alt: "Dr Mbadinuju with friends at a gathering, two of them in embroidered African dress" },
+  { src: "/images/founder/desk-colleagues.jpg", alt: "Dr Mbadinuju with two colleagues at a table set with books and a bell" },
+  { src: "/images/founder/family-wedding.jpg", alt: "Dr Mbadinuju with the bride and groom and their families at a wedding" },
+  { src: "/images/founder/family-beach.jpg", alt: "Dr Mbadinuju with family on a beach, dressed for a family occasion" },
+  { src: "/images/founder/family-outing.jpg", alt: "Dr Mbadinuju in a dark suit with three young members of his family" },
+  { src: "/images/founder/family-member.jpg", alt: "Dr Mbadinuju with a young woman of his family" },
+  { src: "/images/founder/official-signing.jpg", alt: "Dr Mbadinuju in a red cap signing a document at an official ceremony, a judge in wig beside him" },
+  { src: "/images/founder/addressing-gathering.jpg", alt: "Dr Mbadinuju in a red cap and coral beads addressing a public gathering" },
+  { src: "/images/founder/state-reception.jpg", alt: "Dr Mbadinuju in a red cap and white robes shaking hands with a guest at a state reception" },
+  { src: "/images/founder/official-handshake.jpg", alt: "Dr Mbadinuju in a red cap shaking hands across a table at an official ceremony" },
+  { src: "/images/founder/green-robe-colleagues.jpg", alt: "Dr Mbadinuju in a green robe and red cap with colleagues and aides" },
+  { src: "/images/founder/traditional-celebration.jpg", alt: "Dr Mbadinuju at a traditional celebration with guests in red caps" },
+  { src: "/images/founder/reception-friend.jpg", alt: "Dr Mbadinuju smiling with a friend at a reception" },
+  { src: "/images/founder/at-home-family.jpg", alt: "Dr Mbadinuju relaxing at home with family" },
+  { src: "/images/founder/with-young-relative.jpg", alt: "Dr Mbadinuju with a young member of his family in a hotel lobby" },
   { src: "/images/founder/airport-arrival.jpg", alt: "A young Dr Mbadinuju walking behind Vice President Alex Ekwueme and Chief C. C. Onoh on arrival at an airport" },
   { src: "/images/founder/christian-leadership.jpg", alt: "Dr Mbadinuju praying over a baby held in a colleague's arms" },
   { src: "/images/founder/recent-with-wife.jpg", alt: "Dr Mbadinuju in a red cap with his wife, in his later years" },
@@ -132,6 +151,16 @@ export const gallery: { src: string; alt: string }[] = [
   { src: "/images/founder/archive-30.jpg", alt: "Dr Mbadinuju with a mother and child" },
   { src: "/images/founder/archive-31.jpg", alt: "Dr Mbadinuju at a presentation ceremony" },
   { src: "/images/founder/archive-32.jpg", alt: "Dr Mbadinuju at a celebration with guests" },
+];
+
+// The funeral ceremony in Uli, November 2023 (photographs sent by Cheta Mbadinuju, 23 November 2026),
+// shown as their own section of the gallery.
+export const burialGallery: { src: string; alt: string }[] = [
+  { src: "/images/founder/burial-casket.jpg", alt: "Dr Mbadinuju's casket, draped in flags and surrounded by white flowers, at the funeral ceremony in Uli" },
+  { src: "/images/founder/burial-service.jpg", alt: "Clergy at the altar table during the funeral service in Uli" },
+  { src: "/images/founder/burial-flag.jpg", alt: "A flag being folded back from the casket at the funeral ceremony" },
+  { src: "/images/founder/burial-arrival.jpg", alt: "Dignitaries arriving at the funeral ceremony in Uli" },
+  { src: "/images/founder/burial-guests.jpg", alt: "Guests greeting one another at the funeral ceremony in Uli" },
 ];
 
 // Quotes as given in the Foundation's page designs.

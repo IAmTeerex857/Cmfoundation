@@ -57,6 +57,9 @@ The site already handles each gap cleanly: nothing is broken or marked as missin
 - Dashboard staff: the three addresses are added in Vercel (`ADMIN_EMAILS`, kept out of this public repository). They
   sign in at cm.foundation/admin with their email and the shared management password.
 - *A Lawyer's Woes* stays, as Forthcoming 2027.
+- Photos of Dr Mbadinuju (WhatsApp, 23 November): 17 new pictures at the front of the gallery, a sharper copy of
+  the toast picture, and five from the funeral in Uli in a new "Laid to Rest" section (one is on the Burial
+  Tributes card). Six were already on the site, and one was too small to use.
 - About page hero: the book stack photo. Founder 1980s: "Editor and Lecturer at Daily Times, Legal practice,
   Church Administration and Christian Literature."
 
