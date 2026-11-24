@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/literature",
 });
 
-const heroBooks = ["false-men-and-true-christians", "much-ado-about-rapture", "all-is-vanity"].map((s) => getBook(s)!);
+const heroBooks = ["false-men-and-true-christians", "the-criminal-in-heaven", "all-is-vanity"].map((s) => getBook(s)!);
 
 const themes = ["Faith", "Leadership", "Society", "Christian Living", "Governance", "History"];
 
